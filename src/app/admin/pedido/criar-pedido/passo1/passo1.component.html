@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-12">
+        <h4>Dados do Pedido</h4>
+        <form class="p-fluid p-formgrid grid" [formGroup]="form">
+            <div class="field col-12">
+                <label htmlFor="nomeCliente">Nome Cliente</label>
+                <input pInputText formControlName="nomeCliente" required />
+            </div>
+            <div class="field col-12 sm:col-4 lg:col-4">
+                <label>CEP</label>
+                <p-inputMask
+                    formControlName="CEP"
+                    required
+                    mask="99.999-999"
+                ></p-inputMask>
+            </div>
+            <div class="field col-12 sm:col-6 lg:col-6">
+                <label>Rua</label>
+                <input pInputText formControlName="logradouro" required />
+            </div>
+            <div class="field col-12 sm:col-2 lg:col-2">
+                <label>Número</label>
+                <input
+                    pInputText
+                    formControlName="numero"
+                    required
+                    #numeroInput
+                />
+            </div>
+            <div
+                class="field col-12 sm:col-5"
+                *ngIf="form.get('apLojaCasa')?.value === 'Apartamento'"
+            >
+                <label>Nome Edifício</label>
+                <input pInputText formControlName="nomeEdificio" />
+            </div>
+            <div class="field col-12 sm:col-4">
+                <label>Bairro</label>
+                <input pInputText formControlName="bairro" required />
+            </div>
+            <div class="field col-12 sm:col-5">
+                <label>Cidade</label>
+                <input pInputText formControlName="cidade" required />
+            </div>
+            <div class="field col-12 sm:col-3">
+                <label>Estado</label>
+                <input pInputText formControlName="estado" required />
+            </div>
+            <div class="field col-12 sm:col-5 lg:col-5">
+                <label>Numero Orçamento</label>
+                <input pInputText formControlName="idOrcamento" />
+            </div>
+        </form>
+    </div>
+</div>

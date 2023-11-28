@@ -1,0 +1,77 @@
+<div class="row mb-5">
+    <div class="col-12">
+        <h4>Especificações do Vidro</h4>
+
+        <h6>Tipo do Vidro</h6>
+        <div class="flex flex-row gap-5 justify-content-center">
+            <button
+                pButton
+                pRipple
+                label="Laminado"
+                [ngClass]="{
+                    'p-button-secondary':
+                        this.pedido.passo3.tipo_vidro !== 'Laminado'
+                }"
+                (click)="tipoVidro('Laminado')"
+            ></button>
+            <button
+                pButton
+                pRipple
+                label="Temperado"
+                [ngClass]="{
+                    'p-button-secondary':
+                        this.pedido.passo3.tipo_vidro !== 'Temperado'
+                }"
+                (click)="tipoVidro('Temperado')"
+            ></button>
+        </div>
+        <div class="grid p-fluid mt-3 align-bottom">
+            <div class="col-12 md:col-6 ,">
+                <h6>Cor do Vidro</h6>
+                <p-dropdown
+                    [options]="coresDoVidro"
+                    placeholder="Selecione uma cor"
+                    [showClear]="true"
+                    [(ngModel)]="pedido.passo3.cor_vidro"
+                ></p-dropdown>
+            </div>
+            <div
+                class="col-12 md:col-6 align-self-end"
+                *ngIf="pedido.passo3.cor_vidro === 'Outro'"
+            >
+                <span class="p-float-label">
+                    <input
+                        type="number"
+                        id="identiCor"
+                        pInputText
+                        [(ngModel)]="pedido.passo3.identificacao_cor"
+                    />
+                    <label for="identiCor">Identificação da cor</label>
+                </span>
+            </div>
+        </div>
+        <h6>Espessura do Vidro</h6>
+        <div class="flex flex-row gap-5 justify-content-center">
+            <button
+                pButton
+                pRipple
+                label="4+4 ou 8mm"
+                [ngClass]="{
+                    'p-button-secondary':
+                        this.pedido.passo3.espessura_vidro !== '4+4 ou 8mm'
+                }"
+                (click)="espessuraVidro('4+4 ou 8mm')"
+            ></button>
+            <button
+                pButton
+                pRipple
+                label="5+5 ou 10mm"
+                [ngClass]="{
+                    'p-button-secondary':
+                        this.pedido.passo3.espessura_vidro !== '5+5 ou 10mm'
+                }"
+                (click)="espessuraVidro('5+5 ou 10mm')"
+            ></button>
+        </div>
+    </div>
+</div>

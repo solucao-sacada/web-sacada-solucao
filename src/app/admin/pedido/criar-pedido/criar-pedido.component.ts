@@ -26,9 +26,12 @@ export class CriarPedidoComponent {
             cor_aluminio: null,
             identificacao_cor: null,
         },
+        passo5: {
+            formato_sacada: null,
+        },
     };
 
-    activeIndex: number = 2;
+    activeIndex: number = 4;
     form1: FormGroup = this._fb.group({
         nomeCliente: ['', Validators.required],
         CEP: [null, Validators.required],

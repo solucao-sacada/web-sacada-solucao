@@ -1,0 +1,43 @@
+<div class="row mb-5">
+    <div class="col-12">
+        <h4>Especificações do Vidro</h4>
+    </div>
+    <p-dataView #dv [value]="options">
+        <ng-template let-option pTemplate="listItem">
+            <div class="col-12">
+                <div
+                    class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
+                >
+                    <p-image
+                        class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                        imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
+                        [src]="option.image"
+                        width="200"
+                        [preview]="true"
+                    >
+                        <!-- <img
+                        class="w-9 sm:w-16rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                        [src]="option.image"
+                    /> -->
+                    </p-image>
+                    <div
+                        class="flex flex-column sm:flex-row justify-content-between align-items-center md:align-items-start flex-1 gap-4"
+                    >
+                        <div class="text-2xl font-bold text-900">
+                            {{ option.name }}
+                        </div>
+                        <div
+                            class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
+                        >
+                            <button
+                                pButton
+                                icon="pi pi-shopping-cart"
+                                class="md:align-self-end mb-2 p-button-rounded"
+                            ></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

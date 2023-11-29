@@ -2,6 +2,7 @@ export interface Pedido {
     passo2?: passo2;
     passo3?: passo3;
     passo4?: passo4;
+    passo5?: passo5;
 }
 
 interface passo2 {
@@ -22,4 +23,8 @@ interface passo3 {
 interface passo4 {
     cor_aluminio: string;
     identificacao_cor: string;
+}
+
+interface passo5 {
+    formato_sacada: string;
 }

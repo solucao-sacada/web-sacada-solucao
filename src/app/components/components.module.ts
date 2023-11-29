@@ -20,6 +20,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
+import { DataViewModule } from 'primeng/dataview';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { SliderModule } from 'primeng/slider';
 import { TabViewModule } from 'primeng/tabview';
@@ -31,6 +32,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { ToasterService } from './toaster/toaster.service';
 import { MessageService } from 'primeng/api';
+import { ImageModule } from 'primeng/image';
 
 @NgModule({
     declarations: [NavigationTabsBtnComponent, LoadingComponent],
@@ -58,13 +60,17 @@ import { MessageService } from 'primeng/api';
         KnobModule,
         InputSwitchModule,
         ListboxModule,
+        DataViewModule,
         SelectButtonModule,
         CheckboxModule,
         ButtonModule,
         ProgressSpinnerModule,
         ToastModule,
+        ImageModule,
     ],
     exports: [
+        DataViewModule,
+        ImageModule,
         TabViewModule,
         ToastModule,
         FormsModule,

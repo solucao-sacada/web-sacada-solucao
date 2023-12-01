@@ -22,7 +22,7 @@ import { AppAdminComponent } from './layout/app.admin.component';
                 },
                 {
                     path: '',
-                    redirectTo: 'landing',
+                    redirectTo: 'admin',
                     pathMatch: 'full',
                 },
                 {

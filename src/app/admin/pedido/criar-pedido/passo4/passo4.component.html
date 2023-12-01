@@ -1,0 +1,32 @@
+<div class="row mb-5">
+    <div class="col-12">
+        <h4>Especificações do Vidro</h4>
+        <div class="grid gap-3 p-4">
+            <button
+                class="col-5 md:col-2"
+                *ngFor="let cor of cores"
+                pButton
+                pRipple
+                [label]="cor"
+                [ngClass]="{
+                    'p-button-secondary': pedido.passo4.cor_aluminio !== cor
+                }"
+                (click)="alterarCor(cor)"
+            ></button>
+            <div
+                class="col-12 md:col-4 align-self-end"
+                *ngIf="pedido.passo4.cor_aluminio === 'Outro'"
+            >
+                <span class="p-float-label">
+                    <input
+                        type="text"
+                        id="identiCor"
+                        pInputText
+                        [(ngModel)]="pedido.passo4.identificacao_cor"
+                    />
+                    <label for="identiCor">Identificação da cor</label>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

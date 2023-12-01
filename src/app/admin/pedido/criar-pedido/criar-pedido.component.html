@@ -43,7 +43,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 5 </ng-template>
-        <app-passo5></app-passo5>
+        <app-passo5 [pedido]="pedido"></app-passo5>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -51,6 +51,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 6 </ng-template>
+        <app-passo6 [pedido]="pedido"></app-passo6>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -58,6 +59,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 7 </ng-template>
+        <app-passo7 [pedido]="pedido"></app-passo7>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"

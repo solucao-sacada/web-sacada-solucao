@@ -11,6 +11,8 @@ import { BuscaCepService } from 'src/app/services/busca-cep.service';
 import { Passo3Component } from './criar-pedido/passo3/passo3.component';
 import { Passo4Component } from './criar-pedido/passo4/passo4.component';
 import { Passo5Component } from './criar-pedido/passo5/passo5.component';
+import { Passo6Component } from './criar-pedido/passo6/passo6.component';
+import { Passo7Component } from './criar-pedido/passo7/passo7.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +24,8 @@ import { Passo5Component } from './criar-pedido/passo5/passo5.component';
         Passo3Component,
         Passo4Component,
         Passo5Component,
+        Passo6Component,
+        Passo7Component,
     ],
     imports: [CommonModule, PedidoRoutingModule, ComponentsModule],
     providers: [BuscaCepService],

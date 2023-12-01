@@ -28,6 +28,14 @@ export class CriarPedidoComponent {
         },
         passo5: {
             formato_sacada: null,
+            quantidade_aluminio: null,
+            quantidade_vidro: null,
+        },
+        passo6: {
+            alinhamento_viga: null,
+        },
+        passo7: {
+            tipo_aba: null,
         },
     };
 

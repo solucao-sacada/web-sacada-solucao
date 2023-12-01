@@ -3,6 +3,8 @@ export interface Pedido {
     passo3?: passo3;
     passo4?: passo4;
     passo5?: passo5;
+    passo6?: passo6;
+    passo7?: passo7;
 }
 
 interface passo2 {
@@ -27,4 +29,14 @@ interface passo4 {
 
 interface passo5 {
     formato_sacada: string;
+    quantidade_vidro: number;
+    quantidade_aluminio: number;
+}
+
+interface passo6 {
+    alinhamento_viga: string;
+}
+
+interface passo7 {
+    tipo_aba: string;
 }

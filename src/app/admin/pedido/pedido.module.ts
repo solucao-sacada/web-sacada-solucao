@@ -14,6 +14,13 @@ import { Passo5Component } from './criar-pedido/passo5/passo5.component';
 import { Passo6Component } from './criar-pedido/passo6/passo6.component';
 import { Passo7Component } from './criar-pedido/passo7/passo7.component';
 import { Passo8Component } from './criar-pedido/passo8/passo8.component';
+import { Passo9Component } from './criar-pedido/passo9/passo9.component';
+import { Passo10Component } from './criar-pedido/passo10/passo10.component';
+import { Passo11Component } from './criar-pedido/passo11/passo11.component';
+import { Passo12Component } from './criar-pedido/passo12/passo12.component';
+import { Passo13Component } from './criar-pedido/passo13/passo13.component';
+import { Passo14Component } from './criar-pedido/passo14/passo14.component';
+import { Passo15Component } from './criar-pedido/passo15/passo15.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +35,13 @@ import { Passo8Component } from './criar-pedido/passo8/passo8.component';
         Passo6Component,
         Passo7Component,
         Passo8Component,
+        Passo9Component,
+        Passo10Component,
+        Passo11Component,
+        Passo12Component,
+        Passo13Component,
+        Passo14Component,
+        Passo15Component,
     ],
     imports: [CommonModule, PedidoRoutingModule, ComponentsModule],
     providers: [BuscaCepService],

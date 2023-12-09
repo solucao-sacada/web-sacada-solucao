@@ -204,7 +204,7 @@ export class CriarPedidoComponent {
         technician: 'solução sacadas - DENISE SOUZA',
     };
 
-    activeIndex: number = 7;
+    activeIndex: number = 0;
     form1: FormGroup = this._fb.group({
         nomeCliente: ['', Validators.required],
         CEP: [null, Validators.required],

@@ -67,6 +67,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 8 </ng-template>
+        <app-passo8 [pedido]="pedidoJson"></app-passo8>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -127,3 +128,4 @@
         </div>
     </p-tabPanel>
 </p-tabView>
+<!-- <p-button (onClick)="show()">Exibir</p-button> -->

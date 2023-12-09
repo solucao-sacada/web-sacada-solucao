@@ -1157,7 +1157,7 @@ p-inputnumber.p-inputnumber-clearable .p-inputnumber-buttons-horizontal .p-input
   background: #ffffff;
 }
 .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
-  background: #4F46E5;
+  background: #194e69;
 }
 
 p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
@@ -1654,8 +1654,8 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
   color: #ffffff;
 }
 .p-selectbutton .p-button.p-highlight:hover {
-  background: #4F46E5;
-  border-color: #4F46E5;
+  background: #35A8E0;
+  border-color: #35A8E0;
   color: #ffffff;
 }
 .p-selectbutton .p-button.p-highlight:hover .p-button-icon-left,
@@ -1748,8 +1748,8 @@ p-selectbutton.ng-dirty.ng-invalid > .p-selectbutton > .p-button {
   color: #ffffff;
 }
 .p-togglebutton.p-button.p-highlight:hover {
-  background: #4F46E5;
-  border-color: #4F46E5;
+  background: #35A8E0;
+  border-color: #35A8E0;
   color: #ffffff;
 }
 .p-togglebutton.p-button.p-highlight:hover .p-button-icon-left,
@@ -1894,9 +1894,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-radius: 6px;
 }
 .p-button:enabled:hover {
-  background: #4F46E5;
+  background: #35A8E0;
   color: #ffffff;
-  border-color: #4F46E5;
+  border-color: #35A8E0;
 }
 .p-button:enabled:active {
   background: #4338CA;
@@ -3157,8 +3157,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-right: 1px solid #dee2e6;
 }
 .fc.fc-unthemed .fc-view-container .fc-event {
-  background: #4F46E5;
-  border: 1px solid #4F46E5;
+  background: #35A8E0;
+  border: 1px solid #35A8E0;
   color: #ffffff;
 }
 .fc.fc-unthemed .fc-view-container .fc-divider {
@@ -3176,9 +3176,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   align-items: center;
 }
 .fc.fc-unthemed .fc-toolbar .fc-button:enabled:hover {
-  background: #4F46E5;
+  background: #35A8E0;
   color: #ffffff;
-  border-color: #4F46E5;
+  border-color: #35A8E0;
 }
 .fc.fc-unthemed .fc-toolbar .fc-button:enabled:active {
   background: #4338CA;
@@ -3228,8 +3228,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #ffffff;
 }
 .fc.fc-unthemed .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover, .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active:hover, .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover {
-  background: #4F46E5;
-  border-color: #4F46E5;
+  background: #35A8E0;
+  border-color: #35A8E0;
   color: #ffffff;
 }
 .fc.fc-unthemed .fc-toolbar .fc-button.fc-dayGridMonth-button:focus, .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridWeek-button:focus, .fc.fc-unthemed .fc-toolbar .fc-button.fc-timeGridDay-button:focus {
@@ -3312,15 +3312,15 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event {
   color: #ffffff;
-  background: #4F46E5;
-  border-color: #4F46E5;
+  background: #35A8E0;
+  border-color: #35A8E0;
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-block-event .fc-event-main {
   color: #ffffff;
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-dot-event .fc-daygrid-event-dot {
-  background: #4F46E5;
-  border-color: #4F46E5;
+  background: #35A8E0;
+  border-color: #35A8E0;
 }
 .fc.fc-theme-standard .fc-view-harness .fc-event.fc-daygrid-dot-event:hover {
   background: #e9ecef;
@@ -3338,9 +3338,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-radius: 6px;
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button:enabled:hover {
-  background: #4F46E5;
+  background: #35A8E0;
   color: #ffffff;
-  border-color: #4F46E5;
+  border-color: #35A8E0;
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button:enabled:active {
   background: #4338CA;
@@ -3396,8 +3396,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #ffffff;
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button.fc-button-active:hover, .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button.fc-button-active:hover, .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button.fc-button-active:hover {
-  background: #4F46E5;
-  border-color: #4F46E5;
+  background: #35A8E0;
+  border-color: #35A8E0;
   color: #ffffff;
 }
 .fc.fc-theme-standard .fc-toolbar .fc-button.fc-dayGridMonth-button:not(:disabled):focus, .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridWeek-button:not(:disabled):focus, .fc.fc-theme-standard .fc-toolbar .fc-button.fc-timeGridDay-button:not(:disabled):focus {
@@ -4535,7 +4535,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   right: -1rem;
 }
 .p-overlaypanel .p-overlaypanel-close:enabled:hover {
-  background: #4F46E5;
+  background: #35A8E0;
   color: #ffffff;
 }
 .p-overlaypanel:after {
@@ -4652,9 +4652,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-fileupload-choose:not(.p-disabled):hover {
-  background: #4F46E5;
+  background: #35A8E0;
   color: #ffffff;
-  border-color: #4F46E5;
+  border-color: #35A8E0;
 }
 .p-fileupload-choose:not(.p-disabled):active {
   background: #4338CA;

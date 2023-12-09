@@ -1,10 +1,34 @@
 export interface Pedido {
+    client?: Client;
     passo2?: passo2;
     passo3?: passo3;
     passo4?: passo4;
     passo5?: passo5;
     passo6?: passo6;
     passo7?: passo7;
+}
+
+interface Client {
+    address: string;
+    apartament: string;
+    building: string;
+    city: string;
+    name: string;
+    neighborhood: string;
+    state: string;
+}
+
+interface Balcony {
+    aluminiun: {
+        color: {
+            black: boolean;
+            bz1001: boolean;
+            bz1002: boolean;
+            bz1003: boolean;
+            mat: boolean;
+            white: boolean;
+        };
+    };
 }
 
 interface passo2 {

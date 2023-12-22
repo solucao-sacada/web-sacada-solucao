@@ -95,8 +95,6 @@ export class Passo9Component implements OnInit {
         );
 
         this.atualizarVidrosRestantes();
-
-        console.log(this.pedidoService.pedido.balcony.dimensions.data);
     }
 
     limpar() {
@@ -127,7 +125,17 @@ export class Passo9Component implements OnInit {
     }
 
     _nextTab(): void {
-        if (this.vidrosRestantes !== 0) {
+        if (
+            this.linhas.some(
+                (linha) =>
+                    !linha.angle ||
+                    !linha.dimension ||
+                    !linha.quantity ||
+                    !this.pedidoService.pedido.balcony.dimensions.total
+            )
+        ) {
+            this._toster.warn('Preencha todos os campos obirgatórios');
+        } else if (this.vidrosRestantes !== 0) {
             this._toster.warn(
                 `${this.vidrosRestantes} vidros restantes, por favor preencha!`
             );

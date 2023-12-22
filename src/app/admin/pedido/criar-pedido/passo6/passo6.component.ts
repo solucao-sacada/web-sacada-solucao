@@ -1,13 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Pedido } from 'src/app/models/pedido';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
     selector: 'app-passo6',
     templateUrl: './passo6.component.html',
     styles: [],
 })
-export class Passo6Component {
+export class Passo6Component implements OnInit {
     @Input() pedido: Pedido;
+
+    constructor(public pedidoService: PedidoService) {}
 
     selected = '';
     options: any[] = [
@@ -25,8 +28,22 @@ export class Passo6Component {
         },
     ];
 
+    ngOnInit(): void {
+        if (this.pedidoService.pedido.balcony.beam.position.aligned)
+            this.selected = 'Alinhado';
+        if (this.pedidoService.pedido.balcony.beam.position.inside)
+            this.selected = 'Dentro';
+        if (this.pedidoService.pedido.balcony.beam.position.outside)
+            this.selected = 'Fora';
+    }
+
     select(value: string) {
-        this.pedido.passo6.alinhamento_viga = value;
+        this.pedidoService.pedido.balcony.beam.position.aligned =
+            value === 'Alinhado';
+        this.pedidoService.pedido.balcony.beam.position.inside =
+            value === 'Dentro';
+        this.pedidoService.pedido.balcony.beam.position.outside =
+            value === 'Fora';
         this.selected = value;
     }
 }

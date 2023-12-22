@@ -1,13 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Pedido } from 'src/app/models/pedido';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
     selector: 'app-passo7',
     templateUrl: './passo7.component.html',
     styles: [],
 })
-export class Passo7Component {
-    @Input() pedido: Pedido;
+export class Passo7Component implements OnInit {
+    constructor(public pedidoService: PedidoService) {}
 
     selected = '';
     options: any[] = [
@@ -25,8 +26,41 @@ export class Passo7Component {
         },
     ];
 
+    ngOnInit(): void {
+        if (this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal)
+            this.selected = 'Normal';
+        if (this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside)
+            this.selected = 'Chapa de correção para dentro';
+        if (this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside)
+            this.selected = 'Chapa de correção para fora';
+    }
+
     select(value: string) {
-        this.pedido.passo7.tipo_aba = value;
+        if (value === 'Normal') {
+            this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
+                true;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = false;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
+                false;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
+                false;
+        } else if (value === 'Chapa de correção para fora') {
+            this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
+                false;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = true;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
+                true;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
+                false;
+        } else {
+            this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
+                false;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = true;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
+                false;
+            this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
+                true;
+        }
         this.selected = value;
     }
 }

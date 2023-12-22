@@ -28,7 +28,11 @@ export class CriarPedidoComponent {
         public pedidoService: PedidoService
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        if (this.pedidoService.getPedido()) {
+            console.log('Pedido em elaboração');
+        }
+    }
 
     print(): void {
         console.info(this.form1.getRawValue());

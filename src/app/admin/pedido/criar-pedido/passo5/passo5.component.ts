@@ -9,17 +9,6 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo5Component {
-    @Input()
-    public set pedido(value: PedidoJson) {
-        this._pedido = value;
-        if (this._pedido.balcony.format == 1) this.selected = 'Reta';
-        if (this._pedido.balcony.format == 2) this.selected = '"L" Esquerda';
-        if (this._pedido.balcony.format == 3) this.selected = '"L" Direita';
-        if (this._pedido.balcony.format == 4) this.selected = 'Formato "U"';
-        if (this._pedido.balcony.format == 5) this.selected = 'Outro';
-    }
-    _pedido: PedidoJson;
-
     selected = '';
     options: any[] = [
         {
@@ -50,10 +39,23 @@ export class Passo5Component {
     ];
     constructor(private pedidoService: PedidoService) {}
 
+    ngOnInit() {
+        if (this.pedidoService.pedido.balcony.format == 1)
+            this.selected = 'Reta';
+        if (this.pedidoService.pedido.balcony.format == 2)
+            this.selected = '"L" Esquerda';
+        if (this.pedidoService.pedido.balcony.format == 3)
+            this.selected = '"L" Direita';
+        if (this.pedidoService.pedido.balcony.format == 4)
+            this.selected = 'Formato "U"';
+        if (this.pedidoService.pedido.balcony.format == 5)
+            this.selected = 'Outro';
+    }
+
     select(value: string, code: number) {
-        this._pedido.balcony.format = code;
-        this._pedido.balcony.dimensions.data = [];
-        this._pedido.balcony.dimensions.total = '';
+        this.pedidoService.pedido.balcony.format = code;
+        this.pedidoService.pedido.balcony.dimensions.data = [];
+        this.pedidoService.pedido.balcony.dimensions.total = '';
         this.selected = value;
         this.pedidoService.notifyObservers();
     }

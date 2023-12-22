@@ -1,1 +1,70 @@
-<p>passo9 works!</p>
+<h4>Trilhos inferiores</h4>
+
+<div class="flex justify-content-end text-2xl">
+    Vidros restantes:
+    <span class="ml-2 font-bold">{{ vidrosRestantes }}</span>
+</div>
+
+<div class="grid m-0 mt-4 md:mt-4 md:mx-4 border-y-1">
+    <div class="col-3 p-1 text-center border-x-1">Peça</div>
+    <div class="col-3 p-1 text-center border-right-1">Ângulo</div>
+    <div class="col-3 p-1 text-center border-right-1">Dimensão (mm)</div>
+    <div class="col-3 p-1 text-center border-right-1 bg-green-300">
+        Qtd. Vidro
+    </div>
+</div>
+<div
+    class="grid m-0 md:mx-4 border-bottom-1"
+    *ngFor="let linha of linhas; let i = index"
+>
+    <div class="col-3 p-1 text-center border-x-1">{{ linha.piece }}</div>
+    <div class="col-3 p-1 text-center border-right-1">
+        <input
+            type="text"
+            class="border-0 shadow-none text-center w-full"
+            [(ngModel)]="linha.angle"
+            (ngModelChange)="salvarDimensoes()"
+        />
+    </div>
+    <div class="col-3 p-1 text-center border-right-1">
+        <input
+            type="text"
+            class="border-0 shadow-none text-center w-full"
+            [(ngModel)]="linha.dimension"
+            (ngModelChange)="salvarDimensoes()"
+        />
+    </div>
+    <div class="col-3 p-1 text-center border-right-1 bg-green-200">
+        <input
+            type="text"
+            class="border-0 shadow-none text-center bg-green-200 border-green-200 w-full"
+            [(ngModel)]="linha.quantity"
+            (ngModelChange)="salvarDimensoes()"
+        />
+    </div>
+</div>
+<div class="grid m-0 md:mx-4 mb-5">
+    <div class="col-3 p-1 text-center">&nbsp;</div>
+    <div class="col-3 p-1 text-center border-bottom-1 border-x-1">
+        <input
+            type="text"
+            class="border-0 shadow-none text-center w-full"
+            [(ngModel)]="pedidoService.pedido.balcony.dimensions.total"
+        />
+    </div>
+    <div class="col-3 p-1 text-center">&nbsp;</div>
+    <div class="col-3 p-1 text-center">&nbsp;</div>
+</div>
+
+<div
+    class="flex flex-column align-items-center mt-5 justify-content-center text-xl font-light text-gray-800"
+>
+    <p class="text-center">Ângulos em decimal, exemplo: 12,5</p>
+    <p class="text-center">Quantidade de vidros em inteiros, exemplo: 4</p>
+    <p class="text-center">Dimensão em milimetros, exemplo: 40mm</p>
+</div>
+<app-navigation-tabs-btn
+    (nextTab)="_nextTab()"
+    (prevTab)="_prevTab()"
+></app-navigation-tabs-btn>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

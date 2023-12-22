@@ -1,7 +1,8 @@
 <p-tabView
     styleClass="tabview-custom"
-    [(activeIndex)]="activeIndex"
+    [(activeIndex)]="pedidoService.activeIndex"
     [scrollable]="true"
+    (onChange)="pedidoService.changeTab()"
 >
     <p-tabPanel>
         <ng-template pTemplate="header"> 1 </ng-template>
@@ -19,7 +20,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 2 </ng-template>
-        <app-passo2 [pedido]="pedido"></app-passo2>
+        <app-passo2></app-passo2>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -27,7 +28,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 3 </ng-template>
-        <app-passo3 [pedido]="pedido"></app-passo3>
+        <app-passo3></app-passo3>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -35,7 +36,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 4 </ng-template>
-        <app-passo4 [pedido]="pedido"></app-passo4>
+        <app-passo4></app-passo4>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -43,7 +44,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 5 </ng-template>
-        <app-passo5 [pedido]="pedido"></app-passo5>
+        <app-passo5></app-passo5>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -51,7 +52,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 6 </ng-template>
-        <app-passo6 [pedido]="pedido"></app-passo6>
+        <app-passo6></app-passo6>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -59,7 +60,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 7 </ng-template>
-        <app-passo7 [pedido]="pedido"></app-passo7>
+        <app-passo7></app-passo7>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -67,7 +68,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 8 </ng-template>
-        <app-passo8 [pedido]="pedidoJson"></app-passo8>
+        <app-passo8></app-passo8>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -75,10 +76,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 9 </ng-template>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
+        <app-passo9 (nextTab)="nextTab()" (prevTab)="prevTab()"></app-passo9>
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 10 </ng-template>

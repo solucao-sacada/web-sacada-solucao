@@ -8,7 +8,8 @@
                 pRipple
                 label="Definido"
                 [ngClass]="{
-                    'p-button-secondary': !pedido.passo2.defined.isDefined
+                    'p-button-secondary':
+                        !pedidoService.pedido.balcony.tip.defined.isDefined
                 }"
                 (click)="changeTip('defined')"
             ></button>
@@ -17,18 +18,24 @@
                 pRipple
                 label="Melhor ajuste"
                 [ngClass]="{
-                    'p-button-secondary': !pedido.passo2.better_adjustment
+                    'p-button-secondary':
+                        !pedidoService.pedido.balcony.tip.better_adjustment
                 }"
                 (click)="changeTip('better_adjustment')"
             ></button>
         </div>
-        <div class="row text-center" *ngIf="pedido.passo2.defined.isDefined">
+        <div
+            class="row text-center"
+            *ngIf="pedidoService.pedido.balcony.tip.defined.isDefined"
+        >
             <div class="col-12">
                 <label class="text-left">Quantidade de vidros:</label><br />
                 <input
                     class="col-3 md:col-1 mt-2 text-center"
                     pInputText
-                    [(ngModel)]="pedido.passo2.defined.glass_quantity"
+                    [(ngModel)]="
+                        pedidoService.pedido.balcony.tip.defined.glass_quantity
+                    "
                     required
                 />
             </div>

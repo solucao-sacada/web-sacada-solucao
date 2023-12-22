@@ -17,6 +17,7 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from './app.sidebar.component';
 import { AppAdminComponent } from './app.admin.component';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { AppAdminComponent } from './app.admin.component';
         RippleModule,
         RouterModule,
         AppConfigModule,
+        ComponentsModule,
     ],
     exports: [AppAdminComponent],
 })

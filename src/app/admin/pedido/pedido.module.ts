@@ -21,6 +21,7 @@ import { Passo12Component } from './criar-pedido/passo12/passo12.component';
 import { Passo13Component } from './criar-pedido/passo13/passo13.component';
 import { Passo14Component } from './criar-pedido/passo14/passo14.component';
 import { Passo15Component } from './criar-pedido/passo15/passo15.component';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,6 @@ import { Passo15Component } from './criar-pedido/passo15/passo15.component';
         Passo15Component,
     ],
     imports: [CommonModule, PedidoRoutingModule, ComponentsModule],
-    providers: [BuscaCepService],
+    providers: [BuscaCepService, PedidoService],
 })
 export class PedidoModule {}

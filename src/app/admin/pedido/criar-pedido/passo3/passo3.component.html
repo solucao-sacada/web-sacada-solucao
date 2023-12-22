@@ -10,7 +10,7 @@
                 label="Laminado"
                 [ngClass]="{
                     'p-button-secondary':
-                        this.pedido.passo3.tipo_vidro !== 'Laminado'
+                        pedidoService.pedido.balcony.glass.laminated
                 }"
                 (click)="tipoVidro('Laminado')"
             ></button>
@@ -20,7 +20,7 @@
                 label="Temperado"
                 [ngClass]="{
                     'p-button-secondary':
-                        this.pedido.passo3.tipo_vidro !== 'Temperado'
+                        pedidoService.pedido.balcony.glass.tempered
                 }"
                 (click)="tipoVidro('Temperado')"
             ></button>
@@ -32,19 +32,22 @@
                     [options]="coresDoVidro"
                     placeholder="Selecione uma cor"
                     [showClear]="true"
-                    [(ngModel)]="pedido.passo3.cor_vidro"
+                    [(ngModel)]="corDoVidro"
+                    (ngModelChange)="changeCorVidro()"
                 ></p-dropdown>
             </div>
             <div
                 class="col-12 md:col-6 align-self-end"
-                *ngIf="pedido.passo3.cor_vidro === 'Outro'"
+                *ngIf="corDoVidro === 'Outro'"
             >
                 <span class="p-float-label">
                     <input
                         type="number"
                         id="identiCor"
                         pInputText
-                        [(ngModel)]="pedido.passo3.identificacao_cor"
+                        [(ngModel)]="
+                            pedidoService.pedido.balcony.glass.color.other
+                        "
                     />
                     <label for="identiCor">Identificação da cor</label>
                 </span>
@@ -58,9 +61,9 @@
                 label="4+4 ou 8mm"
                 [ngClass]="{
                     'p-button-secondary':
-                        this.pedido.passo3.espessura_vidro !== '4+4 ou 8mm'
+                        pedidoService.pedido.balcony.glass.thickness['8mm']
                 }"
-                (click)="espessuraVidro('4+4 ou 8mm')"
+                (click)="espessuraVidro('8mm')"
             ></button>
             <button
                 pButton
@@ -68,9 +71,9 @@
                 label="5+5 ou 10mm"
                 [ngClass]="{
                     'p-button-secondary':
-                        this.pedido.passo3.espessura_vidro !== '5+5 ou 10mm'
+                        pedidoService.pedido.balcony.glass.thickness['10mm']
                 }"
-                (click)="espessuraVidro('5+5 ou 10mm')"
+                (click)="espessuraVidro('10mm')"
             ></button>
         </div>
     </div>

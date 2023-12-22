@@ -36,6 +36,7 @@ export interface Color {
     bz1003: boolean;
     mat: boolean;
     white: boolean;
+    other: string;
 }
 
 export interface Aperture {
@@ -80,6 +81,7 @@ export interface Color2 {
     colorless: boolean;
     green: boolean;
     tinted: boolean;
+    other: string;
 }
 
 export interface Thickness {

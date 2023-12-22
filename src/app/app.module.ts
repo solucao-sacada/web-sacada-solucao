@@ -13,6 +13,7 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { AdminModule } from './admin/admin.module';
 import { ComponentsModule } from './components/components.module';
+import { PedidoService } from './services/pedido.service';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
@@ -26,6 +27,7 @@ import { ComponentsModule } from './components/components.module';
         NodeService,
         PhotoService,
         ProductService,
+        PedidoService,
     ],
     bootstrap: [AppComponent],
 })

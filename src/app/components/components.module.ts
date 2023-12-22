@@ -33,6 +33,8 @@ import { ToastModule } from 'primeng/toast';
 import { ToasterService } from './toaster/toaster.service';
 import { MessageService } from 'primeng/api';
 import { ImageModule } from 'primeng/image';
+import { MessageModule } from 'primeng/message';
+import { PedidoService } from '../services/pedido.service';
 
 @NgModule({
     declarations: [NavigationTabsBtnComponent, LoadingComponent],
@@ -66,6 +68,7 @@ import { ImageModule } from 'primeng/image';
         ButtonModule,
         ProgressSpinnerModule,
         ToastModule,
+        MessageModule,
         ImageModule,
     ],
     exports: [
@@ -73,6 +76,7 @@ import { ImageModule } from 'primeng/image';
         ImageModule,
         TabViewModule,
         ToastModule,
+        MessageModule,
         FormsModule,
         ReactiveFormsModule,
         AutoCompleteModule,
@@ -100,6 +104,6 @@ import { ImageModule } from 'primeng/image';
         NavigationTabsBtnComponent,
         LoadingComponent,
     ],
-    providers: [LoadingService, ToasterService, MessageService],
+    providers: [LoadingService, ToasterService, MessageService, PedidoService],
 })
 export class ComponentsModule {}

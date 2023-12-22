@@ -5,7 +5,7 @@
     <p-dataView #dv [value]="options">
         <ng-template let-option pTemplate="listItem">
             <div
-                (click)="select(option.name)"
+                (click)="select(option.name, option.code)"
                 class="col-12 cursor-pointer"
                 [style]="
                     selected === option.name ? 'background-color: #a3d4fb;' : ''
@@ -39,48 +39,16 @@
                                     type="number"
                                     id="qtdVidro"
                                     pInputText
-                                    [(ngModel)]="pedido.passo5.quantidade_vidro"
+                                    [(ngModel)]="
+                                        pedido.balcony.tip.defined
+                                            .glass_quantity
+                                    "
                                 />
                                 <label for="qtdVidro"
                                     >Quantidade de vidro</label
                                 >
                             </span>
                         </div>
-                        <div
-                            *ngIf="
-                                selected === 'Outro' && option.name === 'Outro'
-                            "
-                        >
-                            <span class="p-float-label mt-3 sm:mt-0">
-                                <input
-                                    type="number"
-                                    id="qtdAlu"
-                                    pInputText
-                                    [(ngModel)]="
-                                        pedido.passo5.quantidade_aluminio
-                                    "
-                                />
-                                <label for="qtdAlu"
-                                    >Quantidade de Alumínio</label
-                                >
-                            </span>
-                        </div>
-                        <!-- <div
-                            class="flex sm:flex-column align-items-center sm:align-items-end justify-content-center gap-3 sm:gap-2"
-                        >
-                            <button
-                                pButton
-                                pRipple
-                                type="button"
-                                icon="pi {{
-                                    selected === option.name
-                                        ? 'pi-circle-fill'
-                                        : 'pi-circle'
-                                }}"
-                                class="p-button-rounded p-button-text"
-                                (click)="select(option.name)"
-                            ></button>
-                        </div> -->
                     </div>
                 </div>
             </div>

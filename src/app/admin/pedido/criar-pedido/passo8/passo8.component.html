@@ -9,7 +9,7 @@
             label="Normal"
             [ngClass]="{
                 'p-button-secondary':
-                    !pedido.balcony.rails.lower_rail.tip.normal
+                    !pedidoService.pedido.balcony.rails.lower_rail.tip.normal
             }"
             (click)="changeTip('normal')"
         ></button>
@@ -19,7 +19,7 @@
             label="Embutido"
             [ngClass]="{
                 'p-button-secondary':
-                    !pedido.balcony.rails.lower_rail.tip.built_in
+                    !pedidoService.pedido.balcony.rails.lower_rail.tip.built_in
             }"
             (click)="changeTip('built_in')"
         ></button>
@@ -28,7 +28,8 @@
             pRipple
             label="Aba"
             [ngClass]="{
-                'p-button-secondary': !pedido.balcony.rails.lower_rail.tip.tab
+                'p-button-secondary':
+                    !pedidoService.pedido.balcony.rails.lower_rail.tip.tab
             }"
             (click)="changeTip('tab')"
         ></button>
@@ -36,9 +37,9 @@
 
     <h6
         *ngIf="
-            pedido.balcony.rails.lower_rail.tip.normal ||
-            pedido.balcony.rails.lower_rail.tip.tab ||
-            pedido.balcony.rails.lower_rail.tip.built_in
+            pedidoService.pedido.balcony.rails.lower_rail.tip.normal ||
+            pedidoService.pedido.balcony.rails.lower_rail.tip.tab ||
+            pedidoService.pedido.balcony.rails.lower_rail.tip.built_in
         "
         class="mt-5 mb-4"
     >
@@ -46,7 +47,7 @@
     </h6>
 
     <!-- Opção Normal -->
-    <div *ngIf="pedido.balcony.rails.lower_rail.tip.normal">
+    <div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.normal">
         <p-image
             class="w-9 shadow-2 block md:block mx-auto border-round"
             imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
@@ -70,7 +71,10 @@
                 }}</label>
             </div>
             <div
-                *ngIf="pedido.balcony.rails.lower_rail.normal.tip.other"
+                *ngIf="
+                    pedidoService.pedido.balcony.rails.lower_rail.normal.tip
+                        .other
+                "
                 class="flex flex-column"
             >
                 <input type="text" pInputText />
@@ -83,7 +87,7 @@
     </div>
 
     <!-- Opção Embutido -->
-    <div *ngIf="pedido.balcony.rails.lower_rail.tip.built_in">
+    <div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.built_in">
         <p-image
             class="w-9 shadow-2 block md:block mx-auto border-round"
             imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
@@ -155,7 +159,10 @@
                     }}</label>
                 </div>
                 <div
-                    *ngIf="pedido.balcony.rails.lower_rail.built_in.ref.other"
+                    *ngIf="
+                        pedidoService.pedido.balcony.rails.lower_rail.built_in
+                            .ref.other
+                    "
                     class="flex flex-column"
                 >
                     <input type="text" pInputText />
@@ -169,7 +176,7 @@
     </div>
 
     <!-- Opção Aba -->
-    <div *ngIf="pedido.balcony.rails.lower_rail.tip.tab">
+    <div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.tab">
         <div class="flex flex-row gap-5 justify-content-center">
             <button
                 pButton
@@ -177,7 +184,8 @@
                 label="Para Dentro"
                 [ngClass]="{
                     'p-button-secondary':
-                        !pedido.balcony.rails.lower_rail.tab.inside
+                        !pedidoService.pedido.balcony.rails.lower_rail.tab
+                            .inside
                 }"
                 (click)="changeTab('inside')"
             ></button>
@@ -187,13 +195,16 @@
                 label="Para Fora"
                 [ngClass]="{
                     'p-button-secondary':
-                        !pedido.balcony.rails.lower_rail.tab.outside
+                        !pedidoService.pedido.balcony.rails.lower_rail.tab
+                            .outside
                 }"
                 (click)="changeTab('outside')"
             ></button>
         </div>
         <div class="mt-4">
-            <div *ngIf="pedido.balcony.rails.lower_rail.tab.inside">
+            <div
+                *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tab.inside"
+            >
                 <p-image
                     class="w-9 shadow-2 block md:block mx-auto border-round"
                     imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
@@ -203,7 +214,11 @@
                 >
                 </p-image>
             </div>
-            <div *ngIf="pedido.balcony.rails.lower_rail.tab.outside">
+            <div
+                *ngIf="
+                    pedidoService.pedido.balcony.rails.lower_rail.tab.outside
+                "
+            >
                 <p-image
                     class="w-9 shadow-2 block md:block mx-auto border-round"
                     imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
@@ -218,8 +233,8 @@
         <div
             class="flex flex-column gap-3 mt-5"
             *ngIf="
-                pedido.balcony.rails.lower_rail.tab.outside ||
-                pedido.balcony.rails.lower_rail.tab.inside
+                pedidoService.pedido.balcony.rails.lower_rail.tab.outside ||
+                pedidoService.pedido.balcony.rails.lower_rail.tab.inside
             "
         >
             <div class="field-checkbox" *ngFor="let option of tabOptions">

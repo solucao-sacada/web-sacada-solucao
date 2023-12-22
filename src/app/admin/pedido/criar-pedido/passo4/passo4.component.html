@@ -4,25 +4,89 @@
         <div class="grid gap-3 p-4">
             <button
                 class="col-5 md:col-2"
-                *ngFor="let cor of cores"
                 pButton
                 pRipple
-                [label]="cor"
+                label="Preto"
                 [ngClass]="{
-                    'p-button-secondary': pedido.passo4.cor_aluminio !== cor
+                    'p-button-secondary':
+                        !pedidoService.pedido.balcony.aluminium.color.black
                 }"
-                (click)="alterarCor(cor)"
+                (click)="alterarCor('black')"
             ></button>
-            <div
-                class="col-12 md:col-4 align-self-end"
-                *ngIf="pedido.passo4.cor_aluminio === 'Outro'"
-            >
+            <button
+                class="col-5 md:col-2"
+                pButton
+                pRipple
+                label="BZ1001"
+                [ngClass]="{
+                    'p-button-secondary':
+                        !pedidoService.pedido.balcony.aluminium.color.bz1001
+                }"
+                (click)="alterarCor('bz1001')"
+            ></button>
+            <button
+                class="col-5 md:col-2"
+                pButton
+                pRipple
+                label="BZ1002"
+                [ngClass]="{
+                    'p-button-secondary':
+                        !pedidoService.pedido.balcony.aluminium.color.bz1002
+                }"
+                (click)="alterarCor('bz1002')"
+            ></button>
+            <button
+                class="col-5 md:col-2"
+                pButton
+                pRipple
+                label="BZ1003"
+                [ngClass]="{
+                    'p-button-secondary':
+                        !pedidoService.pedido.balcony.aluminium.color.bz1003
+                }"
+                (click)="alterarCor('bz1003')"
+            ></button>
+            <button
+                class="col-5 md:col-2"
+                pButton
+                pRipple
+                label="Incolor"
+                [ngClass]="{
+                    'p-button-secondary':
+                        !pedidoService.pedido.balcony.aluminium.color.mat
+                }"
+                (click)="alterarCor('mat')"
+            ></button>
+            <button
+                class="col-5 md:col-2"
+                pButton
+                pRipple
+                label="Branco"
+                [ngClass]="{
+                    'p-button-secondary':
+                        !pedidoService.pedido.balcony.aluminium.color.white
+                }"
+                (click)="alterarCor('white')"
+            ></button>
+            <button
+                class="col-5 md:col-2"
+                pButton
+                pRipple
+                label="Outro"
+                [ngClass]="{
+                    'p-button-secondary': !outro
+                }"
+                (click)="alterarCor('other')"
+            ></button>
+            <div class="col-12 md:col-4 align-self-end" *ngIf="outro">
                 <span class="p-float-label">
                     <input
                         type="text"
                         id="identiCor"
                         pInputText
-                        [(ngModel)]="pedido.passo4.identificacao_cor"
+                        [(ngModel)]="
+                            pedidoService.pedido.balcony.aluminium.color.other
+                        "
                     />
                     <label for="identiCor">Identificação da cor</label>
                 </span>

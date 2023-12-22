@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Pedido } from 'src/app/models/pedido';
+import { PedidoJson } from 'src/app/models/pedidoJson';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
     selector: 'app-passo2',
@@ -7,16 +9,16 @@ import { Pedido } from 'src/app/models/pedido';
     styles: [],
 })
 export class Passo2Component {
-    @Input() pedido: Pedido;
+    constructor(public pedidoService: PedidoService) {}
 
     changeTip(value: string) {
         if (value === 'better_adjustment') {
-            this.pedido.passo2.better_adjustment = true;
-            this.pedido.passo2.defined.isDefined = false;
-            this.pedido.passo2.defined.glass_quantity = null;
+            this.pedidoService.pedido.balcony.tip.better_adjustment = true;
+            this.pedidoService.pedido.balcony.tip.defined.isDefined = false;
+            this.pedidoService.pedido.balcony.tip.defined.glass_quantity = null;
         } else {
-            this.pedido.passo2.better_adjustment = false;
-            this.pedido.passo2.defined.isDefined = true;
+            this.pedidoService.pedido.balcony.tip.better_adjustment = false;
+            this.pedidoService.pedido.balcony.tip.defined.isDefined = true;
         }
     }
 }

@@ -1,6 +1,6 @@
 <h4>Trilhos inferiores</h4>
 
-<div class="flex justify-content-end text-2xl">
+<div class="flex justify-content-end text-2xl" *ngIf="showVidrosRestantes">
     Vidros restantes:
     <span class="ml-2 font-bold">{{ vidrosRestantes }}</span>
 </div>
@@ -31,7 +31,9 @@
             type="text"
             class="border-0 shadow-none text-center w-full"
             [(ngModel)]="linha.dimension"
-            (ngModelChange)="salvarDimensoes()"
+            (ngModelChange)="
+                salvarDimensoes(); calcularAtualizarQuantity(linha)
+            "
         />
     </div>
     <div class="col-3 p-1 text-center border-right-1 bg-green-200">

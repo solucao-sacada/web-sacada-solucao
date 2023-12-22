@@ -21,4 +21,8 @@ export class Passo2Component {
             this.pedidoService.pedido.balcony.tip.defined.isDefined = true;
         }
     }
+
+    onChangeQtdVidros() {
+        this.pedidoService.notifyObservers();
+    }
 }

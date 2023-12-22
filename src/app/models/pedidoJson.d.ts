@@ -211,10 +211,12 @@ export interface Defined {
 
 export interface Client {
     address: string;
+    zipCode: string;
     apartment: string;
     building: string;
     city: string;
     name: string;
     neighborhood: string;
     state: string;
+    num: number;
 }

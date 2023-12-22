@@ -22,6 +22,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { RatingModule } from 'primeng/rating';
 import { DataViewModule } from 'primeng/dataview';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SliderModule } from 'primeng/slider';
 import { TabViewModule } from 'primeng/tabview';
 import { ToggleButtonModule } from 'primeng/togglebutton';
@@ -35,6 +36,7 @@ import { MessageService } from 'primeng/api';
 import { ImageModule } from 'primeng/image';
 import { MessageModule } from 'primeng/message';
 import { PedidoService } from '../services/pedido.service';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
     declarations: [NavigationTabsBtnComponent, LoadingComponent],
@@ -65,10 +67,12 @@ import { PedidoService } from '../services/pedido.service';
         DataViewModule,
         SelectButtonModule,
         CheckboxModule,
+        OverlayPanelModule,
         ButtonModule,
         ProgressSpinnerModule,
         ToastModule,
         MessageModule,
+        DialogModule,
         ImageModule,
     ],
     exports: [
@@ -76,9 +80,11 @@ import { PedidoService } from '../services/pedido.service';
         ImageModule,
         TabViewModule,
         ToastModule,
+        DialogModule,
         MessageModule,
         FormsModule,
         ReactiveFormsModule,
+        OverlayPanelModule,
         AutoCompleteModule,
         CalendarModule,
         ChipsModule,

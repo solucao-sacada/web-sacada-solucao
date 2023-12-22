@@ -32,6 +32,7 @@ export class Passo9Component implements OnInit {
     linhas: any[] = [];
 
     vidrosRestantes!: number;
+    showVidrosRestantes = true;
 
     constructor(
         public pedidoService: PedidoService,
@@ -78,6 +79,7 @@ export class Passo9Component implements OnInit {
 
     private atualizarVidrosRestantes(): void {
         // Atualiza vidrosRestantes com base nas quantidades preenchidas
+
         this.vidrosRestantes = this.linhas.reduce(
             (total, linha) => total - (linha.quantity ? +linha.quantity : 0),
             this.pedidoService.pedido.balcony.tip.defined.glass_quantity
@@ -117,11 +119,25 @@ export class Passo9Component implements OnInit {
                 this.linhasTabela = 3;
                 break;
             default:
-                this.linhasTabela = 3;
+                this.linhasTabela = +this.pedidoService.pedido.balcony.format;
         }
 
         this.inicializarLinhas();
         this.atualizarVidrosRestantes();
+
+        if (this.pedidoService.pedido.balcony.tip.better_adjustment)
+            this.showVidrosRestantes = false;
+        else this.showVidrosRestantes = true;
+    }
+
+    calcularAtualizarQuantity(linha: any): void {
+        if (linha.dimension) {
+            const valorDimension = parseFloat(linha.dimension);
+            const quantidadeCalculada = Math.ceil(valorDimension / 810);
+            linha.quantity = quantidadeCalculada.toString();
+        } else {
+            linha.quantity = ''; // Limpar quantity se dimension estiver vazio
+        }
     }
 
     _nextTab(): void {

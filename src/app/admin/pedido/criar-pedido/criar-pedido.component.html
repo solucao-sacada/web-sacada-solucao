@@ -6,7 +6,7 @@
 >
     <p-tabPanel>
         <ng-template pTemplate="header"> 1 </ng-template>
-        <app-passo1 [form]="form1"></app-passo1>
+        <app-passo1></app-passo1>
         <div class="flex flex-row-reverse">
             <button
                 pButton
@@ -80,6 +80,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 10 </ng-template>
+        <app-passo10></app-passo10>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"
@@ -87,6 +88,7 @@
     </p-tabPanel>
     <p-tabPanel>
         <ng-template pTemplate="header"> 11 </ng-template>
+        <app-passo11> </app-passo11>
         <app-navigation-tabs-btn
             (nextTab)="nextTab()"
             (prevTab)="prevTab()"

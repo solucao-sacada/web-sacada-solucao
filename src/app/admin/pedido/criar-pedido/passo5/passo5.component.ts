@@ -48,12 +48,11 @@ export class Passo5Component {
             this.selected = '"L" Direita';
         if (this.pedidoService.pedido.balcony.format == 4)
             this.selected = 'Formato "U"';
-        if (this.pedidoService.pedido.balcony.format == 5)
-            this.selected = 'Outro';
+        else this.selected = 'Outro';
     }
 
     select(value: string, code: number) {
-        this.pedidoService.pedido.balcony.format = code;
+        this.pedidoService.pedido.balcony.format = code !== 5 ? code : '';
         this.pedidoService.pedido.balcony.dimensions.data = [];
         this.pedidoService.pedido.balcony.dimensions.total = '';
         this.selected = value;

@@ -1,55 +1,80 @@
 <div class="row">
     <div class="col-12">
         <h4>Dados do Pedido</h4>
-        <form class="p-fluid p-formgrid grid" [formGroup]="form">
+        <div class="p-fluid p-formgrid grid">
             <div class="field col-12">
                 <label htmlFor="nomeCliente">Nome Cliente</label>
-                <input pInputText formControlName="nomeCliente" required />
+                <input
+                    pInputText
+                    [(ngModel)]="pedidoService.pedido.client.name"
+                    required
+                />
             </div>
             <div class="field col-12 sm:col-4 lg:col-4">
                 <label>CEP</label>
                 <p-inputMask
-                    formControlName="CEP"
+                    [(ngModel)]="pedidoService.pedido.client.zipCode"
+                    (ngModelChange)="onChangeCap()"
                     required
                     mask="99.999-999"
                 ></p-inputMask>
             </div>
             <div class="field col-12 sm:col-6 lg:col-6">
                 <label>Rua</label>
-                <input pInputText formControlName="logradouro" required />
+                <input
+                    pInputText
+                    [(ngModel)]="pedidoService.pedido.client.address"
+                    required
+                />
             </div>
             <div class="field col-12 sm:col-2 lg:col-2">
                 <label>Número</label>
                 <input
                     pInputText
-                    formControlName="numero"
+                    [(ngModel)]="pedidoService.pedido.client.num"
                     required
                     #numeroInput
                 />
             </div>
-            <div
+            <!-- <div
                 class="field col-12 sm:col-5"
                 *ngIf="form.get('apLojaCasa')?.value === 'Apartamento'"
             >
                 <label>Nome Edifício</label>
                 <input pInputText formControlName="nomeEdificio" />
-            </div>
+            </div> -->
             <div class="field col-12 sm:col-4">
                 <label>Bairro</label>
-                <input pInputText formControlName="bairro" required />
+                <input
+                    pInputText
+                    [(ngModel)]="pedidoService.pedido.client.neighborhood"
+                    required
+                />
             </div>
             <div class="field col-12 sm:col-5">
                 <label>Cidade</label>
-                <input pInputText formControlName="cidade" required />
+                <input
+                    pInputText
+                    [(ngModel)]="pedidoService.pedido.client.city"
+                    required
+                />
             </div>
             <div class="field col-12 sm:col-3">
                 <label>Estado</label>
-                <input pInputText formControlName="estado" required />
+                <input
+                    pInputText
+                    [(ngModel)]="pedidoService.pedido.client.state"
+                    required
+                />
             </div>
             <div class="field col-12 sm:col-5 lg:col-5">
                 <label>Numero Orçamento</label>
-                <input pInputText formControlName="idOrcamento" />
+                <input
+                    pInputText
+                    [(ngModel)]="pedidoService.pedido.technician"
+                />
             </div>
-        </form>
+        </div>
     </div>
 </div>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

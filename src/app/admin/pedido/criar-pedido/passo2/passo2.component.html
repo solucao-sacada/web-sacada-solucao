@@ -36,6 +36,7 @@
                     [(ngModel)]="
                         pedidoService.pedido.balcony.tip.defined.glass_quantity
                     "
+                    (ngModelChange)="onChangeQtdVidros()"
                     required
                 />
             </div>

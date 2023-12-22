@@ -357,6 +357,8 @@ export class PedidoService {
                     name: 'TRISSIA CHURRASQUEIRA',
                     neighborhood: 'X',
                     state: 'SC',
+                    zipCode: '',
+                    num: 0,
                 },
                 technician: 'solução sacadas - DENISE SOUZA',
             };
@@ -374,15 +376,18 @@ export class PedidoService {
         this.activeIndex += 1;
         this.setActiveIndex(this.activeIndex);
         this.setPedido(this.pedido);
+        this.notifyObservers();
     }
     prevTab(): void {
         if (this.activeIndex > 0) this.activeIndex -= 1;
         this.setActiveIndex(this.activeIndex);
         this.setPedido(this.pedido);
+        this.notifyObservers();
     }
 
     changeTab() {
         this.setActiveIndex(this.activeIndex);
         this.setPedido(this.pedido);
+        this.notifyObservers();
     }
 }

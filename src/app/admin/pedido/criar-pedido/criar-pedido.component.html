@@ -2,128 +2,65 @@
     styleClass="tabview-custom"
     [(activeIndex)]="pedidoService.activeIndex"
     [scrollable]="true"
-    (onChange)="pedidoService.changeTab()"
+    (onChange)="pedidoService.changeTab($event)"
 >
     <p-tabPanel>
         <ng-template pTemplate="header"> 1 </ng-template>
         <app-passo1></app-passo1>
-        <div class="flex flex-row-reverse">
-            <button
-                pButton
-                pRipple
-                label="Próximo"
-                icon="pi pi-chevron-right"
-                iconPos="right"
-                (click)="nextTab()"
-            ></button>
-        </div>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(1)">
         <ng-template pTemplate="header"> 2 </ng-template>
         <app-passo2></app-passo2>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(2)">
         <ng-template pTemplate="header"> 3 </ng-template>
         <app-passo3></app-passo3>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(3)">
         <ng-template pTemplate="header"> 4 </ng-template>
         <app-passo4></app-passo4>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(4)">
         <ng-template pTemplate="header"> 5 </ng-template>
         <app-passo5></app-passo5>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(5)">
         <ng-template pTemplate="header"> 6 </ng-template>
         <app-passo6></app-passo6>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(6)">
         <ng-template pTemplate="header"> 7 </ng-template>
         <app-passo7></app-passo7>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(7)">
         <ng-template pTemplate="header"> 8 </ng-template>
         <app-passo8></app-passo8>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(8)">
         <ng-template pTemplate="header"> 9 </ng-template>
-        <app-passo9 (nextTab)="nextTab()" (prevTab)="prevTab()"></app-passo9>
+        <app-passo9></app-passo9>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(9)">
         <ng-template pTemplate="header"> 10 </ng-template>
         <app-passo10></app-passo10>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(10)">
         <ng-template pTemplate="header"> 11 </ng-template>
         <app-passo11> </app-passo11>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(11)">
         <ng-template pTemplate="header"> 12 </ng-template>
         <app-passo12></app-passo12>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(12)">
         <ng-template pTemplate="header"> 13 </ng-template>
-        <app-passo13></app-passo13>
+        <app-passo13 (isOk)="passo13_OK($event)"></app-passo13>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(13)">
         <ng-template pTemplate="header"> 14 </ng-template>
-        <app-navigation-tabs-btn
-            (nextTab)="nextTab()"
-            (prevTab)="prevTab()"
-        ></app-navigation-tabs-btn>
     </p-tabPanel>
-    <p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(14)">
         <ng-template pTemplate="header"> 15 </ng-template>
-        <div class="flex">
-            <button
-                pButton
-                pRipple
-                label="Próximo"
-                icon="pi pi-chevron-left"
-                (click)="prevTab()"
-            ></button>
-        </div>
     </p-tabPanel>
 </p-tabView>
 <!-- <p-button (onClick)="show()">Exibir</p-button> -->

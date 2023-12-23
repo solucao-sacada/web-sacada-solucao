@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class NavigationTabsBtnComponent {
+    @Input() showPrev: boolean = true;
+    @Input() showNext: boolean = true;
     @Output() nextTab = new EventEmitter();
     @Output() prevTab = new EventEmitter();
 

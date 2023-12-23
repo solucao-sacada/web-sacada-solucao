@@ -46,4 +46,12 @@ export class Passo6Component implements OnInit {
             value === 'Fora';
         this.selected = value;
     }
+
+    nextTab(): void {
+        this.pedidoService.nextTab();
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
+    }
 }

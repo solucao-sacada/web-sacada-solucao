@@ -3,7 +3,7 @@
         <h4>Dados do Pedido</h4>
         <div class="p-fluid p-formgrid grid">
             <div class="field col-12">
-                <label htmlFor="nomeCliente">Nome Cliente</label>
+                <label htmlFor="nomeCliente">Nome Cliente *</label>
                 <input
                     pInputText
                     [(ngModel)]="pedidoService.pedido.client.name"
@@ -14,13 +14,12 @@
                 <label>CEP</label>
                 <p-inputMask
                     [(ngModel)]="pedidoService.pedido.client.zipCode"
-                    (ngModelChange)="onChangeCap()"
-                    required
+                    (ngModelChange)="onChangeCep()"
                     mask="99.999-999"
                 ></p-inputMask>
             </div>
             <div class="field col-12 sm:col-6 lg:col-6">
-                <label>Rua</label>
+                <label>Rua *</label>
                 <input
                     pInputText
                     [(ngModel)]="pedidoService.pedido.client.address"
@@ -28,7 +27,7 @@
                 />
             </div>
             <div class="field col-12 sm:col-2 lg:col-2">
-                <label>Número</label>
+                <label>Número *</label>
                 <input
                     pInputText
                     [(ngModel)]="pedidoService.pedido.client.num"
@@ -36,15 +35,32 @@
                     #numeroInput
                 />
             </div>
-            <!-- <div
+            <div class="col-12">
+                <p-selectButton
+                    [options]="[
+                        { name: 'Loja' },
+                        { name: 'Ap' },
+                        { name: 'Casa' }
+                    ]"
+                    [(ngModel)]="pedidoService.pedido.client.apartment"
+                    [multiple]="false"
+                    optionLabel="name"
+                    optionValue="name"
+                    [style]="{ padding: 0 }"
+                ></p-selectButton>
+            </div>
+            <div
                 class="field col-12 sm:col-5"
-                *ngIf="form.get('apLojaCasa')?.value === 'Apartamento'"
+                *ngIf="pedidoService.pedido.client.apartment === 'Ap'"
             >
-                <label>Nome Edifício</label>
-                <input pInputText formControlName="nomeEdificio" />
-            </div> -->
+                <label>Nome Edfício</label>
+                <input
+                    pInputText
+                    [(ngModel)]="pedidoService.pedido.client.building"
+                />
+            </div>
             <div class="field col-12 sm:col-4">
-                <label>Bairro</label>
+                <label>Bairro *</label>
                 <input
                     pInputText
                     [(ngModel)]="pedidoService.pedido.client.neighborhood"
@@ -52,7 +68,7 @@
                 />
             </div>
             <div class="field col-12 sm:col-5">
-                <label>Cidade</label>
+                <label>Cidade *</label>
                 <input
                     pInputText
                     [(ngModel)]="pedidoService.pedido.client.city"
@@ -60,7 +76,7 @@
                 />
             </div>
             <div class="field col-12 sm:col-3">
-                <label>Estado</label>
+                <label>Estado *</label>
                 <input
                     pInputText
                     [(ngModel)]="pedidoService.pedido.client.state"
@@ -77,4 +93,9 @@
         </div>
     </div>
 </div>
+<app-navigation-tabs-btn
+    [showPrev]="false"
+    (nextTab)="nextTab()"
+    (prevTab)="prevTab()"
+></app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

@@ -16,7 +16,7 @@
                 pButton
                 pRipple
                 type="button"
-                icon="pi pi-times"
+                icon="pi pi-trash"
                 class="p-button-rounded p-button-text p-button-danger"
                 (click)="delete(i)"
             ></button>
@@ -92,13 +92,14 @@
 </div>
 
 <div
-    class="flex flex-column align-items-center mt-5 mb-3 justify-content-center text-xl font-light text-gray-800 my-2 relative"
+    class="flex flex-column align-items-center mt-5 justify-content-center text-xl font-light text-gray-800 my-2 relative"
 >
     <p class="text-center">
         Distribuição dos vidros da esquerda para a direita com visão de dentro
         da sacada
     </p>
 </div>
+
 <app-navigation-tabs-btn
     (nextTab)="nextTab()"
     (prevTab)="prevTab()"

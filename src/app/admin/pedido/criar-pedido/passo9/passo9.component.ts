@@ -25,9 +25,6 @@ import { PedidoService } from 'src/app/services/pedido.service';
     ],
 })
 export class Passo9Component implements OnInit {
-    @Output() nextTab = new EventEmitter();
-    @Output() prevTab = new EventEmitter();
-
     linhasTabela: number = 0;
     linhas: any[] = [];
 
@@ -43,7 +40,6 @@ export class Passo9Component implements OnInit {
         this.update();
 
         this.pedidoService.getObservable().subscribe((data) => {
-            console.log(data);
             if (data) {
                 this.pedidoService.pedido = data;
                 this.update();
@@ -143,10 +139,10 @@ export class Passo9Component implements OnInit {
                 `${this.vidrosRestantes} vidros restantes, por favor preencha!`
             );
         } else {
-            this.nextTab.emit();
+            this.pedidoService.nextTab();
         }
     }
     _prevTab(): void {
-        this.prevTab.emit();
+        this.pedidoService.prevTab();
     }
 }

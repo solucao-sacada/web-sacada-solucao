@@ -29,4 +29,12 @@ export class Passo10Component {
             this.visible = false;
         }
     }
+
+    nextTab(): void {
+        this.pedidoService.nextTab();
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
+    }
 }

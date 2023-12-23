@@ -1,5 +1,13 @@
 import { take, finalize } from 'rxjs';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BuscaCepService } from 'src/app/services/busca-cep.service';
 import { LoadingService } from 'src/app/components/loading/loading.service';
@@ -13,6 +21,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class Passo1Component implements OnInit {
     @ViewChild('numeroInput') numeroInput!: ElementRef;
+    @Output() isOk = new EventEmitter();
 
     constructor(
         private _buscaCep: BuscaCepService,
@@ -23,7 +32,7 @@ export class Passo1Component implements OnInit {
 
     ngOnInit(): void {}
 
-    onChangeCap() {
+    onChangeCep() {
         const cep = (this.pedidoService.pedido.client.zipCode as string)
             .replace('.', '')
             .replace('-', '')
@@ -56,5 +65,25 @@ export class Passo1Component implements OnInit {
                     this._toaster.warn('Cep não encontrado');
                 }
             });
+    }
+
+    nextTab(): void {
+        if (
+            !this.pedidoService.pedido.client.name ||
+            !this.pedidoService.pedido.client.address ||
+            !this.pedidoService.pedido.client.num ||
+            !this.pedidoService.pedido.client.apartment ||
+            !this.pedidoService.pedido.client.neighborhood ||
+            !this.pedidoService.pedido.client.city ||
+            !this.pedidoService.pedido.client.state
+        ) {
+            this._toaster.warn(
+                'Por favor preencha todos os campos obrigatórios'
+            );
+        } else this.pedidoService.nextTab();
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
     }
 }

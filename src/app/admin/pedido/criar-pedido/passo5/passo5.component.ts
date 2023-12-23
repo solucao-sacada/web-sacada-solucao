@@ -58,4 +58,12 @@ export class Passo5Component {
         this.selected = value;
         this.pedidoService.notifyObservers();
     }
+
+    nextTab(): void {
+        this.pedidoService.nextTab();
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
+    }
 }

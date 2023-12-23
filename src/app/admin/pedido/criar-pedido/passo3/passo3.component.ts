@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SelectItem } from 'primeng/api';
+import { MESSAGES } from 'src/app/admin/utils/messages';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
@@ -34,7 +36,28 @@ export class Passo3Component {
         },
     ];
 
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
+
+    ngOnInit(): void {
+        this.pedidoService.pedido.balcony.glass.color.colorless
+            ? (this.corDoVidro = 'Incolor')
+            : '';
+        this.pedidoService.pedido.balcony.glass.color.bronze
+            ? (this.corDoVidro = 'Bronze')
+            : '';
+        this.pedidoService.pedido.balcony.glass.color.green
+            ? (this.corDoVidro = 'Verde')
+            : '';
+        this.pedidoService.pedido.balcony.glass.color.tinted
+            ? (this.corDoVidro = 'Fume')
+            : '';
+        this.pedidoService.pedido.balcony.glass.color.other
+            ? (this.corDoVidro = 'Outro')
+            : '';
+    }
 
     tipoVidro(value: string) {
         if (value === 'laminado') {
@@ -82,6 +105,11 @@ export class Passo3Component {
             this.pedidoService.pedido.balcony.glass.color.bronze = false;
             this.pedidoService.pedido.balcony.glass.color.green = false;
             this.pedidoService.pedido.balcony.glass.color.tinted = false;
+        } else {
+            this.pedidoService.pedido.balcony.glass.color.colorless = false;
+            this.pedidoService.pedido.balcony.glass.color.bronze = false;
+            this.pedidoService.pedido.balcony.glass.color.green = false;
+            this.pedidoService.pedido.balcony.glass.color.tinted = false;
         }
     }
 
@@ -95,5 +123,32 @@ export class Passo3Component {
         else if (this.pedidoService.pedido.balcony.glass.color.green)
             this.corDoVidro = 'Verde';
         else this.corDoVidro = 'Outro';
+    }
+
+    nextTab(): void {
+        if (
+            this.pedidoService.pedido.balcony.glass.tempered ||
+            this.pedidoService.pedido.balcony.glass.laminated
+        ) {
+            if (
+                this.pedidoService.pedido.balcony.glass.color.colorless ||
+                this.pedidoService.pedido.balcony.glass.color.bronze ||
+                this.pedidoService.pedido.balcony.glass.color.green ||
+                this.pedidoService.pedido.balcony.glass.color.tinted
+            ) {
+                if (
+                    this.pedidoService.pedido.balcony.glass.thickness['10mm'] ||
+                    this.pedidoService.pedido.balcony.glass.thickness['8mm']
+                ) {
+                    this.pedidoService.nextTab();
+                } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+            } else if (this.pedidoService.pedido.balcony.glass.color.other) {
+                this.pedidoService.nextTab();
+            } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+        } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
     }
 }

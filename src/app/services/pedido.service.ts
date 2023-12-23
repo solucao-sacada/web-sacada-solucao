@@ -25,6 +25,7 @@ export class PedidoService {
 
     setPedido(pedido: PedidoJson) {
         localStorage.setItem('pedido', JSON.stringify(pedido));
+        console.info('[INFO] Pedido armazenado localmente!', pedido);
     }
 
     getPedido(): PedidoJson {
@@ -45,7 +46,7 @@ export class PedidoService {
                             bz1002: false,
                             bz1003: false,
                             mat: false,
-                            white: true,
+                            white: false,
                             other: null,
                         },
                     },
@@ -94,10 +95,10 @@ export class PedidoService {
                             other: null,
                         },
                         laminated: false,
-                        tempered: true,
+                        tempered: false,
                         thickness: {
                             '10mm': false,
-                            '8mm': true,
+                            '8mm': false,
                         },
                     },
                     levels: {
@@ -179,22 +180,22 @@ export class PedidoService {
                     tip: {
                         better_adjustment: false,
                         defined: {
-                            glass_quantity: '15',
-                            isDefined: true,
+                            glass_quantity: null,
+                            isDefined: false,
                         },
                     },
-                    format: 2,
+                    format: 0,
                 },
                 client: {
                     address: 'X',
-                    apartment: 'X',
+                    apartment: 'Ap',
                     building: 'VIDROALTO',
                     city: 'X',
                     name: 'TRISSIA CHURRASQUEIRA',
                     neighborhood: 'X',
                     state: 'SC',
                     zipCode: '',
-                    num: 0,
+                    num: 10,
                 },
                 technician: 'solução sacadas - DENISE SOUZA',
             };
@@ -214,6 +215,7 @@ export class PedidoService {
         this.setPedido(this.pedido);
         this.notifyObservers();
     }
+
     prevTab(): void {
         if (this.activeIndex > 0) this.activeIndex -= 1;
         this.setActiveIndex(this.activeIndex);
@@ -221,7 +223,8 @@ export class PedidoService {
         this.notifyObservers();
     }
 
-    changeTab() {
+    changeTab(event: any) {
+        this.activeIndex = event.index || 0;
         this.setActiveIndex(this.activeIndex);
         this.setPedido(this.pedido);
         this.notifyObservers();
@@ -246,5 +249,9 @@ export class PedidoService {
             default:
                 return +this.pedido.balcony.format;
         }
+    }
+
+    isTabDisabled(tabIndex: number): boolean {
+        return tabIndex > this.activeIndex;
     }
 }

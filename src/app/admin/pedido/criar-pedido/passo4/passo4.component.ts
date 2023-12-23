@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { MESSAGES } from 'src/app/admin/utils/messages';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
@@ -12,7 +14,10 @@ export class Passo4Component {
     @Input() pedido: PedidoJson;
     outro: boolean;
 
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
 
     ngOnInit(): void {}
 
@@ -41,5 +46,28 @@ export class Passo4Component {
                 other: null,
             };
         }
+    }
+
+    nextTab(): void {
+        const colors = this.pedidoService.pedido.balcony.aluminium.color;
+        if (
+            colors.black ||
+            colors.bz1002 ||
+            colors.bz1001 ||
+            colors.bz1003 ||
+            colors.mat ||
+            colors.white ||
+            this.outro
+        ) {
+            if (this.outro) {
+                if (colors.other) {
+                    this.pedidoService.nextTab();
+                } else this._toaster.warn(MESSAGES.UMA_OPCAO);
+            } else this.pedidoService.nextTab();
+        } else this._toaster.warn(MESSAGES.UMA_OPCAO);
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
     }
 }

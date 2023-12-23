@@ -1,5 +1,9 @@
-<div class="flex justify-content-between">
+<div
+    class="flex justify-content-between mt-4"
+    [ngClass]="{ 'flex-row-reverse': showNext && !showPrev }"
+>
     <button
+        *ngIf="showPrev"
         pButton
         pRipple
         label="Anterior"
@@ -7,6 +11,7 @@
         (click)="_prevTab()"
     ></button>
     <button
+        *ngIf="showNext"
         pButton
         pRipple
         label="Próximo"

@@ -63,4 +63,12 @@ export class Passo7Component implements OnInit {
         }
         this.selected = value;
     }
+
+    nextTab(): void {
+        this.pedidoService.nextTab();
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
+    }
 }

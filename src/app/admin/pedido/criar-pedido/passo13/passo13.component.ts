@@ -9,6 +9,8 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo13Component {
+    @Output() isOk = new EventEmitter();
+
     qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
 
     vidrosRestantes: number;
@@ -41,6 +43,7 @@ export class Passo13Component {
                 piece: i.toString(),
             });
         }
+        this.verifyStep();
     }
 
     getVidroInicial(index: number): number {
@@ -60,11 +63,14 @@ export class Passo13Component {
             this.getVidroInicial(index) +
             +this.pedidoService.pedido.balcony.aperture.locations[index].glasses
         }`);
+        this.verifyStep();
     }
 
     delete(index: number) {
         this.pedidoService.pedido.balcony.aperture.locations.splice(index, 1);
         this.atualizarQtdVidrosRestantes();
+        this.pedidoService.setPedido(this.pedidoService.pedido);
+        this.verifyStep();
     }
 
     atualizarQtdVidrosRestantes(): void {
@@ -82,6 +88,7 @@ export class Passo13Component {
         }
 
         this.vidrosRestantes = qtdVidrosRestantes;
+        this.verifyStep();
     }
 
     novaAbertura() {
@@ -93,6 +100,7 @@ export class Passo13Component {
             piece: '',
             stacking: '',
         });
+        this.verifyStep();
     }
 
     novoFixo() {
@@ -104,9 +112,11 @@ export class Passo13Component {
             piece: '',
             stacking: '',
         });
+        this.verifyStep();
     }
 
     nextTab(): void {
+        this.verifyStep();
         const mensagensAviso = [];
         if (this.vidrosRestantes < 0) {
             mensagensAviso.push(
@@ -137,5 +147,22 @@ export class Passo13Component {
     }
     prevTab(): void {
         this.pedidoService.prevTab();
+    }
+
+    verifyStep(): void {
+        if (this.vidrosRestantes < 0) {
+            this.isOk.emit(false);
+        } else if (this.vidrosRestantes > 0) {
+            this.isOk.emit(false);
+        } else if (
+            this.pedidoService.pedido.balcony.aperture.locations.some(
+                (linha) =>
+                    !linha.glasses || !linha.piece || !linha.door_distance
+            )
+        ) {
+            this.isOk.emit(false);
+        } else {
+            this.isOk.emit(true);
+        }
     }
 }

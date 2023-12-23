@@ -31,4 +31,12 @@ export class Passo12Component {
         this.pedidoService.pedido.balcony.aperture.outside = option.code === 2;
         this.selected = option.name;
     }
+
+    nextTab(): void {
+        this.pedidoService.nextTab();
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
+    }
 }

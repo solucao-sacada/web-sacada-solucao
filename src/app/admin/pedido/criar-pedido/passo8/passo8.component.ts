@@ -105,4 +105,12 @@ export class Passo8Component {
             this.pedidoService.pedido.balcony.rails.lower_rail.built_in.ref
         );
     }
+
+    nextTab(): void {
+        this.pedidoService.nextTab();
+    }
+
+    prevTab(): void {
+        this.pedidoService.prevTab();
+    }
 }

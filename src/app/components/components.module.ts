@@ -37,6 +37,7 @@ import { ImageModule } from 'primeng/image';
 import { MessageModule } from 'primeng/message';
 import { PedidoService } from '../services/pedido.service';
 import { DialogModule } from 'primeng/dialog';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
     declarations: [NavigationTabsBtnComponent, LoadingComponent],
@@ -67,6 +68,7 @@ import { DialogModule } from 'primeng/dialog';
         DataViewModule,
         SelectButtonModule,
         CheckboxModule,
+        CardModule,
         OverlayPanelModule,
         ButtonModule,
         ProgressSpinnerModule,
@@ -106,6 +108,7 @@ import { DialogModule } from 'primeng/dialog';
         ListboxModule,
         SelectButtonModule,
         CheckboxModule,
+        CardModule,
         ButtonModule,
         NavigationTabsBtnComponent,
         LoadingComponent,

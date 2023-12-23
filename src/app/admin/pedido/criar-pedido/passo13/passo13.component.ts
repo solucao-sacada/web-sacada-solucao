@@ -1,11 +1,141 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
+import { LocationP } from 'src/app/models/pedidoJson';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
-  selector: 'app-passo13',
-  templateUrl: './passo13.component.html',
-  styles: [
-  ]
+    selector: 'app-passo13',
+    templateUrl: './passo13.component.html',
+    styles: [],
 })
 export class Passo13Component {
+    qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
 
+    vidrosRestantes: number;
+
+    aberturas: LocationP[] = [];
+
+    qtdPecas = this.pedidoService.getQtdPecas();
+
+    optionsPieces: any[] = [];
+
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
+
+    ngOnInit() {
+        this.update();
+        this.pedidoService.getObservable().subscribe((data) => {
+            this.update();
+        });
+
+        this.atualizarQtdVidrosRestantes();
+    }
+
+    update() {
+        this.qtdPecas = this.pedidoService.getQtdPecas();
+        this.optionsPieces = [];
+        for (let i = 1; i < this.qtdPecas + 1; i++) {
+            this.optionsPieces.push({
+                piece: i.toString(),
+            });
+        }
+    }
+
+    getVidroInicial(index: number): number {
+        let ini = 0;
+        for (let i = 0; i < index; i++) {
+            ini +=
+                +this.pedidoService.pedido.balcony.aperture.locations[i]
+                    .glasses;
+        }
+        return ini;
+    }
+
+    setDistribuition(index: number) {
+        return (this.pedidoService.pedido.balcony.aperture.locations[
+            index
+        ].distribution = `${this.getVidroInicial(index) + 1} a ${
+            this.getVidroInicial(index) +
+            +this.pedidoService.pedido.balcony.aperture.locations[index].glasses
+        }`);
+    }
+
+    delete(index: number) {
+        this.pedidoService.pedido.balcony.aperture.locations.splice(index, 1);
+        this.atualizarQtdVidrosRestantes();
+    }
+
+    atualizarQtdVidrosRestantes(): void {
+        let qtdVidrosRestantes = this.qtdVidros;
+
+        for (
+            let i = 0;
+            i < this.pedidoService.pedido.balcony.aperture.locations.length;
+            i++
+        ) {
+            const qtdVidros =
+                +this.pedidoService.pedido.balcony.aperture.locations[i]
+                    .glasses || 0;
+            qtdVidrosRestantes -= qtdVidros;
+        }
+
+        this.vidrosRestantes = qtdVidrosRestantes;
+    }
+
+    novaAbertura() {
+        this.pedidoService.pedido.balcony.aperture.locations.push({
+            tip: 'Abertura',
+            distribution: '',
+            door_distance: '40',
+            glasses: '',
+            piece: '',
+            stacking: '',
+        });
+    }
+
+    novoFixo() {
+        this.pedidoService.pedido.balcony.aperture.locations.push({
+            tip: 'Fixo',
+            distribution: '',
+            door_distance: '40',
+            glasses: '',
+            piece: '',
+            stacking: '',
+        });
+    }
+
+    nextTab(): void {
+        const mensagensAviso = [];
+        if (this.vidrosRestantes < 0) {
+            mensagensAviso.push(
+                'Número de vidros distribuídos maior que o total disponível'
+            );
+        }
+
+        if (this.vidrosRestantes > 0) {
+            mensagensAviso.push('É necessário distribuir todas as peças');
+        }
+
+        if (
+            this.pedidoService.pedido.balcony.aperture.locations.some(
+                (linha) =>
+                    !linha.glasses || !linha.piece || !linha.door_distance
+            )
+        ) {
+            mensagensAviso.push('Por favor, preencha todos os campos');
+        }
+
+        if (mensagensAviso.length > 0) {
+            mensagensAviso.forEach((mensagem) => {
+                this._toaster.warn(mensagem);
+            });
+        } else {
+            this.pedidoService.nextTab();
+        }
+    }
+    prevTab(): void {
+        this.pedidoService.prevTab();
+    }
 }

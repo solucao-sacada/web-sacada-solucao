@@ -41,11 +41,11 @@ export interface Color {
 
 export interface Aperture {
     inside: boolean;
-    locations: Location[];
+    locations: LocationP[];
     outside: boolean;
 }
 
-export interface Location {
+export interface LocationP {
     distribution: string;
     door_distance: string;
     glasses: string;

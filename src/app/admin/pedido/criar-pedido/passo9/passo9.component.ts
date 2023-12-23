@@ -107,20 +107,7 @@ export class Passo9Component implements OnInit {
     }
 
     update() {
-        switch (this.pedidoService.pedido.balcony.format) {
-            case 1:
-                this.linhasTabela = 1;
-                break;
-            case 2:
-            case 3:
-                this.linhasTabela = 2;
-                break;
-            case 4:
-                this.linhasTabela = 3;
-                break;
-            default:
-                this.linhasTabela = +this.pedidoService.pedido.balcony.format;
-        }
+        this.linhasTabela = this.pedidoService.getQtdPecas();
 
         this.inicializarLinhas();
         this.atualizarVidrosRestantes();
@@ -155,7 +142,9 @@ export class Passo9Component implements OnInit {
             this._toster.warn(
                 `${this.vidrosRestantes} vidros restantes, por favor preencha!`
             );
-        } else this.nextTab.emit();
+        } else {
+            this.nextTab.emit();
+        }
     }
     _prevTab(): void {
         this.prevTab.emit();

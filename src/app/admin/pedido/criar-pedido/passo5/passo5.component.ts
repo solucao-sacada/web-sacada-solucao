@@ -42,11 +42,11 @@ export class Passo5Component {
     ngOnInit() {
         if (this.pedidoService.pedido.balcony.format == 1)
             this.selected = 'Reta';
-        if (this.pedidoService.pedido.balcony.format == 2)
+        else if (this.pedidoService.pedido.balcony.format == 2)
             this.selected = '"L" Esquerda';
-        if (this.pedidoService.pedido.balcony.format == 3)
+        else if (this.pedidoService.pedido.balcony.format == 3)
             this.selected = '"L" Direita';
-        if (this.pedidoService.pedido.balcony.format == 4)
+        else if (this.pedidoService.pedido.balcony.format == 4)
             this.selected = 'Formato "U"';
         else this.selected = 'Outro';
     }

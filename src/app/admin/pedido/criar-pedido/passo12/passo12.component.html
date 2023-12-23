@@ -1,1 +1,45 @@
-<p>passo12 works!</p>
+<h4>Aberturas</h4>
+
+<p-dataView #dv [value]="options">
+    <ng-template let-option pTemplate="listItem">
+        <div
+            (click)="select(option)"
+            class="col-12 cursor-pointer"
+            [style]="
+                selected === option.name ? 'background-color: #a3d4fb;' : ''
+            "
+        >
+            <div
+                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
+            >
+                <p-image
+                    *ngIf="option.image !== ''"
+                    class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                    imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
+                    [src]="option.image"
+                    width="200"
+                    [preview]="true"
+                >
+                </p-image>
+                <div
+                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
+                >
+                    <div class="text-xl sm:text-2xl font-bold h-full">
+                        {{ option.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<div
+    class="flex flex-column align-items-center mt-5 mb-3 justify-content-center text-xl font-light text-gray-800 my-2 relative"
+>
+    <p class="text-center font-medium">
+        PARA FORA SOMENTE EM PORTAS QUE NÃO TENHA INCIDÊNCIA DE VENTO OU CHUVA.
+    </p>
+    <p class="text-center">
+        A vedação do sistema fica comprometida quando o sistema abre fora.
+    </p>
+</div>

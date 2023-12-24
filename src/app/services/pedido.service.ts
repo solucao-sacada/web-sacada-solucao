@@ -218,10 +218,22 @@ export class PedidoService {
     }
 
     getQuantidadeTotalVidros(): number {
-        return this.pedido.balcony.dimensions.data.reduce(
-            (total, linha) => total + (linha[3] ? +linha[3] : 0),
+        if (
+            !this.pedido.balcony.dimensions.data ||
+            this.pedido.balcony.dimensions.data.length === 0
+        ) {
+            return 0;
+        }
+
+        const quantidadeTotal = this.pedido.balcony.dimensions.data.reduce(
+            (total, linha) => {
+                const quantidadeVidros = linha[3] ? +linha[3] : 0;
+                return total + quantidadeVidros;
+            },
             0
         );
+
+        return quantidadeTotal;
     }
 
     getQtdPecas(): number {

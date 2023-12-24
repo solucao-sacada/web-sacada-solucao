@@ -29,10 +29,10 @@ export class Passo13Component {
     ngOnInit() {
         this.update();
         this.pedidoService.getObservable().subscribe((data) => {
+            this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
             this.update();
+            this.atualizarQtdVidrosRestantes();
         });
-
-        this.atualizarQtdVidrosRestantes();
     }
 
     update() {
@@ -74,8 +74,8 @@ export class Passo13Component {
     }
 
     atualizarQtdVidrosRestantes(): void {
+        console.log(this.qtdVidros);
         let qtdVidrosRestantes = this.qtdVidros;
-
         for (
             let i = 0;
             i < this.pedidoService.pedido.balcony.aperture.locations.length;

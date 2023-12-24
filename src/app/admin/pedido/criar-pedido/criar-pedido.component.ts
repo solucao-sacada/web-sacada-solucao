@@ -33,6 +33,7 @@ export class CriarPedidoComponent {
                     this.pedidoService.pedido = JSON.parse(this.pedidoString);
                     this.pedidoService.activeIndex =
                         this.pedidoService.getActiveIndex();
+                    this.pedidoService.notifyObservers();
                 },
                 reject: () => {
                     // this.pedidoService.clearLocalStorage();

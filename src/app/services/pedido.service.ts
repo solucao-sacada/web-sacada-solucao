@@ -1,19 +1,175 @@
 import { Injectable } from '@angular/core';
 import { PedidoJson } from '../models/pedidoJson';
 import { Subject } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PedidoService {
-    pedido = this.getPedido();
+    pedido: PedidoJson = this.intilizePedido();
     qtdTotalVidros: number = 0;
 
     private observableDataSubject = new Subject<any>();
 
-    activeIndex = this.getActiveIndex();
+    activeIndex = 0;
 
-    constructor() {}
+    constructor(private confirmationService: ConfirmationService) {}
+
+    intilizePedido(): PedidoJson {
+        return {
+            accessories: {
+                aparador_aluminio: false,
+                aparador_inox: false,
+                selante: false,
+            },
+            balcony: {
+                aluminium: {
+                    color: {
+                        black: false,
+                        bz1001: false,
+                        bz1002: false,
+                        bz1003: false,
+                        mat: false,
+                        white: false,
+                        other: null,
+                    },
+                },
+                aperture: {
+                    inside: false,
+                    locations: [],
+                    outside: false,
+                },
+                beam: {
+                    position: {
+                        aligned: false,
+                        inside: false,
+                        outside: false,
+                    },
+                },
+                dimensions: {
+                    data: [],
+                    total: '',
+                },
+                glass: {
+                    color: {
+                        bronze: false,
+                        colorless: false,
+                        green: false,
+                        tinted: false,
+                        other: null,
+                    },
+                    laminated: false,
+                    tempered: false,
+                    thickness: {
+                        '10mm': false,
+                        '8mm': false,
+                    },
+                },
+                levels: {
+                    full_aperture: '1080',
+                    measures: {
+                        data: [['1000', '80']],
+                        highest_ceiling: '1000',
+                        highest_floor: '80',
+                        lower_ceiling: '1000',
+                        lower_floor: '80',
+                    },
+                },
+                lock: {
+                    fechadura_para_porta: false,
+                    fechadura_vidro_vidro: false,
+                },
+                plumb: {
+                    left_wall: {
+                        bottom: null,
+                        top: null,
+                    },
+                    right_wall: {
+                        bottom: null,
+                        top: null,
+                    },
+                },
+                rails: {
+                    lower_rail: {
+                        built_in: {
+                            ref: {
+                                A: false,
+                                B: false,
+                                C: false,
+                                other: false,
+                            },
+                            tip: {
+                                A: false,
+                                B: false,
+                                C: false,
+                                D: false,
+                            },
+                        },
+                        normal: {
+                            tip: {
+                                A: false,
+                                B: false,
+                                C: false,
+                                other: false,
+                            },
+                        },
+                        tab: {
+                            inside: false,
+                            outside: false,
+                            tip: {
+                                A: false,
+                                B: false,
+                                C: false,
+                                D: false,
+                                E: false,
+                            },
+                        },
+                        tip: {
+                            built_in: false,
+                            normal: false,
+                            tab: false,
+                        },
+                    },
+                    upper_rail: {
+                        tab: {
+                            inside: false,
+                            outside: false,
+                        },
+                        tip: {
+                            normal: false,
+                            tab: false,
+                        },
+                    },
+                },
+                tip: {
+                    better_adjustment: false,
+                    defined: {
+                        glass_quantity: null,
+                        isDefined: false,
+                    },
+                },
+                format: 0,
+            },
+            client: {
+                address: '',
+                apartment: '',
+                building: '',
+                city: '',
+                name: '',
+                neighborhood: '',
+                state: '',
+                zipCode: '',
+                num: null,
+            },
+            technician: '',
+        };
+    }
+
+    clearLocalStorage() {
+        localStorage.removeItem('pedido');
+        localStorage.removeItem('activeIndex');
+    }
 
     notifyObservers(): void {
         this.observableDataSubject.next(this.pedido);
@@ -28,177 +184,8 @@ export class PedidoService {
         console.info('[INFO] Pedido armazenado localmente!', pedido);
     }
 
-    getPedido(): PedidoJson {
-        const pedido = localStorage.getItem('pedido');
-        if (pedido) return JSON.parse(pedido);
-        else
-            return {
-                accessories: {
-                    aparador_aluminio: false,
-                    aparador_inox: true,
-                    selante: true,
-                },
-                balcony: {
-                    aluminium: {
-                        color: {
-                            black: false,
-                            bz1001: false,
-                            bz1002: false,
-                            bz1003: false,
-                            mat: false,
-                            white: false,
-                            other: null,
-                        },
-                    },
-                    aperture: {
-                        inside: true,
-                        locations: [
-                            {
-                                distribution: '1 a 11',
-                                door_distance: '40',
-                                glasses: '11',
-                                piece: '1',
-                                stacking: 'À Esquerda',
-                                tip: 'Abertura',
-                            },
-                            {
-                                distribution: '12 a 15',
-                                door_distance: '40',
-                                glasses: '4',
-                                piece: '2',
-                                stacking: 'À Direita',
-                                tip: 'Fixo',
-                            },
-                        ],
-                        outside: false,
-                    },
-                    beam: {
-                        position: {
-                            aligned: true,
-                            inside: false,
-                            outside: false,
-                        },
-                    },
-                    dimensions: {
-                        data: [
-                            ['1', '90', '6310', '11'],
-                            ['2', '90', '2005', '4'],
-                        ],
-                        total: '',
-                    },
-                    glass: {
-                        color: {
-                            bronze: false,
-                            colorless: false,
-                            green: false,
-                            tinted: false,
-                            other: null,
-                        },
-                        laminated: false,
-                        tempered: false,
-                        thickness: {
-                            '10mm': false,
-                            '8mm': false,
-                        },
-                    },
-                    levels: {
-                        full_aperture: '1080',
-                        measures: {
-                            data: [['1000', '80']],
-                            highest_ceiling: '1000',
-                            highest_floor: '80',
-                            lower_ceiling: '1000',
-                            lower_floor: '80',
-                        },
-                    },
-                    lock: {
-                        fechadura_para_porta: false,
-                        fechadura_vidro_vidro: true,
-                    },
-                    plumb: {
-                        left_wall: {
-                            bottom: '0',
-                            top: '0',
-                        },
-                        right_wall: {
-                            bottom: '0',
-                            top: '0',
-                        },
-                    },
-                    rails: {
-                        lower_rail: {
-                            built_in: {
-                                ref: {
-                                    A: false,
-                                    B: false,
-                                    C: false,
-                                    other: false,
-                                },
-                                tip: {
-                                    A: false,
-                                    B: false,
-                                    C: false,
-                                    D: false,
-                                },
-                            },
-                            normal: {
-                                tip: {
-                                    A: false,
-                                    B: false,
-                                    C: false,
-                                    other: false,
-                                },
-                            },
-                            tab: {
-                                inside: false,
-                                outside: false,
-                                tip: {
-                                    A: false,
-                                    B: false,
-                                    C: false,
-                                    D: false,
-                                    E: false,
-                                },
-                            },
-                            tip: {
-                                built_in: false,
-                                normal: true,
-                                tab: false,
-                            },
-                        },
-                        upper_rail: {
-                            tab: {
-                                inside: false,
-                                outside: false,
-                            },
-                            tip: {
-                                normal: true,
-                                tab: false,
-                            },
-                        },
-                    },
-                    tip: {
-                        better_adjustment: false,
-                        defined: {
-                            glass_quantity: null,
-                            isDefined: false,
-                        },
-                    },
-                    format: 0,
-                },
-                client: {
-                    address: 'X',
-                    apartment: 'Ap',
-                    building: 'VIDROALTO',
-                    city: 'X',
-                    name: 'TRISSIA CHURRASQUEIRA',
-                    neighborhood: 'X',
-                    state: 'SC',
-                    zipCode: '',
-                    num: 10,
-                },
-                technician: 'solução sacadas - DENISE SOUZA',
-            };
+    getPedido(): string {
+        return localStorage.getItem('pedido');
     }
 
     setActiveIndex(activeIndex: number) {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConfirmationService } from 'primeng/api';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
@@ -10,91 +11,36 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class CriarPedidoComponent {
-    form1: FormGroup = this._fb.group({
-        nomeCliente: ['', Validators.required],
-        CEP: [null, Validators.required],
-        logradouro: ['', Validators.required],
-        numero: ['', Validators.required],
-        apLojaCasa: ['', Validators.required],
-        nomeEdificio: [''],
-        bairro: ['', Validators.required],
-        cidade: ['', Validators.required],
-        estado: ['', Validators.required],
-        idOrcamento: [''],
-    });
+    pedidoString = this.pedidoService.getPedido();
 
     constructor(
         private _fb: FormBuilder,
-        public pedidoService: PedidoService
+        public pedidoService: PedidoService,
+        private confirmationService: ConfirmationService
     ) {}
 
     ngOnInit(): void {
-        if (this.pedidoService.getPedido()) {
-            console.log('Pedido em elaboração');
-        }
-    }
-
-    print(): void {
-        console.info(this.form1.getRawValue());
-    }
-
-    nextTab(): void {
-        this.pedidoService.nextTab();
-    }
-    prevTab(): void {
-        this.pedidoService.prevTab();
-    }
-
-    p1_Ok: boolean = true;
-    passo1_OK(value: boolean) {
-        this.p1_Ok = !value;
-    }
-    p2_Ok: boolean = true;
-    passo2_OK(value: boolean) {
-        this.p2_Ok = !value;
-    }
-    p3_Ok: boolean = true;
-    passo3_OK(value: boolean) {
-        this.p3_Ok = !value;
-    }
-    p4_Ok: boolean = true;
-    passo4_OK(value: boolean) {
-        this.p4_Ok = !value;
-    }
-    p5_Ok: boolean = true;
-    passo5_OK(value: boolean) {
-        this.p5_Ok = !value;
-    }
-    p6_Ok: boolean = true;
-    passo6_OK(value: boolean) {
-        this.p6_Ok = !value;
-    }
-    p7_Ok: boolean = true;
-    passo7_OK(value: boolean) {
-        this.p7_Ok = !value;
-    }
-    p8_Ok: boolean = true;
-    passo8_OK(value: boolean) {
-        this.p8_Ok = !value;
-    }
-    p9_Ok: boolean = true;
-    passo9_OK(value: boolean) {
-        this.p9_Ok = !value;
-    }
-    p10_Ok: boolean = true;
-    passo10_OK(value: boolean) {
-        this.p10_Ok = !value;
-    }
-    p11_Ok: boolean = true;
-    passo11_OK(value: boolean) {
-        this.p11_Ok = !value;
-    }
-    p12_Ok: boolean = true;
-    passo12_OK(value: boolean) {
-        this.p12_Ok = !value;
-    }
-    p13_Ok: boolean = true;
-    passo13_OK(value: boolean) {
-        this.p13_Ok = !value;
+        if (this.pedidoString)
+            this.confirmationService.confirm({
+                message:
+                    'Encontramos um pedido em andamento, deseja dar prosseguimento?',
+                header: 'Confirmação',
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Sim',
+                rejectLabel: 'Não',
+                rejectButtonStyleClass: 'p-button-text',
+                accept: () => {
+                    this.pedidoService.pedido = JSON.parse(this.pedidoString);
+                    this.pedidoService.activeIndex =
+                        this.pedidoService.getActiveIndex();
+                },
+                reject: () => {
+                    // this.pedidoService.clearLocalStorage();
+                    this.pedidoService.activeIndex = 0;
+                    this.pedidoService.pedido =
+                        this.pedidoService.intilizePedido();
+                    // this.pedidoService.setActiveIndex(0);
+                },
+            });
     }
 }

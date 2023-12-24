@@ -71,6 +71,7 @@ export class Passo9Component implements OnInit {
                 })
             );
         }
+        this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
     }
 
     private atualizarVidrosRestantes(): void {
@@ -124,6 +125,7 @@ export class Passo9Component implements OnInit {
     }
 
     _nextTab(): void {
+        this.salvarDimensoes();
         if (
             this.linhas.some(
                 (linha) =>
@@ -134,10 +136,12 @@ export class Passo9Component implements OnInit {
             )
         ) {
             this._toster.warn('Preencha todos os campos obirgatórios');
-        } else if (this.vidrosRestantes !== 0) {
-            this._toster.warn(
-                `${this.vidrosRestantes} vidros restantes, por favor preencha!`
-            );
+        } else if (!this.pedidoService.pedido.balcony.tip.better_adjustment) {
+            if (this.vidrosRestantes !== 0) {
+                this._toster.warn(
+                    `${this.vidrosRestantes} vidros restantes, por favor preencha!`
+                );
+            } else this.pedidoService.nextTab();
         } else {
             this.pedidoService.nextTab();
         }

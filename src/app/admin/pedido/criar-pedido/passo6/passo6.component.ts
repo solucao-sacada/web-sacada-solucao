@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MESSAGES } from 'src/app/admin/utils/messages';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
 
@@ -10,20 +12,26 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo6Component implements OnInit {
     @Input() pedido: Pedido;
 
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
 
     selected = '';
     options: any[] = [
         {
-            name: 'Dentro',
+            code: 'Dentro',
+            name: 'Desalinhado para dentro',
             image: '../../../../../assets/img/6-distancia-guarda-corpo/desalinhado-dentro.jpg',
         },
         {
-            name: 'Alinhado',
+            code: 'Alinhado',
+            name: 'Alinhado com o guarda corpo',
             image: '../../../../../assets/img/6-distancia-guarda-corpo/alinhado.jpg',
         },
         {
-            name: 'Fora',
+            code: 'Fora',
+            name: 'Desalinhado para fora',
             image: '../../../../../assets/img/6-distancia-guarda-corpo/desalinhado-fora.jpg',
         },
     ];
@@ -48,7 +56,10 @@ export class Passo6Component implements OnInit {
     }
 
     nextTab(): void {
-        this.pedidoService.nextTab();
+        const obj = this.pedidoService.pedido.balcony.beam.position;
+        if (obj.aligned || obj.inside || obj.outside) {
+            this.pedidoService.nextTab();
+        } else this._toaster.warn(MESSAGES.UMA_OPCAO);
     }
 
     prevTab(): void {

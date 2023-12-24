@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { MESSAGES } from 'src/app/admin/utils/messages';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
@@ -37,10 +39,14 @@ export class Passo5Component {
             image: '',
         },
     ];
-    constructor(private pedidoService: PedidoService) {}
+    constructor(
+        private pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
 
     ngOnInit() {
-        if (this.pedidoService.pedido.balcony.format == 1)
+        if (this.pedidoService.pedido.balcony.format == 0) this.selected = '';
+        else if (this.pedidoService.pedido.balcony.format == 1)
             this.selected = 'Reta';
         else if (this.pedidoService.pedido.balcony.format == 2)
             this.selected = '"L" Esquerda';
@@ -60,7 +66,16 @@ export class Passo5Component {
     }
 
     nextTab(): void {
-        this.pedidoService.nextTab();
+        if (
+            this.pedidoService.pedido.balcony.format ||
+            this.selected === 'Outro'
+        ) {
+            if (this.selected === 'Outro') {
+                if (this.pedidoService.pedido.balcony.format) {
+                    this.pedidoService.nextTab();
+                } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+            } else this.pedidoService.nextTab();
+        } else this._toaster.warn(MESSAGES.UMA_OPCAO);
     }
 
     prevTab(): void {

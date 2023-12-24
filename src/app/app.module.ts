@@ -14,6 +14,7 @@ import { PhotoService } from './demo/service/photo.service';
 import { AdminModule } from './admin/admin.module';
 import { ComponentsModule } from './components/components.module';
 import { PedidoService } from './services/pedido.service';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
@@ -28,6 +29,7 @@ import { PedidoService } from './services/pedido.service';
         PhotoService,
         ProductService,
         PedidoService,
+        ConfirmationService,
     ],
     bootstrap: [AppComponent],
 })

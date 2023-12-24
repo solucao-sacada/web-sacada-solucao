@@ -5,10 +5,10 @@
     <p-dataView #dv [value]="options">
         <ng-template let-option pTemplate="listItem">
             <div
-                (click)="select(option.name)"
+                (click)="select(option.code)"
                 class="col-12 cursor-pointer"
                 [style]="
-                    selected === option.name ? 'background-color: #a3d4fb' : ''
+                    selected === option.code ? 'background-color: #a3d4fb' : ''
                 "
             >
                 <div
@@ -16,7 +16,7 @@
                 >
                     <p-image
                         *ngIf="option.image !== ''"
-                        class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                        class="w-4 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
                         imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
                         [src]="option.image"
                         width="200"

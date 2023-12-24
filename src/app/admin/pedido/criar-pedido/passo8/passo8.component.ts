@@ -22,6 +22,9 @@ export class Passo8Component {
     ];
 
     selected;
+    normalOption;
+    tabOption;
+    builtInRefOption;
 
     options = [
         {
@@ -47,6 +50,10 @@ export class Passo8Component {
     ];
 
     constructor(public pedidoService: PedidoService) {}
+
+    ngOnInit(): void {
+        this.updateValuesFromRails();
+    }
 
     select(value: string) {
         this.selected = value;
@@ -89,8 +96,22 @@ export class Passo8Component {
             value === 'C';
         this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other =
             value === 'other';
-        console.log(this.pedidoService.pedido.balcony.rails.lower_rail.normal);
+        this.normalOption = value;
     }
+
+    changeTabOption(value: any) {
+        this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.A =
+            value === 'A';
+        this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.B =
+            value === 'B';
+        this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.C =
+            value === 'C';
+        this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.D =
+            value === 'D';
+        this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.E =
+            value === 'E';
+    }
+
     changeBuiltInOption(value: any) {
         console.log(value);
         this.pedidoService.pedido.balcony.rails.lower_rail.built_in.ref.A =
@@ -104,6 +125,69 @@ export class Passo8Component {
         console.log(
             this.pedidoService.pedido.balcony.rails.lower_rail.built_in.ref
         );
+    }
+
+    private updateValuesFromRails(): void {
+        const rails = this.pedidoService.pedido.balcony.rails;
+
+        this.updateSelectedFromRails(rails);
+        this.updateNormalOptionFromRails(rails);
+        this.updateTabOptionFromRails(rails);
+        this.updateBuiltInRefOptionFromRails(rails);
+    }
+
+    private updateSelectedFromRails(rails: any): void {
+        // Exemplo de lógica: Definir this.selected com base no valor de algum campo em rails
+        this.selected = rails.lower_rail.built_in.tip.A
+            ? 'A'
+            : rails.lower_rail.built_in.tip.B
+            ? 'B'
+            : rails.lower_rail.built_in.tip.C
+            ? 'C'
+            : rails.lower_rail.built_in.tip.D
+            ? 'D'
+            : null; // Adapte conforme sua estrutura real
+    }
+
+    private updateBuiltInRefOptionFromRails(rails: any): void {
+        // Exemplo de lógica: Definir this.selected com base no valor de algum campo em rails
+        this.builtInRefOption = rails.lower_rail.built_in.ref.A
+            ? 'A'
+            : rails.lower_rail.built_in.ref.B
+            ? 'B'
+            : rails.lower_rail.built_in.ref.C
+            ? 'C'
+            : rails.lower_rail.built_in.ref.other
+            ? 'other'
+            : null; // Adapte conforme sua estrutura real
+    }
+
+    private updateNormalOptionFromRails(rails: any): void {
+        // Exemplo de lógica: Definir this.normalOption com base no valor de algum campo em rails
+        this.normalOption = rails.lower_rail.normal.tip.A
+            ? 'A'
+            : rails.lower_rail.normal.tip.B
+            ? 'B'
+            : rails.lower_rail.normal.tip.C
+            ? 'C'
+            : rails.lower_rail.normal.tip.other
+            ? 'other'
+            : null; // Adapte conforme sua estrutura real
+    }
+
+    private updateTabOptionFromRails(rails: any): void {
+        // Exemplo de lógica: Definir this.tabOption com base no valor de algum campo em rails
+        this.tabOption = rails.lower_rail.tab.tip.A
+            ? 'A'
+            : rails.lower_rail.tab.tip.B
+            ? 'B'
+            : rails.lower_rail.tab.tip.C
+            ? 'C'
+            : rails.lower_rail.tab.tip.D
+            ? 'D'
+            : rails.lower_rail.tab.tip.E
+            ? 'E'
+            : null; // Adapte conforme sua estrutura real
     }
 
     nextTab(): void {

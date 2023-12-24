@@ -23,7 +23,6 @@
             type="text"
             class="border-0 shadow-none text-center w-full"
             [(ngModel)]="linha.angle"
-            (ngModelChange)="salvarDimensoes()"
         />
     </div>
     <div class="col-3 p-1 text-center border-right-1">
@@ -31,9 +30,7 @@
             type="text"
             class="border-0 shadow-none text-center w-full"
             [(ngModel)]="linha.dimension"
-            (ngModelChange)="
-                salvarDimensoes(); calcularAtualizarQuantity(linha)
-            "
+            (ngModelChange)="calcularAtualizarQuantity(linha)"
         />
     </div>
     <div class="col-3 p-1 text-center border-right-1 bg-green-200">
@@ -41,7 +38,6 @@
             type="text"
             class="border-0 shadow-none text-center bg-green-200 border-green-200 w-full"
             [(ngModel)]="linha.quantity"
-            (ngModelChange)="salvarDimensoes()"
         />
     </div>
 </div>

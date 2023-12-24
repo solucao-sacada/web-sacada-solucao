@@ -38,6 +38,7 @@ import { MessageModule } from 'primeng/message';
 import { PedidoService } from '../services/pedido.service';
 import { DialogModule } from 'primeng/dialog';
 import { CardModule } from 'primeng/card';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
     declarations: [NavigationTabsBtnComponent, LoadingComponent],
@@ -48,6 +49,7 @@ import { CardModule } from 'primeng/card';
         ReactiveFormsModule,
         AutoCompleteModule,
         CalendarModule,
+        ConfirmDialogModule,
         ChipsModule,
         DropdownModule,
         InputMaskModule,
@@ -86,6 +88,7 @@ import { CardModule } from 'primeng/card';
         MessageModule,
         FormsModule,
         ReactiveFormsModule,
+        ConfirmDialogModule,
         OverlayPanelModule,
         AutoCompleteModule,
         CalendarModule,

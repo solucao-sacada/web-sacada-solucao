@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MESSAGES } from 'src/app/admin/utils/messages';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidoService } from 'src/app/services/pedido.service';
 
@@ -8,7 +10,10 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo7Component implements OnInit {
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
 
     selected = '';
     options: any[] = [
@@ -65,7 +70,15 @@ export class Passo7Component implements OnInit {
     }
 
     nextTab(): void {
-        this.pedidoService.nextTab();
+        const obj = this.pedidoService.pedido.balcony.rails.upper_rail;
+        if (
+            obj.tip.normal ||
+            obj.tip.tab ||
+            obj.tab.inside ||
+            obj.tab.outside
+        ) {
+            this.pedidoService.nextTab();
+        } else this._toaster.warn(MESSAGES.UMA_OPCAO);
     }
 
     prevTab(): void {

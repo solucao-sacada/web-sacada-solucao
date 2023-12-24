@@ -152,7 +152,7 @@
                         [name]="option.code"
                         [value]="option.code"
                         (onClick)="changeBuiltInOption(option.code)"
-                        [(ngModel)]="normalOption"
+                        [(ngModel)]="builtInRefOption"
                     ></p-radioButton>
                     <label [for]="option.code" class="ml-2">{{
                         option.label
@@ -242,8 +242,8 @@
                     [inputId]="option.code"
                     [name]="option.code"
                     [value]="option.code"
-                    (onClick)="changeNormalOption(option.code)"
-                    [(ngModel)]="normalOption"
+                    (onClick)="changeTabOption(option.code)"
+                    [(ngModel)]="tabOption"
                 ></p-radioButton>
                 <label [for]="option.code" class="ml-2">{{
                     option.label

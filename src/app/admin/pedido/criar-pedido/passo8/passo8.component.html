@@ -1,53 +1,136 @@
-<div class="row mb-5">
-    <h4>Trilhos inferiores</h4>
+<app-menu-step
+    title="Trilhos Inferiores"
+    step="8 - Trilhos Inferiores"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
 
-    <!-- Botões principais -->
-    <div class="flex flex-row gap-5 justify-content-center">
-        <button
-            pButton
-            pRipple
-            label="Normal"
-            [ngClass]="{
-                'p-button-secondary':
-                    !pedidoService.pedido.balcony.rails.lower_rail.tip.normal
-            }"
-            (click)="changeTip('normal')"
-        ></button>
-        <button
-            pButton
-            pRipple
-            label="Embutido"
-            [ngClass]="{
-                'p-button-secondary':
-                    !pedidoService.pedido.balcony.rails.lower_rail.tip.built_in
-            }"
-            (click)="changeTip('built_in')"
-        ></button>
-        <button
-            pButton
-            pRipple
-            label="Aba"
-            [ngClass]="{
-                'p-button-secondary':
-                    !pedidoService.pedido.balcony.rails.lower_rail.tip.tab
-            }"
-            (click)="changeTip('tab')"
-        ></button>
-    </div>
+<!-- Botões principais -->
+<div class="flex flex-row gap-5 justify-content-center">
+    <button
+        pButton
+        pRipple
+        label="Normal"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido.balcony.rails.lower_rail.tip.normal
+        }"
+        (click)="changeTip('normal')"
+    ></button>
+    <button
+        pButton
+        pRipple
+        label="Embutido"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido.balcony.rails.lower_rail.tip.built_in
+        }"
+        (click)="changeTip('built_in')"
+    ></button>
+    <button
+        pButton
+        pRipple
+        label="Aba"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido.balcony.rails.lower_rail.tip.tab
+        }"
+        (click)="changeTip('tab')"
+    ></button>
+</div>
 
-    <h6
-        *ngIf="
-            pedidoService.pedido.balcony.rails.lower_rail.tip.normal ||
-            pedidoService.pedido.balcony.rails.lower_rail.tip.tab ||
-            pedidoService.pedido.balcony.rails.lower_rail.tip.built_in
-        "
-        class="mt-5 mb-4"
+<h6
+    *ngIf="
+        pedidoService.pedido.balcony.rails.lower_rail.tip.normal ||
+        pedidoService.pedido.balcony.rails.lower_rail.tip.tab ||
+        pedidoService.pedido.balcony.rails.lower_rail.tip.built_in
+    "
+    class="mt-5 mb-4"
+>
+    Linha de referência de medição:
+</h6>
+
+<!-- Opção Normal -->
+<div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.normal">
+    <p-image
+        class="w-9 shadow-2 block md:block mx-auto border-round"
+        imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+        src="../../../../../assets/img/8-trilhos-inferiores/referencia-largura.jpg"
+        width="200"
+        [preview]="true"
     >
-        Linha de referência de medição:
-    </h6>
+    </p-image>
 
-    <!-- Opção Normal -->
-    <div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.normal">
+    <div class="flex flex-column gap-3 mt-5">
+        <div class="field-checkbox" *ngFor="let option of normalOptions">
+            <p-radioButton
+                [inputId]="option.code"
+                [name]="option.code"
+                [value]="option.code"
+                (onClick)="changeNormalOption(option.code)"
+                [(ngModel)]="normalOption"
+            ></p-radioButton>
+            <label [for]="option.code" class="ml-2">{{ option.label }}</label>
+        </div>
+        <div
+            *ngIf="
+                pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other
+            "
+            class="flex flex-column"
+        >
+            <input type="text" pInputText />
+            <small
+                >Descreva aqui a forma medida, apenas para situações diferentes
+                das opções acima.</small
+            >
+        </div>
+    </div>
+</div>
+
+<!-- Opção Embutido -->
+<div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.built_in">
+    <p-image
+        class="w-9 shadow-2 block md:block mx-auto border-round"
+        imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+        src="../../../../../assets/img/8-trilhos-inferiores/marcacao_embutido.jpg"
+        width="200"
+        [preview]="true"
+    >
+    </p-image>
+    <p-dataView #dv [value]="options">
+        <ng-template let-option pTemplate="listItem">
+            <div
+                (click)="select(option.code)"
+                class="col-12 cursor-pointer"
+                [style]="
+                    selected === option.code ? 'background-color: #a3d4fb' : ''
+                "
+            >
+                <div
+                    class="flex md:align-items-start align-items-center p-4 gap-4"
+                >
+                    <p-image
+                        *ngIf="option.image !== ''"
+                        class="w-5 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                        imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+                        [src]="option.image"
+                        width="100"
+                        [preview]="true"
+                    >
+                    </p-image>
+                    <div
+                        class="flex flex-column h-full sm:flex-row justify-content-center md:justify-content-start flex-1 gap-4"
+                    >
+                        <div
+                            class="text-md sm:text-2xl font-bold text-900 h-full"
+                        >
+                            {{ option.name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+    <div class="mt-5">
         <p-image
             class="w-9 shadow-2 block md:block mx-auto border-round"
             imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
@@ -63,8 +146,8 @@
                     [inputId]="option.code"
                     [name]="option.code"
                     [value]="option.code"
-                    (onClick)="changeNormalOption(option.code)"
-                    [(ngModel)]="normalOption"
+                    (onClick)="changeBuiltInOption(option.code)"
+                    [(ngModel)]="builtInRefOption"
                 ></p-radioButton>
                 <label [for]="option.code" class="ml-2">{{
                     option.label
@@ -72,7 +155,7 @@
             </div>
             <div
                 *ngIf="
-                    pedidoService.pedido.balcony.rails.lower_rail.normal.tip
+                    pedidoService.pedido.balcony.rails.lower_rail.built_in.ref
                         .other
                 "
                 class="flex flex-column"
@@ -85,170 +168,71 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Opção Embutido -->
-    <div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.built_in">
-        <p-image
-            class="w-9 shadow-2 block md:block mx-auto border-round"
-            imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-            src="../../../../../assets/img/8-trilhos-inferiores/marcacao_embutido.jpg"
-            width="200"
-            [preview]="true"
-        >
-        </p-image>
-        <p-dataView #dv [value]="options">
-            <ng-template let-option pTemplate="listItem">
-                <div
-                    (click)="select(option.code)"
-                    class="col-12 cursor-pointer"
-                    [style]="
-                        selected === option.code
-                            ? 'background-color: #a3d4fb'
-                            : ''
-                    "
-                >
-                    <div
-                        class="flex md:align-items-start align-items-center p-4 gap-4"
-                    >
-                        <p-image
-                            *ngIf="option.image !== ''"
-                            class="w-5 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
-                            imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-                            [src]="option.image"
-                            width="100"
-                            [preview]="true"
-                        >
-                        </p-image>
-                        <div
-                            class="flex flex-column h-full sm:flex-row justify-content-center md:justify-content-start flex-1 gap-4"
-                        >
-                            <div
-                                class="text-md sm:text-2xl font-bold text-900 h-full"
-                            >
-                                {{ option.name }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </p-dataView>
-        <div class="mt-5">
+<!-- Opção Aba -->
+<div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.tab">
+    <div class="flex flex-row gap-5 justify-content-center">
+        <button
+            pButton
+            pRipple
+            label="Para Dentro"
+            [ngClass]="{
+                'p-button-secondary':
+                    !pedidoService.pedido.balcony.rails.lower_rail.tab.inside
+            }"
+            (click)="changeTab('inside')"
+        ></button>
+        <button
+            pButton
+            pRipple
+            label="Para Fora"
+            [ngClass]="{
+                'p-button-secondary':
+                    !pedidoService.pedido.balcony.rails.lower_rail.tab.outside
+            }"
+            (click)="changeTab('outside')"
+        ></button>
+    </div>
+    <div class="mt-4">
+        <div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tab.inside">
             <p-image
                 class="w-9 shadow-2 block md:block mx-auto border-round"
                 imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-                src="../../../../../assets/img/8-trilhos-inferiores/referencia-largura.jpg"
+                src="../../../../../assets/img/8-trilhos-inferiores/medidas-aba-dentro.jpg"
                 width="200"
                 [preview]="true"
             >
             </p-image>
-
-            <div class="flex flex-column gap-3 mt-5">
-                <div
-                    class="field-checkbox"
-                    *ngFor="let option of normalOptions"
-                >
-                    <p-radioButton
-                        [inputId]="option.code"
-                        [name]="option.code"
-                        [value]="option.code"
-                        (onClick)="changeBuiltInOption(option.code)"
-                        [(ngModel)]="builtInRefOption"
-                    ></p-radioButton>
-                    <label [for]="option.code" class="ml-2">{{
-                        option.label
-                    }}</label>
-                </div>
-                <div
-                    *ngIf="
-                        pedidoService.pedido.balcony.rails.lower_rail.built_in
-                            .ref.other
-                    "
-                    class="flex flex-column"
-                >
-                    <input type="text" pInputText />
-                    <small
-                        >Descreva aqui a forma medida, apenas para situações
-                        diferentes das opções acima.</small
-                    >
-                </div>
-            </div>
+        </div>
+        <div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tab.outside">
+            <p-image
+                class="w-9 shadow-2 block md:block mx-auto border-round"
+                imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+                src="../../../../../assets/img/8-trilhos-inferiores/medidas-aba-fora.jpg"
+                width="200"
+                [preview]="true"
+            >
+            </p-image>
         </div>
     </div>
 
-    <!-- Opção Aba -->
-    <div *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tip.tab">
-        <div class="flex flex-row gap-5 justify-content-center">
-            <button
-                pButton
-                pRipple
-                label="Para Dentro"
-                [ngClass]="{
-                    'p-button-secondary':
-                        !pedidoService.pedido.balcony.rails.lower_rail.tab
-                            .inside
-                }"
-                (click)="changeTab('inside')"
-            ></button>
-            <button
-                pButton
-                pRipple
-                label="Para Fora"
-                [ngClass]="{
-                    'p-button-secondary':
-                        !pedidoService.pedido.balcony.rails.lower_rail.tab
-                            .outside
-                }"
-                (click)="changeTab('outside')"
-            ></button>
-        </div>
-        <div class="mt-4">
-            <div
-                *ngIf="pedidoService.pedido.balcony.rails.lower_rail.tab.inside"
-            >
-                <p-image
-                    class="w-9 shadow-2 block md:block mx-auto border-round"
-                    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-                    src="../../../../../assets/img/8-trilhos-inferiores/medidas-aba-dentro.jpg"
-                    width="200"
-                    [preview]="true"
-                >
-                </p-image>
-            </div>
-            <div
-                *ngIf="
-                    pedidoService.pedido.balcony.rails.lower_rail.tab.outside
-                "
-            >
-                <p-image
-                    class="w-9 shadow-2 block md:block mx-auto border-round"
-                    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-                    src="../../../../../assets/img/8-trilhos-inferiores/medidas-aba-fora.jpg"
-                    width="200"
-                    [preview]="true"
-                >
-                </p-image>
-            </div>
-        </div>
-
-        <div
-            class="flex flex-column gap-3 mt-5"
-            *ngIf="
-                pedidoService.pedido.balcony.rails.lower_rail.tab.outside ||
-                pedidoService.pedido.balcony.rails.lower_rail.tab.inside
-            "
-        >
-            <div class="field-checkbox" *ngFor="let option of tabOptions">
-                <p-radioButton
-                    [inputId]="option.code"
-                    [name]="option.code"
-                    [value]="option.code"
-                    (onClick)="changeTabOption(option.code)"
-                    [(ngModel)]="tabOption"
-                ></p-radioButton>
-                <label [for]="option.code" class="ml-2">{{
-                    option.label
-                }}</label>
-            </div>
+    <div
+        class="flex flex-column gap-3 mt-5"
+        *ngIf="
+            pedidoService.pedido.balcony.rails.lower_rail.tab.outside ||
+            pedidoService.pedido.balcony.rails.lower_rail.tab.inside
+        "
+    >
+        <div class="field-checkbox" *ngFor="let option of tabOptions">
+            <p-radioButton
+                [inputId]="option.code"
+                [name]="option.code"
+                [value]="option.code"
+                (onClick)="changeTabOption(option.code)"
+                [(ngModel)]="tabOption"
+            ></p-radioButton>
+            <label [for]="option.code" class="ml-2">{{ option.label }}</label>
         </div>
     </div>
 </div>

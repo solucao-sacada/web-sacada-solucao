@@ -253,4 +253,13 @@ export class PedidoService {
     isTabDisabled(tabIndex: number): boolean {
         return tabIndex > this.activeIndex;
     }
+
+    sendMessageQuestion(passo: string) {
+        const msg = `Olá, estou com dúvidas no preenchimento da etapa ${passo} do preenchimento do formulário de pedido.`;
+
+        window.open(
+            `http://wa.me/5553999356737?text=${encodeURIComponent(msg)}`,
+            '_blank'
+        );
+    }
 }

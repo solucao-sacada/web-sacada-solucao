@@ -1,0 +1,33 @@
+<div
+    class="flex justify-content-between mb-3 align-items-center relative"
+    #mydiv
+>
+    <span class="font-semibold text-2xl">{{ title }}</span>
+    <button
+        type="button"
+        class="p-button-rounded p-button-secondary"
+        pButton
+        icon="pi pi-ellipsis-v"
+        (click)="menu.toggle($event)"
+    ></button>
+</div>
+<p-menu #menu [popup]="true" [model]="items"></p-menu>
+
+<p-dialog
+    [(visible)]="visible"
+    [modal]="true"
+    header="Dúvidas"
+    [style]="{ width: '50vw', padding: '0' }"
+    [contentStyle]="{ padding: '0' }"
+    [breakpoints]="{ '700px': '90vw' }"
+>
+    <iframe
+        width="100%"
+        height="190px"
+        [src]="urlVideo | safe"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+    ></iframe>
+</p-dialog>

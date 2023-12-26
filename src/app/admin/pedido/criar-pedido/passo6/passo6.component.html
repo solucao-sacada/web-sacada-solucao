@@ -1,47 +1,46 @@
-<div class="row mb-5">
-    <div class="col-12">
-        <h4>Formato da Sacada</h4>
-    </div>
-    <p-dataView #dv [value]="options">
-        <ng-template let-option pTemplate="listItem">
+<app-menu-step
+    title="Alinhamento da viga"
+    step="6 - Alinhamento da viga"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
+
+<p-dataView #dv [value]="options">
+    <ng-template let-option pTemplate="listItem">
+        <div
+            (click)="select(option.code)"
+            class="col-12 cursor-pointer"
+            [style]="
+                selected === option.code ? 'background-color: #a3d4fb' : ''
+            "
+        >
             <div
-                (click)="select(option.code)"
-                class="col-12 cursor-pointer"
-                [style]="
-                    selected === option.code ? 'background-color: #a3d4fb' : ''
-                "
+                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
             >
-                <div
-                    class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
+                <p-image
+                    *ngIf="option.image !== ''"
+                    class="w-4 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                    imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
+                    [src]="option.image"
+                    width="200"
+                    [preview]="true"
                 >
-                    <p-image
-                        *ngIf="option.image !== ''"
-                        class="w-4 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
-                        imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
-                        [src]="option.image"
-                        width="200"
-                        [preview]="true"
-                    >
-                    </p-image>
-                    <div
-                        class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
-                    >
-                        <div
-                            class="text-xl sm:text-2xl font-bold text-900 h-full"
-                        >
-                            {{ option.name }}
-                        </div>
+                </p-image>
+                <div
+                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
+                >
+                    <div class="text-xl sm:text-2xl font-bold text-900 h-full">
+                        {{ option.name }}
                     </div>
                 </div>
             </div>
-        </ng-template>
-    </p-dataView>
-    <div class="row mt-5">
-        <p>
-            <strong>Dica:</strong> Distâncias maiores que 7cm entre o
-            guardacorpo e viga precisam ser avaliados detalhadamente.
-        </p>
-    </div>
+        </div>
+    </ng-template>
+</p-dataView>
+<div class="row mt-5">
+    <p>
+        <strong>Dica:</strong> Distâncias maiores que 7cm entre o guardacorpo e
+        viga precisam ser avaliados detalhadamente.
+    </p>
 </div>
 
 <app-navigation-tabs-btn

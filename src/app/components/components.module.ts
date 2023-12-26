@@ -39,11 +39,23 @@ import { PedidoService } from '../services/pedido.service';
 import { DialogModule } from 'primeng/dialog';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import {
+    ModalVideoComponent,
+    SafePipe,
+} from './modal-video/modal-video.component';
+import { MenuModule } from 'primeng/menu';
+import { MenuStepComponent } from './menu-step/menu-step.component';
 @NgModule({
-    declarations: [NavigationTabsBtnComponent, LoadingComponent],
+    declarations: [
+        NavigationTabsBtnComponent,
+        LoadingComponent,
+        ModalVideoComponent,
+        SafePipe,
+        MenuStepComponent,
+    ],
     imports: [
         CommonModule,
+        MenuModule,
         TabViewModule,
         FormsModule,
         ReactiveFormsModule,
@@ -102,7 +114,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         ToggleButtonModule,
         SliderModule,
         InputTextareaModule,
+        MenuStepComponent,
         RadioButtonModule,
+        ModalVideoComponent,
         InputTextModule,
         RatingModule,
         ChipModule,
@@ -110,6 +124,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         InputSwitchModule,
         ListboxModule,
         SelectButtonModule,
+        MenuModule,
         CheckboxModule,
         CardModule,
         ButtonModule,

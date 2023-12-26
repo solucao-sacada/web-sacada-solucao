@@ -23,6 +23,8 @@ export class Passo1Component implements OnInit {
     @ViewChild('numeroInput') numeroInput!: ElementRef;
     @Output() isOk = new EventEmitter();
 
+    visible = false;
+
     constructor(
         private _buscaCep: BuscaCepService,
         private _loading: LoadingService,

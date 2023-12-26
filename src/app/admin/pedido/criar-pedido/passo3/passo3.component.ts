@@ -42,21 +42,9 @@ export class Passo3Component {
     ) {}
 
     ngOnInit(): void {
-        this.pedidoService.pedido.balcony.glass.color.colorless
-            ? (this.corDoVidro = 'Incolor')
-            : '';
-        this.pedidoService.pedido.balcony.glass.color.bronze
-            ? (this.corDoVidro = 'Bronze')
-            : '';
-        this.pedidoService.pedido.balcony.glass.color.green
-            ? (this.corDoVidro = 'Verde')
-            : '';
-        this.pedidoService.pedido.balcony.glass.color.tinted
-            ? (this.corDoVidro = 'Fume')
-            : '';
-        this.pedidoService.pedido.balcony.glass.color.other
-            ? (this.corDoVidro = 'Outro')
-            : '';
+        this.pedidoService.getObservable().subscribe(() => {
+            this.verify();
+        });
     }
 
     tipoVidro(value: string) {

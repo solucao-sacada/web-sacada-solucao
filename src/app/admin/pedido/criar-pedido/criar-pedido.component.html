@@ -58,9 +58,11 @@
     </p-tabPanel>
     <p-tabPanel [disabled]="pedidoService.isTabDisabled(13)">
         <ng-template pTemplate="header"> 14 </ng-template>
+        <app-passo15></app-passo15>
     </p-tabPanel>
     <p-tabPanel [disabled]="pedidoService.isTabDisabled(14)">
         <ng-template pTemplate="header"> 15 </ng-template>
+        <app-passo14></app-passo14>
     </p-tabPanel>
 </p-tabView>
 <p-confirmDialog [breakpoints]="{ '600px': '90vw' }"></p-confirmDialog>

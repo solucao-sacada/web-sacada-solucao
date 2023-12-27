@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { PedidoJson } from '../models/pedidoJson';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -10,11 +12,21 @@ export class PedidoService {
     pedido: PedidoJson = this.intilizePedido();
     qtdTotalVidros: number = 0;
 
+    apiUrl = environment.API_URL + '/orders';
+
     private observableDataSubject = new Subject<any>();
 
     activeIndex = 0;
 
-    constructor(private confirmationService: ConfirmationService) {}
+    constructor(private _http: HttpClient) {}
+
+    // METODOS BACKEND
+
+    listAll(): Observable<PedidoJson[]> {
+        return this._http.get<PedidoJson[]>(this.apiUrl);
+    }
+
+    // METODOS INTERNOS
 
     intilizePedido(): PedidoJson {
         return {
@@ -79,6 +91,10 @@ export class PedidoService {
                 lock: {
                     fechadura_para_porta: false,
                     fechadura_vidro_vidro: false,
+                    pvc: false,
+                    ferro: false,
+                    '1520/1531': false,
+                    '3210/3211': false,
                 },
                 plumb: {
                     left_wall: {
@@ -258,7 +274,7 @@ export class PedidoService {
         const msg = `Olá, estou com dúvidas no preenchimento da etapa ${passo} do preenchimento do formulário de pedido.`;
 
         window.open(
-            `http://wa.me/5553999356737?text=${encodeURIComponent(msg)}`,
+            `http://wa.me/5548984052727?text=${encodeURIComponent(msg)}`,
             '_blank'
         );
     }

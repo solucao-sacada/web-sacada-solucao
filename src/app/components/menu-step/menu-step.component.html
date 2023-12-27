@@ -5,11 +5,12 @@
     <span class="font-semibold text-2xl">{{ title }}</span>
     <button
         type="button"
-        class="p-button-rounded p-button-secondary"
+        class="p-button-text p-button-secondary"
         pButton
-        icon="pi pi-ellipsis-v"
         (click)="menu.toggle($event)"
-    ></button>
+    >
+        <i class="pi pi-cog text-2xl"></i>
+    </button>
 </div>
 <p-menu #menu [popup]="true" [model]="items"></p-menu>
 

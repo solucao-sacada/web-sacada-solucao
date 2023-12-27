@@ -28,7 +28,7 @@ export class MenuStepComponent {
                 },
                 {
                     label: 'Zerar Pedido',
-                    icon: 'pi pi-times',
+                    icon: 'pi pi-trash',
                     command: () => {
                         this.zerarPedido();
                     },
@@ -46,8 +46,8 @@ export class MenuStepComponent {
                     },
                 },
                 {
-                    label: 'Video',
-                    icon: 'pi pi-video',
+                    label: 'Dúvidas',
+                    icon: 'pi pi-question',
                     command: () => {
                         this.visible = true;
                     },
@@ -61,7 +61,6 @@ export class MenuStepComponent {
     zerarPedido() {
         this.pedidoService.pedido = this.pedidoService.intilizePedido();
         this.pedidoService.activeIndex = 0;
-        this.pedidoService.setActiveIndex(0);
-        this.pedidoService.setPedido(this.pedidoService.pedido);
+        this.pedidoService.clearLocalStorage();
     }
 }

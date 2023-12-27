@@ -145,6 +145,7 @@ export class Passo13Component {
             this.pedidoService.nextTab();
         }
     }
+
     prevTab(): void {
         this.pedidoService.prevTab();
     }

@@ -39,6 +39,7 @@ import { PedidoService } from '../services/pedido.service';
 import { DialogModule } from 'primeng/dialog';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableModule } from 'primeng/table';
 import {
     ModalVideoComponent,
     SafePipe,
@@ -66,6 +67,7 @@ import { MenuStepComponent } from './menu-step/menu-step.component';
         DropdownModule,
         InputMaskModule,
         InputNumberModule,
+        TableModule,
         ColorPickerModule,
         CascadeSelectModule,
         MultiSelectModule,
@@ -110,6 +112,7 @@ import { MenuStepComponent } from './menu-step/menu-step.component';
         InputNumberModule,
         ColorPickerModule,
         CascadeSelectModule,
+        TableModule,
         MultiSelectModule,
         ToggleButtonModule,
         SliderModule,

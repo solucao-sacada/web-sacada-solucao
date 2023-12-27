@@ -1,4 +1,7 @@
 export interface PedidoJson {
+    _id?: string;
+    code?: number;
+    createdAt?: Date;
     accessories: Accessories;
     balcony: Balcony;
     client: Client;
@@ -105,6 +108,10 @@ export interface Measures {
 export interface Lock {
     fechadura_para_porta: boolean;
     fechadura_vidro_vidro: boolean;
+    pvc: boolean;
+    ferro: boolean;
+    '1520/1531': boolean;
+    '3210/3211': boolean;
 }
 
 export interface Plumb {

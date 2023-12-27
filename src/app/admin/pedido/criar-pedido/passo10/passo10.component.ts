@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { MESSAGES } from 'src/app/admin/utils/messages';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -8,13 +10,20 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo10Component {
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
 
     difference = '';
     visible = false;
 
     ngOnInit(): void {
         this.openOverlay();
+
+        this.pedidoService.getObservable().subscribe(() => {
+            this.openOverlay();
+        });
     }
 
     openOverlay() {
@@ -31,7 +40,22 @@ export class Passo10Component {
     }
 
     nextTab(): void {
-        this.pedidoService.nextTab();
+        const result = Math.abs(
+            +this.pedidoService.pedido.balcony.plumb.left_wall.bottom -
+                +this.pedidoService.pedido.balcony.plumb.left_wall.top
+        );
+        if (
+            this.pedidoService.pedido.balcony.plumb.left_wall.bottom &&
+            this.pedidoService.pedido.balcony.plumb.left_wall.top
+        ) {
+            if (result < 8) {
+                this.pedidoService.nextTab();
+            } else {
+                this._toaster.warn('Perfil fora do esquadro, por favor ajuste');
+            }
+        } else {
+            this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+        }
     }
 
     prevTab(): void {

@@ -5,7 +5,7 @@ export const MENUS = [
             {
                 label: 'Dashboard',
                 icon: 'pi pi-fw pi-home',
-                routerLink: ['/'],
+                routerLink: ['/admin'],
             },
             {
                 label: 'Orçamentos',

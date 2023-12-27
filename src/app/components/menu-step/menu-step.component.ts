@@ -27,9 +27,11 @@ export class MenuStepComponent {
                     },
                 },
                 {
-                    label: 'Zerar Checklist',
+                    label: 'Zerar Pedido',
                     icon: 'pi pi-times',
-                    command: () => {},
+                    command: () => {
+                        this.zerarPedido();
+                    },
                 },
             ],
         },
@@ -55,4 +57,11 @@ export class MenuStepComponent {
     ];
 
     constructor(public pedidoService: PedidoService) {}
+
+    zerarPedido() {
+        this.pedidoService.pedido = this.pedidoService.intilizePedido();
+        this.pedidoService.activeIndex = 0;
+        this.pedidoService.setActiveIndex(0);
+        this.pedidoService.setPedido(this.pedidoService.pedido);
+    }
 }

@@ -77,7 +77,14 @@
             "
             class="flex flex-column"
         >
-            <input type="text" pInputText />
+            <input
+                type="text"
+                pInputText
+                [(ngModel)]="
+                    pedidoService.pedido.balcony.rails.lower_rail.normal.tip
+                        .other
+                "
+            />
             <small
                 >Descreva aqui a forma medida, apenas para situações diferentes
                 das opções acima.</small

@@ -23,10 +23,12 @@ export class Passo12Component {
     selected = '';
 
     ngOnInit() {
-        if (this.pedidoService.pedido.balcony.aperture.inside)
-            this.selected = 'Para Dentro';
-        if (this.pedidoService.pedido.balcony.aperture.outside)
-            this.selected = 'Para Fora';
+        this.pedidoService.getObservable().subscribe(() => {
+            if (this.pedidoService.pedido.balcony.aperture.inside)
+                this.selected = 'Para Dentro';
+            if (this.pedidoService.pedido.balcony.aperture.outside)
+                this.selected = 'Para Fora';
+        });
     }
 
     constructor(public pedidoService: PedidoService) {}

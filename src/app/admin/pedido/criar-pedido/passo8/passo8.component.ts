@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { MESSAGES } from 'src/app/admin/utils/messages';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
 
@@ -49,10 +51,16 @@ export class Passo8Component {
         },
     ];
 
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
 
     ngOnInit(): void {
         this.updateValuesFromRails();
+        this.pedidoService.getObservable().subscribe(() => {
+            this.updateValuesFromRails();
+        });
     }
 
     select(value: string) {
@@ -191,7 +199,54 @@ export class Passo8Component {
     }
 
     nextTab(): void {
-        this.pedidoService.nextTab();
+        const rails = this.pedidoService.pedido.balcony.rails.lower_rail;
+        if (rails.tip.built_in || rails.tip.normal || rails.tip.tab) {
+            if (rails.tip.normal) {
+                if (
+                    rails.normal.tip.A ||
+                    rails.normal.tip.B ||
+                    rails.normal.tip.C ||
+                    rails.normal.tip.other
+                ) {
+                    this.pedidoService.nextTab();
+                } else {
+                    this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+                }
+            } else if (rails.tip.built_in) {
+                if (
+                    (rails.built_in.tip.A ||
+                        rails.built_in.tip.B ||
+                        rails.built_in.tip.C ||
+                        rails.built_in.tip.D) &&
+                    (rails.built_in.ref.A ||
+                        rails.built_in.ref.B ||
+                        rails.built_in.ref.C ||
+                        rails.built_in.ref.other)
+                ) {
+                    this.pedidoService.nextTab();
+                } else {
+                    this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+                }
+            } else if (rails.tip.tab) {
+                if (rails.tab.inside || rails.tab.outside) {
+                    if (
+                        rails.tab.tip.A ||
+                        rails.tab.tip.B ||
+                        rails.tab.tip.C ||
+                        rails.tab.tip.D ||
+                        rails.tab.tip.E
+                    ) {
+                        this.pedidoService.nextTab();
+                    } else {
+                        this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+                    }
+                } else {
+                    this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+                }
+            }
+        } else {
+            this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+        }
     }
 
     prevTab(): void {

@@ -11,7 +11,7 @@
         label="Definido"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.tip.defined.isDefined
+                !pedidoService.pedido?.balcony.tip.defined.isDefined
         }"
         (click)="changeTip('defined')"
     ></button>
@@ -21,14 +21,14 @@
         label="Melhor ajuste"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.tip.better_adjustment
+                !pedidoService.pedido?.balcony.tip.better_adjustment
         }"
         (click)="changeTip('better_adjustment')"
     ></button>
 </div>
 <div
     class="row text-center"
-    *ngIf="pedidoService.pedido.balcony.tip.defined.isDefined"
+    *ngIf="pedidoService.pedido?.balcony.tip.defined.isDefined"
 >
     <div class="col-12">
         <label class="text-left">Quantidade de vidros:</label><br />
@@ -36,7 +36,7 @@
             class="col-3 md:col-1 mt-2 text-center"
             pInputText
             [(ngModel)]="
-                pedidoService.pedido.balcony.tip.defined.glass_quantity
+                pedidoService.pedido?.balcony.tip.defined.glass_quantity
             "
             (ngModelChange)="onChangeQtdVidros()"
             required

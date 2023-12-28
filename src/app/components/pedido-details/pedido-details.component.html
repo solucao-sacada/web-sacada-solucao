@@ -7,19 +7,19 @@
             >Nome Cliente</span
         >
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
-            pedido.client.name
+            pedido?.client.name
         }}</span>
     </div>
     <div class="flex">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Rua</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
-            pedido.client.address
+            pedido?.client.address
         }}</span>
     </div>
     <div class="flex">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Número</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
-            pedido.client.num
+            pedido?.client.num
         }}</span>
     </div>
     <div class="flex mt-3">
@@ -31,15 +31,15 @@
         >
         <span
             class="col-data col-title p-2 w-5 border-bottom-1 border-right-1"
-            >{{ getTipoSacada(pedido.balcony.tip) }}</span
+            >{{ getTipoSacada(pedido?.balcony.tip) }}</span
         >
     </div>
-    <div class="flex" *ngIf="pedido.balcony.tip.defined.isDefined">
+    <div class="flex" *ngIf="pedido?.balcony.tip.defined.isDefined">
         <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
             >Quantidade de vidros</span
         >
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            pedido.balcony.tip.defined.glass_quantity
+            pedido?.balcony.tip.defined.glass_quantity
         }}</span>
     </div>
     <div class="flex">
@@ -47,7 +47,7 @@
             >Espessura do Vidro</span
         >
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            pedido.balcony.glass.thickness["10mm"]
+            pedido?.balcony.glass.thickness["10mm"]
                 ? "5+5 ou 10mm"
                 : "4+4 ou 8mm"
         }}</span>
@@ -57,7 +57,7 @@
             >Tipo do Vidro</span
         >
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            pedido.balcony.glass.laminated ? "Laminado" : "Temperado"
+            pedido?.balcony.glass.laminated ? "Laminado" : "Temperado"
         }}</span>
     </div>
     <div class="flex">
@@ -65,7 +65,7 @@
             >Cor do Alumínio</span
         >
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            getColorAluminiun(pedido.balcony.aluminium.color)
+            getColorAluminiun(pedido?.balcony.aluminium.color)
         }}</span>
     </div>
     <div class="flex">
@@ -73,7 +73,7 @@
             >Formato da Sacada</span
         >
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            getFormat(pedido.balcony.format).toUpperCase()
+            getFormat(pedido?.balcony.format).toUpperCase()
         }}</span>
     </div>
     <div class="flex">
@@ -81,7 +81,7 @@
             >Quatidade Peças</span
         >
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            getQtdPecas(pedido.balcony.format)
+            getQtdPecas(pedido?.balcony.format)
         }}</span>
     </div>
 </div>

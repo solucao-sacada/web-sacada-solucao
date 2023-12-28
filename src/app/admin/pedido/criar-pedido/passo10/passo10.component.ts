@@ -19,8 +19,6 @@ export class Passo10Component {
     visible = false;
 
     ngOnInit(): void {
-        this.openOverlay();
-
         this.pedidoService.getObservable().subscribe(() => {
             this.openOverlay();
         });

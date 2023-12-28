@@ -10,13 +10,19 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class ListarPedidosComponent {
     pedidos: PedidoJson[] = [];
     pedido: PedidoJson;
+    activeIndex: number = 0;
 
     constructor(public pedidoService: PedidoService) {}
 
     ngOnInit(): void {
         this.pedidoService.listAll().subscribe((data) => {
             this.pedidos = data;
-            this.pedido = data[0];
         });
+    }
+
+    onSelectRow(value: any) {
+        console.log(value);
+        this.pedido = value.data;
+        this.activeIndex = 1;
     }
 }

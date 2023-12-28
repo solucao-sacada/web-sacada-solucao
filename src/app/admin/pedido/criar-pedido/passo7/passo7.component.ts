@@ -32,12 +32,14 @@ export class Passo7Component implements OnInit {
     ];
 
     ngOnInit(): void {
-        if (this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal)
-            this.selected = 'Normal';
-        if (this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside)
-            this.selected = 'Chapa de correção para dentro';
-        if (this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside)
-            this.selected = 'Chapa de correção para fora';
+        this.pedidoService.getObservable().subscribe(() => {
+            if (this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal)
+                this.selected = 'Normal';
+            if (this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside)
+                this.selected = 'Chapa de correção para dentro';
+            if (this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside)
+                this.selected = 'Chapa de correção para fora';
+        });
     }
 
     select(value: string) {

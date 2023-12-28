@@ -4,6 +4,94 @@
     urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
 ></app-menu-step>
 
+<p-image
+    class="w-9 my-3 sm:w-15 md:w-3 shadow-2 block md:block mx-auto border-round relative"
+    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+    src="https://placehold.co/600x400"
+>
+</p-image>
+
+<div class="grid m-0 mt-4 md:mt-4 md:mx-4 border-y-1">
+    <div
+        class="col-3 p-1 text-center border-x-1 flex justify-content-center align-items-center font-bold"
+    >
+        Ponto
+    </div>
+    <div
+        class="col-3 p-1 text-center border-right-1 flex justify-content-center align-items-center font-bold"
+    >
+        Medida Teto(mm) - Laser até a viga
+    </div>
+    <div
+        class="col-3 p-1 text-center border-right-1 flex justify-content-center align-items-center font-bold"
+    >
+        Medida Chão(mm) - Laser até o piso
+    </div>
+    <div
+        class="col-3 p-1 text-center border-right-1 flex justify-content-center align-items-center font-bold"
+    >
+        X
+    </div>
+</div>
+<div
+    class="grid m-0 md:mx-4 border-bottom-1"
+    *ngFor="let linha of medidas; let index = index"
+>
+    <div
+        class="col-3 p-1 text-center border-x-1 flex justify-content-center align-items-center"
+    >
+        {{ linha.ponto }}
+    </div>
+    <div
+        class="col-3 p-1 text-center border-right-1 flex justify-content-center align-items-center"
+    >
+        <input
+            type="text"
+            class="border-0 shadow-none text-center w-full"
+            [(ngModel)]="linha.ceiling"
+        />
+    </div>
+    <div
+        class="col-3 p-1 text-center border-right-1 flex justify-content-center align-items-center"
+    >
+        <input
+            type="text"
+            class="border-0 shadow-none text-center w-full"
+            [(ngModel)]="linha.floor"
+        />
+    </div>
+    <div
+        class="col-3 p-1 text-center border-right-1 flex justify-content-center align-items-center"
+    >
+        <i class="pi pi-trash text-red-600" (click)="remove(index)"></i>
+    </div>
+</div>
+
+<div class="flex justify-content-center border-round-lg shadow-3 my-3 p-3">
+    <span class="text-xl"
+        ><strong>Menor altura:</strong> {{ verificarMenorAltura() }}</span
+    >
+</div>
+
+<div
+    class="flex flex-column align-items-center mt-5 justify-content-center text-xl font-light text-gray-800 my-2 relative"
+>
+    <p class="text-center">
+        <strong>Dica:</strong> Marcar as distâncias em milimetros (mm) do laser
+        ao teto e chão da abertura, iniciando pela lateral esquerda do vão.
+    </p>
+    <p class="text-center">Indicado uma medida para cada vidro</p>
+</div>
+
+<div class="flex justify-content-center mt-3">
+    <p-button
+        label="Nova Medida"
+        icon="pi pi-plus"
+        styleClass="bg-green-600 border-0"
+        (onClick)="newMeasure()"
+    ></p-button>
+</div>
+
 <app-navigation-tabs-btn
     (nextTab)="nextTab()"
     (prevTab)="prevTab()"

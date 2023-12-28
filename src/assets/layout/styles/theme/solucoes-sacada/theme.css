@@ -5894,7 +5894,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-toast {
-  opacity: 0.9;
+  opacity: 1;
 }
 .p-toast .p-toast-message {
   margin: 0 0 1rem 0;

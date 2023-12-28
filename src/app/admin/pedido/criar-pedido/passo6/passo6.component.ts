@@ -37,12 +37,14 @@ export class Passo6Component implements OnInit {
     ];
 
     ngOnInit(): void {
-        if (this.pedidoService.pedido.balcony.beam.position.aligned)
-            this.selected = 'Alinhado';
-        if (this.pedidoService.pedido.balcony.beam.position.inside)
-            this.selected = 'Dentro';
-        if (this.pedidoService.pedido.balcony.beam.position.outside)
-            this.selected = 'Fora';
+        this.pedidoService.getObservable().subscribe(() => {
+            if (this.pedidoService.pedido.balcony.beam.position.aligned)
+                this.selected = 'Alinhado';
+            if (this.pedidoService.pedido.balcony.beam.position.inside)
+                this.selected = 'Dentro';
+            if (this.pedidoService.pedido.balcony.beam.position.outside)
+                this.selected = 'Fora';
+        });
     }
 
     select(value: string) {

@@ -64,6 +64,18 @@
         <ng-template pTemplate="header"> 15 </ng-template>
         <app-passo14></app-passo14>
     </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(15)">
+        <ng-template pTemplate="header"> 16 </ng-template>
+        <app-passo16></app-passo16>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(16)">
+        <ng-template pTemplate="header"> 17 </ng-template>
+        <app-passo17></app-passo17>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(17)">
+        <ng-template pTemplate="header"> 18 </ng-template>
+        <app-passo18></app-passo18>
+    </p-tabPanel>
 </p-tabView>
 <p-confirmDialog [breakpoints]="{ '600px': '90vw' }"></p-confirmDialog>
 

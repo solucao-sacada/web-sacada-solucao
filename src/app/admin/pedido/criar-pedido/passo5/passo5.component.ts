@@ -45,16 +45,19 @@ export class Passo5Component {
     ) {}
 
     ngOnInit() {
-        if (this.pedidoService.pedido.balcony.format == 0) this.selected = '';
-        else if (this.pedidoService.pedido.balcony.format == 1)
-            this.selected = 'Reta';
-        else if (this.pedidoService.pedido.balcony.format == 2)
-            this.selected = '"L" Esquerda';
-        else if (this.pedidoService.pedido.balcony.format == 3)
-            this.selected = '"L" Direita';
-        else if (this.pedidoService.pedido.balcony.format == 4)
-            this.selected = 'Formato "U"';
-        else this.selected = 'Outro';
+        this.pedidoService.getObservable().subscribe(() => {
+            if (this.pedidoService.pedido.balcony.format == 0)
+                this.selected = '';
+            else if (this.pedidoService.pedido.balcony.format == 1)
+                this.selected = 'Reta';
+            else if (this.pedidoService.pedido.balcony.format == 2)
+                this.selected = '"L" Esquerda';
+            else if (this.pedidoService.pedido.balcony.format == 3)
+                this.selected = '"L" Direita';
+            else if (this.pedidoService.pedido.balcony.format == 4)
+                this.selected = 'Formato "U"';
+            else this.selected = 'Outro';
+        });
     }
 
     select(value: string, code: number) {

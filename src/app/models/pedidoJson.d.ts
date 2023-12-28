@@ -1,11 +1,13 @@
 export interface PedidoJson {
     _id?: string;
+    idUser: string;
     code?: number;
     createdAt?: Date;
     accessories: Accessories;
     balcony: Balcony;
     client: Client;
     technician: string;
+    observation: string;
 }
 
 export interface Accessories {

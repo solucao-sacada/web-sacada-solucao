@@ -37,7 +37,9 @@
             (click)="selectVidro(option)"
             class="col-12 cursor-pointer"
             [style]="
-                selected === option.name ? 'background-color: #a3d4fb;' : ''
+                selectedVidro === option.name
+                    ? 'background-color: #a3d4fb;'
+                    : ''
             "
         >
             <div
@@ -74,7 +76,9 @@
             (click)="selectPorta(option)"
             class="col-12 cursor-pointer"
             [style]="
-                selected === option.name ? 'background-color: #a3d4fb;' : ''
+                selectedPorta === option.name
+                    ? 'background-color: #a3d4fb;'
+                    : ''
             "
         >
             <div

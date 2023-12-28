@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { PedidoJson } from '../models/pedidoJson';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, catchError } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ToasterService } from '../components/toaster/toaster.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PedidoService {
-    pedido: PedidoJson = this.intilizePedido();
+    pedido: PedidoJson;
     qtdTotalVidros: number = 0;
 
     apiUrl = environment.API_URL + '/orders';
@@ -18,7 +20,13 @@ export class PedidoService {
 
     activeIndex = 0;
 
-    constructor(private _http: HttpClient) {}
+    maxActiveIndex = 0;
+
+    constructor(
+        private _http: HttpClient,
+        private _toaster: ToasterService,
+        private _auth: AuthService
+    ) {}
 
     // METODOS BACKEND
 
@@ -26,10 +34,32 @@ export class PedidoService {
         return this._http.get<PedidoJson[]>(this.apiUrl);
     }
 
+    create(pedido: PedidoJson): Observable<any> {
+        return this._http.post<any>(this.apiUrl, pedido).pipe(
+            catchError((error) => {
+                console.error('Ocorreu um erro:', error);
+                const pedidos: PedidoJson[] =
+                    JSON.parse(this.getPedidosOK()) || [];
+
+                if (
+                    pedidos.filter((item) => item.code === pedido.code)
+                        .length === 0
+                )
+                    pedidos.push(pedido);
+
+                this.setPedidosOK(pedidos);
+                this._toaster.info('Pedido armazenado temporariamente.');
+                return '';
+            })
+        );
+    }
+
     // METODOS INTERNOS
 
     intilizePedido(): PedidoJson {
         return {
+            idUser: this._auth.getUser()._id,
+            code: Math.random() * 10,
             accessories: {
                 aparador_aluminio: false,
                 aparador_inox: false,
@@ -79,13 +109,13 @@ export class PedidoService {
                     },
                 },
                 levels: {
-                    full_aperture: '1080',
+                    full_aperture: '',
                     measures: {
-                        data: [['1000', '80']],
-                        highest_ceiling: '1000',
-                        highest_floor: '80',
-                        lower_ceiling: '1000',
-                        lower_floor: '80',
+                        data: [],
+                        highest_ceiling: '',
+                        highest_floor: '',
+                        lower_ceiling: '',
+                        lower_floor: '',
                     },
                 },
                 lock: {
@@ -178,7 +208,8 @@ export class PedidoService {
                 zipCode: '',
                 num: null,
             },
-            technician: '',
+            technician: this._auth.getUser().name,
+            observation: '',
         };
     }
 
@@ -200,6 +231,18 @@ export class PedidoService {
         console.info('[INFO] Pedido armazenado localmente!', pedido);
     }
 
+    setPedidosOK(pedidos: PedidoJson[]) {
+        localStorage.setItem('pedidosOK', JSON.stringify(pedidos));
+    }
+
+    getPedidosOK(): string {
+        return localStorage.getItem('pedidosOK');
+    }
+
+    removePedidosOk() {
+        localStorage.removeItem('pedidosOK');
+    }
+
     getPedido(): string {
         return localStorage.getItem('pedido');
     }
@@ -213,7 +256,7 @@ export class PedidoService {
     }
 
     nextTab(): void {
-        this.activeIndex += 1;
+        if (this.activeIndex < this.maxActiveIndex) this.activeIndex += 1;
         this.setActiveIndex(this.activeIndex);
         this.setPedido(this.pedido);
         this.notifyObservers();
@@ -235,13 +278,13 @@ export class PedidoService {
 
     getQuantidadeTotalVidros(): number {
         if (
-            !this.pedido.balcony.dimensions.data ||
-            this.pedido.balcony.dimensions.data.length === 0
+            !this.pedido?.balcony.dimensions.data ||
+            this.pedido?.balcony.dimensions.data.length === 0
         ) {
             return 0;
         }
 
-        const quantidadeTotal = this.pedido.balcony.dimensions.data.reduce(
+        const quantidadeTotal = this.pedido?.balcony.dimensions.data.reduce(
             (total, linha) => {
                 const quantidadeVidros = linha[3] ? +linha[3] : 0;
                 return total + quantidadeVidros;
@@ -253,7 +296,7 @@ export class PedidoService {
     }
 
     getQtdPecas(): number {
-        switch (this.pedido.balcony.format) {
+        switch (this.pedido?.balcony.format) {
             case 1:
                 return 1;
             case 2:
@@ -262,7 +305,7 @@ export class PedidoService {
             case 4:
                 return 3;
             default:
-                return +this.pedido.balcony.format;
+                return +this.pedido?.balcony.format;
         }
     }
 

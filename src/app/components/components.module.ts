@@ -40,12 +40,15 @@ import { DialogModule } from 'primeng/dialog';
 import { CardModule } from 'primeng/card';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
+import { FileUploadModule } from 'primeng/fileupload';
 import {
     ModalVideoComponent,
     SafePipe,
 } from './modal-video/modal-video.component';
 import { MenuModule } from 'primeng/menu';
 import { MenuStepComponent } from './menu-step/menu-step.component';
+import { PedidoDetailsComponent } from './pedido-details/pedido-details.component';
+
 @NgModule({
     declarations: [
         NavigationTabsBtnComponent,
@@ -53,6 +56,7 @@ import { MenuStepComponent } from './menu-step/menu-step.component';
         ModalVideoComponent,
         SafePipe,
         MenuStepComponent,
+        PedidoDetailsComponent,
     ],
     imports: [
         CommonModule,
@@ -66,6 +70,7 @@ import { MenuStepComponent } from './menu-step/menu-step.component';
         ChipsModule,
         DropdownModule,
         InputMaskModule,
+        FileUploadModule,
         InputNumberModule,
         TableModule,
         ColorPickerModule,
@@ -108,12 +113,14 @@ import { MenuStepComponent } from './menu-step/menu-step.component';
         CalendarModule,
         ChipsModule,
         DropdownModule,
+        FileUploadModule,
         InputMaskModule,
         InputNumberModule,
         ColorPickerModule,
         CascadeSelectModule,
         TableModule,
         MultiSelectModule,
+        PedidoDetailsComponent,
         ToggleButtonModule,
         SliderModule,
         InputTextareaModule,

@@ -45,6 +45,7 @@
                         pInputText
                         class="w-full md:w-30rem mb-5"
                         style="padding: 1rem"
+                        [(ngModel)]="email"
                     />
 
                     <label
@@ -84,7 +85,7 @@
                         pRipple
                         label="Login"
                         class="w-full p-3 text-xl"
-                        [routerLink]="['/']"
+                        (click)="login()"
                     ></button>
                 </div>
             </div>

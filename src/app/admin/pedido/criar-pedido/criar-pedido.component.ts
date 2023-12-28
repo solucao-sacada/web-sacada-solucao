@@ -14,7 +14,6 @@ export class CriarPedidoComponent {
     pedidoString = this.pedidoService.getPedido();
 
     constructor(
-        private _fb: FormBuilder,
         public pedidoService: PedidoService,
         private confirmationService: ConfirmationService
     ) {}
@@ -43,5 +42,9 @@ export class CriarPedidoComponent {
                     // this.pedidoService.setActiveIndex(0);
                 },
             });
+        else {
+            this.pedidoService.pedido = this.pedidoService.intilizePedido();
+        }
+        this.pedidoService.maxActiveIndex = 17;
     }
 }

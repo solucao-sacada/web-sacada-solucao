@@ -1,0 +1,31 @@
+<app-menu-step
+    title="Envio da Foto"
+    step="17 - Envio da Foto"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
+
+<label for="obs">Observações</label>
+<textarea
+    id="obs"
+    [autoResize]="true"
+    class="w-full mb-3"
+    rows="5"
+    pInputTextarea
+    [(ngModel)]="pedidoService.pedido.observation"
+></textarea>
+
+<p-fileUpload
+    class="mt-3"
+    [showCancelButton]="false"
+    name="demo[]"
+    [multiple]="true"
+    accept="image/*"
+    maxFileSize="1000000"
+>
+</p-fileUpload>
+
+<app-navigation-tabs-btn
+    (nextTab)="nextTab()"
+    (prevTab)="prevTab()"
+></app-navigation-tabs-btn>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

@@ -110,7 +110,9 @@ export class Passo3Component {
             this.corDoVidro = 'Fume';
         else if (this.pedidoService.pedido.balcony.glass.color.green)
             this.corDoVidro = 'Verde';
-        else this.corDoVidro = 'Outro';
+        else if (this.pedidoService.pedido.balcony.glass.color.other)
+            this.corDoVidro = 'Outro';
+        else this.corDoVidro = '';
     }
 
     nextTab(): void {

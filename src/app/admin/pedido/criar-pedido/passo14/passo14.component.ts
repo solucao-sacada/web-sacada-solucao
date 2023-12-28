@@ -1,5 +1,7 @@
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoService } from './../../../../services/pedido.service';
 import { Component } from '@angular/core';
+import { MESSAGES } from 'src/app/admin/utils/messages';
 
 @Component({
     selector: 'app-passo14',
@@ -7,21 +9,26 @@ import { Component } from '@angular/core';
     styles: [],
 })
 export class Passo14Component {
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) {}
 
     ngOnInit() {
         this.pedidoService.getObservable().subscribe(() => {
             if (this.pedidoService.pedido.balcony.lock.pvc)
-                this.selected = 'PVC';
+                this.selectedVidro = 'PVC';
             else if (this.pedidoService.pedido.balcony.lock.ferro)
-                this.selected = 'FERRO';
-            else if (this.pedidoService.pedido.balcony.lock['1520/1531'])
-                this.selected = '1520/1531';
+                this.selectedVidro = 'FERRO';
+            if (this.pedidoService.pedido.balcony.lock['1520/1531'])
+                this.selectedPorta = '1520/1531';
             else if (this.pedidoService.pedido.balcony.lock['3210/3211'])
-                this.selected = '3210/3211';
+                this.selectedPorta = '3210/3211';
         });
     }
 
+    selectedVidro: string = '';
+    selectedPorta: string = '';
     selected: string = '';
 
     optionsVidro: any[] = [
@@ -64,17 +71,28 @@ export class Passo14Component {
     selectVidro(option: any) {
         this.pedidoService.pedido.balcony.lock.pvc = option.code === 1;
         this.pedidoService.pedido.balcony.lock.ferro = option.code === 2;
-        this.selected = option.name;
+        this.selectedVidro = option.name;
     }
 
     selectPorta(option: any) {
         this.pedidoService.pedido.balcony.lock['1520/1531'] = option.code === 1;
         this.pedidoService.pedido.balcony.lock['3210/3211'] = option.code === 2;
-        this.selected = option.name;
+        this.selectedPorta = option.name;
     }
 
     nextTab(): void {
-        this.pedidoService.nextTab();
+        const option = this.pedidoService.pedido.balcony.lock;
+        if (option.fechadura_para_porta || option.fechadura_vidro_vidro) {
+            if (option.pvc || option.ferro) {
+                this.pedidoService.nextTab();
+            } else if (option['1520/1531'] || option['3210/3211']) {
+                this.pedidoService.nextTab();
+            } else {
+                this._toaster.warn(MESSAGES.UMA_OPCAO);
+            }
+        } else {
+            this._toaster.warn(MESSAGES.UMA_OPCAO);
+        }
     }
     prevTab(): void {
         this.pedidoService.prevTab();

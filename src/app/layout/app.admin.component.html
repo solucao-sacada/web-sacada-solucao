@@ -5,11 +5,13 @@
     </div>
     <div class="layout-main-container">
         <div class="layout-main">
-            <router-outlet></router-outlet>
+            <router-outlet
+                ><p-toast life="4000" key="tst"></p-toast
+            ></router-outlet>
         </div>
         <app-footer></app-footer>
     </div>
     <!-- <app-config></app-config> -->
+    <p-toast life="4000" key="tst"></p-toast>
     <div class="layout-mask"></div>
 </div>
-<p-toast key="tst"></p-toast>

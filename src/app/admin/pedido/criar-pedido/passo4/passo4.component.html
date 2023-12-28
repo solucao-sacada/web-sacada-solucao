@@ -12,7 +12,7 @@
         label="Preto"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.aluminium.color.black
+                !pedidoService.pedido?.balcony.aluminium.color.black
         }"
         (click)="alterarCor('black')"
     ></button>
@@ -23,7 +23,7 @@
         label="BZ1001"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.aluminium.color.bz1001
+                !pedidoService.pedido?.balcony.aluminium.color.bz1001
         }"
         (click)="alterarCor('bz1001')"
     ></button>
@@ -34,7 +34,7 @@
         label="BZ1002"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.aluminium.color.bz1002
+                !pedidoService.pedido?.balcony.aluminium.color.bz1002
         }"
         (click)="alterarCor('bz1002')"
     ></button>
@@ -45,7 +45,7 @@
         label="BZ1003"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.aluminium.color.bz1003
+                !pedidoService.pedido?.balcony.aluminium.color.bz1003
         }"
         (click)="alterarCor('bz1003')"
     ></button>
@@ -56,7 +56,7 @@
         label="Incolor"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.aluminium.color.mat
+                !pedidoService.pedido?.balcony.aluminium.color.mat
         }"
         (click)="alterarCor('mat')"
     ></button>
@@ -67,7 +67,7 @@
         label="Branco"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.aluminium.color.white
+                !pedidoService.pedido?.balcony.aluminium.color.white
         }"
         (click)="alterarCor('white')"
     ></button>
@@ -87,7 +87,9 @@
                 type="text"
                 id="identiCor"
                 pInputText
-                [(ngModel)]="pedidoService.pedido.balcony.aluminium.color.other"
+                [(ngModel)]="
+                    pedidoService.pedido?.balcony.aluminium.color.other
+                "
             />
             <label for="identiCor">Identificação da cor</label>
         </span>

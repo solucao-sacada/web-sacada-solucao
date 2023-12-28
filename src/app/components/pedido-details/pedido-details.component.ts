@@ -17,17 +17,17 @@ export class PedidoDetailsComponent {
     pedido: PedidoJson;
 
     getTipoSacada(value: Tip6): string {
-        if (value.defined.isDefined) return 'DEFINIDO';
+        if (value?.defined.isDefined) return 'DEFINIDO';
         else return 'MELHOR AJUSTE';
     }
     getColorAluminiun(value: Color): string {
-        if (value.black) return 'PRETO';
-        else if (value.bz1001) return 'BZ1001';
-        else if (value.bz1002) return 'BZ1002';
-        else if (value.bz1003) return 'BZ1003';
-        else if (value.mat) return 'INCOLOR';
-        else if (value.white) return 'BRANCO';
-        else if (value.other) return value.other;
+        if (value?.black) return 'PRETO';
+        else if (value?.bz1001) return 'BZ1001';
+        else if (value?.bz1002) return 'BZ1002';
+        else if (value?.bz1003) return 'BZ1003';
+        else if (value?.mat) return 'INCOLOR';
+        else if (value?.white) return 'BRANCO';
+        else if (value?.other) return value?.other;
         else return '';
     }
 
@@ -41,7 +41,7 @@ export class PedidoDetailsComponent {
             case 4:
                 return '3';
             default:
-                return this.pedido.balcony.format;
+                return this.pedido?.balcony.format;
         }
     }
 

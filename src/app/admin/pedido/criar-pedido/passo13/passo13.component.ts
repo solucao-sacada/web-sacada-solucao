@@ -27,7 +27,6 @@ export class Passo13Component {
     ) {}
 
     ngOnInit() {
-        this.update();
         this.pedidoService.getObservable().subscribe((data) => {
             this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
             this.update();

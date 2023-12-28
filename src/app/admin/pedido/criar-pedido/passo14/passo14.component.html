@@ -11,7 +11,7 @@
         label="Fechadura para Vidro"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.lock.fechadura_vidro_vidro
+                !pedidoService.pedido?.balcony.lock.fechadura_vidro_vidro
         }"
         (click)="changeTip('vidro')"
     ></button>
@@ -21,7 +21,7 @@
         label="Fechadura para Porta"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.lock.fechadura_para_porta
+                !pedidoService.pedido?.balcony.lock.fechadura_para_porta
         }"
         (click)="changeTip('porta')"
     ></button>
@@ -30,7 +30,7 @@
 <p-dataView
     #dv
     [value]="optionsVidro"
-    *ngIf="pedidoService.pedido.balcony.lock.fechadura_vidro_vidro"
+    *ngIf="pedidoService.pedido?.balcony.lock.fechadura_vidro_vidro"
 >
     <ng-template let-option pTemplate="listItem">
         <div
@@ -69,7 +69,7 @@
 <p-dataView
     #dv
     [value]="optionsPorta"
-    *ngIf="pedidoService.pedido.balcony.lock.fechadura_para_porta"
+    *ngIf="pedidoService.pedido?.balcony.lock.fechadura_para_porta"
 >
     <ng-template let-option pTemplate="listItem">
         <div

@@ -37,8 +37,6 @@ export class Passo9Component implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.update();
-
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
                 this.pedidoService.pedido = data;

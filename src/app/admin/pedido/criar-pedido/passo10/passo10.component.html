@@ -10,7 +10,7 @@
         <input
             class="w-full"
             pInputText
-            [(ngModel)]="pedidoService.pedido.balcony.plumb.left_wall.top"
+            [(ngModel)]="pedidoService.pedido?.balcony.plumb.left_wall.top"
         />
     </div>
 </div>
@@ -27,7 +27,7 @@
         <input
             class="w-full"
             pInputText
-            [(ngModel)]="pedidoService.pedido.balcony.plumb.left_wall.bottom"
+            [(ngModel)]="pedidoService.pedido?.balcony.plumb.left_wall.bottom"
             (ngModelChange)="openOverlay()"
         />
     </div>

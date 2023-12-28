@@ -11,7 +11,7 @@
         pRipple
         label="Laminado"
         [ngClass]="{
-            'p-button-secondary': !pedidoService.pedido.balcony.glass.laminated
+            'p-button-secondary': !pedidoService.pedido?.balcony.glass.laminated
         }"
         (click)="tipoVidro('laminado')"
     ></button>
@@ -20,7 +20,7 @@
         pRipple
         label="Temperado"
         [ngClass]="{
-            'p-button-secondary': !pedidoService.pedido.balcony.glass.tempered
+            'p-button-secondary': !pedidoService.pedido?.balcony.glass.tempered
         }"
         (click)="tipoVidro('Temperado')"
     ></button>
@@ -43,7 +43,7 @@
             <input
                 id="identiCor"
                 pInputText
-                [(ngModel)]="pedidoService.pedido.balcony.glass.color.other"
+                [(ngModel)]="pedidoService.pedido?.balcony.glass.color.other"
                 (ngModelChange)="pedidoService.verifyP3()"
             />
             <label for="identiCor">Identificação da cor</label>
@@ -58,7 +58,7 @@
         label="4+4 ou 8mm"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.glass.thickness['8mm']
+                !pedidoService.pedido?.balcony.glass.thickness['8mm']
         }"
         (click)="espessuraVidro('8mm')"
     ></button>
@@ -68,7 +68,7 @@
         label="5+5 ou 10mm"
         [ngClass]="{
             'p-button-secondary':
-                !pedidoService.pedido.balcony.glass.thickness['10mm']
+                !pedidoService.pedido?.balcony.glass.thickness['10mm']
         }"
         (click)="espessuraVidro('10mm')"
     ></button>

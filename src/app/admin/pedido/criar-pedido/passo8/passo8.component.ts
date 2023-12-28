@@ -57,7 +57,6 @@ export class Passo8Component {
     ) {}
 
     ngOnInit(): void {
-        this.updateValuesFromRails();
         this.pedidoService.getObservable().subscribe(() => {
             this.updateValuesFromRails();
         });

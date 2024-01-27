@@ -27,6 +27,7 @@ export class InfoPessoalComponent {
     croppedImage: any = '';
     visible = false;
     user: User = this.auth.getUser();
+    isEdit = false
 
     constructor(private sanitizer: DomSanitizer, private auth: AuthService) {}
 

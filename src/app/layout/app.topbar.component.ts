@@ -19,15 +19,12 @@ export class AppTopBarComponent {
 
     constructor(
         public layoutService: LayoutService,
-        private auth: AuthService,
+        public auth: AuthService,
         private router: Router
     ) {}
 
-    goTo() {
-        if (this.auth.isLogged()) {
-            this.router.navigate(['/app/informacoes-pessoais']);
-        } else {
-            this.router.navigate(['/auth']);
-        }
+    logout() {
+        localStorage.removeItem('user')
+        location.reload();
     }
 }

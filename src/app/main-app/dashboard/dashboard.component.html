@@ -1,17 +1,4 @@
-<div class="flex justify-content-center align-items-center">
-    <div class="text-center mb-5" routerLink="/app/informacoes-pessoais">
-        <img
-            [src]="user.image || 'assets/img/avatar-generic.png'"
-            alt="Image"
-            height="80"
-            width="80"
-            class="mb-3 border-circle"
-        />
-        <div class="text-900 text-3xl font-medium mb-3">
-            Bem-vindo, {{ user.name }}!
-        </div>
-    </div>
-</div>
+<app-info-pessoal></app-info-pessoal>
 <div class="ng-star-inserted">
     <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
         <div class="grid">

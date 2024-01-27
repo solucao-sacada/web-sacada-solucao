@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as jspdf from 'jspdf';
 import { ConfirmationService } from 'primeng/api';
-import { concat } from 'rxjs';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
-import { Color, PedidoJson, Tip6 } from 'src/app/models/pedidoJson';
+import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -16,6 +16,8 @@ export class ListarPedidosComponent {
     draftPedidos: PedidoJson[] = [];
     pedido: PedidoJson;
     activeIndex: number = 0;
+
+    @ViewChild('printable') public dataToExport: ElementRef;
 
     constructor(
         public pedidoService: PedidoService,
@@ -43,6 +45,29 @@ export class ListarPedidosComponent {
     print() {
         if (this.pedido) window.print();
         else this._toaster.warn('Selecione um pedido para imprimir');
+    }
+
+    downloadAsPdf(): void {
+        const pdf = new jspdf.jsPDF();
+
+        // Obtém o conteúdo HTML que você deseja incluir no PDF
+        console.log(this.dataToExport);
+        let conteudo = this.dataToExport.nativeElement;
+        // Adiciona o conteúdo ao PDF
+        pdf.html(conteudo, {
+            x: 15,
+            y: 5,
+            width: 180,
+            windowWidth: 650,
+            callback: (pdf) => {
+                pdf.setProperties({
+                    title: `Detalhes do pedido ${this.pedido.code} - Cliente: ${this.pedido.client.name} - Responsável: ${this.pedido.technician}`,
+                });
+                pdf.output('dataurlnewwindow', {
+                    filename: 'pedido-' + this.pedido.code + '-' + this.pedido.client.name + '-' + this.pedido.technician + '.pdf'
+                });
+            },
+        });
     }
 
     excluirDraft(pedido: PedidoJson) {

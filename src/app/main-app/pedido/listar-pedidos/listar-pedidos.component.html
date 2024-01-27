@@ -12,7 +12,7 @@
         pRipple
         icon="pi pi-print"
         class="mb-3 p-button-rounded"
-        (click)="print()"
+        (click)="downloadAsPdf()"
         [disabled]="!pedido"
     ></button>
 </div>
@@ -42,7 +42,7 @@
         </p-table>
     </p-tabPanel>
     <p-tabPanel header="Detalhes" [disabled]="!pedido">
-        <div id="printable">
+        <div id="printable" #printable>
             <app-pedido-details [Pedido]="pedido" />
         </div>
     </p-tabPanel>

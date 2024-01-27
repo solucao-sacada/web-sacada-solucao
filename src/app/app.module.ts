@@ -11,14 +11,14 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
-import { AdminModule } from './admin/admin.module';
+import { MainAppModule } from './admin/main-app.module';
 import { ComponentsModule } from './components/components.module';
 import { PedidoService } from './services/pedido.service';
 import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [AppRoutingModule, AppAdminModule, AdminModule, ComponentsModule],
+    imports: [AppRoutingModule, AppAdminModule, MainAppModule, ComponentsModule],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService,

@@ -32,4 +32,4 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ],
     exports: [RouterModule],
 })
-export class AdminRoutingModule {}
+export class MainAppRoutingModule {}

@@ -8,21 +8,21 @@ import { AppAdminComponent } from './layout/app.admin.component';
         RouterModule.forRoot(
             [
                 {
-                    path: 'admin',
+                    path: 'app',
                     component: AppAdminComponent,
                     children: [
                         {
                             path: '',
                             loadChildren: () =>
-                                import('./admin/admin.module').then(
-                                    (m) => m.AdminModule
+                                import('./admin/main-app.module').then(
+                                    (m) => m.MainAppModule
                                 ),
                         },
                     ],
                 },
                 {
                     path: '',
-                    redirectTo: 'admin',
+                    redirectTo: 'app',
                     pathMatch: 'full',
                 },
                 {

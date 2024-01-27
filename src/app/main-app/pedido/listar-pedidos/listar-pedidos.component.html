@@ -1,11 +1,21 @@
-<button
-    pButton
-    pRipple
-    label="Novo Pedido"
-    icon="pi pi-plus"
-    class="mb-3"
-    routerLink="/app/pedidos/novo"
-></button>
+<div class="flex justify-content-between ">
+    <button
+        pButton
+        pRipple
+        label="Novo Pedido"
+        icon="pi pi-plus"
+        class="mb-3"
+        routerLink="/app/pedidos/novo"
+    ></button>
+    <button
+        pButton
+        pRipple
+        icon="pi pi-print"
+        class="mb-3 p-button-rounded"
+        (click)="print()"
+        [disabled]="!pedido"
+    ></button>
+</div>
 <p-tabView [(activeIndex)]="activeIndex">
     <p-tabPanel header="Pedidos">
         <p-table
@@ -32,8 +42,10 @@
         </p-table>
     </p-tabPanel>
     <p-tabPanel header="Detalhes" [disabled]="!pedido">
-        <app-pedido-details [Pedido]="pedido"></app-pedido-details
-    ></p-tabPanel>
+        <div id="printable">
+            <app-pedido-details [Pedido]="pedido" />
+        </div>
+    </p-tabPanel>
     <p-tabPanel header="Rascunhos" [disabled]="draftPedidos.length == 0">
         <p-table
             [value]="draftPedidos"

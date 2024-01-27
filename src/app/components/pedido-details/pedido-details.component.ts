@@ -59,4 +59,16 @@ export class PedidoDetailsComponent {
                 return 'Outro';
         }
     }
+
+    get alinhamentoDaViga(): string {
+        if (this.pedido?.balcony.beam.position.aligned) return 'Alinhado';
+        else if (this.pedido?.balcony.beam.position.inside) return 'Desalinhado para Dentro';
+        else return 'Desalinhado para Fora';
+    }
+
+    get trilhosSuperiores(): string {
+        if(this.pedido?.balcony.rails.upper_rail.tip.normal) return 'Normal'
+        else if(this.pedido?.balcony.rails.upper_rail.tab.inside) return 'Chapa de correção para dentro'
+        else return 'Chapa de correção para fora'
+    }
 }

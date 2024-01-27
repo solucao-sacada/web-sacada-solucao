@@ -40,6 +40,11 @@ export class ListarPedidosComponent {
         });
     }
 
+    print() {
+        if (this.pedido) window.print();
+        else this._toaster.warn('Selecione um pedido para imprimir');
+    }
+
     excluirDraft(pedido: PedidoJson) {
         this.confirmationService.confirm({
             message: 'Tem certeza que deseja excluir este pedido de rascunho?',

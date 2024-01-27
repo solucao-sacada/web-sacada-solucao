@@ -22,6 +22,30 @@
             pedido?.client.num
         }}</span>
     </div>
+    <div class="flex">
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Bairro</span>
+        <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
+            pedido?.client.neighborhood
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Estado</span>
+        <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
+            pedido?.client.state
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Ap/Loja/Casa</span>
+        <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
+            pedido?.client.building
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Nome do Técnico</span>
+        <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
+            pedido?.client.technician
+        }}</span>
+    </div>
     <div class="flex mt-3">
         <span class="col-title p-2 w-12 border-1 font-bold">DADOS PEDIDO</span>
     </div>
@@ -82,6 +106,22 @@
         >
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             getQtdPecas(pedido?.balcony.format)
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
+            >Alinhamento da viga</span
+        >
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            alinhamentoDaViga
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
+            >Trilhos Superiores</span
+        >
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            trilhosSuperiores
         }}</span>
     </div>
 </div>

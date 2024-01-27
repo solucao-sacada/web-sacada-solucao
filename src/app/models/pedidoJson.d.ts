@@ -10,6 +10,7 @@ export interface PedidoJson {
     observation: string;
     activeIndex?: number;
     isDraft?: boolean;
+    status?: string
 }
 
 export interface Accessories {

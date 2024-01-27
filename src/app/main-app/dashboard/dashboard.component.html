@@ -24,9 +24,9 @@
                                 class="flex align-items-center justify-content-between"
                             >
                                 <span class="text-700">Concluídos</span
-                                ><span class="font-bold text-700">10/12</span>
+                                ><span class="font-bold text-700">{{qtdEntregue}}/{{qtdTotal}}</span>
                             </div>
-                            progress vbar
+                            <p-progressBar [value]="(qtdEntregue/qtdTotal)*100"></p-progressBar>
                         </div>
                     </div>
                 </div>
@@ -45,8 +45,6 @@
                                 <span class="text-700">Total</span
                                 ><span class="font-bold text-700">8</span>
                             </div>
-                            progress vbar
-
                         </div>
                     </div>
                 </div>

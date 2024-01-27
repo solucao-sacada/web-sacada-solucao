@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MESSAGES } from 'src/app/admin/utils/messages';
+import { Component, OnInit } from '@angular/core';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
-import { Pedido } from 'src/app/models/pedido';
+import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({

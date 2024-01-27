@@ -1,7 +1,7 @@
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoService } from './../../../../services/pedido.service';
 import { Component } from '@angular/core';
-import { MESSAGES } from 'src/app/admin/utils/messages';
+import { MESSAGES } from 'src/app/main-app/utils/messages';
 
 @Component({
     selector: 'app-passo14',

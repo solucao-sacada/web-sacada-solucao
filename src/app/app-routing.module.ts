@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
-import { AppAdminComponent } from './layout/app.admin.component';
+import { MainAppLayoutComponent } from './layout/main-app-layout.component';
 
 @NgModule({
     imports: [
@@ -9,12 +9,12 @@ import { AppAdminComponent } from './layout/app.admin.component';
             [
                 {
                     path: 'app',
-                    component: AppAdminComponent,
+                    component: MainAppLayoutComponent,
                     children: [
                         {
                             path: '',
                             loadChildren: () =>
-                                import('./admin/main-app.module').then(
+                                import('./main-app/main-app.module').then(
                                     (m) => m.MainAppModule
                                 ),
                         },
@@ -30,13 +30,6 @@ import { AppAdminComponent } from './layout/app.admin.component';
                     loadChildren: () =>
                         import('./demo/components/auth/auth.module').then(
                             (m) => m.AuthModule
-                        ),
-                },
-                {
-                    path: 'landing',
-                    loadChildren: () =>
-                        import('./demo/components/landing/landing.module').then(
-                            (m) => m.LandingModule
                         ),
                 },
                 { path: 'notfound', component: NotfoundComponent },

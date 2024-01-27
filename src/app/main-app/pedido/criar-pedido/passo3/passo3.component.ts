@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { MESSAGES } from 'src/app/admin/utils/messages';
+import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidoJson } from 'src/app/models/pedidoJson';

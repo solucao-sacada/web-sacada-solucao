@@ -74,7 +74,7 @@ export class ListarPedidosComponent {
             this.pedidoService.setActiveIndex(
                 this.pedidoService.pedido.activeIndex || 0
             );
-            this.router.navigate(['/admin/pedidos/novo']);
+            this.router.navigate(['/app/pedidos/novo']);
         }
     }
 }

@@ -16,7 +16,7 @@ import { AppTopBarComponent } from './app.topbar.component';
 import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from './app.sidebar.component';
-import { AppAdminComponent } from './app.admin.component';
+import { MainAppLayoutComponent } from './main-app-layout.component';
 import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { ComponentsModule } from '../components/components.module';
         AppFooterComponent,
         AppMenuComponent,
         AppSidebarComponent,
-        AppAdminComponent,
+        MainAppLayoutComponent,
     ],
     imports: [
         BrowserModule,
@@ -43,6 +43,6 @@ import { ComponentsModule } from '../components/components.module';
         AppConfigModule,
         ComponentsModule,
     ],
-    exports: [AppAdminComponent],
+    exports: [MainAppLayoutComponent],
 })
-export class AppAdminModule {}
+export class MainAppLayoutModule {}

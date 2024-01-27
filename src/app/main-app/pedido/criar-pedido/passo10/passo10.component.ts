@@ -1,22 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { MESSAGES } from 'src/app/admin/utils/messages';
+import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
-    selector: 'app-passo11',
-    templateUrl: './passo11.component.html',
+    selector: 'app-passo10',
+    templateUrl: './passo10.component.html',
     styles: [],
 })
-export class Passo11Component {
+export class Passo10Component {
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
     ) {}
 
     difference = '';
-
     visible = false;
 
     ngOnInit(): void {
@@ -27,8 +26,8 @@ export class Passo11Component {
 
     openOverlay() {
         const result = Math.abs(
-            +this.pedidoService.pedido.balcony.plumb.right_wall.bottom -
-                +this.pedidoService.pedido.balcony.plumb.right_wall.top
+            +this.pedidoService.pedido.balcony.plumb.left_wall.bottom -
+                +this.pedidoService.pedido.balcony.plumb.left_wall.top
         );
         this.difference = result.toString() + 'mm';
         if (result >= 8) {
@@ -40,12 +39,12 @@ export class Passo11Component {
 
     nextTab(): void {
         const result = Math.abs(
-            +this.pedidoService.pedido.balcony.plumb.right_wall.bottom -
-                +this.pedidoService.pedido.balcony.plumb.right_wall.top
+            +this.pedidoService.pedido.balcony.plumb.left_wall.bottom -
+                +this.pedidoService.pedido.balcony.plumb.left_wall.top
         );
         if (
-            this.pedidoService.pedido.balcony.plumb.right_wall.bottom &&
-            this.pedidoService.pedido.balcony.plumb.right_wall.top
+            this.pedidoService.pedido.balcony.plumb.left_wall.bottom &&
+            this.pedidoService.pedido.balcony.plumb.left_wall.top
         ) {
             if (result < 8) {
                 this.pedidoService.nextTab();

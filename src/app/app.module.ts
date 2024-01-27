@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AppAdminModule } from './layout/app.admin.module';
+import { MainAppLayoutModule } from './layout/main-app-layout.module';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { ProductService } from './demo/service/product.service';
 import { CountryService } from './demo/service/country.service';
@@ -11,14 +11,14 @@ import { EventService } from './demo/service/event.service';
 import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
-import { MainAppModule } from './admin/main-app.module';
+import { MainAppModule } from './main-app/main-app.module';
 import { ComponentsModule } from './components/components.module';
 import { PedidoService } from './services/pedido.service';
 import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [AppRoutingModule, AppAdminModule, MainAppModule, ComponentsModule],
+    imports: [AppRoutingModule, MainAppLayoutModule, MainAppModule, ComponentsModule],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService,

@@ -29,15 +29,6 @@
             required
         />
     </div>
-    <div class="field col-12 sm:col-2 lg:col-2">
-        <label>Número *</label>
-        <input
-            pInputText
-            [(ngModel)]="pedidoService.pedido?.client.num"
-            required
-            #numeroInput
-        />
-    </div>
     <div class="col-12">
         <p-selectButton
             [options]="[{ name: 'Loja' }, { name: 'Ap' }, { name: 'Casa' }]"
@@ -54,6 +45,15 @@
     >
         <label>Nome Edfício</label>
         <input pInputText [(ngModel)]="pedidoService.pedido?.client.building" />
+    </div>
+    <div class="field col-12 sm:col-2 lg:col-2">
+        <label>Número *</label>
+        <input
+            pInputText
+            [(ngModel)]="pedidoService.pedido?.client.num"
+            required
+            #numeroInput
+        />
     </div>
     <div class="field col-12 sm:col-4">
         <label>Bairro *</label>

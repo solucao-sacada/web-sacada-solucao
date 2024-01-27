@@ -47,9 +47,10 @@ export class PedidoService {
                 )
                     pedidos.push(pedido);
 
+                this.removerDraft(pedido);
                 this.setPedidosOK(pedidos);
                 this._toaster.info('Pedido armazenado temporariamente.');
-                return '';
+                throw error;
             })
         );
     }
@@ -58,7 +59,7 @@ export class PedidoService {
 
     intilizePedido(): PedidoJson {
         return {
-            idUser: this._auth.getUser()._id,
+            idUser: this._auth.getUser()?._id,
             code: Math.random() * 10,
             accessories: {
                 aparador_aluminio: false,
@@ -208,7 +209,7 @@ export class PedidoService {
                 zipCode: '',
                 num: null,
             },
-            technician: this._auth.getUser().name,
+            technician: this._auth.getUser()?.name,
             observation: '',
         };
     }
@@ -258,6 +259,7 @@ export class PedidoService {
     nextTab(): void {
         if (this.activeIndex < this.maxActiveIndex) this.activeIndex += 1;
         this.setActiveIndex(this.activeIndex);
+        this.pedido.activeIndex = this.activeIndex;
         this.setPedido(this.pedido);
         this.notifyObservers();
     }
@@ -265,6 +267,7 @@ export class PedidoService {
     prevTab(): void {
         if (this.activeIndex > 0) this.activeIndex -= 1;
         this.setActiveIndex(this.activeIndex);
+        this.pedido.activeIndex = this.activeIndex;
         this.setPedido(this.pedido);
         this.notifyObservers();
     }
@@ -320,5 +323,33 @@ export class PedidoService {
             `http://wa.me/5548984052727?text=${encodeURIComponent(msg)}`,
             '_blank'
         );
+    }
+
+    saveDraftPedido(pedido: PedidoJson) {
+        let pedidoEncontrado = null;
+        pedido.isDraft = true;
+        const pedidosStorage: PedidoJson[] =
+            JSON.parse(localStorage.getItem('draft-pedido')) || [];
+        pedidoEncontrado = pedidosStorage.findIndex(
+            (p) => p.code === pedido.code
+        );
+
+        if (pedidoEncontrado === -1) pedidosStorage.push(pedido);
+        else pedidosStorage[pedidoEncontrado] = pedido;
+        localStorage.setItem('draft-pedido', JSON.stringify(pedidosStorage));
+        this.clearLocalStorage();
+    }
+
+    getDraftPedidos(): PedidoJson[] {
+        return JSON.parse(localStorage.getItem('draft-pedido')) || [];
+    }
+
+    removerDraft(pedido: PedidoJson) {
+        const drafts = this.getDraftPedidos();
+        if(drafts.length > 0) {
+            const index = drafts.findIndex((p) => p.code === pedido.code);
+            drafts.splice(index, 1);
+            localStorage.setItem('draft-pedido', JSON.stringify(drafts));
+        }
     }
 }

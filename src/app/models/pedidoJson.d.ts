@@ -8,6 +8,8 @@ export interface PedidoJson {
     client: Client;
     technician: string;
     observation: string;
+    activeIndex?: number;
+    isDraft?: boolean;
 }
 
 export interface Accessories {

@@ -32,6 +32,11 @@ export const MENUS = [
                 icon: 'pi pi-fw pi-box',
                 routerLink: ['/admin/pedidos/listar'],
             },
+            {
+                label: 'Rascunhos',
+                icon: 'pi pi-fw pi-box',
+                routerLink: ['/admin/pedidos/listar/rascunhos'],
+            },
         ],
     },
     {

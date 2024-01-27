@@ -21,9 +21,40 @@
                     <td>{{ pedido.createdAt | date : "dd/MM/yyyy" }}</td>
                 </tr>
             </ng-template>
-        </p-table></p-tabPanel
-    >
+        </p-table>
+    </p-tabPanel>
     <p-tabPanel header="Detalhes" [disabled]="!pedido">
         <app-pedido-details [Pedido]="pedido"></app-pedido-details
     ></p-tabPanel>
+    <p-tabPanel header="Rascunhos" [disabled]="draftPedidos.length == 0">
+        <p-table
+            [value]="draftPedidos"
+            selectionMode="single"
+            [(selection)]="pedido"
+            dataKey="code"
+            (onRowSelect)="onSelectRow($event)"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Excluir</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-pedido>
+                <tr [pSelectableRow]="pedido">
+                    <td>{{ pedido.client.name }}</td>
+                    <td>
+                        <button
+                            pButton
+                            pRipple
+                            label="Excluir"
+                            icon="pi pi-trash"
+                            (click)="excluirDraft(pedido)"
+                        ></button>
+                    </td>
+                </tr>
+            </ng-template> </p-table
+    ></p-tabPanel>
 </p-tabView>
+<p-confirmDialog [breakpoints]="{ '600px': '90vw' }"></p-confirmDialog>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

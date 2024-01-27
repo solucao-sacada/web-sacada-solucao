@@ -88,17 +88,28 @@ export class Passo15Component {
     }
 
     verificarMenorAltura(): number {
-        let menorAltura = Infinity;
+        let menorAlturaTeto = Infinity;
+        let menorAlturaPiso = Infinity;
 
         for (let i = 0; i < this.medidas.length; i++) {
-            let menorAlturaProx =
-                +this.medidas[i].ceiling + +this.medidas[i].floor;
-            if (menorAlturaProx)
-                if (menorAltura > menorAlturaProx)
-                    menorAltura = menorAlturaProx;
+            const alturaTeto = +this.medidas[i].ceiling;
+            const alturaPiso = +this.medidas[i].floor;
+
+            if (!isNaN(alturaTeto) && alturaTeto < menorAlturaTeto) {
+                menorAlturaTeto = alturaTeto;
+            }
+
+            if (!isNaN(alturaPiso) && alturaPiso < menorAlturaPiso) {
+                menorAlturaPiso = alturaPiso;
+            }
         }
 
-        return menorAltura !== Infinity ? menorAltura : 0;
+        // Check if both values are valid (not Infinity) before returning their sum
+        if (menorAlturaTeto !== Infinity && menorAlturaPiso !== Infinity) {
+            return menorAlturaTeto + menorAlturaPiso;
+        } else {
+            return 0;
+        }
     }
 
     salvar() {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { MainAppLayoutComponent } from './layout/main-app-layout.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 @NgModule({
     imports: [

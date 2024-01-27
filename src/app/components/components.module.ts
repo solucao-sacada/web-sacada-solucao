@@ -48,6 +48,7 @@ import {
 import { MenuModule } from 'primeng/menu';
 import { MenuStepComponent } from './menu-step/menu-step.component';
 import { PedidoDetailsComponent } from './pedido-details/pedido-details.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { PedidoDetailsComponent } from './pedido-details/pedido-details.componen
         SafePipe,
         MenuStepComponent,
         PedidoDetailsComponent,
+        NotfoundComponent
     ],
     imports: [
         CommonModule,
@@ -103,6 +105,7 @@ import { PedidoDetailsComponent } from './pedido-details/pedido-details.componen
         ImageModule,
         TabViewModule,
         ToastModule,
+        NotfoundComponent,
         DialogModule,
         MessageModule,
         FormsModule,

@@ -10,7 +10,7 @@ export const MENUS = [
             {
                 label: 'Orçamentos',
                 icon: 'pi pi-fw pi-dollar',
-                routerLink: ['/app/orcamentos'],
+                routerLink: ['/app/orcamentos/listar'],
             },
             {
                 label: 'Pedidos',
@@ -36,6 +36,21 @@ export const MENUS = [
                 label: 'Rascunhos',
                 icon: 'pi pi-fw pi-box',
                 routerLink: ['/app/pedidos/listar/rascunhos'],
+            },
+        ],
+    },
+    {
+        label: 'Orçamentos',
+        items: [
+            {
+                label: 'Novo Orçamento',
+                icon: 'pi pi-fw pi-dollar',
+                routerLink: ['/app/orcamentos/novo/S'],
+            },
+            {
+                label: 'Meus Orçamentos',
+                icon: 'pi pi-fw pi-dollar',
+                routerLink: ['/app/orcamentos/listar'],
             },
         ],
     },

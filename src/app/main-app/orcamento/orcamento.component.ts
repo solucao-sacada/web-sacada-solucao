@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { CalculoOrcamento } from 'src/app/models/orcamento';
 
@@ -19,7 +19,7 @@ export class OrcamentoComponent {
     orcamento: CalculoOrcamento = new CalculoOrcamento();
     selected: CalculoOrcamento;
     fb = inject(FormBuilder);
-    router = inject(Router);
+    route = inject(ActivatedRoute);
     toaster = inject(ToasterService);
 
     ngOnInit() {
@@ -31,6 +31,12 @@ export class OrcamentoComponent {
         this.orcamento2.send = 'email@teste.com';
 
         this.orcamentos = [this.orcamento1, this.orcamento2];
+
+        this.route.params.subscribe((params) => {
+            if(params['new']) {
+                this.activeIndex = 1
+            }
+        })
     }
     onSubmit() {
         if (!this.orcamento.cliente) {

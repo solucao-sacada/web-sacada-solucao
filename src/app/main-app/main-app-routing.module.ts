@@ -27,6 +27,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
                         (m) => m.OrcamentoModule
                     ),
             },
+            {
+                path: 'informacoes-pessoais',
+                loadChildren: () =>
+                    import('./info-pessoal/info-pessoal.module').then(
+                        (m) => m.InfoPessoalModule
+                    ),
+            },
             { path: '**', redirectTo: '/notfound' },
         ]),
     ],

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User, UserResponse } from '../models/user';
+import { User, UserResponse } from '../models/user.model';
 
 @Injectable({
     providedIn: 'root',
@@ -22,5 +22,9 @@ export class AuthService {
 
     getUser(): User {
         return JSON.parse(localStorage.getItem('user'));
+    }
+
+    isLogged(): boolean {
+        return localStorage.getItem('user') ? true : false;
     }
 }

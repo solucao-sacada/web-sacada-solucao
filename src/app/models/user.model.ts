@@ -8,6 +8,7 @@ export interface User {
     phone: string;
     role: string;
     createdAt: string;
+    image?: string;
 }
 
 export interface UserResponse {

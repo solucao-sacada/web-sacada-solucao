@@ -1,12 +1,15 @@
 <div class="flex justify-content-center align-items-center">
-    <div class="text-center mb-5">
+    <div class="text-center mb-5" routerLink="/app/informacoes-pessoais">
         <img
-            src="assets/demo/images/login/avatar.png"
+            [src]="user.image || 'assets/img/avatar-generic.png'"
             alt="Image"
-            height="50"
-            class="mb-3"
+            height="80"
+            width="80"
+            class="mb-3 border-circle"
         />
-        <div class="text-900 text-3xl font-medium mb-3">Bem-vindo, Isabel!</div>
+        <div class="text-900 text-3xl font-medium mb-3">
+            Bem-vindo, {{ user.name }}!
+        </div>
     </div>
 </div>
 <div class="ng-star-inserted">
@@ -24,14 +27,21 @@
                                 class="flex align-items-center justify-content-between"
                             >
                                 <span class="text-700">Concluídos</span
-                                ><span class="font-bold text-700">{{qtdEntregue}}/{{qtdTotal}}</span>
+                                ><span class="font-bold text-700"
+                                    >{{ qtdEntregue }}/{{ qtdTotal }}</span
+                                >
                             </div>
-                            <p-progressBar [value]="(qtdEntregue/qtdTotal)*100"></p-progressBar>
+                            <p-progressBar
+                                [value]="(qtdEntregue / qtdTotal) * 100"
+                            ></p-progressBar>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 lg:col-4 p-2"  routerLink="/app/orcamentos/listar">
+            <div
+                class="col-12 lg:col-4 p-2"
+                routerLink="/app/orcamentos/listar"
+            >
                 <div class="shadow-2 surface-card border-round p-4 h-full">
                     <div class="flex align-items-start">
                         <div class="flex-1">

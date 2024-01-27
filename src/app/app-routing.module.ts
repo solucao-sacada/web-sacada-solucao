@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MainAppLayoutComponent } from './layout/main-app-layout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RedirectGuard } from './guards/redirect.guard';
 
 @NgModule({
     imports: [
@@ -19,6 +21,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
                                 ),
                         },
                     ],
+                    canActivate: [AuthGuard],
                 },
                 {
                     path: '',
@@ -31,9 +34,10 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
                         import('./demo/components/auth/auth.module').then(
                             (m) => m.AuthModule
                         ),
+                    canActivate: [RedirectGuard],
                 },
-                { path: 'notfound', component: NotfoundComponent },
-                { path: '**', redirectTo: '/notfound' },
+                // { path: 'notfound', component: NotfoundComponent },
+                // { path: '**', redirectTo: '/notfound' },
             ],
             {
                 scrollPositionRestoration: 'enabled',

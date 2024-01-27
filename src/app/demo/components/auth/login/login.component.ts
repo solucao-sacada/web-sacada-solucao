@@ -33,7 +33,7 @@ export class LoginComponent {
         this._auth.signIn(this.email, this.password).subscribe((response) => {
             console.log(response);
             this._auth.setUser(response.user);
-            this._router.navigate(['/admin']);
+            this._router.navigate(['/app']);
         });
     }
 }

@@ -63,9 +63,15 @@ export class ListarPedidosComponent {
                 pdf.setProperties({
                     title: `Detalhes do pedido ${this.pedido.code} - Cliente: ${this.pedido.client.name} - Responsável: ${this.pedido.technician}`,
                 });
-                pdf.output('dataurlnewwindow', {
-                    filename: 'pedido-' + this.pedido.code + '-' + this.pedido.client.name + '-' + this.pedido.technician + '.pdf'
-                });
+                pdf.save(
+                    'pedido-' +
+                        this.pedido.code +
+                        '-' +
+                        this.pedido.client.name +
+                        '-' +
+                        this.pedido.technician +
+                        '.pdf'
+                );
             },
         });
     }

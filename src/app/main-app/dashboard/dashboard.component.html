@@ -19,7 +19,9 @@
                                 >
                             </div>
                             <p-progressBar
-                                [value]="(qtdEntregue / qtdTotal) * 100"
+                                [value]="
+                                    ((qtdEntregue / qtdTotal) * 100).toFixed(2)
+                                "
                             ></p-progressBar>
                         </div>
                     </div>
@@ -40,7 +42,9 @@
                                 class="flex align-items-center justify-content-between"
                             >
                                 <span class="text-700">Total</span
-                                ><span class="font-bold text-700">8</span>
+                                ><span class="font-bold text-700">{{
+                                    qtdOrcamentos
+                                }}</span>
                             </div>
                         </div>
                     </div>

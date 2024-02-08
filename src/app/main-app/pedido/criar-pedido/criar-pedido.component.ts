@@ -51,7 +51,8 @@ export class CriarPedidoComponent implements CanComponentDeactivate {
     }
 
     canDeactivate(): boolean | Promise<boolean> {
-        if (this.pedidoService.activeIndex > 0)
+        if (this.pedidoService.activeIndex > 0) {
+            localStorage.removeItem('imagemBase64');
             return new Promise<boolean>((resolve, reject) => {
                 this.confirmationService.confirm({
                     message:
@@ -72,6 +73,6 @@ export class CriarPedidoComponent implements CanComponentDeactivate {
                     },
                 });
             });
-        else return true;
+        } else return true;
     }
 }

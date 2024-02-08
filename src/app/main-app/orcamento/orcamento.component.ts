@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { CalculoOrcamento } from 'src/app/models/orcamento';
+import { AuthService } from 'src/app/services/auth.service';
+import { OrcamentoService } from 'src/app/services/orcamento.service';
 
 @Component({
     selector: 'app-orcamento',
@@ -15,29 +17,30 @@ export class OrcamentoComponent {
     orcamento1 = new CalculoOrcamento();
     orcamento2 = new CalculoOrcamento();
 
-    orcamentos: CalculoOrcamento[] = [];
+    orcamentos: any[] = [];
     orcamento: CalculoOrcamento = new CalculoOrcamento();
     selected: CalculoOrcamento;
     fb = inject(FormBuilder);
+    auth = inject(AuthService);
     route = inject(ActivatedRoute);
     toaster = inject(ToasterService);
+    orcamentoService = inject(OrcamentoService);
 
     ngOnInit() {
-        this.orcamento1.cliente = 'Gustavo';
-        this.orcamento1.valorFinal = 2250;
-        this.orcamento1.send = 'email@teste.com';
-        this.orcamento2.cliente = 'Kaio';
-        this.orcamento2.valorFinal = 5325;
-        this.orcamento2.send = 'email@teste.com';
-
-        this.orcamentos = [this.orcamento1, this.orcamento2];
+        this.load();
 
         this.route.params.subscribe((params) => {
-            if(params['new']) {
-                this.activeIndex = 1
+            if (params['new']) {
+                this.activeIndex = 1;
             }
-        })
+        });
     }
+    private load() {
+        this.orcamentoService.list().subscribe((orcamentos) => {
+            this.orcamentos = orcamentos;
+        });
+    }
+
     onSubmit() {
         if (!this.orcamento.cliente) {
             this.toaster.warn('Por favor, preencha o campo Cliente');
@@ -73,10 +76,19 @@ export class OrcamentoComponent {
             this.toaster.warn('Por favor, preencha o campo E-MAIL');
             return;
         }
-
-        this.orcamentos.push(this.orcamento);
-        this.orcamento = new CalculoOrcamento();
-        this.isCalculeted = false;
-        this.activeIndex = 0;
+        this.orcamentoService
+            .create({
+                client: this.orcamento.cliente,
+                emailClient: this.orcamento.send,
+                idUser: this.auth.getUser()._id,
+                price: this.orcamento.valorFinal,
+            })
+            .subscribe((response) => {
+                this.toaster.success('Orcamento salvo com sucesso!');
+                this.load();
+                this.orcamento = new CalculoOrcamento();
+                this.isCalculeted = false;
+                this.activeIndex = 0;
+            });
     }
 }

@@ -15,15 +15,15 @@
                 <tr>
                     <td>
                         <span class="p-column-title font-bold">Nome</span
-                        >{{ orcamento.cliente }}
+                        >{{ orcamento.client }}
                     </td>
                     <td>
                         <span class="p-column-title font-bold">E-mail</span>
-                        {{ orcamento.send }}
+                        {{ orcamento.emailClient }}
                     </td>
                     <td>
                         <span class="p-column-title font-bold">Valor</span>
-                        {{ orcamento.valorFinal | currency: 'BRL' }}
+                        {{ orcamento.price | currency : "BRL" }}
                     </td>
                     <!-- <td>
                         <span class="p-column-title font-bold"></span>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Color, PedidoJson, Tip6 } from 'src/app/models/pedidoJson';
+import { ImageService } from 'src/app/services/image.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -10,7 +11,10 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class PedidoDetailsComponent {
     qtdLinhasDim: number;
     linhas: any[];
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+        public imageService: ImageService
+    ) {}
 
     @Input() set Pedido(value: PedidoJson) {
         this.pedido = value;

@@ -9,15 +9,17 @@ import {
 import { ComponentsModule } from 'src/app/components/components.module';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
     selector: 'app-info-pessoal',
     templateUrl: './info-pessoal.component.html',
     styles: [
         `
-        img {
-            object-fit: cover;
-        }`,
+            img {
+                object-fit: cover;
+            }
+        `,
     ],
     standalone: true,
     imports: [CommonModule, ImageCropperModule, ComponentsModule],
@@ -27,9 +29,13 @@ export class InfoPessoalComponent {
     croppedImage: any = '';
     visible = false;
     user: User = this.auth.getUser();
-    isEdit = false
+    isEdit = false;
 
-    constructor(private sanitizer: DomSanitizer, private auth: AuthService) {}
+    constructor(
+        private sanitizer: DomSanitizer,
+        private auth: AuthService,
+        private imageService: ImageService
+    ) {}
 
     fileChangeEvent(event: any): void {
         this.imageChangedEvent = event;
@@ -52,7 +58,12 @@ export class InfoPessoalComponent {
     }
 
     save() {
-        this.user.image = this.croppedImage;
-        this.visible = false;
+        this.imageService
+            .uploadImageUser(this.user._id, this.croppedImage)
+            .subscribe((data) => {
+                console.log(data);
+                this.user.image = this.croppedImage;
+                this.visible = false;
+            });
     }
 }

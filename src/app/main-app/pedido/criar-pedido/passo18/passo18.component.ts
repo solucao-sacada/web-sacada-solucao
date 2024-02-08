@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
+import { ImageService } from 'src/app/services/image.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class Passo18Component {
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService,
-        private _router: Router
+        private _router: Router,
+        private imageServive: ImageService
     ) {}
 
     disableEnviar = false;
@@ -25,10 +27,15 @@ export class Passo18Component {
             .subscribe((response) => {
                 console.log(response);
                 this._toaster.success('Pedido Salvo com Sucesso');
-                this.pedidoService.removePedidosOk();
-                setTimeout(() => {
-                    this._router.navigate(['/admin']);
-                }, 3000);
+                this.imageServive
+                    .uploadOrderImageFromLocalStorage(response._id)
+                    .subscribe((data) => {
+                        console.log(data);
+                        this.pedidoService.removePedidosOk();
+                        setTimeout(() => {
+                            this._router.navigate(['/admin']);
+                        }, 3000);
+                    });
             });
 
         this.pedidoService.clearLocalStorage();

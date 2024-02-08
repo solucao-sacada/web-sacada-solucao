@@ -1,3 +1,10 @@
+export interface OrcamentoRequestModel {
+    idUser: string;
+    client: string;
+    emailClient: string;
+    price: number;
+}
+
 export interface IConstsOrcamento {
     sel: number;
     red: number;
@@ -94,7 +101,7 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     qtdAparador: number | null = null;
     selante: boolean = false;
     qtdSelante: number | null = null;
-    valorFinal: number = null
+    valorFinal: number = null;
 
     set setCliente(value: string) {
         this.cliente = value;

@@ -39,7 +39,7 @@
             >Ap/Loja/Casa</span
         >
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
-            pedido?.client.building
+            pedido?.client.apartment
         }}</span>
     </div>
     <div class="flex">
@@ -321,5 +321,12 @@
         <span class="col-data p-2 w-12 border-bottom-1 border-x-1">{{
             pedido?.observation
         }}</span>
+    </div>
+    <div class="flex justify-content-center w-full">
+        <img
+            [src]="pedido?.images ? pedido.images[0] : imageService.getImageUrl"
+            alt=""
+            class="w-6 mt-5"
+        />
     </div>
 </div>

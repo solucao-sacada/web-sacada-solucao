@@ -35,13 +35,17 @@
         }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Ap/Loja/Casa</span>
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1"
+            >Ap/Loja/Casa</span
+        >
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.client.building
         }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Nome do Técnico</span>
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1"
+            >Nome do Técnico</span
+        >
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.technician
         }}</span>
@@ -124,5 +128,198 @@
             trilhosSuperiores
         }}</span>
     </div>
-
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
+            >Trilhos Inferiores - Linha de referência de medição</span
+        >
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            trilhosInferioresLenhaRef
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
+            >Trilhos Inferiores</span
+        >
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            trilhosInferiores
+        }}</span>
+    </div>
+    <div class="flex mt-4">
+        <span class="col-title p-2 w-5 border-y-1 border-x-1">Peça</span>
+        <span class="col-data p-2 w-5 border-y-1 border-right-1">Ângulo</span>
+        <span class="col-data p-2 w-5 border-y-1 border-right-1">Dimensão</span>
+        <span class="col-data p-2 w-5 border-y-1 border-right-1"
+            >Quantidade</span
+        >
+    </div>
+    <div class="flex" *ngFor="let item of linhas">
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">{{
+            item.piece
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            item.angle
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            item.dimension
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            item.quantity
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1"></span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            pedido?.balcony.dimensions.total
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1"></span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1"></span>
+    </div>
+    <div class="flex mt-4">
+        <span class="col-title p-2 w-7 border-y-1 border-x-1"
+            >Prumo das Paredes – Canto inferior esquerdo</span
+        >
+        <span class="col-data p-2 w-5 border-y-1 border-right-1">{{
+            pedido?.balcony.plumb.left_wall.bottom
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
+            >Prumo das Paredes – Canto superior esquerdo</span
+        >
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            pedido?.balcony.plumb.left_wall.top
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
+            >Prumo das Paredes – Canto inferior direito</span
+        >
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            pedido?.balcony.plumb.right_wall.bottom
+        }}</span>
+    </div>
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
+            >Prumo das Paredes – Canto superior direito</span
+        >
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            pedido?.balcony.plumb.right_wall.top
+        }}</span>
+    </div>
+    <div class="flex mt-4">
+        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1"
+            >Abertura – Sentido das Aberturas</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >{{
+                pedido?.balcony.aperture.inside ? "Para Dentro" : "Para Fora"
+            }}</span
+        >
+    </div>
+    <div class="flex mt-4">
+        <span class="col-title p-2 w-5 border-bottom-1 border-top-1 border-x-1"
+            >Tipo</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >Peça / Perfil</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >Quantidade de vidros</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >Distribuição dos Vidros</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >Distância do Pivô Porta</span
+        >
+    </div>
+    <div
+        class="flex"
+        *ngFor="let item of pedido?.balcony.aperture.locations; let i = index"
+    >
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">{{
+            item.tip
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            i + 1
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            item.glasses
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            item.stacking || "Fixo"
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            item.door_distance
+        }}</span>
+    </div>
+    <div class="flex mt-4">
+        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1"
+            >Fechaduras</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >{{
+                pedido?.balcony.lock.fechadura_para_porta
+                    ? "Fechadura para Porta"
+                    : "Fechadura para Vidro"
+            }}</span
+        >
+    </div>
+    <div class="flex mt-4">
+        <span class="col-title p-2 w-5 border-bottom-1 border-top-1 border-x-1"
+            >Ponto</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >Medida Teto – laser até a viga</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >Medida Chão – laser a base inferior</span
+        >
+    </div>
+    <div
+        class="flex"
+        *ngFor="let item of pedido?.balcony.levels.measures.data; let i = index"
+    >
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">{{
+            incrementAlpha(i)
+        }}</span>
+        <span class="col-title p-2 w-5 border-bottom-1 border-right-1">{{
+            item[0]
+        }}</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
+            item[1]
+        }}</span>
+    </div>
+    <div class="flex mt-4">
+        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1"
+            >Tabela de Níveis partindo do Guardacorpo – Menor Altura</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >{{ pedido?.balcony.levels.full_aperture }}</span
+        >
+    </div>
+    <div class="flex mt-4">
+        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1"
+            >Acessórios</span
+        >
+        <span
+            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
+            >TODO</span
+        >
+    </div>
+    <div class="flex flex-column mt-4">
+        <span class="col-title p-2 w-12 border-1">Observações</span>
+        <span class="col-data p-2 w-12 border-bottom-1 border-x-1">{{
+            pedido?.observation
+        }}</span>
+    </div>
 </div>

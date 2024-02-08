@@ -8,10 +8,13 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styleUrls: ['./pedido-details.component.scss'],
 })
 export class PedidoDetailsComponent {
+    qtdLinhasDim: number;
+    linhas: any[];
     constructor(public pedidoService: PedidoService) {}
 
     @Input() set Pedido(value: PedidoJson) {
         this.pedido = value;
+        this.dimensoes();
     }
 
     pedido: PedidoJson;
@@ -52,7 +55,7 @@ export class PedidoDetailsComponent {
             case 2:
                 return '"L" Esquerda';
             case 3:
-                return '"R" Esquerda';
+                return '"L" Direita';
             case 4:
                 return 'Formato U';
             default:
@@ -62,13 +65,57 @@ export class PedidoDetailsComponent {
 
     get alinhamentoDaViga(): string {
         if (this.pedido?.balcony.beam.position.aligned) return 'Alinhado';
-        else if (this.pedido?.balcony.beam.position.inside) return 'Desalinhado para Dentro';
+        else if (this.pedido?.balcony.beam.position.inside)
+            return 'Desalinhado para Dentro';
         else return 'Desalinhado para Fora';
     }
 
     get trilhosSuperiores(): string {
-        if(this.pedido?.balcony.rails.upper_rail.tip.normal) return 'Normal'
-        else if(this.pedido?.balcony.rails.upper_rail.tab.inside) return 'Chapa de correção para dentro'
-        else return 'Chapa de correção para fora'
+        if (this.pedido?.balcony.rails.upper_rail.tip.normal) return 'Normal';
+        else if (this.pedido?.balcony.rails.upper_rail.tab.inside)
+            return 'Chapa de correção para dentro';
+        else return 'Chapa de correção para fora';
+    }
+
+    get trilhosInferioresLenhaRef(): string {
+        const tips = this.pedido?.balcony.rails.lower_rail.normal.tip;
+        if (tips?.A) return 'A';
+        else if (tips?.B) return 'B';
+        else if (tips?.C) return 'C';
+        else return 'Outros';
+    }
+
+    get trilhosInferiores(): string {
+        const tips = this.pedido?.balcony.rails.lower_rail.tip;
+        if (tips?.normal) return 'Normal';
+        else if (tips?.tab) return 'Aba';
+        else return 'Embutido';
+    }
+
+    dimensoes() {
+        this.qtdLinhasDim = this.pedidoService.getQtdPecas(
+            this.pedido?.balcony.format
+        );
+        this.linhas = this.pedido.balcony.dimensions.data.map(
+            (linha, index) => ({
+                piece: index + 1,
+                angle: linha[1] || '', // Índice 1 representa o ângulo, ajuste conforme necessário
+                dimension: linha[2] || '', // Índice 2 representa a dimensão, ajuste conforme necessário
+                quantity: linha[3] || '', // Índice 3 representa a quantidade, ajuste conforme necessário
+            })
+        );
+        console.log(this.linhas);
+    }
+
+    incrementAlpha(index) {
+        let result = '';
+        const base = 'A'.charCodeAt(0);
+
+        while (index >= 0) {
+            result = String.fromCharCode(base + (index % 26)) + result;
+            index = Math.floor(index / 26) - 1;
+        }
+
+        return result;
     }
 }

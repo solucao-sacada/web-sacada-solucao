@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { PedidoJson } from '../models/pedidoJson';
-import { Observable, Subject, catchError } from 'rxjs';
-import { ConfirmationService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, Subject, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ToasterService } from '../components/toaster/toaster.service';
+import { PedidoJson } from '../models/pedidoJson';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -298,18 +297,31 @@ export class PedidoService {
         return quantidadeTotal;
     }
 
-    getQtdPecas(): number {
-        switch (this.pedido?.balcony.format) {
-            case 1:
-                return 1;
-            case 2:
-            case 3:
-                return 2;
-            case 4:
-                return 3;
-            default:
-                return +this.pedido?.balcony.format;
-        }
+    getQtdPecas(value?: any): number {
+        if (value)
+            switch (value) {
+                case 1:
+                    return 1;
+                case 2:
+                case 3:
+                    return 2;
+                case 4:
+                    return 3;
+                default:
+                    return +value;
+            }
+        else
+            switch (this.pedido?.balcony.format) {
+                case 1:
+                    return 1;
+                case 2:
+                case 3:
+                    return 2;
+                case 4:
+                    return 3;
+                default:
+                    return +this.pedido?.balcony.format;
+            }
     }
 
     isTabDisabled(tabIndex: number): boolean {
@@ -346,7 +358,7 @@ export class PedidoService {
 
     removerDraft(pedido: PedidoJson) {
         const drafts = this.getDraftPedidos();
-        if(drafts.length > 0) {
+        if (drafts.length > 0) {
             const index = drafts.findIndex((p) => p.code === pedido.code);
             drafts.splice(index, 1);
             localStorage.setItem('draft-pedido', JSON.stringify(drafts));

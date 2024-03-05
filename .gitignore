@@ -5,6 +5,9 @@
 /tmp
 /out-tsc
 /bazel-out
+/ios
+/android
+capacitor.config.ts
 
 # Node
 /node_modules

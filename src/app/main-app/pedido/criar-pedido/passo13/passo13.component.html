@@ -1,0 +1,111 @@
+<app-menu-step
+    title="Local das Aberturas"
+    step="13 - Local das Aberturas"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
+
+<div
+    class="flex gap-3 flex-column border-round-lg shadow-3 my-3 p-3"
+    *ngFor="
+        let option of pedidoService.pedido?.balcony.aperture.locations;
+        let i = index
+    "
+>
+    <div class="flex flex-column">
+        <div class="flex justify-content-between">
+            <span class="font-bold"
+                >Seção {{ i + 1 }} - {{ option.tip.toUpperCase() }}</span
+            >
+            <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-text p-button-danger"
+                (click)="delete(i)"
+            ></button>
+        </div>
+        <span>
+            Vidros de
+            {{ setDistribuition(i) }}
+        </span>
+    </div>
+    <div class="flex gap-2">
+        <div class="flex flex-column w-6 p-2">
+            <span>Peça/Perfil</span>
+            <p-dropdown
+                styleClass="w-full"
+                [options]="optionsPieces"
+                [(ngModel)]="option.piece"
+                optionLabel="piece"
+                optionValue="piece"
+                [showClear]="false"
+            ></p-dropdown>
+        </div>
+        <div class="flex flex-column w-6 p-2">
+            <span>Qtd de vidros</span>
+            <input
+                pInputText
+                [(ngModel)]="option.glasses"
+                (ngModelChange)="atualizarQtdVidrosRestantes()"
+            />
+        </div>
+    </div>
+    <div class="flex gap-2" *ngIf="option.tip.toUpperCase() === 'ABERTURA'">
+        <div class="flex flex-column w-8 p-2">
+            <span>Empilhamento</span>
+            <p-dropdown
+                styleClass="w-full"
+                [options]="[{ stack: 'À Direita' }, { stack: 'À Esquerda' }]"
+                [(ngModel)]="option.stacking"
+                optionLabel="stack"
+                optionValue="stack"
+                [showClear]="false"
+            ></p-dropdown>
+        </div>
+        <div class="flex flex-column w-4 p-2">
+            <span>Pivô</span>
+            <input
+                pInputText
+                [(ngModel)]="option.door_distance"
+                (ngModelChange)="atualizarQtdVidrosRestantes()"
+            />
+        </div>
+    </div>
+</div>
+
+<div class="flex justify-content-center text-2xl my-3">
+    Vidros restantes:
+    <span class="ml-2 font-bold">{{ vidrosRestantes }}</span>
+</div>
+
+<div class="flex gap-3 justify-content-between">
+    <p-button
+        label="Nova Abertura"
+        icon="pi pi-plus"
+        styleClass="bg-green-600 border-0"
+        (onClick)="novaAbertura()"
+    ></p-button>
+    <p-button
+        label="Fixo"
+        icon="pi pi-plus"
+        severity="success"
+        styleClass="bg-green-600 border-0"
+        (onClick)="novoFixo()"
+    ></p-button>
+</div>
+
+<div
+    class="flex flex-column align-items-center mt-5 justify-content-center text-xl font-light text-gray-800 my-2 relative"
+>
+    <p class="text-center">
+        Distribuição dos vidros da esquerda para a direita com visão de dentro
+        da sacada
+    </p>
+</div>
+
+<app-navigation-tabs-btn
+    (nextTab)="nextTab()"
+    (prevTab)="prevTab()"
+></app-navigation-tabs-btn>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

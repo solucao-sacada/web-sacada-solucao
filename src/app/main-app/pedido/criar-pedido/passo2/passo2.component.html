@@ -1,0 +1,64 @@
+<app-menu-step
+    title="Tipos de Sacada"
+    step="2 - Tipos de Sacada"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
+
+<div class="flex flex-row gap-5 justify-content-center">
+    <button
+        pButton
+        pRipple
+        label="Definido"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.tip.defined.isDefined
+        }"
+        (click)="changeTip('defined')"
+    ></button>
+    <button
+        pButton
+        pRipple
+        label="Melhor ajuste"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.tip.better_adjustment
+        }"
+        (click)="changeTip('better_adjustment')"
+    ></button>
+</div>
+<div
+    class="row text-center"
+    *ngIf="pedidoService.pedido?.balcony.tip.defined.isDefined"
+>
+    <div class="col-12">
+        <label class="text-left">Quantidade de vidros:</label><br />
+        <input
+            class="col-3 md:col-1 mt-2 text-center"
+            pInputText
+            [(ngModel)]="
+                pedidoService.pedido?.balcony.tip.defined.glass_quantity
+            "
+            (ngModelChange)="onChangeQtdVidros()"
+            required
+        />
+    </div>
+</div>
+<div class="row mt-5">
+    <p>
+        <strong>Definido:</strong> quando já há sacadas instaladas no prédio e
+        neste caso deve-se manter o padrão de número de folhas, cor do alumínio,
+        espessura do vidro e cor do vidro.
+    </p>
+
+    <p>
+        <strong>Melhor ajuste:</strong> quando não há sacadas existentes no
+        prédio e as definições dos tamanhos dos vidros faremos da forma de se
+        ter o melhor funcionamento.
+    </p>
+</div>
+
+<app-navigation-tabs-btn
+    (nextTab)="nextTab()"
+    (prevTab)="prevTab()"
+></app-navigation-tabs-btn>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

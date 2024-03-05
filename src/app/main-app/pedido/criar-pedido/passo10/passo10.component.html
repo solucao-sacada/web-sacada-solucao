@@ -1,0 +1,61 @@
+<app-menu-step
+    title="Prumo Parede Esquerda"
+    step="10 - Prumo Parede Esquerda"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
+
+<div class="flex justify-content-center">
+    <div class="w-9 md:w-3">
+        <label>Medida Superior</label>
+        <input
+            class="w-full"
+            pInputText
+            [(ngModel)]="pedidoService.pedido?.balcony.plumb.left_wall.top"
+        />
+    </div>
+</div>
+<div #mydiv class="relative"></div>
+<p-image
+    class="w-9 my-3 sm:w-15 md:w-3 shadow-2 block md:block mx-auto border-round relative"
+    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+    src="../../../../../assets/img/10-prumo-paredes/esquerdo.jpg"
+>
+</p-image>
+<div class="flex justify-content-center">
+    <div class="w-9 md:w-3 relative">
+        <label>Medida Inferior</label>
+        <input
+            class="w-full"
+            pInputText
+            [(ngModel)]="pedidoService.pedido?.balcony.plumb.left_wall.bottom"
+            (ngModelChange)="openOverlay()"
+        />
+    </div>
+</div>
+
+<div
+    class="flex flex-column align-items-center mt-5 justify-content-center text-xl font-light text-gray-800 my-2 relative"
+>
+    <p class="text-center">Dica: Marcar as distâncias em milimetros (mm).</p>
+</div>
+
+<p-dialog
+    [showHeader]="false"
+    [(visible)]="visible"
+    [breakpoints]="{ '500px': '90vw' }"
+    [style]="{
+        width: '50vw',
+        border: 'solid 1px #9a2530',
+    }"
+>
+    <div class="font-bold text-xl mt-5 text-center">
+        <span class="text-red-700">Atenção:</span> Perfil fora do esquadro em
+        {{ difference }}
+    </div>
+</p-dialog>
+
+<app-navigation-tabs-btn
+    (nextTab)="nextTab()"
+    (prevTab)="prevTab()"
+></app-navigation-tabs-btn>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

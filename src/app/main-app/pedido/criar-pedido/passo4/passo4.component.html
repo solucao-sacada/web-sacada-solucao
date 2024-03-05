@@ -1,0 +1,103 @@
+<app-menu-step
+    title="Cor do Alumínio"
+    step="4 - Cor do Alumínio"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
+
+<div class="grid gap-3 p-4">
+    <button
+        class="col-5 md:col-2"
+        pButton
+        pRipple
+        label="Preto"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.aluminium.color.black
+        }"
+        (click)="alterarCor('black')"
+    ></button>
+    <button
+        class="col-5 md:col-2"
+        pButton
+        pRipple
+        label="BZ1001"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.aluminium.color.bz1001
+        }"
+        (click)="alterarCor('bz1001')"
+    ></button>
+    <button
+        class="col-5 md:col-2"
+        pButton
+        pRipple
+        label="BZ1002"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.aluminium.color.bz1002
+        }"
+        (click)="alterarCor('bz1002')"
+    ></button>
+    <button
+        class="col-5 md:col-2"
+        pButton
+        pRipple
+        label="BZ1003"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.aluminium.color.bz1003
+        }"
+        (click)="alterarCor('bz1003')"
+    ></button>
+    <button
+        class="col-5 md:col-2"
+        pButton
+        pRipple
+        label="Incolor"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.aluminium.color.mat
+        }"
+        (click)="alterarCor('mat')"
+    ></button>
+    <button
+        class="col-5 md:col-2"
+        pButton
+        pRipple
+        label="Branco"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.aluminium.color.white
+        }"
+        (click)="alterarCor('white')"
+    ></button>
+    <button
+        class="col-5 md:col-2"
+        pButton
+        pRipple
+        label="Outro"
+        [ngClass]="{
+            'p-button-secondary': !outro
+        }"
+        (click)="alterarCor('other')"
+    ></button>
+    <div class="col-12 md:col-4 align-self-end" *ngIf="outro">
+        <span class="p-float-label">
+            <input
+                type="text"
+                id="identiCor"
+                pInputText
+                [(ngModel)]="
+                    pedidoService.pedido?.balcony.aluminium.color.other
+                "
+            />
+            <label for="identiCor">Identificação da cor</label>
+        </span>
+    </div>
+</div>
+
+<app-navigation-tabs-btn
+    (nextTab)="nextTab()"
+    (prevTab)="prevTab()"
+></app-navigation-tabs-btn>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

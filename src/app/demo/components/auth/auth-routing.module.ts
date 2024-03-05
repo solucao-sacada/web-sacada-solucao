@@ -21,7 +21,6 @@ import { RouterModule } from '@angular/router';
                 loadChildren: () =>
                     import('./login/login.module').then((m) => m.LoginModule),
             },
-            { path: '**', redirectTo: '/notfound' },
         ]),
     ],
     exports: [RouterModule],

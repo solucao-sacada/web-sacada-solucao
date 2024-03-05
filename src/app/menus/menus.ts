@@ -1,21 +1,21 @@
 export const MENUS = [
     {
-        label: 'Admin',
+        label: 'Painel',
         items: [
             {
                 label: 'Dashboard',
                 icon: 'pi pi-fw pi-home',
-                routerLink: ['/'],
+                routerLink: ['/app'],
             },
             {
                 label: 'Orçamentos',
                 icon: 'pi pi-fw pi-dollar',
-                routerLink: ['/admin/orcamentos'],
+                routerLink: ['/app/orcamentos/listar'],
             },
             {
                 label: 'Pedidos',
                 icon: 'pi pi-fw pi-box',
-                routerLink: ['/admin/pedidos/novo'],
+                routerLink: ['/app/pedidos/novo'],
             },
         ],
     },
@@ -25,12 +25,32 @@ export const MENUS = [
             {
                 label: 'Realizar Pedido',
                 icon: 'pi pi-fw pi-box',
-                routerLink: ['/admin/pedidos/novo'],
+                routerLink: ['/app/pedidos/novo'],
             },
             {
                 label: 'Meus Pedidos',
                 icon: 'pi pi-fw pi-box',
-                routerLink: ['/admin/pedidos/listar'],
+                routerLink: ['/app/pedidos/listar'],
+            },
+            {
+                label: 'Rascunhos',
+                icon: 'pi pi-fw pi-box',
+                routerLink: ['/app/pedidos/listar/rascunhos'],
+            },
+        ],
+    },
+    {
+        label: 'Orçamentos',
+        items: [
+            {
+                label: 'Novo Orçamento',
+                icon: 'pi pi-fw pi-dollar',
+                routerLink: ['/app/orcamentos/novo/S'],
+            },
+            {
+                label: 'Meus Orçamentos',
+                icon: 'pi pi-fw pi-dollar',
+                routerLink: ['/app/orcamentos/listar'],
             },
         ],
     },

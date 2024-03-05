@@ -1,28 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NotfoundComponent } from './demo/components/notfound/notfound.component';
-import { AppAdminComponent } from './layout/app.admin.component';
+import { MainAppLayoutComponent } from './layout/main-app-layout.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RedirectGuard } from './guards/redirect.guard';
 
 @NgModule({
     imports: [
         RouterModule.forRoot(
             [
                 {
-                    path: 'admin',
-                    component: AppAdminComponent,
+                    path: 'app',
+                    component: MainAppLayoutComponent,
                     children: [
                         {
                             path: '',
                             loadChildren: () =>
-                                import('./admin/admin.module').then(
-                                    (m) => m.AdminModule
+                                import('./main-app/main-app.module').then(
+                                    (m) => m.MainAppModule
                                 ),
                         },
                     ],
+                    canActivate: [AuthGuard],
                 },
                 {
                     path: '',
-                    redirectTo: 'landing',
+                    redirectTo: 'app',
                     pathMatch: 'full',
                 },
                 {
@@ -31,16 +34,10 @@ import { AppAdminComponent } from './layout/app.admin.component';
                         import('./demo/components/auth/auth.module').then(
                             (m) => m.AuthModule
                         ),
+                    canActivate: [RedirectGuard],
                 },
-                {
-                    path: 'landing',
-                    loadChildren: () =>
-                        import('./demo/components/landing/landing.module').then(
-                            (m) => m.LandingModule
-                        ),
-                },
-                { path: 'notfound', component: NotfoundComponent },
-                { path: '**', redirectTo: '/notfound' },
+                // { path: 'notfound', component: NotfoundComponent },
+                // { path: '**', redirectTo: '/notfound' },
             ],
             {
                 scrollPositionRestoration: 'enabled',

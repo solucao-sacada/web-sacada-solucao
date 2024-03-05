@@ -1,0 +1,329 @@
+<p-toast life="4000" key="tst"></p-toast>
+
+<p-tabView [(activeIndex)]="activeIndex">
+    <p-tabPanel header="Meus Orçamentos">
+        <p-table [value]="orcamentos" dataKey="nome" responsiveLayout="stack">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Valor</th>
+                    <!-- <th>Enviar</th> -->
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-orcamento>
+                <tr>
+                    <td>
+                        <span class="p-column-title font-bold">Nome</span
+                        >{{ orcamento.client }}
+                    </td>
+                    <td>
+                        <span class="p-column-title font-bold">E-mail</span>
+                        {{ orcamento.emailClient }}
+                    </td>
+                    <td>
+                        <span class="p-column-title font-bold">Valor</span>
+                        {{ orcamento.price | currency : "BRL" }}
+                    </td>
+                    <!-- <td>
+                        <span class="p-column-title font-bold"></span>
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-check"
+                            label="Criar pedido"
+                        ></button>
+                    </td> -->
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Novo Orçamento">
+        <app-title title="Valores"></app-title>
+        <form (ngSubmit)="onSubmit()" class="mt-4">
+            <div class="flex flex-column gap-1 mb-3">
+                <label for="cliente" class="font-bold">Cliente</label>
+                <input
+                    pInputText
+                    id="cliente"
+                    name="cliente"
+                    [(ngModel)]="orcamento.cliente"
+                />
+            </div>
+            <div class="flex flex-column gap-1 mb-3">
+                <label for="ml" class="font-bold"> Largura Total (mm)</label>
+                <p-inputNumber
+                    styleClass="w-full"
+                    id="ml"
+                    [(ngModel)]="orcamento.ml"
+                    mode="decimal"
+                    name="ml"
+                    [minFractionDigits]="0"
+                    [maxFractionDigits]="2"
+                    placeholder="Largura em milímetros"
+                />
+            </div>
+            <div class="flex flex-column gap-1 mb-3">
+                <label for="ml" class="font-bold">Altura Total (mm)</label>
+                <p-inputNumber
+                    styleClass="w-full"
+                    id="ml"
+                    [(ngModel)]="orcamento.h"
+                    mode="decimal"
+                    name="ml"
+                    [minFractionDigits]="0"
+                    [maxFractionDigits]="2"
+                    placeholder="Altura em milímetros"
+                />
+            </div>
+            <div class="flex">
+                <div class="flex w-7 flex-column gap-2 mb-3">
+                    <label class="font-bold">Aparadores</label>
+                    <div class="flex">
+                        <p-radioButton
+                            name="aparador"
+                            [value]="false"
+                            [(ngModel)]="orcamento.aparador"
+                            inputId="aparator"
+                        ></p-radioButton>
+                        <label for="aparador" class="ml-2">Sem aparador</label>
+                    </div>
+                    <div class="flex">
+                        <p-radioButton
+                            name="apInox"
+                            [value]="true"
+                            [(ngModel)]="orcamento.aparador"
+                            inputId="apInox"
+                        ></p-radioButton>
+                        <label for="apInox" class="ml-2"
+                            >Aparador de Inox</label
+                        >
+                    </div>
+                </div>
+                <div
+                    class="flex w-5 flex-column gap-1 mb-3"
+                    *ngIf="orcamento.aparador"
+                >
+                    <label for="qtdAparador" class="font-bold"
+                        >Quantidade
+                    </label>
+                    <p-inputNumber
+                        [inputStyle]="{ width: '100%' }"
+                        id="qtdAparador"
+                        name="qtdAparador"
+                        [(ngModel)]="orcamento.qtdAparador"
+                        inputId="integeronly"
+                    />
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex w-7 flex-column gap-2 mb-3">
+                    <label class="font-bold">Selante</label>
+                    <div class="flex">
+                        <p-radioButton
+                            name="selante"
+                            [value]="false"
+                            [(ngModel)]="orcamento.selante"
+                            inputId="selante"
+                        ></p-radioButton>
+                        <label for="selante" class="ml-2">Sem selante</label>
+                    </div>
+                    <div class="flex">
+                        <p-radioButton
+                            name="selante2"
+                            [value]="true"
+                            [(ngModel)]="orcamento.selante"
+                            inputId="selante2"
+                        ></p-radioButton>
+                        <label for="selante2" class="ml-2">Selante</label>
+                    </div>
+                </div>
+                <div
+                    class="flex w-5 flex-column gap-1 mb-3"
+                    *ngIf="orcamento.selante"
+                >
+                    <label for="qtdAparador" class="font-bold"
+                        >Quantidade</label
+                    >
+                    <p-inputNumber
+                        [inputStyle]="{ width: '100%' }"
+                        id="qtdAparador"
+                        name="qtdAparador"
+                        [(ngModel)]="orcamento.qtdSelante"
+                        inputId="integeronly"
+                    />
+                    <small class="text-bold"
+                        >Um selante rende de 4-5 metros linear.</small
+                    >
+                </div>
+            </div>
+
+            <div class="flex flex-column gap-1 mb-3">
+                <label for="vd" class="font-bold"
+                    >Valor do Vidro por m² (R$)</label
+                >
+                <p-inputNumber
+                    styleClass="w-full"
+                    id="vd"
+                    name="vd"
+                    [(ngModel)]="orcamento.vd"
+                    mode="currency"
+                    currency="BRL"
+                />
+            </div>
+            <div class="flex flex-column gap-1 mb-3">
+                <label for="mar" class="font-bold">Meta de margem (%)</label>
+                <p-inputNumber
+                    styleClass="w-full"
+                    id="mar"
+                    name="mar"
+                    [(ngModel)]="orcamento.mar"
+                    inputId="percent"
+                    suffix="%"
+                />
+            </div>
+            <button
+                pButton
+                pRipple
+                class="w-full mt-3 mb-5"
+                label="Calcular Sacada"
+                type="submit"
+            ></button>
+        </form>
+        <ng-container *ngIf="isCalculeted">
+            <div class="flex flex-column gap-2 align-items-center text-lg">
+                <app-title title="Resultados" class="mb-3" />
+                <ng-container>
+                    <div
+                        class="flex justify-content-between font-bold w-full px-7"
+                    >
+                        <span>Custo Total:</span>
+                        <span>{{
+                            orcamento.custoTotalAVista | currency : "BRL"
+                        }}</span>
+                    </div>
+                </ng-container>
+                <ng-container>
+                    <div class="flex justify-content-between w-full px-7">
+                        <span>Kit Solução:</span>
+                        <span>{{
+                            orcamento.kitAVista | currency : "BRL"
+                        }}</span>
+                    </div>
+                </ng-container>
+                <ng-container>
+                    <div class="flex justify-content-between w-full px-7">
+                        <span>Custo Vidro:</span>
+                        <span>{{
+                            orcamento.valorVidro | currency : "BRL"
+                        }}</span>
+                    </div>
+                </ng-container>
+                <ng-container>
+                    <div class="flex justify-content-between w-full px-7">
+                        <span>Custo Acessórios:</span>
+                        <span>{{
+                            orcamento.valorAcessorios | currency : "BRL"
+                        }}</span>
+                    </div>
+                </ng-container>
+                <app-title title="Valor da Venda" class="my-3" />
+                <ng-container>
+                    <div
+                        class="flex justify-content-between align-items-center w-full"
+                    >
+                        <span class="w-5">Margem de 70%: </span>
+                        <span class="w-3">{{
+                            orcamento.valorFinalMargem | currency : "BRL"
+                        }}</span>
+                        <button
+                            pButton
+                            pRipple
+                            class="w-4 p-button-text"
+                            (click)="
+                                orcamento.valorFinal =
+                                    orcamento.valorFinalMargem
+                            "
+                            label="Selecionar"
+                        ></button>
+                    </div>
+                </ng-container>
+                <ng-container>
+                    <div
+                        class="flex justify-content-between align-items-center w-full"
+                    >
+                        <span class="w-5">Margem de 75%: </span>
+                        <span class="w-3">{{
+                            orcamento.valorFinalMargem2 | currency : "BRL"
+                        }}</span>
+                        <button
+                            pButton
+                            pRipple
+                            class="w-4 p-button-text"
+                            (click)="
+                                orcamento.valorFinal =
+                                    orcamento.valorFinalMargem2
+                            "
+                            label="Selecionar"
+                        ></button>
+                    </div>
+                </ng-container>
+                <ng-container>
+                    <div
+                        class="flex justify-content-between align-items-center w-full"
+                    >
+                        <span class="w-5">Margem de 80%: </span>
+                        <span class="w-3">{{
+                            orcamento.valorFinalMargem3 | currency : "BRL"
+                        }}</span>
+                        <button
+                            pButton
+                            pRipple
+                            class="w-4 p-button-text"
+                            label="Selecionar"
+                            (click)="
+                                orcamento.valorFinal =
+                                    orcamento.valorFinalMargem3
+                            "
+                        ></button>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="flex flex-column gap-1 mb-3 mt-4">
+                <label for="vd" class="font-bold">Valor Final</label>
+                <p-inputNumber
+                    styleClass="w-full"
+                    id="vd"
+                    name="vd"
+                    [(ngModel)]="orcamento.valorFinal"
+                    mode="currency"
+                    currency="BRL"
+                />
+            </div>
+            <div class="flex flex-column gap-1 mb-3">
+                <label for="cliente" class="font-bold"
+                    >E-mail do Cliente:</label
+                >
+                <input
+                    pInputText
+                    id="cliente"
+                    name="cliente"
+                    [(ngModel)]="orcamento.send"
+                />
+            </div>
+            <span class="text-center font-medium"
+                >Estes valores podem sofrer alteração em virtude da escolha de
+                acessórios e, nº de aberturas e tipo de trilho.</span
+            >
+            <button
+                pButton
+                pRipple
+                class="w-full mt-3 mb-5"
+                label="Enviar Orçamento"
+                (click)="send()"
+            ></button>
+            <div #resultado>&#32;</div>
+        </ng-container>
+    </p-tabPanel>
+</p-tabView>

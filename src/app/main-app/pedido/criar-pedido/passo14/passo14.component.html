@@ -1,0 +1,112 @@
+<app-menu-step
+    title="Fechaduras"
+    step="15 - Fechaduras"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
+
+<div class="flex flex-row gap-5 justify-content-center mb-3">
+    <button
+        pButton
+        pRipple
+        label="Fechadura para Vidro"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.lock.fechadura_vidro_vidro
+        }"
+        (click)="changeTip('vidro')"
+    ></button>
+    <button
+        pButton
+        pRipple
+        label="Fechadura para Porta"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.lock.fechadura_para_porta
+        }"
+        (click)="changeTip('porta')"
+    ></button>
+</div>
+
+<p-dataView
+    #dv
+    [value]="optionsVidro"
+    *ngIf="pedidoService.pedido?.balcony.lock.fechadura_vidro_vidro"
+>
+    <ng-template let-option pTemplate="listItem">
+        <div
+            (click)="selectVidro(option)"
+            class="col-12 cursor-pointer"
+            [style]="
+                selectedVidro === option.name
+                    ? 'background-color: #a3d4fb;'
+                    : ''
+            "
+        >
+            <div
+                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
+            >
+                <p-image
+                    *ngIf="option.image !== ''"
+                    class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                    imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
+                    [src]="option.image"
+                    width="200"
+                    [preview]="true"
+                >
+                </p-image>
+                <div
+                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
+                >
+                    <div class="text-xl sm:text-2xl font-bold h-full">
+                        {{ option.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<p-dataView
+    #dv
+    [value]="optionsPorta"
+    *ngIf="pedidoService.pedido?.balcony.lock.fechadura_para_porta"
+>
+    <ng-template let-option pTemplate="listItem">
+        <div
+            (click)="selectPorta(option)"
+            class="col-12 cursor-pointer"
+            [style]="
+                selectedPorta === option.name
+                    ? 'background-color: #a3d4fb;'
+                    : ''
+            "
+        >
+            <div
+                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
+            >
+                <p-image
+                    *ngIf="option.image !== ''"
+                    class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                    imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
+                    [src]="option.image"
+                    width="200"
+                    [preview]="true"
+                >
+                </p-image>
+                <div
+                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
+                >
+                    <div class="text-xl sm:text-2xl font-bold h-full">
+                        {{ option.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<app-navigation-tabs-btn
+    (nextTab)="nextTab()"
+    (prevTab)="prevTab()"
+></app-navigation-tabs-btn>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

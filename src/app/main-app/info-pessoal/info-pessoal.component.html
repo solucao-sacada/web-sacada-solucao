@@ -1,0 +1,36 @@
+<input #inputImg class="hidden" type="file" (change)="fileChangeEvent($event)" />
+
+<p-dialog
+    [(visible)]="visible"
+    [style]="{ width: '80vw' }"
+    header="Cortar Imagem"
+    [modal]="true"
+>
+    <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="1 / 1"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded($event)"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+    <div class="flex justify-content-center">
+        <button pButton pRipple label="Enviar" (click)="save()"></button>
+    </div>
+</p-dialog>
+
+<div class="flex justify-content-center align-items-center  flex-column w-full">
+    <img
+        [src]="user.image || 'assets/img/avatar-generic.png'"
+        alt="Image"
+        height="80"
+        width="80"
+        class="mb-3 border-circle bg-cover"
+        (click)="inputImg.click()"
+    />
+    <div class="text-900 text-3xl font-medium mb-3">
+        Bem-vindo, {{ user.name }}!
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<p-tabView
+    styleClass="tabview-custom"
+    [(activeIndex)]="pedidoService.activeIndex"
+    [scrollable]="true"
+    (onChange)="pedidoService.changeTab($event)"
+>
+    <p-tabPanel>
+        <ng-template pTemplate="header"> 1 </ng-template>
+        <app-passo1></app-passo1>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(1)">
+        <ng-template pTemplate="header"> 2 </ng-template>
+        <app-passo2></app-passo2>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(2)">
+        <ng-template pTemplate="header"> 3 </ng-template>
+        <app-passo3></app-passo3>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(3)">
+        <ng-template pTemplate="header"> 4 </ng-template>
+        <app-passo4></app-passo4>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(4)">
+        <ng-template pTemplate="header"> 5 </ng-template>
+        <app-passo5></app-passo5>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(5)">
+        <ng-template pTemplate="header"> 6 </ng-template>
+        <app-passo6></app-passo6>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(6)">
+        <ng-template pTemplate="header"> 7 </ng-template>
+        <app-passo7></app-passo7>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(7)">
+        <ng-template pTemplate="header"> 8 </ng-template>
+        <app-passo8></app-passo8>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(8)">
+        <ng-template pTemplate="header"> 9 </ng-template>
+        <app-passo9></app-passo9>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(9)">
+        <ng-template pTemplate="header"> 10 </ng-template>
+        <app-passo10></app-passo10>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(10)">
+        <ng-template pTemplate="header"> 11 </ng-template>
+        <app-passo11> </app-passo11>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(11)">
+        <ng-template pTemplate="header"> 12 </ng-template>
+        <app-passo12></app-passo12>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(12)">
+        <ng-template pTemplate="header"> 13 </ng-template>
+        <app-passo13></app-passo13>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(13)">
+        <ng-template pTemplate="header"> 14 </ng-template>
+        <app-passo15></app-passo15>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(14)">
+        <ng-template pTemplate="header"> 15 </ng-template>
+        <app-passo14></app-passo14>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(15)">
+        <ng-template pTemplate="header"> 16 </ng-template>
+        <app-passo16></app-passo16>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(16)">
+        <ng-template pTemplate="header"> 17 </ng-template>
+        <app-passo17></app-passo17>
+    </p-tabPanel>
+    <p-tabPanel [disabled]="pedidoService.isTabDisabled(17)">
+        <ng-template pTemplate="header"> 18 </ng-template>
+        <app-passo18></app-passo18>
+    </p-tabPanel>
+</p-tabView>
+<p-confirmDialog [breakpoints]="{ '600px': '90vw' }"></p-confirmDialog>
+
+<!-- <p-button (onClick)="show()">Exibir</p-button> -->

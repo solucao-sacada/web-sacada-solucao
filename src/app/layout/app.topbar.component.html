@@ -27,9 +27,13 @@
                 layoutService.state.profileSidebarVisible
         }"
     >
-        <button class="p-link layout-topbar-button" routerLink="/auth/login">
-            <i class="pi pi-user"></i>
-            <span>Profile</span>
+        <button
+            class="p-link layout-topbar-button text-xl"
+            (click)="logout()"
+
+        >
+            <i class="pi pi-power-off"></i>
+            <span class="text-lg">Sair</span>
         </button>
     </div>
 </div>

@@ -5,6 +5,7 @@
 export const environment = {
     production: false,
     URL_BUSCA_CEP: 'https://viacep.com.br/ws/',
+    API_URL: 'https://api-solucoes-sacada.up.railway.app',
 };
 
 /*

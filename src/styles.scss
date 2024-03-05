@@ -16,3 +16,18 @@ $gutter: 1rem; //for primeflex grid system
 .field {
     margin-bottom: 0;
 }
+
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    #printable, #printable * {
+      visibility: visible;
+    }
+    #printable {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+    }
+  }

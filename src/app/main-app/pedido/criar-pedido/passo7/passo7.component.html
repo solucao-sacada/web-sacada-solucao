@@ -1,0 +1,44 @@
+<app-menu-step
+    title="Trilhos Superiores"
+    step="4 - Trilhos Superiores"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
+></app-menu-step>
+
+<p-dataView #dv [value]="options">
+    <ng-template let-option pTemplate="listItem">
+        <div
+            (click)="select(option.name)"
+            class="col-12 cursor-pointer"
+            [style]="
+                selected === option.name ? 'background-color: #a3d4fb' : ''
+            "
+        >
+            <div
+                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
+            >
+                <p-image
+                    *ngIf="option.image !== ''"
+                    class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+                    [src]="option.image"
+                    width="200"
+                    [preview]="true"
+                >
+                </p-image>
+                <div
+                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
+                >
+                    <div class="text-xl sm:text-2xl font-bold text-900 h-full">
+                        {{ option.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<app-navigation-tabs-btn
+    (nextTab)="nextTab()"
+    (prevTab)="prevTab()"
+></app-navigation-tabs-btn>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

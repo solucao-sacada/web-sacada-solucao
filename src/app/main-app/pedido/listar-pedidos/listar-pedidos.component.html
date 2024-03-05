@@ -1,0 +1,80 @@
+<div class="flex justify-content-between ">
+    <button
+        pButton
+        pRipple
+        label="Novo Pedido"
+        icon="pi pi-plus"
+        class="mb-3"
+        routerLink="/app/pedidos/novo"
+    ></button>
+    <button
+        pButton
+        pRipple
+        icon="pi pi-print"
+        class="mb-3 p-button-rounded"
+        (click)="downloadAsPdf()"
+        [disabled]="!pedido"
+    ></button>
+</div>
+<p-tabView [(activeIndex)]="activeIndex">
+    <p-tabPanel header="Pedidos">
+        <p-table
+            [value]="pedidos"
+            selectionMode="single"
+            [(selection)]="pedido"
+            dataKey="code"
+            (onRowSelect)="onSelectRow($event)"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Data</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-pedido>
+                <tr [pSelectableRow]="pedido">
+                    <td>{{ pedido.code }}</td>
+                    <td>{{ pedido.client.name }}</td>
+                    <td>{{ pedido.createdAt | date : "dd/MM/yyyy" }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-tabPanel>
+    <p-tabPanel header="Detalhes" [disabled]="!pedido">
+        <div id="printable" #printable>
+            <app-pedido-details [Pedido]="pedido" />
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Rascunhos" [disabled]="draftPedidos.length == 0">
+        <p-table
+            [value]="draftPedidos"
+            selectionMode="single"
+            [(selection)]="pedido"
+            dataKey="code"
+            (onRowSelect)="onSelectRow($event)"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Excluir</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-pedido>
+                <tr [pSelectableRow]="pedido">
+                    <td>{{ pedido.client.name }}</td>
+                    <td>
+                        <button
+                            pButton
+                            pRipple
+                            label="Excluir"
+                            icon="pi pi-trash"
+                            (click)="excluirDraft(pedido)"
+                        ></button>
+                    </td>
+                </tr>
+            </ng-template> </p-table
+    ></p-tabPanel>
+</p-tabView>
+<p-confirmDialog [breakpoints]="{ '600px': '90vw' }"></p-confirmDialog>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

@@ -20,21 +20,15 @@
             "
         >
             <div
-                class="w-full surface-card py-8 px-5 sm:px-8"
+                class="w-full surface-card py-4 px-5 sm:px-8"
                 style="border-radius: 53px"
             >
                 <div class="text-center mb-5">
-                    <img
-                        src="assets/demo/images/login/avatar.png"
-                        alt="Image"
-                        height="50"
-                        class="mb-3"
-                    />
                     <div class="text-900 text-3xl font-medium mb-3">
-                        Welcome, Isabel!
+                        Bem-vindo!
                     </div>
                     <span class="text-600 font-medium"
-                        >Sign in to continue</span
+                        >Faça o login para continuar</span
                     >
                 </div>
 
@@ -49,21 +43,25 @@
                         type="text"
                         placeholder="Email address"
                         pInputText
+                        type="email"
                         class="w-full md:w-30rem mb-5"
                         style="padding: 1rem"
+                        [(ngModel)]="email"
                     />
 
                     <label
                         for="password1"
                         class="block text-900 font-medium text-xl mb-2"
-                        >Password</label
+                        >Senha</label
                     >
                     <p-password
                         id="password1"
+                        class="w-full"
                         [(ngModel)]="password"
                         placeholder="Password"
                         [toggleMask]="true"
-                        styleClass="mb-5"
+                        [feedback]="false"
+                        styleClass="mb-5 w-full"
                         inputStyleClass="w-full p-3 md:w-30rem"
                     ></p-password>
 
@@ -76,20 +74,20 @@
                                 [binary]="true"
                                 styleClass="mr-2"
                             ></p-checkbox>
-                            <label for="rememberme1">Remember me</label>
+                            <label for="rememberme1">Lembrar-me</label>
                         </div>
                         <a
                             class="font-medium no-underline ml-2 text-right cursor-pointer"
                             style="color: var(--primary-color)"
-                            >Forgot password?</a
+                            >Esqueceu a senha?</a
                         >
                     </div>
                     <button
                         pButton
                         pRipple
-                        label="Sign In"
+                        label="Login"
                         class="w-full p-3 text-xl"
-                        [routerLink]="['/']"
+                        (click)="login()"
                     ></button>
                 </div>
             </div>

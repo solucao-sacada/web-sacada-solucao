@@ -6,6 +6,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 @Component({
     selector: 'app-passo8',
     templateUrl: './passo8.component.html',
+    styleUrls: ['./passo8.component.scss']
 })
 export class Passo8Component {
     normalOptions = [
@@ -38,7 +39,7 @@ export class Passo8Component {
             name: 'B - Dentro da calha',
             image: '../../../../../assets/img/8-trilhos-inferiores/dentro.jpg',
         },
-        
+
     ];
     options2 = [
         {
@@ -64,7 +65,7 @@ export class Passo8Component {
         });
     }
 
-    
+
     select(value: string) {
         this.selected = value;
         this.pedidoService.pedido.balcony.rails.lower_rail.built_in.tip.A =
@@ -79,7 +80,7 @@ export class Passo8Component {
             this.pedidoService.pedido.balcony.rails.lower_rail.built_in
         );
     }
-    
+
     changeTip(value: string) {
         this.pedidoService.pedido.balcony.rails.lower_rail.tip.built_in =
             value === 'built_in';

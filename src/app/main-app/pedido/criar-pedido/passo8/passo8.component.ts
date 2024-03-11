@@ -27,17 +27,7 @@ export class Passo8Component {
     tabOption;
     builtInRefOption;
 
-    options = [
-        {
-            code: 'opt1',
-            name: 'Opção 1',
-            img: '../../../../../assets/img/no-image.jpg',
-        },
-        {
-            code: 'opt1',
-            name: 'Opção 2',
-            img: '../../../../../assets/img/no-image.jpg',
-        },
+    options1 = [
         {
             code: 'A',
             name: 'A - Sobre o piso pronto',
@@ -48,6 +38,9 @@ export class Passo8Component {
             name: 'B - Dentro da calha',
             image: '../../../../../assets/img/8-trilhos-inferiores/dentro.jpg',
         },
+        
+    ];
+    options2 = [
         {
             code: 'C',
             name: 'C - Sobre o piso pronto',
@@ -71,6 +64,7 @@ export class Passo8Component {
         });
     }
 
+    
     select(value: string) {
         this.selected = value;
         this.pedidoService.pedido.balcony.rails.lower_rail.built_in.tip.A =
@@ -85,7 +79,7 @@ export class Passo8Component {
             this.pedidoService.pedido.balcony.rails.lower_rail.built_in
         );
     }
-
+    
     changeTip(value: string) {
         this.pedidoService.pedido.balcony.rails.lower_rail.tip.built_in =
             value === 'built_in';
@@ -126,6 +120,7 @@ export class Passo8Component {
             value === 'D';
         this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.E =
             value === 'E';
+            console.log(this.pedidoService.pedido.balcony.rails.lower_rail.tab);
     }
 
     changeBuiltInOption(value: any) {

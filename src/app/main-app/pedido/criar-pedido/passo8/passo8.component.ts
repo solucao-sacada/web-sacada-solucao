@@ -29,6 +29,16 @@ export class Passo8Component {
 
     options = [
         {
+            code: 'opt1',
+            name: 'Opção 1',
+            img: '../../../../../assets/img/no-image.jpg',
+        },
+        {
+            code: 'opt1',
+            name: 'Opção 2',
+            img: '../../../../../assets/img/no-image.jpg',
+        },
+        {
             code: 'A',
             name: 'A - Sobre o piso pronto',
             image: '../../../../../assets/img/8-trilhos-inferiores/dentro.jpg',

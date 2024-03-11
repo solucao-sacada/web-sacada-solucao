@@ -102,11 +102,35 @@
     width="200"
     [preview]="true"
     >
+<<<<<<< HEAD
 </p-image>
     <p-accordion [activeIndex]="">
         <p-accordionTab header="OPÇÃO 1">
             <p-dataView #dv [value]="options1">
                 <ng-template let-option pTemplate="listItem">
+=======
+    </p-image>
+    <p-dataView #dv [value]="options">
+        <ng-template let-option pTemplate="listItem">
+            <div
+                (click)="select(option.code)"
+                class="col-12 cursor-pointer"
+                [style]="
+                    selected === option.code ? 'background-color: #a3d4fb' : ''
+                ">
+                <div
+                    class="flex md:align-items-start align-items-center p-4 gap-4"
+                >
+                    <p-image
+                        *ngIf="option.image !== ''"
+                        class="w-5 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                        imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+                        [src]="option.image"
+                        width="100"
+                        [preview]="true"
+                    >
+                    </p-image>
+>>>>>>> e9d8ddd (commit)
                     <div
                         (click)="select(select.code)"
                         class="col-12 cursor-pointer"

@@ -55,13 +55,15 @@ export class Passo5Component {
             else if (this.pedidoService.pedido.balcony.format == 3)
                 this.selected = '"L" Direita';
             else if (this.pedidoService.pedido.balcony.format == 4)
-                this.selected = 'Formato "U"';
-            else this.selected = 'Outro';
+            this.selected = 'Formato "U"';
+            else if (this.pedidoService.pedido.balcony.format == 5)
+            this.selected = 'Formato "Outro"';
+            // else this.selected = 'Outro';
         });
     }
 
     select(value: string, code: number) {
-        this.pedidoService.pedido.balcony.format = code !== 5 ? code : '';
+        this.pedidoService.pedido.balcony.format = code;
         this.pedidoService.pedido.balcony.dimensions.data = [];
         this.pedidoService.pedido.balcony.dimensions.total = '';
         this.selected = value;

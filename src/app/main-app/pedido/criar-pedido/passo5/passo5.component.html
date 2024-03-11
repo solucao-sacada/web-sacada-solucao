@@ -25,33 +25,21 @@
                     [preview]="true"
                 >
                 </p-image>
-                <div
-                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
-                >
-                    <div class="text-xl sm:text-2xl font-bold h-full">
-                        {{ option.name }}
-                    </div>
-                    <div
-                        *ngIf="selected === 'Outro' && option.name === 'Outro'"
-                    >
-                        <span class="p-float-label">
-                            <input
-                                type="number"
-                                id="qtdVidro"
-                                pInputText
-                                [(ngModel)]="
-                                    pedidoService.pedido?.balcony.format
-                                "
-                                required
-                            />
-                            <label for="qtdVidro">Quantidade de Peças</label>
-                        </span>
-                    </div>
-                </div>
             </div>
         </div>
     </ng-template>
 </p-dataView>
+<div class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4">
+    <div>
+        <input
+            type="number"
+            id="qtdVidro"
+            pInputText
+            required
+        />
+        <label for="qtdVidro">Quantidade de Peças</label>
+    </div>
+</div>
 <div class="row mt-5" *ngIf="selected === 'Outro'">
     <p>
         O número de peças está relacionado ao número de cortes com grau do

@@ -58,12 +58,20 @@ export class Passo3Component {
     }
 
     espessuraVidro(value: string) {
-        if (value === '10mm') {
+        if (value === '8mm') {
+            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = true;
+            this.pedidoService.pedido.balcony.glass.thickness['10mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
+           
+        } else if (value === '10mm')  {
             this.pedidoService.pedido.balcony.glass.thickness['10mm'] = true;
             this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
-        } else {
+            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
+        } else if (value === '12mm')  {
+            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = true;
+            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
             this.pedidoService.pedido.balcony.glass.thickness['10mm'] = false;
-            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = true;
+
         }
     }
 
@@ -127,8 +135,9 @@ export class Passo3Component {
                 this.pedidoService.pedido.balcony.glass.color.tinted
             ) {
                 if (
+                    this.pedidoService.pedido.balcony.glass.thickness['8mm'] ||
                     this.pedidoService.pedido.balcony.glass.thickness['10mm'] ||
-                    this.pedidoService.pedido.balcony.glass.thickness['8mm']
+                    this.pedidoService.pedido.balcony.glass.thickness['12mm'] 
                 ) {
                     this.pedidoService.nextTab();
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);

@@ -6,7 +6,6 @@ import { PedidoService } from 'src/app/services/pedido.service';
 @Component({
     selector: 'app-passo8',
     templateUrl: './passo8.component.html',
-    styleUrls: ['./passo8.component.scss']
 })
 export class Passo8Component {
     normalOptions = [

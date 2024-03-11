@@ -12,6 +12,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class Passo5Component {
     selected = '';
+    amountPieces: number = 0
     options: any[] = [
         {
             code: 1,
@@ -55,10 +56,9 @@ export class Passo5Component {
             else if (this.pedidoService.pedido.balcony.format == 3)
                 this.selected = '"L" Direita';
             else if (this.pedidoService.pedido.balcony.format == 4)
-            this.selected = 'Formato "U"';
-            else if (this.pedidoService.pedido.balcony.format == 5)
-            this.selected = 'Formato "Outro"';
-            // else this.selected = 'Outro';
+                this.selected = 'Formato "U"';
+            else
+                this.selected = 'Outro';
         });
     }
 
@@ -71,6 +71,7 @@ export class Passo5Component {
     }
 
     nextTab(): void {
+       this.pedidoService.pedido.balcony.format = this.amountPieces
         if (
             this.pedidoService.pedido.balcony.format ||
             this.selected === 'Outro'

@@ -14,6 +14,6 @@ export class CanDeactivateGuard
   canDeactivate(
     component: CanComponentDeactivate
   ): boolean | Promise<boolean> {
-    return component.canDeactivate ? component.canDeactivate() : false;
+    return component.canDeactivate ? component.canDeactivate() : true;
   }
 }

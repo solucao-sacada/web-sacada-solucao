@@ -10,38 +10,30 @@
             (click)="select(option.name, option.code)"
             class="col-12 cursor-pointer"
             [style]="
-                selected === option.name ? 'background-color: #a3d4fb;' : ''
-            "
-        >
+                selected === option.name ? 'background-color: #a3d4fb;' : '' ">
             <div
-                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
-            >
+                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4">
                 <p-image
                     *ngIf="option.image !== ''"
                     class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
                     imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
                     [src]="option.image"
                     width="200"
-                    [preview]="true"
-                >
+                    [preview]="true">
                 </p-image>
                 <div
-                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
-                >
+                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4">
                     <div class="text-xl sm:text-2xl font-bold h-full">
                         {{ option.name }}
                     </div>
                     <div
-                        *ngIf="selected === 'Outro' && option.name === 'Outro'"
-                    >
+                        *ngIf="selected === 'Outro' && option.name === 'Outro'">
                         <span class="p-float-label">
                             <input
                                 type="number"
                                 id="qtdVidro"
                                 pInputText
-                                [(ngModel)]="
-                                    pedidoService.pedido?.balcony.format
-                                "
+                                [(ngModel)]="amountPieces"
                                 required
                             />
                             <label for="qtdVidro">Quantidade de Peças</label>

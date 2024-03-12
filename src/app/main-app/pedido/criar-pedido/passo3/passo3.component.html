@@ -72,6 +72,16 @@
         }"
         (click)="espessuraVidro('10mm')"
     ></button>
+    <button
+        pButton
+        pRipple
+        label="6+6 ou 12mm"
+        [ngClass]="{
+            'p-button-secondary':
+                !pedidoService.pedido?.balcony.glass.thickness['12mm']
+        }"
+        (click)="espessuraVidro('12mm')"
+    ></button>
 </div>
 
 <app-navigation-tabs-btn

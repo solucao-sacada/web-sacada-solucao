@@ -27,7 +27,7 @@ export class Passo8Component {
     tabOption;
     builtInRefOption;
 
-    options = [
+    options1 = [
         {
             code: 'A',
             name: 'A - Sobre o piso pronto',
@@ -38,6 +38,9 @@ export class Passo8Component {
             name: 'B - Dentro da calha',
             image: '../../../../../assets/img/8-trilhos-inferiores/dentro.jpg',
         },
+
+    ];
+    options2 = [
         {
             code: 'C',
             name: 'C - Sobre o piso pronto',
@@ -60,6 +63,7 @@ export class Passo8Component {
             this.updateValuesFromRails();
         });
     }
+
 
     select(value: string) {
         this.selected = value;
@@ -116,6 +120,7 @@ export class Passo8Component {
             value === 'D';
         this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.E =
             value === 'E';
+            console.log(this.pedidoService.pedido.balcony.rails.lower_rail.tab);
     }
 
     changeBuiltInOption(value: any) {

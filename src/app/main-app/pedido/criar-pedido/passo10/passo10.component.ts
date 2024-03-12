@@ -40,17 +40,18 @@ export class Passo10Component {
     nextTab(): void {
         const result = Math.abs(
             +this.pedidoService.pedido.balcony.plumb.left_wall.bottom -
-                +this.pedidoService.pedido.balcony.plumb.left_wall.top
+            +this.pedidoService.pedido.balcony.plumb.left_wall.top
         );
         if (
             this.pedidoService.pedido.balcony.plumb.left_wall.bottom &&
             this.pedidoService.pedido.balcony.plumb.left_wall.top
         ) {
-            if (result < 8) {
-                this.pedidoService.nextTab();
-            } else {
-                this._toaster.warn('Perfil fora do esquadro, por favor ajuste');
-            }
+            this.pedidoService.nextTab();
+            // if (result < 8) {
+            // }
+            // else {
+            //     this._toaster.warn('Perfil fora do esquadro, por favor ajuste');
+            // }
         } else {
             this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
         }

@@ -94,8 +94,9 @@ export interface Color2 {
 }
 
 export interface Thickness {
-    '10mm': boolean;
     '8mm': boolean;
+    '10mm': boolean;
+    '12mm': boolean;
 }
 
 export interface Levels {

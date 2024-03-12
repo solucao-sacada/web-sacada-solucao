@@ -50,6 +50,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { PedidoDetailsComponent } from './pedido-details/pedido-details.component';
 import { TitleComponent } from './title/title.component';
 import { ToasterService } from './toaster/toaster.service';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
     declarations: [
@@ -145,7 +146,8 @@ import { ToasterService } from './toaster/toaster.service';
         ButtonModule,
         NavigationTabsBtnComponent,
         LoadingComponent,
-        TitleComponent
+        TitleComponent,
+        AccordionModule,
     ],
     providers: [LoadingService, ToasterService, MessageService, PedidoService],
 })

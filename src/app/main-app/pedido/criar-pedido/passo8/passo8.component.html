@@ -5,7 +5,7 @@
 ></app-menu-step>
 
 <!-- Botões principais -->
-<div class="flex flex-row gap-5 justify-content-center">
+<div class="flex flex-row gap-5 justify-content-center mb-4">
     <button
         pButton
         pRipple
@@ -38,15 +38,15 @@
     ></button>
 </div>
 
+<!-- Linha de refêrencia -->
 <h6
     *ngIf="
         pedidoService.pedido?.balcony.rails.lower_rail.tip.normal ||
-        pedidoService.pedido?.balcony.rails.lower_rail.tip.tab ||
-        pedidoService.pedido?.balcony.rails.lower_rail.tip.built_in
+        pedidoService.pedido?.balcony.rails.lower_rail.tip.tab
     "
-    class="mt-5 mb-4"
->
-    Linha de referência de medição:
+    class="mt-5 mb-4">
+
+    <label for="" class="font-semibold">Linha de referência de medição:</label>
 </h6>
 
 <!-- Opção Normal -->
@@ -96,47 +96,85 @@
 <!-- Opção Embutido -->
 <div *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tip.built_in">
     <p-image
-        class="w-9 shadow-2 block md:block mx-auto border-round"
-        imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-        src="../../../../../assets/img/8-trilhos-inferiores/marcacao_embutido.jpg"
-        width="200"
-        [preview]="true"
+    class="w-9 shadow-2 block md:block mx-auto border-round"
+    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+    src="../../../../../assets/img/8-trilhos-inferiores/marcacao_embutido.jpg"
+    width="200"
+    [preview]="true"
     >
-    </p-image>
-    <p-dataView #dv [value]="options">
-        <ng-template let-option pTemplate="listItem">
-            <div
-                (click)="select(option.code)"
-                class="col-12 cursor-pointer"
-                [style]="
-                    selected === option.code ? 'background-color: #a3d4fb' : ''
-                "
-            >
-                <div
-                    class="flex md:align-items-start align-items-center p-4 gap-4"
-                >
-                    <p-image
-                        *ngIf="option.image !== ''"
-                        class="w-5 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
-                        imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-                        [src]="option.image"
-                        width="100"
-                        [preview]="true"
-                    >
-                    </p-image>
-                    <div
-                        class="flex flex-column h-full sm:flex-row justify-content-center md:justify-content-start flex-1 gap-4"
-                    >
+</p-image>
+    <div class="mt-4">
+        <p-accordion [activeIndex]="">
+            <p-accordionTab header="Definir Altura">
+                <p-dataView #dv [value]="options1">
+                    <ng-template let-option1 pTemplate="listItem">
                         <div
-                            class="text-md sm:text-2xl font-bold text-900 h-full"
-                        >
-                            {{ option.name }}
+                            (click)="select(option1.code)"
+                            class="col-12 cursor-pointer"
+                            [style]="selected === option1.code ? 'background-color: #a3d4fb' : ''">
+
+                            <div class="flex md:align-items-start align-items-center p-4 gap-4">
+                                <p-image
+                                    *ngIf="option1.image !== ''"
+                                    class="w-5 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                                    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+                                    [src]="option1.image"
+                                    width="100"
+                                    [preview]="true">
+                                </p-image>
+                                <div class="flex flex-column h-full sm:flex-row justify-content-center md:justify-content-start flex-1 gap-4">
+                                    <div class="text-md sm:text-2xl font-bold text-900 h-full">
+                                        {{ option1.name }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-    </p-dataView>
+                    </ng-template>
+                </p-dataView>
+            </p-accordionTab>
+
+            <!-- OPÇÃO 2 -->
+            <p-accordionTab header="Definir Largura">
+                <p-dataView #dv [value]="options2">
+                    <ng-template let-option2 pTemplate="listItem">
+                        <div
+                            (click)="select(option2.code)"
+                            class="col-12 cursor-pointer"
+                            [style]="selected === option2.code ? 'background-color: #a3d4fb' : '' "
+                        >
+                            <div
+                                class="flex md:align-items-start align-items-center p-4 gap-4"
+                            >
+                                <p-image
+                                    *ngIf="option2.image !== ''"
+                                    class="w-5 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                                    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+                                    [src]="option2.image"
+                                    width="100"
+                                    [preview]="true"
+                                >
+                                </p-image>
+                                <div
+                                class="flex flex-column h-full sm:flex-row justify-content-center md:justify-content-start flex-1 gap-4"
+                            >
+                                <div
+                                    class="text-md sm:text-2xl font-bold text-900 h-full"
+                                >
+                                    {{ option2.name }}
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-dataView>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+    <!-- Referência -->
+    <div class="mt-4">
+        <label for="" class="font-semibold">Linha de referência de medição:</label>
+    </div>
     <div class="mt-5">
         <p-image
             class="w-9 shadow-2 block md:block mx-auto border-round"
@@ -176,6 +214,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Opção Aba -->
 <div *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tip.tab">

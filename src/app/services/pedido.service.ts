@@ -104,8 +104,9 @@ export class PedidoService {
                     laminated: false,
                     tempered: false,
                     thickness: {
-                        '10mm': false,
                         '8mm': false,
+                        '10mm': false,
+                        '12mm': false,
                     },
                 },
                 levels: {

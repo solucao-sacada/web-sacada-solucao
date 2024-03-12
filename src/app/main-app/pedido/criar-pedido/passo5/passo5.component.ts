@@ -71,12 +71,13 @@ export class Passo5Component {
     }
 
     nextTab(): void {
-       this.pedidoService.pedido.balcony.format = this.amountPieces
         if (
             this.pedidoService.pedido.balcony.format ||
             this.selected === 'Outro'
         ) {
             if (this.selected === 'Outro') {
+                this.pedidoService.pedido.balcony.format = this.amountPieces
+
                 if (this.pedidoService.pedido.balcony.format) {
                     this.pedidoService.nextTab();
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);

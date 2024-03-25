@@ -53,17 +53,6 @@
         class="col-5 md:col-2"
         pButton
         pRipple
-        label="Incolor"
-        [ngClass]="{
-            'p-button-secondary':
-                !pedidoService.pedido?.balcony.aluminium.color.mat
-        }"
-        (click)="alterarCor('mat')"
-    ></button>
-    <button
-        class="col-5 md:col-2"
-        pButton
-        pRipple
         label="Branco"
         [ngClass]="{
             'p-button-secondary':
@@ -91,7 +80,7 @@
                     pedidoService.pedido?.balcony.aluminium.color.other
                 "
             />
-            <label for="identiCor">Identificação da cor</label>
+            <label for="identiCor">Indique o código ral</label>
         </span>
     </div>
 </div>

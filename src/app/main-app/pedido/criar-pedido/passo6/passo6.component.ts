@@ -15,9 +15,11 @@ export class Passo6Component implements OnInit {
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
-    ) {}
+    ) { }
 
     selected = '';
+    selectedOptions: { [key: string]: boolean } = {};
+
     options: any[] = [
         {
             code: 'Dentro',
@@ -44,6 +46,10 @@ export class Passo6Component implements OnInit {
                 this.selected = 'Dentro';
             if (this.pedidoService.pedido.balcony.beam.position.outside)
                 this.selected = 'Fora';
+
+            if (this.selectedOptions[this.selected] === undefined) {
+                this.selectedOptions = {};
+            }
         });
     }
 
@@ -55,6 +61,22 @@ export class Passo6Component implements OnInit {
         this.pedidoService.pedido.balcony.beam.position.outside =
             value === 'Fora';
         this.selected = value;
+        this.selectedOptions[value] = true;
+    }
+
+    toggleSelection(optionCode: string) {
+        if (this.selected === optionCode) {
+            console.log('Item selecionado:', optionCode);
+            this.selectedOptions[optionCode] = !this.selectedOptions[optionCode];
+        } else {
+            this.selected = optionCode;
+            this.selectedOptions = {};
+            this.selectedOptions[optionCode] = true;
+            this.pedidoService.pedido.balcony.format = this.options.find(option => option.code === optionCode)?.code;
+            this.pedidoService.pedido.balcony.dimensions.data = [];
+            this.pedidoService.pedido.balcony.dimensions.total = '';
+            this.pedidoService.notifyObservers();
+        }
     }
 
     nextTab(): void {

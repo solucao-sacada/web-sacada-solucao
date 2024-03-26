@@ -9,9 +9,7 @@
         <div
             (click)="select(option.code)"
             class="col-12 cursor-pointer"
-            [style]="
-                selected === option.code ? 'background-color: #a3d4fb' : ''
-            "
+            [style]="selected === option.code ? 'background-color: #a3d4fb' : '' "
         >
             <div
                 class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
@@ -31,6 +29,15 @@
                     <div class="text-xl sm:text-2xl font-bold text-900 h-full">
                         {{ option.name }}
                     </div>
+                </div>
+                <div>
+                    <input 
+                        type="checkbox" 
+                        name="selectedOption" 
+                        [value]="option.code" 
+                        [(ngModel)]="selectedOptions[option.code]" 
+                        class="cursor-pointer"
+                    />
                 </div>
             </div>
         </div>

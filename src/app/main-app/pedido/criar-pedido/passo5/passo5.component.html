@@ -1,49 +1,53 @@
-<app-menu-step
-    title="Formato da Sacada"
-    step="5 - Formato da Sacada"
-    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
-></app-menu-step>
+<app-menu-step title="Formato da Sacada" step="5 - Formato da Sacada"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"></app-menu-step>
 
-<p-dataView #dv [value]="options">
-    <ng-template let-option pTemplate="listItem">
-        <div
-            (click)="select(option.name, option.code)"
-            class="col-12 cursor-pointer"
-            [style]="
-                selected === option.name ? 'background-color: #a3d4fb;' : '' ">
+    <p-dataView #dv [value]="options">
+        <ng-template let-option pTemplate="listItem">
             <div
-                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4">
-                <p-image
-                    *ngIf="option.image !== ''"
-                    class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
-                    imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
-                    [src]="option.image"
-                    width="200"
-                    [preview]="true">
-                </p-image>
-                <div
-                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4">
-                    <div class="text-xl sm:text-2xl font-bold h-full">
-                        {{ option.name }}
+                (click)="toggleSelection(option.name)"
+                class="col-12 cursor-pointer"
+                [style]="selected === option.name ? 'background-color: #a3d4fb;' : '' ">
+                <div class="flex flex-column md:flex-row md:align-items-start p-4 gap-4">
+                    <p-image
+                        *ngIf="option.image !== ''"
+                        class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
+                        imageClass=" object-fit-cover w-full shadow-2 block mx-auto border-round"
+                        [src]="option.image"
+                        width="200"
+                        [preview]="true">
+                    </p-image>
+                    <div class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4">
+                        <div class="text-xl sm:text-2xl font-bold h-full">
+                            {{ option.name }}
+                        </div>
+                        <div *ngIf="selected === 'Outro' && option.name === 'Outro'">
+                            <span class="p-float-label">
+                                <input
+                                    type="number"
+                                    id="qtdVidro"
+                                    pInputText
+                                    [(ngModel)]="amountPieces"
+                                    required
+                                />
+                                <label for="qtdVidro">Quantidade de Peças</label>
+                            </span>
+                        </div>
                     </div>
-                    <div
-                        *ngIf="selected === 'Outro' && option.name === 'Outro'">
-                        <span class="p-float-label">
-                            <input
-                                type="number"
-                                id="qtdVidro"
-                                pInputText
-                                [(ngModel)]="amountPieces"
-                                required
-                            />
-                            <label for="qtdVidro">Quantidade de Peças</label>
-                        </span>
+                    <!-- Adicionando checkbox para cada item -->
+                    <div>
+                        <input 
+                            type="checkbox" 
+                            name="selectedOption" 
+                            [value]="option.name" 
+                            [(ngModel)]="selectedOptions[option.name]" 
+                            class="cursor-pointer"
+                        />
                     </div>
                 </div>
             </div>
-        </div>
-    </ng-template>
-</p-dataView>
+        </ng-template>
+    </p-dataView>
+    
 <div class="row mt-5" *ngIf="selected === 'Outro'">
     <p>
         O número de peças está relacionado ao número de cortes com grau do
@@ -53,8 +57,5 @@
     </p>
 </div>
 
-<app-navigation-tabs-btn
-    (nextTab)="nextTab()"
-    (prevTab)="prevTab()"
-></app-navigation-tabs-btn>
+<app-navigation-tabs-btn (nextTab)="nextTab()" (prevTab)="prevTab()"></app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

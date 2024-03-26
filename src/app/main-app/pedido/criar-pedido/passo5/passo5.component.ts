@@ -11,6 +11,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo5Component {
+    selectedOptions: { [key: string]: boolean } = {};
     selected = '';
     amountPieces: number = 0
     options: any[] = [
@@ -43,7 +44,7 @@ export class Passo5Component {
     constructor(
         private pedidoService: PedidoService,
         private _toaster: ToasterService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.pedidoService.getObservable().subscribe(() => {
@@ -59,14 +60,34 @@ export class Passo5Component {
                 this.selected = 'Formato "U"';
             else
                 this.selected = 'Outro';
+
+            if (this.selectedOptions[this.selected] === undefined) {
+                this.selectedOptions = {};
+            }
         });
     }
 
-    select(value: string, code: number) {
+    toggleSelection(optionName: string) {
+        if (this.selected === optionName) {
+            console.log('Item selecionado:', optionName);
+            this.selectedOptions[optionName] = !this.selectedOptions[optionName];
+        } else {
+            this.selected = optionName;
+            this.selectedOptions = {};
+            this.selectedOptions[optionName] = true;
+            this.pedidoService.pedido.balcony.format = this.options.find(option => option.name === optionName)?.code;
+            this.pedidoService.pedido.balcony.dimensions.data = [];
+            this.pedidoService.pedido.balcony.dimensions.total = '';
+            this.pedidoService.notifyObservers();
+        }
+    }    
+    
+     select(value: string, code: number) {
         this.pedidoService.pedido.balcony.format = code;
         this.pedidoService.pedido.balcony.dimensions.data = [];
         this.pedidoService.pedido.balcony.dimensions.total = '';
         this.selected = value;
+        this.selectedOptions[value] = true;
         this.pedidoService.notifyObservers();
     }
 
@@ -76,13 +97,19 @@ export class Passo5Component {
             this.selected === 'Outro'
         ) {
             if (this.selected === 'Outro') {
-                this.pedidoService.pedido.balcony.format = this.amountPieces
+                this.pedidoService.pedido.balcony.format = this.amountPieces;
 
                 if (this.pedidoService.pedido.balcony.format) {
                     this.pedidoService.nextTab();
-                } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-            } else this.pedidoService.nextTab();
-        } else this._toaster.warn(MESSAGES.UMA_OPCAO);
+                } else {
+                    this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+                }
+            } else {
+                this.pedidoService.nextTab();
+            }
+        } else {
+            this._toaster.warn(MESSAGES.UMA_OPCAO);
+        }
     }
 
     prevTab(): void {

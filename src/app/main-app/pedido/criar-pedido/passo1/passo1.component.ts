@@ -17,10 +17,19 @@ import { PedidoService } from 'src/app/services/pedido.service';
 @Component({
     selector: 'app-passo1',
     templateUrl: './passo1.component.html',
-    styles: [],
+    styles: [
+        `
+            @media (max-width: 576px) {
+                ::ng-deep .selectBuilding .p-button-label {
+                    font-size: 11px !important;
+                }
+            }
+        `
+    ],
 })
 export class Passo1Component implements OnInit {
     @ViewChild('numeroInput') numeroInput!: ElementRef;
+    @ViewChild('cepInput') cepInput!: ElementRef;
     @Output() isOk = new EventEmitter();
 
     visible = false;
@@ -30,44 +39,41 @@ export class Passo1Component implements OnInit {
         private _loading: LoadingService,
         private _toaster: ToasterService,
         public pedidoService: PedidoService
-    ) {}
+    ) { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { }
+
 
     onChangeCep() {
-        const cep = (this.pedidoService.pedido.client.zipCode as string)
-            .replace('.', '')
-            .replace('-', '')
-            .replace('_', '');
-        if (cep.length > 7) {
-            this.buscaCep(+cep);
-            console.log(cep);
+        let cep = this.pedidoService.pedido.client.zipCode as string;
+        cep = cep.replace(/\D/g, ''); 
+        if (cep.length === 8) { 
+            this.buscaCep(cep); 
         }
     }
-
-    buscaCep(cep: number) {
+    
+    buscaCep(cep: string) { // Alteramos o tipo do parâmetro para string
+        console.log(cep);
         this._loading.start();
         this._buscaCep
-            .buscaCep(cep)
+            .buscaCep(cep) // Passa o CEP como número para a função buscaCep
             .pipe(
                 take(1),
                 finalize(() => this._loading.stop())
             )
             .subscribe((response) => {
                 if (!response.erro) {
-                    (this.pedidoService.pedido.client.address =
-                        response.logradouro),
-                        (this.pedidoService.pedido.client.neighborhood =
-                            response.bairro),
-                        (this.pedidoService.pedido.client.city =
-                            response.localidade),
-                        (this.pedidoService.pedido.client.state = response.uf),
-                        this.numeroInput.nativeElement.focus();
+                    this.pedidoService.pedido.client.address = response.logradouro;
+                    this.pedidoService.pedido.client.neighborhood = response.bairro;
+                    this.pedidoService.pedido.client.city = response.localidade;
+                    this.pedidoService.pedido.client.state = response.uf;
+                    this.numeroInput.nativeElement.focus();
                 } else {
                     this._toaster.warn('Cep não encontrado');
                 }
             });
     }
+    
 
     nextTab(): void {
         if (
@@ -89,3 +95,8 @@ export class Passo1Component implements OnInit {
         this.pedidoService.prevTab();
     }
 }
+
+
+
+
+

@@ -18,7 +18,7 @@
         <p-inputMask
             [(ngModel)]="pedidoService.pedido?.client.zipCode"
             (ngModelChange)="onChangeCep()"
-            mask="99.999-999"
+            mask="99999-999"
         ></p-inputMask>
     </div>
     <div class="field col-12 sm:col-6 lg:col-6">
@@ -29,24 +29,7 @@
             required
         />
     </div>
-    <div class="col-12">
-        <p-selectButton
-            [options]="[{ name: 'Loja' }, { name: 'Ap' }, { name: 'Casa' }]"
-            [(ngModel)]="pedidoService.pedido?.client.apartment"
-            [multiple]="false"
-            optionLabel="name"
-            optionValue="name"
-            [style]="{ padding: 0 }"
-        ></p-selectButton>
-    </div>
-    <div
-        class="field col-12 sm:col-5"
-        *ngIf="pedidoService.pedido?.client.apartment === 'Ap'"
-    >
-        <label>Nome Edfício</label>
-        <input pInputText [(ngModel)]="pedidoService.pedido?.client.building" />
-    </div>
-    <div class="field col-12 sm:col-2 lg:col-2">
+    <div class="field col-12 sm:col-1 lg:col-1">
         <label>Número *</label>
         <input
             pInputText
@@ -55,7 +38,22 @@
             #numeroInput
         />
     </div>
-    <div class="field col-12 sm:col-4">
+    <div class="col-12">
+        <p-selectButton
+            class="selectBuilding"
+            [options]="[{ name: 'Loja' }, { name: 'Apartamento' }, { name: 'Casa' }]"
+            [(ngModel)]="pedidoService.pedido?.client.apartment"
+            [multiple]="false"
+            optionLabel="name"
+            optionValue="name"
+        ></p-selectButton>
+    </div>
+    <div class="field col-12 sm:col-3" *ngIf="pedidoService.pedido?.client.apartment === 'Apartamento'">
+        <label>Complemento</label>
+        <input pInputText [(ngModel)]="pedidoService.pedido?.client.building" />
+    </div>
+ 
+    <div class="field col-12 sm:col-3">
         <label>Bairro *</label>
         <input
             pInputText
@@ -63,7 +61,7 @@
             required
         />
     </div>
-    <div class="field col-12 sm:col-5">
+    <div class="field col-12 sm:col-3">
         <label>Cidade *</label>
         <input
             pInputText
@@ -71,7 +69,7 @@
             required
         />
     </div>
-    <div class="field col-12 sm:col-3">
+    <div class="field col-12 sm:col-1">
         <label>Estado *</label>
         <input
             pInputText
@@ -79,8 +77,8 @@
             required
         />
     </div>
-    <div class="field col-12 sm:col-5 lg:col-5">
-        <label>Numero Orçamento</label>
+    <div class="field col-12 sm:col-2">
+        <label>Número Orçamento</label>
         <input pInputText />
     </div>
 </div>
@@ -88,5 +86,6 @@
     [showPrev]="false"
     (nextTab)="nextTab()"
     (prevTab)="prevTab()"
-></app-navigation-tabs-btn>
+>
+</app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

@@ -12,7 +12,7 @@ export class BuscaCepService {
 
     url = environment.URL_BUSCA_CEP;
 
-    buscaCep(cep: number): Observable<BuscaCepResponse> {
-        return this.http.get<BuscaCepResponse>(this.url + `/${cep}` + '/json');
+    buscaCep(cep: string): Observable<BuscaCepResponse> {
+        return this.http.get<BuscaCepResponse>(this.url + `${cep}` + '/json');
     }
 }

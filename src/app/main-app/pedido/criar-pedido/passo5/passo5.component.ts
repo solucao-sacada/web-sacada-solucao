@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
+import { Pedido } from 'src/app/models/pedido';
+import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
     selector: 'app-passo5',
     templateUrl: './passo5.component.html',
-    styleUrls: []
+    styles: [],
 })
-export class Passo5Component implements OnInit {
+export class Passo5Component {
+    selectedOption = '';
 
     selected = '';
-    selectedOption = '';
-    amountPieces: number = 0;
-    
+    amountPieces: number = 0
     options: any[] = [
         {
             code: 1,
@@ -40,10 +42,9 @@ export class Passo5Component implements OnInit {
             image: '',
         },
     ];
-
     constructor(
         private pedidoService: PedidoService,
-        private toasterService: ToasterService
+        private _toaster: ToasterService
     ) { }
 
     ngOnInit() {
@@ -60,57 +61,60 @@ export class Passo5Component implements OnInit {
                 this.selected = 'Formato "U"';
             else if (this.pedidoService.pedido.balcony.format == 5)
                 this.selected = 'Outro';
-            
-            this.toggleSelection(this.selected);
+
+            this.setSelectedOption();
         });
-    
-        if (this.pedidoService.pedido.balcony.dimensions.data.length > 0){
-            let newData = this.pedidoService.pedido.balcony.dimensions.data[0];
-            this.selectedOption = String(newData);
+
+        if (this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
+            let novoData = this.pedidoService.pedido.balcony.dimensions.data[0];
+            this.selectedOption = String(novoData);
         }
     }
-    
-    
+    setSelectedOption() {
+        this.options.forEach(option => {
+            if (option.name === this.selected) {
+                this.selectedOption = option.name;
+            }
+        });
+    }
 
-    toggleSelection(optionName: string) {
+    toggleSelection(optionName: string): void {
         if (this.selectedOption === optionName) {
             return;
         }
 
         this.selectedOption = optionName;
+
+        // Atualiza o formato do balcão com base na opção selecionada
         this.pedidoService.pedido.balcony.format = this.options.find(option => option.name === optionName)?.code || 0;
+
+        // Limpa os dados relacionados ao formato do balcão
         this.pedidoService.pedido.balcony.dimensions.data = [];
         this.pedidoService.pedido.balcony.dimensions.total = '';
+        // Notifica os observadores após qualquer mudança no formato do balcão
         this.pedidoService.notifyObservers();
     }
 
+
     select(value: string, code: number) {
-        this.selectedOption = value;
         this.pedidoService.pedido.balcony.format = code;
         this.pedidoService.pedido.balcony.dimensions.data = [];
         this.pedidoService.pedido.balcony.dimensions.total = '';
+        this.selected = value;
+        this.selectedOption[value] = true;
         this.pedidoService.notifyObservers();
     }
 
     nextTab(): void {
+        const obj = this.pedidoService.pedido.balcony.format;
         if (
-            this.pedidoService.pedido.balcony.format ||
-            this.selectedOption === 'Outro'
+            obj == 1 ||
+            obj == 2 ||
+            obj == 3 ||
+            obj == 4
         ) {
-            if (this.selectedOption === 'Outro') {
-                this.pedidoService.pedido.balcony.format = this.amountPieces;
-
-                if (this.pedidoService.pedido.balcony.format) {
-                    this.pedidoService.nextTab();
-                } else {
-                    this.toasterService.warn('Campos obrigatórios não preenchidos.');
-                }
-            } else {
-                this.pedidoService.nextTab();
-            }
-        } else {
-            this.toasterService.warn('Selecione uma opção.');
-        }
+            this.pedidoService.nextTab();
+        } else this._toaster.warn(MESSAGES.UMA_OPCAO);
     }
 
     prevTab(): void {

@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
-import { Pedido } from 'src/app/models/pedido';
-import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { Pedido } from 'src/app/models/pedido';
 
 @Component({
     selector: 'app-passo5',
@@ -11,10 +10,12 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo5Component {
-    selectedOption = '';
+    @Input() pedido: Pedido;
 
     selected = '';
+    selectedOption = '';
     amountPieces: number = 0
+    
     options: any[] = [
         {
             code: 1,

@@ -1,119 +1,124 @@
-<app-menu-step
-    title="Trilhos Inferiores"
-    step="8 - Trilhos Inferiores"
-    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
-></app-menu-step>
+<app-menu-step title="Trilhos Inferiores" step="8 - Trilhos Inferiores"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"></app-menu-step>
 
 <!-- Botões principais -->
 <div class="flex flex-row gap-5 justify-content-center mb-4">
-    <button
-        pButton
-        pRipple
-        label="Normal"
-        [ngClass]="{
+    <button pButton pRipple label="Normal" [ngClass]="{
             'p-button-secondary':
                 !pedidoService.pedido?.balcony.rails.lower_rail.tip.normal
-        }"
-        (click)="changeTip('normal')"
-    ></button>
-    <button
-        pButton
-        pRipple
-        label="Embutido"
-        [ngClass]="{
+        }" (click)="changeTip('normal')"></button>
+    <button pButton pRipple label="Embutido" [ngClass]="{
             'p-button-secondary':
                 !pedidoService.pedido?.balcony.rails.lower_rail.tip.built_in
-        }"
-        (click)="changeTip('built_in')"
-    ></button>
-    <button
-        pButton
-        pRipple
-        label="Aba"
-        [ngClass]="{
+        }" (click)="changeTip('built_in')"></button>
+    <button pButton pRipple label="Aba" [ngClass]="{
             'p-button-secondary':
                 !pedidoService.pedido?.balcony.rails.lower_rail.tip.tab
-        }"
-        (click)="changeTip('tab')"
-    ></button>
+        }" (click)="changeTip('tab')"></button>
 </div>
 
 <!-- Linha de refêrencia -->
-<h6
-    *ngIf="
+<h6 *ngIf="
         pedidoService.pedido?.balcony.rails.lower_rail.tip.normal ||
         pedidoService.pedido?.balcony.rails.lower_rail.tip.tab
-    "
-    class="mt-5 mb-4">
+    " class="mt-5 mb-4">
 
     <label for="" class="font-semibold">Linha de referência de medição:</label>
 </h6>
 
 <!-- Opção Normal -->
 <div *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tip.normal">
-    <p-image
-        class="w-9 shadow-2 block md:block mx-auto border-round"
+    <p-image class="w-9 shadow-2 block md:block mx-auto border-round"
         imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-        src="../../../../../assets/img/8-trilhos-inferiores/referencia-largura.jpg"
-        width="200"
-        [preview]="true"
-    >
+        src="../../../../../assets/img/8-trilhos-inferiores/referencia-largura.jpg" width="200" [preview]="true">
     </p-image>
 
     <div class="flex flex-column gap-3 mt-5">
         <div class="field-checkbox" *ngFor="let option of normalOptions">
-            <p-radioButton
-                [inputId]="option.code"
-                [name]="option.code"
-                [value]="option.code"
-                (onClick)="changeNormalOption(option.code)"
-                [(ngModel)]="normalOption"
-            ></p-radioButton>
+            <p-radioButton [inputId]="option.code" [name]="option.code" [value]="option.code"
+                (onClick)="changeNormalOption(option.code)" [(ngModel)]="normalOption"></p-radioButton>
             <label [for]="option.code" class="ml-2">{{ option.label }}</label>
         </div>
-        <div
-            *ngIf="
+        <div *ngIf="
                 pedidoService.pedido?.balcony.rails.lower_rail.normal.tip.other
-            "
-            class="flex flex-column"
-        >
-            <input
-                type="text"
-                pInputText
-                [(ngModel)]="
+            " class="flex flex-column">
+            <input type="text" pInputText [(ngModel)]="
                     pedidoService.pedido?.balcony.rails.lower_rail.normal.tip
                         .other
-                "
-            />
-            <small
-                >Descreva aqui a forma medida, apenas para situações diferentes
-                das opções acima.</small
-            >
+                " />
+            <small>Descreva aqui a forma medida, apenas para situações diferentes
+                das opções acima.</small>
         </div>
     </div>
 </div>
 
 <!-- Opção Embutido -->
 <div *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tip.built_in">
-    <p-image
-    class="w-9 shadow-2 block md:block mx-auto border-round"
-    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-    src="../../../../../assets/img/8-trilhos-inferiores/marcacao_embutido.jpg"
-    width="200"
-    [preview]="true"
-    >
-</p-image>
     <div class="mt-4">
         <p-accordion [activeIndex]="">
             <p-accordionTab header="Definir Altura">
-                <p-dataView #dv [value]="options1">
+                <!-- <p-dataView #dv [value]="options1">
                     <ng-template let-option1 pTemplate="listItem">
                         <div
                             (click)="select(option1.code)"
                             class="col-12 cursor-pointer"
-                            [style]="selected === option1.code ? 'background-color: #a3d4fb' : ''">
+                            [style]="selected === option1.code ? 'background-color: #a3d4fb' : ''"> -->
 
-                            <div class="flex md:align-items-start align-items-center p-4 gap-4">
+                <div class="flex flex-column gap-8 w-full">
+                    <!-- Primeira imagem e opções A e B -->
+                    <div class="flex flex-column md:flex-row items-center">
+                        <!-- Imagem dentro.jpg -->
+                        <p-image
+                            class="w-15 sm:w-15rem md:w-[20rem] shadow-2 block md:block border-round order-1 md:order-none"
+                            imageClass="object-fit-cover w-full h-auto shadow-2 block border-round"
+                            src="../../../../../assets/img/8-trilhos-inferiores/dentro.jpg" width="100"
+                            [preview]="true">
+                        </p-image>
+                        <!-- Opções A e B -->
+                        <div class="flex flex-column md:justify-start md:h-full md:pl-8">
+                            <div class="text-lg sm:text-2xl font-bold text-900">
+                                <div (click)="select('A')" [class.selected]="selected === 'A'"
+                                    class="btn cursor-pointer w-full md:w-auto h-12 md:h-auto flex items-center justify-center md:justify-start p-3 w-full"
+                                    [style.background-color]="selected === 'A' ? '#a3d4fb' : ''">A - Sobre o piso pronto
+                                </div>
+                            </div>
+                            <div class="text-lg sm:text-2xl font-bold text-900 mt-4">
+                                <div (click)="select('B')" [class.selected]="selected === 'B'"
+                                    class="btn cursor-pointer w-full md:w-auto h-12 md:h-auto flex items-center justify-center md:justify-start p-3 w-full"
+                                    [style.background-color]="selected === 'B' ? '#a3d4fb' : ''">B - Dentro da calha
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Segunda imagem e opções C e D -->
+                    <div class="flex flex-column md:flex-row items-center">
+                        <!-- Imagem dentro-degrau.jpg -->
+                        <p-image
+                            class="w-15 sm:w-15rem md:w-[20rem] shadow-2 block md:block border-round order-1 md:order-none"
+                            imageClass="object-fit-cover w-full h-auto shadow-2 block border-round"
+                            src="../../../../../assets/img/8-trilhos-inferiores/dentro-degrau.jpg" width="100"
+                            [preview]="true">
+                        </p-image>
+                        <!-- Opções C e D -->
+                        <div class="flex flex-column justify-center md:justify-start md:h-full md:pl-8">
+                            <div class="text-lg sm:text-2xl font-bold text-900">
+                                <div (click)="select('C')" [class.selected]="selected === 'C'"
+                                    class="btn cursor-pointer w-full md:w-auto h-12 md:h-auto flex items-center justify-center md:justify-start p-3 w-full"
+                                    [style.background-color]="selected === 'C' ? '#a3d4fb' : ''">C - Sobre o piso pronto
+                                </div>
+                            </div>
+                            <div class="text-lg sm:text-2xl font-bold text-900 mt-4">
+                                <div (click)="select('D')" [class.selected]="selected === 'D'"
+                                    class="btn cursor-pointer w-full md:w-auto h-12 md:h-auto flex items-center justify-center md:justify-start p-3 w-full"
+                                    [style.background-color]="selected === 'D' ? '#a3d4fb' : ''">D - Dentro da calha
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <div class="flex md:align-items-start align-items-center p-4 gap-4">
                                 <p-image
                                     *ngIf="option1.image !== ''"
                                     class="w-5 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
@@ -127,91 +132,42 @@
                                         {{ option1.name }}
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div> -->
+                <!-- </div>
                     </ng-template>
-                </p-dataView>
+                </p-dataView> -->
             </p-accordionTab>
 
-            <!-- OPÇÃO 2 -->
-            <p-accordionTab header="Definir Largura">
-                <p-dataView #dv [value]="options2">
-                    <ng-template let-option2 pTemplate="listItem">
-                        <div
-                            (click)="select(option2.code)"
-                            class="col-12 cursor-pointer"
-                            [style]="selected === option2.code ? 'background-color: #a3d4fb' : '' "
-                        >
-                            <div
-                                class="flex md:align-items-start align-items-center p-4 gap-4"
-                            >
-                                <p-image
-                                    *ngIf="option2.image !== ''"
-                                    class="w-5 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
-                                    imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-                                    [src]="option2.image"
-                                    width="100"
-                                    [preview]="true"
-                                >
-                                </p-image>
-                                <div
-                                class="flex flex-column h-full sm:flex-row justify-content-center md:justify-content-start flex-1 gap-4"
-                            >
-                                <div
-                                    class="text-md sm:text-2xl font-bold text-900 h-full"
-                                >
-                                    {{ option2.name }}
-                                </div>
-                            </div>
-                            </div>
+            <!-- Referencia -->
+            <p-accordionTab header="Linha de referência de medição">
+                <div class="mt-5">
+                    <p-image class="w-9 shadow-2 block md:block mx-auto border-round"
+                        imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+                        src="../../../../../assets/img/8-trilhos-inferiores/referencia-largura.jpg" width="200"
+                        [preview]="true">
+                    </p-image>
+
+                    <div class="flex flex-column gap-3 mt-5">
+                        <div class="field-checkbox" *ngFor="let option of normalOptions">
+                            <p-radioButton [inputId]="option.code" [name]="option.code" [value]="option.code"
+                                (onClick)="changeBuiltInOption(option.code)"
+                                [(ngModel)]="builtInRefOption"></p-radioButton>
+                            <label [for]="option.code" class="ml-2">{{
+                                option.label
+                                }}</label>
                         </div>
-                    </ng-template>
-                </p-dataView>
+                        <div *ngIf="
+                                pedidoService.pedido?.balcony.rails.lower_rail.built_in.ref
+                                    .other
+                            " class="flex flex-column">
+                            <input type="text" pInputText />
+                            <small>Descreva aqui a forma medida, apenas para situações
+                                diferentes das opções acima.</small>
+                        </div>
+                    </div>
+                </div>
             </p-accordionTab>
         </p-accordion>
-    </div>
-
-    <!-- Referência -->
-    <div class="mt-4">
-        <label for="" class="font-semibold">Linha de referência de medição:</label>
-    </div>
-    <div class="mt-5">
-        <p-image
-            class="w-9 shadow-2 block md:block mx-auto border-round"
-            imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-            src="../../../../../assets/img/8-trilhos-inferiores/referencia-largura.jpg"
-            width="200"
-            [preview]="true"
-        >
-        </p-image>
-
-        <div class="flex flex-column gap-3 mt-5">
-            <div class="field-checkbox" *ngFor="let option of normalOptions">
-                <p-radioButton
-                    [inputId]="option.code"
-                    [name]="option.code"
-                    [value]="option.code"
-                    (onClick)="changeBuiltInOption(option.code)"
-                    [(ngModel)]="builtInRefOption"
-                ></p-radioButton>
-                <label [for]="option.code" class="ml-2">{{
-                    option.label
-                }}</label>
-            </div>
-            <div
-                *ngIf="
-                    pedidoService.pedido?.balcony.rails.lower_rail.built_in.ref
-                        .other
-                "
-                class="flex flex-column"
-            >
-                <input type="text" pInputText />
-                <small
-                    >Descreva aqui a forma medida, apenas para situações
-                    diferentes das opções acima.</small
-                >
-            </div>
-        </div>
     </div>
 </div>
 
@@ -219,72 +175,47 @@
 <!-- Opção Aba -->
 <div *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tip.tab">
     <div class="flex flex-row gap-5 justify-content-center">
-        <button
-            pButton
-            pRipple
-            label="Para Dentro"
-            [ngClass]="{
+        <button pButton pRipple label="Chapa para Dentro" [ngClass]="{
                 'p-button-secondary':
                     !pedidoService.pedido?.balcony.rails.lower_rail.tab.inside
-            }"
-            (click)="changeTab('inside')"
-        ></button>
-        <button
-            pButton
-            pRipple
-            label="Para Fora"
-            [ngClass]="{
+            }" (click)="changeTab('inside')"></button>
+        <button pButton pRipple label="Chapa para Fora" [ngClass]="{
                 'p-button-secondary':
                     !pedidoService.pedido?.balcony.rails.lower_rail.tab.outside
-            }"
-            (click)="changeTab('outside')"
-        ></button>
+            }" (click)="changeTab('outside')"></button>
     </div>
     <div class="mt-4">
         <div *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tab.inside">
-            <p-image
-                class="w-9 shadow-2 block md:block mx-auto border-round"
+            <p-image class="w-9 shadow-2 block md:block mx-auto border-round"
                 imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-                src="../../../../../assets/img/8-trilhos-inferiores/medidas-aba-dentro.jpg"
-                width="200"
-                [preview]="true"
-            >
+                src="../../../../../assets/img/8-trilhos-inferiores/medidas-aba-dentro.jpg" width="200"
+                [preview]="true">
             </p-image>
         </div>
         <div *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tab.outside">
-            <p-image
-                class="w-9 shadow-2 block md:block mx-auto border-round"
+            <p-image class="w-9 shadow-2 block md:block mx-auto border-round"
                 imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
-                src="../../../../../assets/img/8-trilhos-inferiores/medidas-aba-fora.jpg"
-                width="200"
-                [preview]="true"
-            >
+                src="../../../../../assets/img/8-trilhos-inferiores/medidas-aba-fora.jpg" width="200" [preview]="true">
             </p-image>
         </div>
     </div>
 
-    <div
-        class="flex flex-column gap-3 mt-5"
-        *ngIf="
-            pedidoService.pedido?.balcony.rails.lower_rail.tab.outside ||
-            pedidoService.pedido?.balcony.rails.lower_rail.tab.inside
-        "
-    >
-        <div class="field-checkbox" *ngFor="let option of tabOptions">
-            <p-radioButton
-                [inputId]="option.code"
-                [name]="option.code"
-                [value]="option.code"
-                (onClick)="changeTabOption(option.code)"
-                [(ngModel)]="tabOption"
-            ></p-radioButton>
+    <div class="flex flex-column gap-3 mt-5" *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tab.inside">
+        <div class="field-checkbox" *ngFor="let option of tabOptionsInside">
+            <p-radioButton [inputId]="option.code" [name]="option.code" [value]="option.code"
+                (onClick)="changeTabOption(option.code)" [(ngModel)]="tabOption"></p-radioButton>
+            <label [for]="option.code" class="ml-2">{{ option.label }}</label>
+        </div>
+    </div>
+
+    <div class="flex flex-column gap-3 mt-5" *ngIf="pedidoService.pedido?.balcony.rails.lower_rail.tab.outside">
+        <div class="field-checkbox" *ngFor="let option of tabOptionsOutside">
+            <p-radioButton [inputId]="option.code" [name]="option.code" [value]="option.code"
+                (onClick)="changeTabOption(option.code)" [(ngModel)]="tabOption"></p-radioButton>
             <label [for]="option.code" class="ml-2">{{ option.label }}</label>
         </div>
     </div>
 </div>
 
-<app-navigation-tabs-btn
-    (nextTab)="nextTab()"
-    (prevTab)="prevTab()"
-></app-navigation-tabs-btn>
+<app-navigation-tabs-btn (nextTab)="nextTab()" (prevTab)="prevTab()"></app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

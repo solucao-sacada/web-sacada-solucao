@@ -9,18 +9,29 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class Passo8Component {
     normalOptions = [
-        { code: 'A', label: 'A' },
-        { code: 'B', label: 'B' },
-        { code: 'C', label: 'C' },
+        { code: 'A', label: 'A - Dentro' },
+        { code: 'B', label: 'B - Centro' },
+        { code: 'C', label: 'C - Fora' },
         { code: 'other', label: 'Outro' },
     ];
-    tabOptions = [
-        { code: 'A', label: 'A' },
-        { code: 'B', label: 'B' },
-        { code: 'C', label: 'C' },
-        { code: 'D', label: 'D' },
-        { code: 'E', label: 'E' },
+    // ABA CHAPA PARA DENTRO
+    tabOptionsInside = [
+        { code: 'A', label: 'A - DENTRO DO CONJUNTO INFERIOR' },
+        { code: 'B', label: 'B - CENTRO ABA FIXAÇÃO' },
+        { code: 'C', label: 'C - DENTRO DO TRILHO INFERIOR' },
+        { code: 'D', label: 'D - CENTRO DO TRILHO INFERIOR' },
+        { code: 'E', label: 'E - FORA DO CONJUNTO' },
     ];
+
+    // ABA CHAPA PARA FORA
+    tabOptionsOutside = [
+        { code: 'A', label: 'A - DENTRO DO CONJUNTO INFERIOR'},
+        { code: 'B', label: 'B - CENTRO DO TRILHO INFERIOR' },
+        { code: 'C', label: 'C - DENTRO DO TRILHO INFERIOR' },
+        { code: 'D', label: 'D - CENTRO ABA FIXAÇÃO' },
+        { code: 'E', label: 'E - FORA DO CONJUNTO INFERIOR' },
+    ];
+
 
     selected;
     normalOption;
@@ -38,9 +49,6 @@ export class Passo8Component {
             name: 'B - Dentro da calha',
             image: '../../../../../assets/img/8-trilhos-inferiores/dentro.jpg',
         },
-
-    ];
-    options2 = [
         {
             code: 'C',
             name: 'C - Sobre o piso pronto',
@@ -51,12 +59,13 @@ export class Passo8Component {
             name: 'D - Dentro da calha',
             image: '../../../../../assets/img/8-trilhos-inferiores/dentro-degrau.jpg',
         },
+
     ];
 
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.pedidoService.getObservable().subscribe(() => {
@@ -120,7 +129,7 @@ export class Passo8Component {
             value === 'D';
         this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.E =
             value === 'E';
-            console.log(this.pedidoService.pedido.balcony.rails.lower_rail.tab);
+        console.log(this.pedidoService.pedido.balcony.rails.lower_rail.tab);
     }
 
     changeBuiltInOption(value: any) {
@@ -152,12 +161,12 @@ export class Passo8Component {
         this.selected = rails.lower_rail.built_in.tip.A
             ? 'A'
             : rails.lower_rail.built_in.tip.B
-            ? 'B'
-            : rails.lower_rail.built_in.tip.C
-            ? 'C'
-            : rails.lower_rail.built_in.tip.D
-            ? 'D'
-            : null; // Adapte conforme sua estrutura real
+                ? 'B'
+                : rails.lower_rail.built_in.tip.C
+                    ? 'C'
+                    : rails.lower_rail.built_in.tip.D
+                        ? 'D'
+                        : null; // Adapte conforme sua estrutura real
     }
 
     private updateBuiltInRefOptionFromRails(rails: any): void {
@@ -165,12 +174,12 @@ export class Passo8Component {
         this.builtInRefOption = rails.lower_rail.built_in.ref.A
             ? 'A'
             : rails.lower_rail.built_in.ref.B
-            ? 'B'
-            : rails.lower_rail.built_in.ref.C
-            ? 'C'
-            : rails.lower_rail.built_in.ref.other
-            ? 'other'
-            : null; // Adapte conforme sua estrutura real
+                ? 'B'
+                : rails.lower_rail.built_in.ref.C
+                    ? 'C'
+                    : rails.lower_rail.built_in.ref.other
+                        ? 'other'
+                        : null; // Adapte conforme sua estrutura real
     }
 
     private updateNormalOptionFromRails(rails: any): void {
@@ -178,12 +187,12 @@ export class Passo8Component {
         this.normalOption = rails.lower_rail.normal.tip.A
             ? 'A'
             : rails.lower_rail.normal.tip.B
-            ? 'B'
-            : rails.lower_rail.normal.tip.C
-            ? 'C'
-            : rails.lower_rail.normal.tip.other
-            ? 'other'
-            : null; // Adapte conforme sua estrutura real
+                ? 'B'
+                : rails.lower_rail.normal.tip.C
+                    ? 'C'
+                    : rails.lower_rail.normal.tip.other
+                        ? 'other'
+                        : null; // Adapte conforme sua estrutura real
     }
 
     private updateTabOptionFromRails(rails: any): void {
@@ -191,14 +200,14 @@ export class Passo8Component {
         this.tabOption = rails.lower_rail.tab.tip.A
             ? 'A'
             : rails.lower_rail.tab.tip.B
-            ? 'B'
-            : rails.lower_rail.tab.tip.C
-            ? 'C'
-            : rails.lower_rail.tab.tip.D
-            ? 'D'
-            : rails.lower_rail.tab.tip.E
-            ? 'E'
-            : null; // Adapte conforme sua estrutura real
+                ? 'B'
+                : rails.lower_rail.tab.tip.C
+                    ? 'C'
+                    : rails.lower_rail.tab.tip.D
+                        ? 'D'
+                        : rails.lower_rail.tab.tip.E
+                            ? 'E'
+                            : null; // Adapte conforme sua estrutura real
     }
 
     nextTab(): void {

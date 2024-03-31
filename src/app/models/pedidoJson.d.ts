@@ -32,6 +32,7 @@ export interface Balcony {
     rails: Rails;
     tip: Tip6;
     format: any;
+    selectedOption?: string;
 }
 
 export interface Aluminium {
@@ -71,6 +72,7 @@ export interface Position {
     aligned: boolean;
     inside: boolean;
     outside: boolean;
+    selectedOption?: string; 
 }
 
 export interface Dimensions {

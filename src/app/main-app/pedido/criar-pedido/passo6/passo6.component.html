@@ -7,10 +7,11 @@
 <p-dataView #dv [value]="options">
     <ng-template let-option pTemplate="listItem">
         <div
-            (click)="select(option.code)"
+            (click)="toggleSelection(option.name)"
             class="col-12 cursor-pointer"
-            [style]="selected === option.code ? 'background-color: #a3d4fb' : '' "
+            [style.background-color]="selectedOption === option.name ? '#a3d4fb' : '' "
         >
+    
             <div
                 class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
             >
@@ -34,8 +35,9 @@
                     <input 
                         type="checkbox" 
                         name="selectedOption" 
-                        [value]="option.code" 
-                        [(ngModel)]="selectedOptions[option.code]" 
+                        [value]="option.name" 
+                        [checked]="selectedOption === option.name"
+                        (change)="toggleSelection(option.name)"
                         class="cursor-pointer"
                     />
                 </div>

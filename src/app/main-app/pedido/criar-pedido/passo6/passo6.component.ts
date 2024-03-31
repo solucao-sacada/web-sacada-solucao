@@ -12,81 +12,121 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo6Component implements OnInit {
     @Input() pedido: Pedido;
 
+    selected = '';
+    selectedOption = '';
+
+    options: any[] = [
+        {
+            code: 1,
+            name: 'Chapa de correção para fora',
+            image: '../../../../../assets/img/6-distancia-guarda-corpo/desalinhado-dentro.jpg',
+        },
+        {
+            code: 2,
+            name: 'Alinhado com o guarda corpo',
+            image: '../../../../../assets/img/6-distancia-guarda-corpo/alinhado.jpg',
+        },
+        {
+            code: 3,
+            name: 'Chapa de correção para dentro',
+            image: '../../../../../assets/img/6-distancia-guarda-corpo/desalinhado-fora.jpg',
+        },
+    ];
+
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
     ) { }
 
-    selected = '';
-    selectedOptions: { [key: string]: boolean } = {};
-
-    options: any[] = [
-        {
-            code: 'Dentro',
-            name: 'Desalinhado para dentro',
-            image: '../../../../../assets/img/6-distancia-guarda-corpo/desalinhado-dentro.jpg',
-        },
-        {
-            code: 'Alinhado',
-            name: 'Alinhado com o guarda corpo',
-            image: '../../../../../assets/img/6-distancia-guarda-corpo/alinhado.jpg',
-        },
-        {
-            code: 'Fora',
-            name: 'Desalinhado para fora',
-            image: '../../../../../assets/img/6-distancia-guarda-corpo/desalinhado-fora.jpg',
-        },
-    ];
-
-    ngOnInit(): void {
+    ngOnInit() {
         this.pedidoService.getObservable().subscribe(() => {
-            if (this.pedidoService.pedido.balcony.beam.position.aligned)
-                this.selected = 'Alinhado';
-            if (this.pedidoService.pedido.balcony.beam.position.inside)
-                this.selected = 'Dentro';
-            if (this.pedidoService.pedido.balcony.beam.position.outside)
-                this.selected = 'Fora';
-
-            if (this.selectedOptions[this.selected] === undefined) {
-                this.selectedOptions = {};
-            }
+            this.setSelectedFromPosition();
         });
     }
+    
 
-    select(value: string) {
-        this.pedidoService.pedido.balcony.beam.position.aligned =
-            value === 'Alinhado';
-        this.pedidoService.pedido.balcony.beam.position.inside =
-            value === 'Dentro';
-        this.pedidoService.pedido.balcony.beam.position.outside =
-            value === 'Fora';
-        this.selected = value;
-        this.selectedOptions[value] = true;
-    }
+    setSelectedFromPosition() {
+        const position = this.pedidoService.pedido.balcony.beam.position;
 
-    toggleSelection(optionCode: string) {
-        if (this.selected === optionCode) {
-            console.log('Item selecionado:', optionCode);
-            this.selectedOptions[optionCode] = !this.selectedOptions[optionCode];
-        } else {
-            this.selected = optionCode;
-            this.selectedOptions = {};
-            this.selectedOptions[optionCode] = true;
-            this.pedidoService.pedido.balcony.format = this.options.find(option => option.code === optionCode)?.code;
-            this.pedidoService.pedido.balcony.dimensions.data = [];
-            this.pedidoService.pedido.balcony.dimensions.total = '';
-            this.pedidoService.notifyObservers();
+        if (position) {
+            if (position.aligned) {
+                this.selected = 'Alinhado com o guarda corpo';
+            } else if (position.inside) {
+                this.selected = 'Chapa de correção para dentro';
+            } else if (position.outside) {
+                this.selected = 'Chapa de correção para fora';
+            }
+            this.setSelectedOption();
         }
     }
 
+    setSelectedOption() {
+        this.selectedOption = this.selected;
+    }
+
+    toggleSelection(optionName: string): void {
+        if (this.selectedOption === optionName) {
+            return;
+        }
+
+        this.selectedOption = optionName;
+
+        // Atualiza a posição do feixe com base na opção selecionada
+        const selectedOption = this.options.find(option => option.name === optionName);
+        if (selectedOption) {
+            const position = this.pedidoService.pedido.balcony.beam.position;
+            position.aligned = selectedOption.code === 2;
+            position.inside = selectedOption.code === 3;
+            position.outside = selectedOption.code === 1;
+        }
+
+        // Limpa os dados relacionados ao formato do balcão
+        this.pedidoService.pedido.balcony.dimensions.data = [];
+        this.pedidoService.pedido.balcony.dimensions.total = '';
+
+        // Notifica os observadores após qualquer mudança no formato do balcão
+        this.pedidoService.notifyObservers();
+    }
+
     nextTab(): void {
-        const obj = this.pedidoService.pedido.balcony.beam.position;
-        if (obj.aligned || obj.inside || obj.outside) {
+        const position = this.pedidoService.pedido.balcony.beam.position;
+    
+        if (position && (position.aligned || position.inside || position.outside)) {
             this.pedidoService.nextTab();
-        } else this._toaster.warn(MESSAGES.UMA_OPCAO);
+        } else {
+            this._toaster.warn(MESSAGES.UMA_OPCAO);
+        }
     }
 
     prevTab(): void {
         this.pedidoService.prevTab();
     }
+    
+
+    // select(value: string, code: number) {
+    //     this.pedidoService.pedido.balcony.format = code;
+    //     this.pedidoService.pedido.balcony.dimensions.data = [];
+    //     this.pedidoService.pedido.balcony.dimensions.total = '';
+    //     this.selected = value;
+    //     this.selectedOption[value] = true;
+    //     this.pedidoService.notifyObservers();
+    // }
+
+
+    // nextTab(): void {
+    //     const position = this.pedidoService.pedido.balcony.beam.position;
+
+    //     if (
+    //         position == 1 || 
+    //         position == 2 || 
+    //         position == 3
+    //         ) {
+    //             this.pedidoService.nextTab();
+    //     } else {
+    //         this._toaster.warn(MESSAGES.UMA_OPCAO);
+    //     }
+
+    // }
+  
+   
 }

@@ -97,14 +97,14 @@ export class Passo5Component {
     }
 
 
-    select(value: string, code: number) {
-        this.pedidoService.pedido.balcony.format = code;
-        this.pedidoService.pedido.balcony.dimensions.data = [];
-        this.pedidoService.pedido.balcony.dimensions.total = '';
-        this.selected = value;
-        this.selectedOption[value] = true;
-        this.pedidoService.notifyObservers();
-    }
+    // select(value: string, code: number) {
+    //     this.pedidoService.pedido.balcony.format = code;
+    //     this.pedidoService.pedido.balcony.dimensions.data = [];
+    //     this.pedidoService.pedido.balcony.dimensions.total = '';
+    //     this.selected = value;
+    //     this.selectedOption[value] = true;
+    //     this.pedidoService.notifyObservers();
+    // }
 
     nextTab(): void {
         const obj = this.pedidoService.pedido.balcony.format;

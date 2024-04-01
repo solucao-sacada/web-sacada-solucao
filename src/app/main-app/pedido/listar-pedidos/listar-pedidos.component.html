@@ -1,30 +1,36 @@
+<!-- Div de botões -->
 <div class="flex justify-content-between ">
+    <!-- Botão novo pedido -->
     <button
         pButton
         pRipple
         label="Novo Pedido"
         icon="pi pi-plus"
         class="mb-3"
-        routerLink="/app/pedidos/novo"
-    ></button>
+        routerLink="/app/pedidos/novo">
+    </button>
+
+    <!-- Botão de imprimir -->
     <button
         pButton
         pRipple
         icon="pi pi-print"
         class="mb-3 p-button-rounded"
         (click)="downloadAsPdf()"
-        [disabled]="!pedido"
-    ></button>
+        [disabled]="!pedido">
+    </button>
 </div>
+
 <p-tabView [(activeIndex)]="activeIndex">
+    <!-- Tabela de pedidos com header e body -->
     <p-tabPanel header="Pedidos">
         <p-table
             [value]="pedidos"
             selectionMode="single"
             [(selection)]="pedido"
             dataKey="code"
-            (onRowSelect)="onSelectRow($event)"
-        >
+            (onRowSelect)="onSelectRow($event)">
+
             <ng-template pTemplate="header">
                 <tr>
                     <th>Code</th>
@@ -32,6 +38,7 @@
                     <th>Data</th>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-pedido>
                 <tr [pSelectableRow]="pedido">
                     <td>{{ pedido.code }}</td>
@@ -41,6 +48,7 @@
             </ng-template>
         </p-table>
     </p-tabPanel>
+
     <p-tabPanel header="Detalhes" [disabled]="!pedido">
         <div id="printable" #printable>
             <app-pedido-details [Pedido]="pedido" />

@@ -33,6 +33,11 @@ export class PedidoService {
         return this._http.get<PedidoJson[]>(this.apiUrl);
     }
 
+    listByUser(): Observable<PedidoJson[]> {
+        console.log(this._auth.getUser()._id);
+        return this._http.get<PedidoJson[]>(this.apiUrl + '/user/' + this._auth.getUser()._id);
+    }
+
     create(pedido: PedidoJson): Observable<any> {
         return this._http.post<any>(this.apiUrl, pedido).pipe(
             catchError((error) => {

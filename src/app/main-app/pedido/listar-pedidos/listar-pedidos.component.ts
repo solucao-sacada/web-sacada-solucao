@@ -36,7 +36,8 @@ export class ListarPedidosComponent {
         });
 
         this.pedidoService.pedido = this.pedidoService.intilizePedido();
-        this.pedidoService.listAll().subscribe((data) => {
+        this.pedidoService.listByUser().subscribe((data) => {
+            console.log(data)
             this.pedidos = data;
             this.draftPedidos = this.pedidoService.getDraftPedidos();
         });
@@ -51,7 +52,6 @@ export class ListarPedidosComponent {
         const pdf = new jspdf.jsPDF();
 
         // Obtém o conteúdo HTML que você deseja incluir no PDF
-        console.log(this.dataToExport);
         let conteudo = this.dataToExport.nativeElement;
         // Adiciona o conteúdo ao PDF
         pdf.html(conteudo, {
@@ -100,7 +100,6 @@ export class ListarPedidosComponent {
     }
 
     onSelectRow(value: any) {
-        console.log(value);
         if (value.data._id) {
             this.pedido = value.data;
             this.activeIndex = 1;

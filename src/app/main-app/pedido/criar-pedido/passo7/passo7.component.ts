@@ -45,58 +45,63 @@ export class Passo7Component implements OnInit {
         if (this.selected === optionName) {
             return;
         }
-       const selectedOption = this.options.find(option => option.name === optionName);
+        
+        const selectedOption = this.options.find(option => option.name === optionName);
+        
         if (selectedOption) {
-            const rail = this.pedidoService.pedido.balcony.rails.upper_rail.tab;
-            rail.inside = selectedOption.name === 'Chapa de correção para dentro';
-            rail.outside = selectedOption.name === 'Chapa de correção para fora';
-            
-        }
-        else if (selectedOption.name === 'Normal') {
-            const rail = this.pedidoService.pedido.balcony.rails.upper_rail.tip;
-            rail.normal = selectedOption.name === 'Normal';
-            rail.tab = false;
-        }
+            const rail = this.pedidoService.pedido.balcony.rails.upper_rail;
     
-        this.selected = optionName;
-        this.pedidoService.notifyObservers();
+            if (optionName === 'Chapa de correção para dentro') {
+                rail.tab.inside = true;
+                rail.tab.outside = false;
+            } else if (optionName === 'Chapa de correção para fora') {
+                rail.tab.inside = false;
+                rail.tab.outside = true;
+            } else if (optionName === 'Normal') {
+                rail.tip.normal = true;
+                rail.tab.outside = false;
+                rail.tab.inside = false;
+            }
+            
+            this.selected = optionName;
+            this.pedidoService.notifyObservers();
+        }
     }
     
 
-    select(value: string) {
-        if (value === 'Normal') {
-            this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
-                true;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = false;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
-                false;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
-                false;
-        } else if (value === 'Chapa de correção para fora') {
-            this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
-                false;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = true;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
-                true;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
-                false;
-        } else {
-            this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
-                false;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = true;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
-                false;
-            this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
-                true;
-        }
-        this.selected = value;
-    }
+    // select(value: string) {
+    //     if (value === 'Normal') {
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
+    //             true;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = false;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
+    //             false;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
+    //             false;
+    //     } else if (value === 'Chapa de correção para fora') {
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
+    //             false;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = true;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
+    //             true;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
+    //             false;
+    //     } else {
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
+    //             false;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = true;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
+    //             false;
+    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
+    //             true;
+    //     }
+    //     this.selected = value;
+    // }
 
     nextTab(): void {
         const obj = this.pedidoService.pedido.balcony.rails.upper_rail;
         if (
             obj.tip.normal ||
-            obj.tip.tab ||
             obj.tab.inside ||
             obj.tab.outside
         ) {

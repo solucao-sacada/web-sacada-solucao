@@ -37,6 +37,7 @@ export class Passo8Component {
     normalOption;
     tabOption;
     builtInRefOption;
+    selectedOption!: string;
 
     options1 = [
         {
@@ -70,6 +71,7 @@ export class Passo8Component {
     ngOnInit(): void {
         this.pedidoService.getObservable().subscribe(() => {
             this.updateValuesFromRails();
+            this.selectedOption = this.pedidoService.pedido?.balcony?.rails?.lower_rail?.normal?.tip.other ? 'other' : '';
         });
     }
 
@@ -84,9 +86,6 @@ export class Passo8Component {
             value === 'C';
         this.pedidoService.pedido.balcony.rails.lower_rail.built_in.tip.D =
             value === 'D';
-        console.log(
-            this.pedidoService.pedido.balcony.rails.lower_rail.built_in
-        );
     }
 
     changeTip(value: string) {
@@ -113,9 +112,12 @@ export class Passo8Component {
             value === 'B';
         this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.C =
             value === 'C';
-        this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other =
-            value === 'other';
-        this.normalOption = value;
+            if (value === 'other') {
+                this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other = '';
+            } else {
+                this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other = undefined; 
+            }
+            this.normalOption = value;
     }
 
     changeTabOption(value: any) {
@@ -129,7 +131,6 @@ export class Passo8Component {
             value === 'D';
         this.pedidoService.pedido.balcony.rails.lower_rail.tab.tip.E =
             value === 'E';
-        console.log(this.pedidoService.pedido.balcony.rails.lower_rail.tab);
     }
 
     changeBuiltInOption(value: any) {
@@ -142,9 +143,6 @@ export class Passo8Component {
             value === 'C';
         this.pedidoService.pedido.balcony.rails.lower_rail.built_in.ref.other =
             value === 'other';
-        console.log(
-            this.pedidoService.pedido.balcony.rails.lower_rail.built_in.ref
-        );
     }
 
     private updateValuesFromRails(): void {
@@ -192,7 +190,7 @@ export class Passo8Component {
                     ? 'C'
                     : rails.lower_rail.normal.tip.other
                         ? 'other'
-                        : null; // Adapte conforme sua estrutura real
+                        : false 
     }
 
     private updateTabOptionFromRails(rails: any): void {

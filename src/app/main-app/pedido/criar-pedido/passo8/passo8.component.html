@@ -39,16 +39,19 @@
                 (onClick)="changeNormalOption(option.code)" [(ngModel)]="normalOption"></p-radioButton>
             <label [for]="option.code" class="ml-2">{{ option.label }}</label>
         </div>
-        <div *ngIf="
+        <!-- <div *ngIf="
                 pedidoService.pedido?.balcony.rails.lower_rail.normal.tip.other
             " class="flex flex-column">
-            <input type="text" pInputText [(ngModel)]="
-                    pedidoService.pedido?.balcony.rails.lower_rail.normal.tip
-                        .other
-                " />
+            <input type="text" pInputText [(ngModel)]="pedidoService.pedido?.balcony.rails.lower_rail.normal.tip.other"/>
             <small>Descreva aqui a forma medida, apenas para situações diferentes
                 das opções acima.</small>
+        </div> -->
+
+        <div *ngIf="normalOption === 'other'" class="flex flex-column">
+            <input type="text" pInputText [(ngModel)]="pedidoService.pedido?.balcony.rails.lower_rail.normal.tip.other"/>
+            <small>Descreva aqui a forma medida, apenas para situações diferentes das opções acima.</small>
         </div>
+        
     </div>
 </div>
 

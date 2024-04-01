@@ -84,6 +84,7 @@ export interface Glass {
     color: Color2;
     laminated: boolean;
     tempered: boolean;
+    laminatedTemperad: boolean;
     thickness: Thickness;
 }
 
@@ -99,6 +100,9 @@ export interface Thickness {
     '8mm': boolean;
     '10mm': boolean;
     '12mm': boolean;
+    '7mm': boolean;
+    '9mm': boolean;
+    '11mm': boolean;
 }
 
 export interface Levels {

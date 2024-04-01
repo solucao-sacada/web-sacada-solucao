@@ -13,6 +13,10 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class Passo3Component {
     corDoVidro: string;
+    showDiv1: boolean = false;
+    showDiv2: boolean = false;
+    selectedButton: string = '';
+
     coresDoVidro: SelectItem<string>[] = [
         {
             label: 'Incolor',
@@ -39,7 +43,7 @@ export class Passo3Component {
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.pedidoService.getObservable().subscribe(() => {
@@ -47,32 +51,95 @@ export class Passo3Component {
         });
     }
 
-    tipoVidro(value: string) {
-        if (value === 'laminado') {
+    // tipoVidro(value: string) {
+    //     if (value === 'laminado') {
+    //         this.pedidoService.pedido.balcony.glass.laminated = true;
+    //         this.pedidoService.pedido.balcony.glass.tempered = false;
+    //     }
+    //     else if (value === 'Temperado') {
+    //         this.pedidoService.pedido.balcony.glass.laminated = false;
+    //         this.pedidoService.pedido.balcony.glass.tempered = true;
+    //     }
+    //     else if (value === 'laminadoTemperado') {
+    //         this.pedidoService.pedido.balcony.glass.laminated = true;
+    //         this.pedidoService.pedido.balcony.glass.tempered = true;
+    //     }
+    //     else {
+    //     }
+    // }
+
+    tipoVidro(tipo: string) {
+        this.selectedButton = tipo;
+        if (tipo === 'laminado') {
             this.pedidoService.pedido.balcony.glass.laminated = true;
             this.pedidoService.pedido.balcony.glass.tempered = false;
-        } else {
+            this.pedidoService.pedido.balcony.glass.laminatedTemperad = false;
+            this.showDiv1 = true;
+            this.showDiv2 = false;
+        }
+        else if (tipo === 'Temperado') {
             this.pedidoService.pedido.balcony.glass.laminated = false;
             this.pedidoService.pedido.balcony.glass.tempered = true;
+            this.pedidoService.pedido.balcony.glass.laminatedTemperad = false;
+            this.showDiv1 = true;
+            this.showDiv2 = false;
+        } else if (tipo === 'laminadoTemperado') {
+            this.pedidoService.pedido.balcony.glass.laminated = false;
+            this.pedidoService.pedido.balcony.glass.tempered = false;
+            this.pedidoService.pedido.balcony.glass.laminatedTemperad = true;
+            this.showDiv1 = false;
+            this.showDiv2 = true;
         }
     }
-
     espessuraVidro(value: string) {
         if (value === '8mm') {
+            this.pedidoService.pedido.balcony.glass.thickness['7mm'] = false;
             this.pedidoService.pedido.balcony.glass.thickness['8mm'] = true;
+            this.pedidoService.pedido.balcony.glass.thickness['9mm'] = false;
             this.pedidoService.pedido.balcony.glass.thickness['10mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['11mm'] = false;
             this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
-           
-        } else if (value === '10mm')  {
-            this.pedidoService.pedido.balcony.glass.thickness['10mm'] = true;
-            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
-            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
-        } else if (value === '12mm')  {
-            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = true;
-            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
-            this.pedidoService.pedido.balcony.glass.thickness['10mm'] = false;
 
+        } else if (value === '10mm') {
+            this.pedidoService.pedido.balcony.glass.thickness['7mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['9mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['10mm'] = true;
+            this.pedidoService.pedido.balcony.glass.thickness['11mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
+        } else if (value === '12mm') {
+            this.pedidoService.pedido.balcony.glass.thickness['7mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['9mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['10mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['11mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = true;
         }
+        else if (value === '7mm') {
+            this.pedidoService.pedido.balcony.glass.thickness['7mm'] = true;
+            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['9mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['10mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['11mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
+        }
+        else if (value === '9mm') {
+            this.pedidoService.pedido.balcony.glass.thickness['7mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['9mm'] = true;
+            this.pedidoService.pedido.balcony.glass.thickness['10mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['11mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
+        }
+        else if (value === '11mm') {
+            this.pedidoService.pedido.balcony.glass.thickness['7mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['8mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['9mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['10mm'] = false;
+            this.pedidoService.pedido.balcony.glass.thickness['11mm'] = true;
+            this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
+        }
+
     }
 
     changeCorVidro() {
@@ -126,7 +193,8 @@ export class Passo3Component {
     nextTab(): void {
         if (
             this.pedidoService.pedido.balcony.glass.tempered ||
-            this.pedidoService.pedido.balcony.glass.laminated
+            this.pedidoService.pedido.balcony.glass.laminated ||
+            this.pedidoService.pedido.balcony.glass.laminatedTemperad
         ) {
             if (
                 this.pedidoService.pedido.balcony.glass.color.colorless ||
@@ -137,7 +205,10 @@ export class Passo3Component {
                 if (
                     this.pedidoService.pedido.balcony.glass.thickness['8mm'] ||
                     this.pedidoService.pedido.balcony.glass.thickness['10mm'] ||
-                    this.pedidoService.pedido.balcony.glass.thickness['12mm'] 
+                    this.pedidoService.pedido.balcony.glass.thickness['12mm'] ||
+                    this.pedidoService.pedido.balcony.glass.thickness['7mm'] ||
+                    this.pedidoService.pedido.balcony.glass.thickness['9mm'] ||
+                    this.pedidoService.pedido.balcony.glass.thickness['11mm']
                 ) {
                     this.pedidoService.nextTab();
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);

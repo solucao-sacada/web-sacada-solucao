@@ -1,91 +1,76 @@
-<app-menu-step
-    title="Especificações do Vidro"
-    step="3 - Especificações do Vidro"
-    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
-></app-menu-step>
+<app-menu-step title="Especificações do Vidro" step="3 - Especificações do Vidro"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"></app-menu-step>
 
 <h6>Tipo do Vidro</h6>
 <div class="flex flex-row gap-5 justify-content-center">
-    <button
-        pButton
-        pRipple
-        label="Laminado"
-        [ngClass]="{
+    <button pButton pRipple label="Laminado" [ngClass]="{
             'p-button-secondary': !pedidoService.pedido?.balcony.glass.laminated
-        }"
-        (click)="tipoVidro('laminado')"
-    ></button>
-    <button
-        pButton
-        pRipple
-        label="Temperado"
-        [ngClass]="{
+        }" (click)="tipoVidro('laminado')"></button>
+    <button pButton pRipple label="Temperado" [ngClass]="{
             'p-button-secondary': !pedidoService.pedido?.balcony.glass.tempered
-        }"
-        (click)="tipoVidro('Temperado')"
-    ></button>
+        }" (click)="tipoVidro('Temperado')"></button>
+    <button pButton pRipple label="Laminado e Temperado" [ngClass]="{
+            'p-button-secondary': !pedidoService.pedido?.balcony.glass.laminatedTemperad
+        }" (click)="tipoVidro('laminadoTemperado')"></button>
 </div>
+
 <div class="grid p-fluid mt-3 align-bottom">
     <div class="col-12 md:col-6 ,">
         <h6>Cor do Vidro</h6>
-        <p-dropdown
-            (onClear)="corDoVidro = null; changeCorVidro()"
-            [options]="coresDoVidro"
-            optionValue="value"
-            placeholder="Selecione uma cor"
-            [showClear]="true"
-            [(ngModel)]="corDoVidro"
-            (ngModelChange)="changeCorVidro()"
-        ></p-dropdown>
+        <p-dropdown (onClear)="corDoVidro = null; changeCorVidro()" [options]="coresDoVidro" optionValue="value"
+            placeholder="Selecione uma cor" [showClear]="true" [(ngModel)]="corDoVidro"
+            (ngModelChange)="changeCorVidro()"></p-dropdown>
     </div>
     <div class="col-12 md:col-6 align-self-end" *ngIf="corDoVidro === 'Outro'">
         <span class="p-float-label">
-            <input
-                id="identiCor"
-                pInputText
-                [(ngModel)]="pedidoService.pedido?.balcony.glass.color.other"
-                (ngModelChange)="pedidoService.verifyP3()"
-            />
+            <input id="identiCor" pInputText [(ngModel)]="pedidoService.pedido?.balcony.glass.color.other"
+                (ngModelChange)="pedidoService.verifyP3()" />
             <label for="identiCor">Identificação da cor</label>
         </span>
     </div>
 </div>
 <h6>Espessura do Vidro</h6>
-<div class="flex flex-row gap-5 justify-content-center">
-    <button
-        pButton
-        pRipple
-        label="4+4 ou 8mm"
-        [ngClass]="{
-            'p-button-secondary':
-                !pedidoService.pedido?.balcony.glass.thickness['8mm']
-        }"
-        (click)="espessuraVidro('8mm')"
-    ></button>
-    <button
-        pButton
-        pRipple
-        label="5+5 ou 10mm"
-        [ngClass]="{
-            'p-button-secondary':
-                !pedidoService.pedido?.balcony.glass.thickness['10mm']
-        }"
-        (click)="espessuraVidro('10mm')"
-    ></button>
-    <button
-        pButton
-        pRipple
-        label="6+6 ou 12mm"
-        [ngClass]="{
-            'p-button-secondary':
-                !pedidoService.pedido?.balcony.glass.thickness['12mm']
-        }"
-        (click)="espessuraVidro('12mm')"
-    ></button>
+<div *ngIf="pedidoService.pedido?.balcony.glass.laminated || pedidoService.pedido?.balcony.glass.tempered || pedidoService.pedido?.balcony.glass.laminatedTemperad">
+    <div class="flex flex-row gap-3 justify-content-center" *ngIf="showDiv1" #laminado>
+        <div class="flex flex-row gap-3 justify-content-center">
+            <button pButton pRipple label="4+4 ou 8mm" [ngClass]="{
+            'p-button-secondary': !pedidoService.pedido?.balcony.glass.thickness['8mm']}"
+                (click)="espessuraVidro('8mm')">
+            </button>
+            <button pButton pRipple label="5+5 ou 10mm" [ngClass]="{
+            'p-button-secondary': !pedidoService.pedido?.balcony.glass.thickness['10mm']}"
+                (click)="espessuraVidro('10mm')">
+            </button>
+            <button pButton pRipple label="6+6 ou 12mm" [ngClass]="{
+            'p-button-secondary': !pedidoService.pedido?.balcony.glass.thickness['12mm']}"
+                (click)="espessuraVidro('12mm')">
+            </button>
+        </div>
+        <div class="flex justify-content-center mt-2">
+            <span></span>
+        </div>
+    </div>
+    <div class="flex flex-column gap-3 justify-content-center" *ngIf="showDiv2" #laminadoTemperado>
+        <div class="flex flex-row gap-3 justify-content-center">
+            <button pButton pRipple label="4+3 ou 7mm" [ngClass]="{
+                'p-button-secondary': !pedidoService.pedido?.balcony.glass.thickness['7mm']}"
+                (click)="espessuraVidro('7mm')">
+            </button>
+            <button pButton pRipple label="5+4 ou 9mm" [ngClass]="{
+                'p-button-secondary': !pedidoService.pedido?.balcony.glass.thickness['9mm']}"
+                (click)="espessuraVidro('9mm')">
+            </button>
+            <button pButton pRipple label="6+5 ou 11mm" [ngClass]="{
+                'p-button-secondary': !pedidoService.pedido?.balcony.glass.thickness['11mm']}"
+                (click)="espessuraVidro('11mm')">
+            </button>
+        </div>
+        <div class="flex justify-content-center mt-2">
+            <span>Laminação do laminado/temperado é maior do que a normal, por isso é reduzido em 1 milímetro.</span>
+        </div>
+    </div>
 </div>
 
-<app-navigation-tabs-btn
-    (nextTab)="nextTab()"
-    (prevTab)="prevTab()"
-></app-navigation-tabs-btn>
+
+<app-navigation-tabs-btn (nextTab)="nextTab()" (prevTab)="prevTab()"></app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

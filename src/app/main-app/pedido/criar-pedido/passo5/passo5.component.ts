@@ -112,7 +112,8 @@ export class Passo5Component {
             obj == 1 ||
             obj == 2 ||
             obj == 3 ||
-            obj == 4
+            obj == 4 ||
+            obj == 5
         ) {
             this.pedidoService.nextTab();
         } else this._toaster.warn(MESSAGES.UMA_OPCAO);

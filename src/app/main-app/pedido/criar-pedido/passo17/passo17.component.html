@@ -7,7 +7,6 @@
 <label for="obs">Observações</label>
 <textarea
     id="obs"
-    [autoResize]="true"
     class="w-full mb-3"
     rows="5"
     pInputTextarea
@@ -21,6 +20,8 @@
     maxFileSize="1000000"
     [customUpload]="true"
     (uploadHandler)="uploadFile($event)"
+    [chooseLabel]="'Adicionar'"
+    [uploadLabel]="'Enviar'"
 >
 </p-fileUpload>
 

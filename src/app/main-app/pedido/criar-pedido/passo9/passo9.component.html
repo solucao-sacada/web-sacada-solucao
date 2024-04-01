@@ -1,9 +1,8 @@
 <app-menu-step
-    title="Dmiensões"
-    step="9 - Dmiensões"
+    title="Dimensões"
+    step="9 - Dimensões"
     urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
 ></app-menu-step>
-
 <div class="flex justify-content-end text-2xl" *ngIf="showVidrosRestantes">
     Vidros restantes:
     <span class="ml-2 font-bold">{{ vidrosRestantes }}</span>
@@ -49,10 +48,13 @@
     <div class="col-3 p-1 text-center">&nbsp;</div>
     <div class="col-3 p-1 text-center border-bottom-1 border-x-1">
         <input
-            type="text"
+            type="number" step="0.01"
             class="border-0 shadow-none text-center w-full"
             [(ngModel)]="pedidoService.pedido?.balcony.dimensions.total"
         />
+    </div>
+    <div class="flex flex-end ml-2">
+        <span>*campo referente ao último grau da parede à direita</span>
     </div>
     <div class="col-3 p-1 text-center">&nbsp;</div>
     <div class="col-3 p-1 text-center">&nbsp;</div>

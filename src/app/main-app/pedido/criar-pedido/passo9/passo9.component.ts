@@ -85,7 +85,7 @@ export class Passo9Component implements OnInit {
         this.pedidoService.pedido.balcony.dimensions.data = this.linhas.map(
             (linha) => [
                 linha.piece.toString(),
-                linha.angle.replace(',', '.'),
+                // linha.angle.replace(',', '.'),
                 linha.dimension,
                 linha.quantity,
             ]

@@ -26,18 +26,19 @@ export class Passo18Component {
             .pipe(finalize(() => (this.disableEnviar = true)))
             .subscribe((response) => {
                 console.log(response);
-                this._toaster.success('Pedido Salvo com Sucesso');
                 this.imageServive
                     .uploadOrderImageFromLocalStorage(response._id)
                     .subscribe((data) => {
                         console.log(data);
-                        this.pedidoService.removePedidosOk();
-                        setTimeout(() => {
-                            this._router.navigate(['/admin']);
-                        }, 3000);
+                        this._toaster.success('Pedido Salvo com Sucesso');
+
+                        // this.pedidoService.removePedidosOk();
+                        // setTimeout(() => {
+                        //     this._router.navigate(['/admin']);
+                        // }, 3000);
                     });
             });
 
-        this.pedidoService.clearLocalStorage();
+        // this.pedidoService.clearLocalStorage();
     }
 }

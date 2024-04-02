@@ -25,7 +25,7 @@ export class Passo8Component {
 
     // ABA CHAPA PARA FORA
     tabOptionsOutside = [
-        { code: 'A', label: 'A - DENTRO DO CONJUNTO INFERIOR'},
+        { code: 'A', label: 'A - DENTRO DO CONJUNTO INFERIOR' },
         { code: 'B', label: 'B - CENTRO DO TRILHO INFERIOR' },
         { code: 'C', label: 'C - DENTRO DO TRILHO INFERIOR' },
         { code: 'D', label: 'D - CENTRO ABA FIXAÇÃO' },
@@ -112,12 +112,12 @@ export class Passo8Component {
             value === 'B';
         this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.C =
             value === 'C';
-            if (value === 'other') {
-                this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other = '';
-            } else {
-                this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other = undefined; 
-            }
-            this.normalOption = value;
+        if (value === 'other') {
+            this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other = '';
+        } else {
+            this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.other = undefined;
+        }
+        this.normalOption = value;
     }
 
     changeTabOption(value: any) {
@@ -190,7 +190,7 @@ export class Passo8Component {
                     ? 'C'
                     : rails.lower_rail.normal.tip.other
                         ? 'other'
-                        : false 
+                        : false
     }
 
     private updateTabOptionFromRails(rails: any): void {
@@ -221,8 +221,14 @@ export class Passo8Component {
                     this.pedidoService.nextTab();
                 } else {
                     this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-                }
+                } 
             } else if (rails.tip.built_in) {
+                if (
+                    rails.built_in.tip.A ||
+                    rails.built_in.tip.B ||
+                    rails.built_in.tip.C ||
+                    rails.built_in.tip.D
+                ) 
                 if (
                     (rails.built_in.tip.A ||
                         rails.built_in.tip.B ||

@@ -32,10 +32,10 @@ export class Passo18Component {
                         console.log(data);
                         this._toaster.success('Pedido Salvo com Sucesso');
 
-                        // this.pedidoService.removePedidosOk();
-                        // setTimeout(() => {
-                        //     this._router.navigate(['/admin']);
-                        // }, 3000);
+                        this.pedidoService.removePedidosOk();
+                        setTimeout(() => {
+                            this._router.navigate(['/admin']);
+                        }, 3000);
                     });
             });
 

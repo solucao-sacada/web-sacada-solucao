@@ -29,7 +29,6 @@ export class Passo18Component {
                 this.imageServive
                     .uploadOrderImageFromLocalStorage(response._id)
                     .subscribe((data) => {
-                        console.log(data);
                         this._toaster.success('Pedido Salvo com Sucesso');
 
                         this.pedidoService.removePedidosOk();

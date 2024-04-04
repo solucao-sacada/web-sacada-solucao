@@ -17,10 +17,12 @@
                     width="200"
                     [preview]="true"
                 ></p-image>
+
                 <div class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4">
                     <div class="text-xl sm:text-2xl font-bold h-full">
                         {{ option.name }}
                     </div>
+
                     <div *ngIf="selectedOption === 'Outro' && option.name === 'Outro'">
                         <span class="p-float-label">
                             <input
@@ -34,6 +36,7 @@
                         </span>
                     </div>
                 </div>
+
                 <div>
                     <input
                         type="checkbox"

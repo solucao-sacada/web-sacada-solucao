@@ -7,15 +7,11 @@
 <p-dataView #dv [value]="options">
     <ng-template let-option pTemplate="listItem">
         <div
-            (click)="select(option)"
+            (click)="toggleSelection(option.name);"
             class="col-12 cursor-pointer"
             [style]="
-                selected === option.name ? 'background-color: #a3d4fb;' : ''
-            "
-        >
-            <div
-                class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
-            >
+                selected === option.name ? 'background-color: #a3d4fb;' : '' ">
+            <div class="flex flex-column md:flex-row md:align-items-start p-4 gap-4">
                 <p-image
                     *ngIf="option.image !== ''"
                     class="w-9 sm:w-15rem md:w-10rem shadow-2 block md:block mx-auto border-round"
@@ -25,12 +21,23 @@
                     [preview]="true"
                 >
                 </p-image>
+
                 <div
-                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4"
-                >
+                    class="flex flex-column h-full sm:flex-row justify-content-between align-items-center flex-1 gap-4">
                     <div class="text-xl sm:text-2xl font-bold h-full">
                         {{ option.name }}
                     </div>
+                </div>
+
+                <div>
+                    <input
+                        type="checkbox"
+                        name="selectedOption"
+                        [value]="option.name"
+                        [checked]="selectedOption === option.name"
+                        (change)="toggleSelection(option.name);"
+                        class="cursor-pointer"
+                    />
                 </div>
             </div>
         </div>

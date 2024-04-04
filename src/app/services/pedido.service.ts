@@ -67,7 +67,9 @@ export class PedidoService {
             accessories: {
                 aparador_aluminio: false,
                 aparador_inox: false,
+                sem_aparador: false,
                 selante: false,
+                sem_selante: false,
             },
             balcony: {
                 aluminium: {

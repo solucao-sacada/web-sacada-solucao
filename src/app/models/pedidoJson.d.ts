@@ -17,7 +17,9 @@ export interface PedidoJson {
 export interface Accessories {
     aparador_aluminio: boolean;
     aparador_inox: boolean;
+    sem_aparador: boolean;
     selante: boolean;
+    sem_selante: boolean;
 }
 
 export interface Balcony {

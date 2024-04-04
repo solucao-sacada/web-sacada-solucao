@@ -1,11 +1,49 @@
-<app-menu-step
-    title="Acessórios Finais"
-    step="16 - Acessórios Finais"
-    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"
-></app-menu-step>
+<app-menu-step title="Acessórios Finais" step="16 - Acessórios Finais"
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"></app-menu-step>
+<div class="flex flex-column justify-content-center">
 
-<app-navigation-tabs-btn
-    (nextTab)="nextTab()"
-    (prevTab)="prevTab()"
-></app-navigation-tabs-btn>
+    <div class="">
+        <label class="text-center mb-2">Selecione o aparador</label>
+        <p-image class="w-9 my-3 sm:w-15 md:w-3 shadow-2 block md:block mx-auto border-round relative"
+            imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+            src="../../../../../assets/img//15-acessorios-finais/aparador_inox.jpg" [preview]="true">
+        </p-image>
+
+        <div>
+            <div class="flex flex-row gap-1 mb-2">
+                <p-radioButton name="aparador" value="aparador_inox" [(ngModel)]="aparador"></p-radioButton>
+                <label for="aparador" class="ml-2">Aparador de inox</label>
+            </div>
+            <div class="flex flex-row gap-1 mb-2">
+                <p-radioButton name="aparador_aluminio" value="aparador_aluminio" [(ngModel)]="aparador"></p-radioButton>
+                <label for="aparador" class="ml-2">Aparador de aluminio</label>
+            </div>
+            <div class="flex flex-row gap-1">
+                <p-radioButton name="aparador" value="sem_aparador" [(ngModel)]="aparador"></p-radioButton>
+                <label for="aparador" class="ml-2">Sem aparador</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <label class="w-full">Selecione selante</label>
+
+        <p-image class="w-9 my-3 sm:w-15 md:w-3 shadow-2 block md:block mx-auto border-round relative"
+            imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
+            src="../../../../../assets/img/15-acessorios-finais/selante.jpg" [preview]="true">
+        </p-image>
+        <div>
+            <div class="flex flex-row gap-1 mb-2">
+                <p-radioButton name="selante" value="selante" [(ngModel)]="selante"></p-radioButton>
+                <label for="selante" class="ml-2">Selante</label>
+            </div>
+            <div class="flex flex-row gap-1">
+                <p-radioButton name="selante" value="sem_selante" [(ngModel)]="selante"></p-radioButton>
+                <label for="selante" class="ml-2">Sem selante</label>
+            </div>
+        </div>
+    </div>
+
+</div>
+<app-navigation-tabs-btn (nextTab)="nextTab()" (prevTab)="prevTab()"></app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

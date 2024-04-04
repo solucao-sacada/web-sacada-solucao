@@ -12,8 +12,8 @@ export class Passo16Component {
     selante = '';
     aparador = '';
 
-    pedidoService = inject(PedidoService) 
-    toaster = inject(ToasterService) 
+    pedidoService = inject(PedidoService)
+    toaster = inject(ToasterService)
 
     ngOnInit(): void {
         this.pedidoService.getObservable().subscribe(() => {
@@ -37,6 +37,25 @@ export class Passo16Component {
 
 
     nextTab(): void {
+        if(this.aparador === 'aparador_inox'){
+            this.pedidoService.pedido.accessories.aparador_inox = true;
+            this.pedidoService.pedido.accessories.sem_aparador = false;
+            this.pedidoService.pedido.accessories.aparador_aluminio = false;
+
+        }else if(this.aparador === 'aparador_aluminio'){
+            this.pedidoService.pedido.accessories.aparador_aluminio = true;
+            this.pedidoService.pedido.accessories.sem_aparador = false;
+            this.pedidoService.pedido.accessories.aparador_inox = false;
+        }
+
+        if(this.selante === 'selante'){
+            this.pedidoService.pedido.accessories.selante = true;
+            this.pedidoService.pedido.accessories.sem_selante = false;
+        }else if(this.selante === 'sem_selante'){
+            this.pedidoService.pedido.accessories.sem_selante = true;
+            this.pedidoService.pedido.accessories.selante = false;
+        }
+
         if (this.aparador !== '' && this.selante !== '') {
             this.pedidoService.nextTab();
         } else {

@@ -49,45 +49,33 @@ export class Passo5Component {
     ) { }
 
     ngOnInit() {
-        this.pedidoService.getObservable().subscribe(() => {
-            if (this.pedidoService.pedido.balcony.format == 0)
-                this.selected = '';
+        this.amountPieces = this.pedidoService.pedido.balcony.format
+        if (this.pedidoService.pedido.balcony.format == 0)
+                this.selectedOption = '';
             else if (this.pedidoService.pedido.balcony.format == 1)
-                this.selected = 'Reta';
+                this.selectedOption = 'Reta';
             else if (this.pedidoService.pedido.balcony.format == 2)
-                this.selected = '"L" Esquerda';
+                this.selectedOption = '"L" Esquerda';
             else if (this.pedidoService.pedido.balcony.format == 3)
-                this.selected = '"L" Direita';
+                this.selectedOption = '"L" Direita';
             else if (this.pedidoService.pedido.balcony.format == 4)
-                this.selected = 'Formato "U"';
-            else if (this.pedidoService.pedido.balcony.format == 5)
-                this.selected = 'Outro';
-
-            this.setSelectedOption();
-        });
+                this.selectedOption = 'Formato "U"';
+            else if (this.amountPieces == 5){
+                this.selectedOption = 'Outro';
+                this.pedidoService.pedido.balcony.format = this.amountPieces
+            }
 
         if (this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
             let novoData = this.pedidoService.pedido.balcony.dimensions.data[0];
             this.selectedOption = String(novoData);
         }
     }
-    setSelectedOption() {
-        this.options.forEach(option => {
-            if (option.name === this.selected) {
-                this.selectedOption = option.name;
-            }
-        });
-    }
-
     toggleSelection(optionName: string): void {
-        if (this.selectedOption === optionName) {
-            return;
-        }
-
         this.selectedOption = optionName;
-
         // Atualiza o formato do balcão com base na opção selecionada
         this.pedidoService.pedido.balcony.format = this.options.find(option => option.name === optionName)?.code || 0;
+
+        this.amountPieces = this.pedidoService.pedido.balcony.format
 
         // Limpa os dados relacionados ao formato do balcão
         this.pedidoService.pedido.balcony.dimensions.data = [];
@@ -96,64 +84,19 @@ export class Passo5Component {
         this.pedidoService.notifyObservers();
     }
 
-
-    // select(value: string, code: number) {
-    //     this.pedidoService.pedido.balcony.format = code;
-    //     this.pedidoService.pedido.balcony.dimensions.data = [];
-    //     this.pedidoService.pedido.balcony.dimensions.total = '';
-    //     this.selected = value;
-    //     this.selectedOption[value] = true;
-    //     this.pedidoService.notifyObservers();
-    // }
-
-    // nextTab(): void {
-    //     const obj = this.pedidoService.pedido.balcony.format;
-    //     if (
-    //         obj == 1 ||
-    //         obj == 2 ||
-    //         obj == 3 ||
-    //         obj == 4 
-    //     ){
-    //         this.pedidoService.nextTab();
-    //     }
-    //     else if (obj === 5) {
-    //             this.pedidoService.pedido.balcony.format = this.amountPieces
-    //             if (
-    //                 this.pedidoService.pedido.balcony.format ||
-    //                 this.selected === 'Outro'
-    //             ) 
-                
-    //             if (this.selected === 'Outro') {
-    //                 if (this.pedidoService.pedido.balcony.format) {
-    //                     this.pedidoService.nextTab();
-    //                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-    //             } else this.pedidoService.nextTab();
-    //         } else this._toaster.warn(MESSAGES.UMA_OPCAO);
-    // }
-
     nextTab(): void {
-        const obj = this.pedidoService.pedido.balcony.format;
+        const obj = this.pedidoService.pedido.balcony.format
         if (
             obj == 1 ||
             obj == 2 ||
             obj == 3 ||
-            obj == 4 
+            obj == 4
         ){
             this.pedidoService.nextTab();
+
+        }else if (obj >= 5) {
+            this.pedidoService.nextTab();
         }
-        else if (obj === 5) {
-                this.pedidoService.pedido.balcony.format = this.amountPieces
-                if (
-                    this.pedidoService.pedido.balcony.format ||
-                    this.selected === 'Outro'
-                ) 
-                
-                if (this.selected === 'Outro') {
-                    if (this.pedidoService.pedido.balcony.format) {
-                        this.pedidoService.nextTab();
-                    } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-                } else this.pedidoService.nextTab();
-            } else this._toaster.warn(MESSAGES.UMA_OPCAO);
     }
 
     prevTab(): void {

@@ -211,12 +211,24 @@ export class Passo3Component {
                     this.pedidoService.pedido.balcony.glass.thickness['11mm']
                 ) {
                     this.pedidoService.nextTab();
+                    // console.log(`Espessura do Vidro: ${this.getThicknessLabel(this.pedidoService.pedido.balcony.glass.thickness)}`);
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
             } else if (this.pedidoService.pedido.balcony.glass.color.other) {
                 this.pedidoService.nextTab();
             } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
         } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
     }
+    
+    getThicknessLabel(thickness: any): string {
+     
+        for (const key in thickness) {
+            if (thickness[key]) {
+                return key;
+            }
+        }
+        return ''; 
+    }
+    
 
     prevTab(): void {
         this.pedidoService.prevTab();

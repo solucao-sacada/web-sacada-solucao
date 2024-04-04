@@ -34,7 +34,6 @@ export class PedidoService {
     }
 
     listByUser(): Observable<PedidoJson[]> {
-        console.log(this._auth.getUser()._id);
         return this._http.get<PedidoJson[]>(this.apiUrl + '/user/' + this._auth.getUser()._id);
     }
 
@@ -272,6 +271,7 @@ export class PedidoService {
         this.setActiveIndex(this.activeIndex);
         this.pedido.activeIndex = this.activeIndex;
         this.setPedido(this.pedido);
+        this.saveDraftPedido(this.pedido);
         this.notifyObservers();
     }
 

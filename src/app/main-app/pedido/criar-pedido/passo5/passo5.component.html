@@ -35,10 +35,10 @@
                     </div>
                 </div>
                 <div>
-                    <input 
-                        type="checkbox" 
-                        name="selectedOption" 
-                        [value]="option.name" 
+                    <input
+                        type="checkbox"
+                        name="selectedOption"
+                        [value]="option.name"
                         [checked]="selectedOption === option.name"
                         (change)="toggleSelection(option.name)"
                         class="cursor-pointer"
@@ -46,10 +46,10 @@
                 </div>
             </div>
         </div>
-        
+
         </ng-template>
     </p-dataView>
-    
+
 <div class="row mt-5" *ngIf="selected === 'Outro'">
     <p>
         O número de peças está relacionado ao número de cortes com grau do

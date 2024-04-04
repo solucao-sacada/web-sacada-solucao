@@ -106,6 +106,31 @@ export class Passo5Component {
     //     this.pedidoService.notifyObservers();
     // }
 
+    // nextTab(): void {
+    //     const obj = this.pedidoService.pedido.balcony.format;
+    //     if (
+    //         obj == 1 ||
+    //         obj == 2 ||
+    //         obj == 3 ||
+    //         obj == 4 
+    //     ){
+    //         this.pedidoService.nextTab();
+    //     }
+    //     else if (obj === 5) {
+    //             this.pedidoService.pedido.balcony.format = this.amountPieces
+    //             if (
+    //                 this.pedidoService.pedido.balcony.format ||
+    //                 this.selected === 'Outro'
+    //             ) 
+                
+    //             if (this.selected === 'Outro') {
+    //                 if (this.pedidoService.pedido.balcony.format) {
+    //                     this.pedidoService.nextTab();
+    //                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+    //             } else this.pedidoService.nextTab();
+    //         } else this._toaster.warn(MESSAGES.UMA_OPCAO);
+    // }
+
     nextTab(): void {
         const obj = this.pedidoService.pedido.balcony.format;
         if (

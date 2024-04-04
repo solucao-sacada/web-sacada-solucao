@@ -27,6 +27,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo9Component implements OnInit {
     linhasTabela: number = 0;
     linhas: any[] = [];
+    total: string = '';
 
     vidrosRestantes!: number;
     showVidrosRestantes = true;
@@ -37,6 +38,7 @@ export class Passo9Component implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.total = parseFloat(this.pedidoService.pedido.balcony.dimensions.total).toFixed(1);
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
                 this.pedidoService.pedido = data;
@@ -53,9 +55,9 @@ export class Passo9Component implements OnInit {
             this.linhas = this.pedidoService.pedido.balcony.dimensions.data.map(
                 (linha, index) => ({
                     piece: index + 1,
-                    angle: linha[1] || '', 
-                    dimension: linha[2] || '', 
-                    quantity: linha[3] || '', 
+                    angle: linha[1] || '',
+                    dimension: linha[2] || '',
+                    quantity: linha[3] || '',
                 })
             );
         } else {
@@ -65,7 +67,7 @@ export class Passo9Component implements OnInit {
                     piece: index + 1,
                     angle: '',
                     dimension: '',
-                    quantity: '', 
+                    quantity: '',
                 })
             );
         }
@@ -80,17 +82,17 @@ export class Passo9Component implements OnInit {
         );
         // Define a quantidade de vidros restantes como a diferença entre a quantidade inicial de peças e a quantidade de peças adicionadas
         this.vidrosRestantes = this.linhasTabela - totalPieces;
-    
+
         // Garante que os vidros restantes não sejam negativos
         this.vidrosRestantes = Math.max(0, this.vidrosRestantes);
     }
-    
+
     update() {
         this.linhasTabela = this.pedidoService.getQtdPecas();
         this.inicializarLinhas();
-        this.atualizarVidrosRestantes(); 
+        this.atualizarVidrosRestantes();
     }
-    
+
     verificarAtualizarQuantidadeDeVidro(linha): void {
         const dimensao = parseFloat(linha.dimension);
         if (dimensao >= 500) {
@@ -100,21 +102,21 @@ export class Passo9Component implements OnInit {
         }
         this.atualizarVidrosRestantes(); // Chama a função após adicionar ou remover um vidro
     }
-    
-    
+
+
     salvarDimensoes(): void {
         this.pedidoService.pedido.balcony.dimensions.data = this.linhas.map(
             (linha) => [
                 linha.piece.toString(),
-                linha.angle.replace(',', '.'),
+                parseFloat(linha.angle).toFixed(1),
                 linha.dimension,
                 linha.quantity,
             ]
         );
-    
-        this.atualizarVidrosRestantes(); 
+
+        this.atualizarVidrosRestantes();
     }
-    
+
     limpar() {
         this.pedidoService.pedido.balcony.dimensions.data = [];
         this.pedidoService.pedido.balcony.dimensions.total = '';
@@ -131,13 +133,14 @@ export class Passo9Component implements OnInit {
             linha.quantity = ''; // Limpar quantity se dimension estiver vazio
         }
     }
+
     private getTotalVidros(): number {
         return this.linhas.reduce((total, linha) => total + (linha.quantity ? +linha.quantity : 0), 0);
-    }    
+    }
 
     _nextTab(): void {
         this.salvarDimensoes();
-    
+
         // Verifica se todos os campos obrigatórios foram preenchidos
         if (
             this.linhas.some(
@@ -152,7 +155,7 @@ export class Passo9Component implements OnInit {
         } else {
             // Calcula a quantidade total de vidros
             const totalVidros = this.getTotalVidros();
-    
+
             // Verifica se a quantidade total de vidros excede a quantidade total de peças
             if (totalVidros > this.linhasTabela) {
                 this._toster.warn('Você selecionou mais vidros do que peças disponíveis. Por favor, ajuste as quantidades.');
@@ -168,8 +171,12 @@ export class Passo9Component implements OnInit {
             }
         }
     }
-    
+
     _prevTab(): void {
         this.pedidoService.prevTab();
+    }
+
+    updatePedido(value: string): void {
+        this.pedidoService.pedido.balcony.dimensions.total = parseFloat(value).toFixed(1);
     }
 }

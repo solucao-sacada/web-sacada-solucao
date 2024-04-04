@@ -43,11 +43,10 @@ export class Passo6Component implements OnInit {
             this.setSelectedFromPosition();
         });
     }
-    
+
 
     setSelectedFromPosition() {
         const position = this.pedidoService.pedido.balcony.beam.position;
-
         if (position) {
             if (position.aligned) {
                 this.selected = 'Alinhado com o guarda corpo';
@@ -90,7 +89,7 @@ export class Passo6Component implements OnInit {
 
     nextTab(): void {
         const position = this.pedidoService.pedido.balcony.beam.position;
-    
+
         if (position && (position.aligned || position.inside || position.outside)) {
             this.pedidoService.nextTab();
         } else {
@@ -101,7 +100,7 @@ export class Passo6Component implements OnInit {
     prevTab(): void {
         this.pedidoService.prevTab();
     }
-    
+
 
     // select(value: string, code: number) {
     //     this.pedidoService.pedido.balcony.format = code;
@@ -117,8 +116,8 @@ export class Passo6Component implements OnInit {
     //     const position = this.pedidoService.pedido.balcony.beam.position;
 
     //     if (
-    //         position == 1 || 
-    //         position == 2 || 
+    //         position == 1 ||
+    //         position == 2 ||
     //         position == 3
     //         ) {
     //             this.pedidoService.nextTab();
@@ -127,6 +126,6 @@ export class Passo6Component implements OnInit {
     //     }
 
     // }
-  
-   
+
+
 }

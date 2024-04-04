@@ -26,6 +26,7 @@
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()"
         />
     </div>
+
     <div class="col-3 p-1 text-center border-right-1">
         <input
             type="text"
@@ -51,7 +52,8 @@
         <input
             type="text"
             class="border-0 shadow-none text-center w-full"
-            [(ngModel)]="pedidoService.pedido?.balcony.dimensions.total"
+            [(ngModel)]="total"
+            (input)="updatePedido($event.target.value)"
         />
     </div>
     <div class="flex flex-end ml-2">

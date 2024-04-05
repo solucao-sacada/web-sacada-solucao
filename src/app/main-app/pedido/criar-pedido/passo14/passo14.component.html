@@ -61,6 +61,16 @@
                         {{ option.name }}
                     </div>
                 </div>
+                <div>
+                    <input 
+                        type="checkbox" 
+                        name="selected" 
+                        [value]="option.name" 
+                        [checked]="selected === option.name"
+                        (change)="toggleSelection(option.name)"
+                        class="cursor-pointer"
+                    />
+                </div>
             </div>
         </div>
     </ng-template>
@@ -73,13 +83,10 @@
 >
     <ng-template let-option pTemplate="listItem">
         <div
+            (change)="toggleSelection(option.name);"
             (click)="selectPorta(option)"
             class="col-12 cursor-pointer"
-            [style]="
-                selectedPorta === option.name
-                    ? 'background-color: #a3d4fb;'
-                    : ''
-            "
+            [style]="selectedPorta === option.name? 'background-color: #a3d4fb;': ''"
         >
             <div
                 class="flex flex-column md:flex-row md:align-items-start p-4 gap-4"
@@ -99,6 +106,16 @@
                     <div class="text-xl sm:text-2xl font-bold h-full">
                         {{ option.name }}
                     </div>
+                </div>
+                <div>
+                    <input 
+                        type="checkbox" 
+                        name="selected" 
+                        [value]="option.name" 
+                        [checked]="selected === option.name"
+                        (change)="toggleSelection(option.name)"
+                        class="cursor-pointer"
+                    />
                 </div>
             </div>
         </div>

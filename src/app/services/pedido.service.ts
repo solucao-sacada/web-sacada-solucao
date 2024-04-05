@@ -125,8 +125,10 @@ export class PedidoService {
                         data: [],
                         highest_ceiling: '',
                         highest_floor: '',
+                        highest_prolongation: '',
                         lower_ceiling: '',
                         lower_floor: '',
+                        lower_prolongation: '',
                     },
                 },
                 lock: {

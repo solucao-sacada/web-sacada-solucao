@@ -73,15 +73,35 @@
     >
 </div>
 
-<div
-    class="flex flex-column align-items-center mt-5 justify-content-center text-xl font-light text-gray-800 my-2 relative"
->
+<div class="flex flex-column align-items-center gap-2 mt-5 justify-content-center text-xl font-light text-gray-800 my-2 relative">
+    <div class="flex flex-column align-items-center gap-2 justify-content-center">
+            <strong *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21">Necessário correção da viga</strong>
+            <span class="text-red-600" *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 41">
+                A diferença de nível na VIGA ultraprassa os 40mm. Entre em contato com fornecedor.
+            </span>
+            <span *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21">
+                Informe o tamanho do prolongador em milimetros (mm).
+            </span>
+            <p-inputNumber *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21" [(ngModel)]="prolongadorTeto" [format]="'n'" [step]="0.1" [minFractionDigits]="1" [maxFractionDigits]="1"></p-inputNumber>
+
+        <hr *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21 && diferencaPrimeiraPontoUltimoPontoPiso >= 20" class="m-2">
+
+            <strong *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20">Necessário correção da base</strong>
+            <span class="text-red-600" *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 35">
+                A diferença de nível na Base ultraprassa os 35mm. Entre em contato com fornecedor.
+            </span>
+            <span *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20">
+                Informe o tamanho do prolongador em milimetros (mm).
+            </span>
+            <p-inputNumber class="mb-4" *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20" [(ngModel)]="prolongadorPiso" [format]="'n'" [step]="0.1" [minFractionDigits]="1" [maxFractionDigits]="1"></p-inputNumber>
+    </div>
+</div>
+
     <p class="text-center">
         <strong>Dica:</strong> Marcar as distâncias em milimetros (mm) do laser
         ao teto e chão da abertura, iniciando pela lateral esquerda do vão.
     </p>
     <p class="text-center">Indicado uma medida para cada vidro</p>
-</div>
 
 <div class="flex justify-content-center mt-3">
     <p-button
@@ -92,8 +112,30 @@
     ></p-button>
 </div>
 
+<div>
+    <p-dialog [(visible)]="visible" [style]="{width: '450px'}" header="Aviso" [modal]="true" class="p-fluid">
+        <p class="text-700">O sistema ultrapassou o limite com o auxilio do prolongador. Entre em contato com o fornecedor. Deseja continuar?</p>
+        <div class="flex flex-row gap-2 justify-content-end mt-4">
+            <button
+            pButton
+            style="width: 4.5rem;"
+            (click)="naoContinuar()">
+            Não
+            </button>
+            <button
+                pButton
+                style="width: 4.5rem;"
+                (click)="simContinuar()">
+                Sim
+            </button>
+        </div>
+    </p-dialog>
+
+
+</div>
+
 <app-navigation-tabs-btn
-    (nextTab)="nextTab()"
+    (nextTab)="verificarProlongadores()"
     (prevTab)="prevTab()"
 ></app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

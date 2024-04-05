@@ -27,6 +27,7 @@ export class Passo13Component {
     ) {}
 
     ngOnInit() {
+        console.log(this.pedidoService.pedido?.balcony.aperture.locations)
         this.pedidoService.getObservable().subscribe((data) => {
             this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
             this.update();
@@ -73,7 +74,6 @@ export class Passo13Component {
     }
 
     atualizarQtdVidrosRestantes(): void {
-        console.log(this.qtdVidros);
         let qtdVidrosRestantes = this.qtdVidros;
         for (
             let i = 0;
@@ -116,6 +116,19 @@ export class Passo13Component {
 
     nextTab(): void {
         this.verifyStep();
+        if(this.pedidoService.pedido.balcony.aperture.locations.length > 0) {
+            let isNotHaveStacking = false
+            for(let location of this.pedidoService.pedido?.balcony.aperture.locations){
+                if(location.stacking === 'Nenhum'){
+                    isNotHaveStacking = true
+                }
+            }
+            if(isNotHaveStacking){
+                this._toaster.warn('Por favor, defina o tipo de empilhamento!');
+                 return
+            }
+        }
+
         const mensagensAviso = [];
         if (this.vidrosRestantes < 0) {
             mensagensAviso.push(
@@ -150,6 +163,7 @@ export class Passo13Component {
     }
 
     verifyStep(): void {
+
         if (this.vidrosRestantes < 0) {
             this.isOk.emit(false);
         } else if (this.vidrosRestantes > 0) {

@@ -9,23 +9,7 @@ import { MESSAGES } from 'src/app/main-app/utils/messages';
     styles: [],
 })
 export class Passo14Component {
-    constructor(
-        public pedidoService: PedidoService,
-        private _toaster: ToasterService
-    ) { }
 
-    ngOnInit() {
-        this.pedidoService.getObservable().subscribe(() => {
-            if (this.pedidoService.pedido.balcony.lock.pvc)
-                this.selectedVidro = 'PVC';
-            else if (this.pedidoService.pedido.balcony.lock.ferro)
-                this.selectedVidro = 'FERRO';
-            if (this.pedidoService.pedido.balcony.lock['1520/1531'])
-                this.selectedPorta = '1520/1531';
-            else if (this.pedidoService.pedido.balcony.lock['3210/3211'])
-                this.selectedPorta = '3210/3211';
-        });
-    }
 
     selectedVidro: string = '';
     selectedPorta: string = '';
@@ -58,6 +42,30 @@ export class Passo14Component {
         },
     ];
 
+    constructor(
+        public pedidoService: PedidoService,
+        private _toaster: ToasterService
+    ) { }
+
+    ngOnInit() {
+        this.pedidoService.getObservable().subscribe(() => {
+            if (this.pedidoService.pedido.balcony.lock.pvc){
+                this.selectedVidro = 'PVC';
+                this.selected = 'PVC';
+            }else if (this.pedidoService.pedido.balcony.lock.ferro){
+                this.selectedVidro = 'FERRO';
+                this.selected = 'FERRO';
+            }if (this.pedidoService.pedido.balcony.lock['1520/1531']){
+                this.selectedPorta = '1520/1531';
+                this.selected = '1520/1531';
+            }else if (this.pedidoService.pedido.balcony.lock['3210/3211']){
+                this.selectedPorta = '3210/3211';
+                this.selected = '3210/3211';
+            }
+
+        });
+    }
+
     changeTip(value: string) {
         if (value === 'vidro') {
             this.pedidoService.pedido.balcony.lock.fechadura_para_porta = false;
@@ -69,36 +77,29 @@ export class Passo14Component {
         }
     }
 
-    selectVidro(option: any) {
-        this.pedidoService.pedido.balcony.lock.pvc = option.code === 1;
-        this.pedidoService.pedido.balcony.lock.ferro = option.code === 2;
-        this.selectedVidro = option.name;
-    }
-
-    selectPorta(option: any) {
-        this.pedidoService.pedido.balcony.lock['1520/1531'] = option.code === 1;
-        this.pedidoService.pedido.balcony.lock['3210/3211'] = option.code === 2;
-        this.selectedPorta = option.name;
-    }
-
     toggleSelection(optionName: string): void {
         this.selectedOption = optionName;
         this.selected = optionName;
 
+
         if (optionName.includes('PVC')) {
             this.pedidoService.pedido.balcony.lock.pvc = true;
-            this.pedidoService.pedido.balcony.lock.ferro = false; 
+            this.pedidoService.pedido.balcony.lock.ferro = false;
+            this.selectedVidro = 'PVC';
         } else if(optionName.includes('FERRO')) {
                 this.pedidoService.pedido.balcony.lock.ferro == true;
                 this.pedidoService.pedido.balcony.lock.pvc == false;
+                this.selectedVidro = 'FERRO';
             }
 
         if (optionName.includes('1520/1531')) {
             this.pedidoService.pedido.balcony.lock['1520/1531'] == true;
             this.pedidoService.pedido.balcony.lock['3210/3211'] == false;
+            this.selectedPorta = '1520/1531';
         } else if (optionName.includes('3210/3211')) {
             this.pedidoService.pedido.balcony.lock['3210/3211'] == true;
             this.pedidoService.pedido.balcony.lock['1520/1531'] == false;
+            this.selectedPorta = '3210/3211';
         }
     }
     nextTab(): void {

@@ -23,9 +23,9 @@ export class Passo16Component {
             else if (this.pedidoService.pedido.accessories.sem_selante) {
                 this.selante = 'sem_selante';
             }
-            else if (this.pedidoService.pedido.accessories.aparador_aluminio) {
-                this.aparador = 'aparador_aluminio';
-            }
+            // else if (this.pedidoService.pedido.accessories.aparador_aluminio) {
+            //     this.aparador = 'aparador_aluminio';
+            // }
             else if (this.pedidoService.pedido.accessories.aparador_inox) {
                 this.aparador = 'aparador_inox';
             }

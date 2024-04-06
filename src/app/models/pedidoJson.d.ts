@@ -20,6 +20,8 @@ export interface Accessories {
     sem_aparador: boolean;
     selante: boolean;
     sem_selante: boolean;
+    qtdAparador: number;
+    qtdSelante: number;
 }
 
 export interface Balcony {

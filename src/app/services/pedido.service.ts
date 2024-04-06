@@ -70,6 +70,8 @@ export class PedidoService {
                 sem_aparador: false,
                 selante: false,
                 sem_selante: false,
+                qtdAparador: 0,
+                qtdSelante: 0,
             },
             balcony: {
                 aluminium: {

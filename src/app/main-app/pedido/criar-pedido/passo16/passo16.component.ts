@@ -43,16 +43,19 @@ export class Passo16Component {
             this.pedidoService.pedido.accessories.aparador_inox = true;
             this.pedidoService.pedido.accessories.sem_aparador = false;
             this.pedidoService.pedido.accessories.aparador_aluminio = false;
+            this.pedidoService.pedido.accessories.qtdAparador = this.qtdAparador
 
         } else if (this.aparador === 'aparador_aluminio') {
             this.pedidoService.pedido.accessories.aparador_aluminio = true;
             this.pedidoService.pedido.accessories.sem_aparador = false;
             this.pedidoService.pedido.accessories.aparador_inox = false;
+            this.pedidoService.pedido.accessories.qtdAparador = this.qtdAparador
         }
 
         if (this.selante === 'selante') {
             this.pedidoService.pedido.accessories.selante = true;
             this.pedidoService.pedido.accessories.sem_selante = false;
+            this.pedidoService.pedido.accessories.qtdSelante = this.qtdSelante
         } else if (this.selante === 'sem_selante') {
             this.pedidoService.pedido.accessories.sem_selante = true;
             this.pedidoService.pedido.accessories.selante = false;
@@ -71,7 +74,7 @@ export class Passo16Component {
         } else {
             this.toaster.warn(MESSAGES.UMA_OPCAO);
         }
-        
+
     }
 
     prevTab(): void {

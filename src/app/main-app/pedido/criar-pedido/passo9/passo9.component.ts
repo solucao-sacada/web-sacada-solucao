@@ -21,13 +21,31 @@ import { PedidoService } from 'src/app/services/pedido.service';
                 border: 0 none;
                 outline: 0;
             }
+
+            :host ::ng-deep .p-inputtext {
+                border:none;
+                text-align: center;
+                padding: 0;
+            }
+
+            :host ::ng-deep .p-inputtext:enabled:focus {
+                outline:none;
+                border: none;
+                box-shadow: none;
+            }
+
+            ::ng-deep .green-300 .p-inputtext{
+                background-color: var(--green-200);
+                padding: 0;
+            }
+
         `,
     ],
 })
 export class Passo9Component implements OnInit {
     linhasTabela: number = 0;
     linhas: any[] = [];
-    total: string = '';
+    total: number = 0;
 
     vidrosRestantes!: number;
     showVidrosRestantes = true;
@@ -38,13 +56,14 @@ export class Passo9Component implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.total = this.pedidoService.pedido.balcony.dimensions.total ? parseFloat(this.pedidoService.pedido.balcony.dimensions.total).toFixed(1) : '';
+        this.total = Number(this.pedidoService.pedido.balcony.dimensions.total)
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
                 this.pedidoService.pedido = data;
                 this.update();
             }
         });
+        this.inicializarLinhas();
     }
 
     private inicializarLinhas(): void {
@@ -81,7 +100,7 @@ export class Passo9Component implements OnInit {
             0
         );
         // Define a quantidade de vidros restantes como a diferença entre a quantidade inicial de peças e a quantidade de peças adicionadas
-        this.vidrosRestantes = this.linhasTabela - totalPieces;
+        this.vidrosRestantes = this.linhasTabela - Number(totalPieces);
 
         // Garante que os vidros restantes não sejam negativos
         this.vidrosRestantes = Math.max(0, this.vidrosRestantes);
@@ -109,8 +128,8 @@ export class Passo9Component implements OnInit {
             (linha) => [
                 linha.piece.toString(),
                 parseFloat(linha.angle).toFixed(1),
-                linha.dimension,
-                linha.quantity,
+                String(linha.dimension),
+                String(linha.quantity),
             ]
         );
 

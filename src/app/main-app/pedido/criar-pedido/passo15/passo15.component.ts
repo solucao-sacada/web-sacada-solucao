@@ -27,6 +27,13 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo15Component {
     medidas: any[] = [];
     menorAltura = 0;
+    menorAlturaTeto = 0;
+    diferencaPrimeiraPontoUltimoPontoTeto = 0;
+    diferencaPrimeiraPontoUltimoPontoPiso = 0;
+    prolongadorTeto = 0;
+    prolongadorPiso = 0;
+    visible = false
+
 
     constructor(
         public pedidoService: PedidoService,
@@ -34,6 +41,8 @@ export class Passo15Component {
     ) {}
 
     ngOnInit(): void {
+        this.prolongadorPiso = 0
+        this.prolongadorTeto = 0
         this.pedidoService.getObservable().subscribe(() => {
             this.inicializarLinhas();
             this.menorAltura = this.verificarMenorAltura();
@@ -91,6 +100,10 @@ export class Passo15Component {
         let menorAlturaTeto = Infinity;
         let menorAlturaPiso = Infinity;
 
+        this.diferencaPrimeiraPontoUltimoPontoTeto = Math.abs(Number(this.medidas[0].ceiling) - Number(this.medidas[this.medidas.length - 1].ceiling))
+
+        this.diferencaPrimeiraPontoUltimoPontoPiso = Math.abs(Number(this.medidas[0].floor) - Number(this.medidas[this.medidas.length - 1].floor))
+
         for (let i = 0; i < this.medidas.length; i++) {
             const alturaTeto = +this.medidas[i].ceiling;
             const alturaPiso = +this.medidas[i].floor;
@@ -104,9 +117,12 @@ export class Passo15Component {
             }
         }
 
+
         // Check if both values are valid (not Infinity) before returning their sum
         if (menorAlturaTeto !== Infinity && menorAlturaPiso !== Infinity) {
-            return menorAlturaTeto + menorAlturaPiso;
+            let menorAltura = menorAlturaTeto + menorAlturaPiso;
+            this.menorAltura = menorAltura;
+            return menorAltura;
         } else {
             return 0;
         }
@@ -153,8 +169,31 @@ export class Passo15Component {
             this.verificarMenorAltura().toString();
     }
 
+    verificarProlongadores(): void {
+        if(this.prolongadorPiso === 0 && this.prolongadorTeto === 0){
+            if(this.diferencaPrimeiraPontoUltimoPontoPiso >= 21 || this.diferencaPrimeiraPontoUltimoPontoTeto >= 20){
+                this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS)
+                return
+            }else{
+                this.nextTab()
+            }
+            return
+        }
+
+        if(this.prolongadorPiso > 35 || this.prolongadorTeto > 40){
+            this.visible = true
+            return
+        }else{
+            this.nextTab()
+        }
+
+    }
+
     nextTab(): void {
         this.salvar();
+        this.pedidoService.pedido.balcony.levels.measures.highest_prolongation = this.prolongadorTeto.toString();
+        this.pedidoService.pedido.balcony.levels.measures.lower_prolongation = this.prolongadorPiso.toString();
+
         let hasError = true;
         this.medidas.map((medida) => {
             if (medida.ceiling && medida.floor) hasError = false;
@@ -166,5 +205,14 @@ export class Passo15Component {
     }
     prevTab(): void {
         this.pedidoService.prevTab();
+    }
+
+    naoContinuar(): void {
+        this.visible = false
+    }
+
+    simContinuar(): void {
+        this.nextTab()
+        this.visible = false
     }
 }

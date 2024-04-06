@@ -38,7 +38,7 @@ export class Passo9Component implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.total = this.pedidoService.pedido.balcony.dimensions.total ? this.pedidoService.pedido.balcony.dimensions.total : '';
+        this.total = this.pedidoService.pedido.balcony.dimensions.total ? parseFloat(this.pedidoService.pedido.balcony.dimensions.total).toFixed(1) : '';
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
                 this.pedidoService.pedido = data;

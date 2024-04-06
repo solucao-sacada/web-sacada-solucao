@@ -34,7 +34,7 @@
 >
     <ng-template let-option pTemplate="listItem">
         <div
-            (click)="selectVidro(option)"
+            (click)="toggleSelection(option.name)"
             class="col-12 cursor-pointer"
             [style]="
                 selectedVidro === option.name
@@ -62,10 +62,10 @@
                     </div>
                 </div>
                 <div>
-                    <input 
-                        type="checkbox" 
-                        name="selected" 
-                        [value]="option.name" 
+                    <input
+                        type="checkbox"
+                        name="selected"
+                        [value]="option.name"
                         [checked]="selected === option.name"
                         (change)="toggleSelection(option.name)"
                         class="cursor-pointer"
@@ -83,8 +83,7 @@
 >
     <ng-template let-option pTemplate="listItem">
         <div
-            (change)="toggleSelection(option.name);"
-            (click)="selectPorta(option)"
+            (click)="toggleSelection(option.name);"
             class="col-12 cursor-pointer"
             [style]="selectedPorta === option.name? 'background-color: #a3d4fb;': ''"
         >
@@ -108,10 +107,10 @@
                     </div>
                 </div>
                 <div>
-                    <input 
-                        type="checkbox" 
-                        name="selected" 
-                        [value]="option.name" 
+                    <input
+                        type="checkbox"
+                        name="selected"
+                        [value]="option.name"
                         [checked]="selected === option.name"
                         (change)="toggleSelection(option.name)"
                         class="cursor-pointer"

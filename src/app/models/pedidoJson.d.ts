@@ -74,7 +74,7 @@ export interface Position {
     aligned: boolean;
     inside: boolean;
     outside: boolean;
-    selectedOption?: string; 
+    selectedOption?: string;
 }
 
 export interface Dimensions {
@@ -116,8 +116,10 @@ export interface Measures {
     data: string[][];
     highest_ceiling: string;
     highest_floor: string;
+    highest_prolongation: string;
     lower_ceiling: string;
     lower_floor: string;
+    lower_prolongation: string;
 }
 
 export interface Lock {

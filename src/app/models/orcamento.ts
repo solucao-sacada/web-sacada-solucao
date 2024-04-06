@@ -11,6 +11,7 @@ export interface IConstsOrcamento {
     apa: number;
     fec: number;
     ins: number;
+    // chapa_in: number;
     cond: string;
     Vsac_AVISTA: number;
     Vsac_APRAZO: number;
@@ -49,6 +50,15 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
      */
     private _ins = 150;
     /**
+     * Chapa de correção
+     */
+    private _chapaInf = 50;
+    private _chapaSup = 50;
+    /**
+     * Prolongador
+     */
+    private _prolong = 50;
+    /**
      * TEXTO QUE SERÁ INFORMANDO NO
      * ORÇAMENTO DO CLIENTE FINAL PARA PAGAMENTO
      * DE PARCEIRO SERÁ ARMAZENADO COMO
@@ -77,6 +87,15 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     public get ins() {
         return this._ins;
     }
+    public get chapaSup() {
+        return this._chapaSup;
+    }
+    public get chapaInf() {
+        return this._chapaInf;
+    }
+    public get prolong() {
+        return this._prolong;
+    }
     public get cond() {
         return this._cond;
     }
@@ -98,8 +117,13 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     //variaveis adicionadas
     cliente: string = '';
     aparador: boolean = false;
-    qtdAparador: number | null = null;
     selante: boolean = false;
+    chapaSuperior: boolean = false;
+    chapaInferior: boolean = false;
+    prolongador: boolean = false;
+    
+    qtdAparador: number | null = null;
+    qtdProlongador: number | null = null;
     qtdSelante: number | null = null;
     valorFinal: number = null;
 
@@ -138,9 +162,22 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
      * Valor dos acessórios
      */
     get valorAcessorios(): number {
-        return this.sel * this.qtdSelante + this.qtdAparador * this.apa;
+        let valor = this.sel * this.qtdSelante + this.qtdAparador * this.apa + this.qtdProlongador * this.prolong;
+    
+        // Adiciona o valor da chapa superior se estiver sendo usada
+        if (this.chapaSuperior) {
+            valor += this.chapaSup;
+        }
+    
+        // Adiciona o valor da chapa inferior se estiver sendo usada
+        if (this.chapaInferior) {
+            valor += this.chapaInf;
+        }
+    
+        return valor;
     }
-
+    
+    
     /**
      * Custo total a vista
      */

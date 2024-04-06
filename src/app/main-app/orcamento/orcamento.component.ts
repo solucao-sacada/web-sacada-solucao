@@ -12,6 +12,7 @@ import { OrcamentoService } from 'src/app/services/orcamento.service';
 })
 export class OrcamentoComponent {
     @ViewChild('resultado') resultadoSection: ElementRef;
+    backgroundColor: string = 'white'; 
     activeIndex = 0;
     isCalculeted = false;
     orcamento1 = new CalculoOrcamento();
@@ -35,6 +36,7 @@ export class OrcamentoComponent {
             }
         });
     }
+
     private load() {
         this.orcamentoService.list().subscribe((orcamentos) => {
             this.orcamentos = orcamentos;

@@ -1,6 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
-
+import { DividerModule } from 'primeng/divider';
 import { OrcamentoRoutingModule } from './orcamento-routing.module';
 import { OrcamentoComponent } from './orcamento.component';
 import { ComponentsModule } from 'src/app/components/components.module';
@@ -16,6 +16,7 @@ registerLocaleData(localePt);
     CommonModule,
     OrcamentoRoutingModule,
     ComponentsModule,
+    DividerModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-BR' }

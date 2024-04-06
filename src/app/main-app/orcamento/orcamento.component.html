@@ -1,7 +1,7 @@
 <p-toast life="4000" key="tst"></p-toast>
-
 <p-tabView [(activeIndex)]="activeIndex">
     <p-tabPanel header="Meus Orçamentos">
+   
         <p-table [value]="orcamentos" dataKey="nome" responsiveLayout="stack">
             <ng-template pTemplate="header">
                 <tr>
@@ -40,17 +40,28 @@
         </p-table>
     </p-tabPanel>
     <p-tabPanel header="Novo Orçamento">
+        <p-image class="w-12 my-3 sm:w-17 md:w-3 block md:block mx-auto relative"
+            [ngStyle]="{'background-color': backgroundColor}"
+            imageClass="object-fit-cover w-full block mx-auto"
+            [preview]="true"
+            src="../../../assets/img/Orcamento/sacada.jpeg">
+        </p-image>
+        
+        <div class="flex flex-column gap-1 mb-5">
+            <label for="cliente" class="font-bold">Cliente</label>
+            <input
+                pInputText
+                id="cliente"
+                name="cliente"
+                [(ngModel)]="orcamento.cliente"
+            />
+        </div>
+
         <app-title title="Valores"></app-title>
+        <hr class="mb-3 mt-2">
+
         <form (ngSubmit)="onSubmit()" class="mt-4">
-            <div class="flex flex-column gap-1 mb-3">
-                <label for="cliente" class="font-bold">Cliente</label>
-                <input
-                    pInputText
-                    id="cliente"
-                    name="cliente"
-                    [(ngModel)]="orcamento.cliente"
-                />
-            </div>
+
             <div class="flex flex-column gap-1 mb-3">
                 <label for="ml" class="font-bold"> Largura Total (mm)</label>
                 <p-inputNumber
@@ -77,9 +88,37 @@
                     placeholder="Altura em milímetros"
                 />
             </div>
+            <div class="flex flex-column gap-1 mb-3">
+                <label for="vd" class="font-bold"
+                    >Valor do Vidro por m² (R$)</label
+                >
+                <p-inputNumber
+                    styleClass="w-full"
+                    id="vd"
+                    name="vd"
+                    [(ngModel)]="orcamento.vd"
+                    mode="currency"
+                    currency="BRL"
+                />
+            </div>
+            <div class="flex flex-column gap-1 mb-5">
+                <label for="mar" class="font-bold">Meta de margem (%)</label>
+                <p-inputNumber
+                    styleClass="w-full"
+                    id="mar"
+                    name="mar"
+                    [(ngModel)]="orcamento.mar"
+                    inputId="percent"
+                    suffix="%"
+                />
+            </div>
+
+            <!-- APARADORES -->
+            <app-title title="Aparadores"></app-title>
+            <hr class="mb-3 mt-2">
+
             <div class="flex">
-                <div class="flex w-7 flex-column gap-2 mb-3">
-                    <label class="font-bold">Aparadores</label>
+                <div class="flex w-7 flex-column gap-2 mb-5">
                     <div class="flex">
                         <p-radioButton
                             name="aparador"
@@ -113,13 +152,20 @@
                         id="qtdAparador"
                         name="qtdAparador"
                         [(ngModel)]="orcamento.qtdAparador"
+                        [showButtons]="true" 
+                        [min]="1"
                         inputId="integeronly"
                     />
                 </div>
+                
             </div>
+
+            <!-- SELANTE -->
+            <app-title title="Selante"></app-title>
+            <hr class="mb-3 mt-2">
+
             <div class="flex">
-                <div class="flex w-7 flex-column gap-2 mb-3">
-                    <label class="font-bold">Selante</label>
+                <div class="flex w-7 flex-column gap-2 mb-5">
                     <div class="flex">
                         <p-radioButton
                             name="selante"
@@ -151,38 +197,124 @@
                         id="qtdAparador"
                         name="qtdAparador"
                         [(ngModel)]="orcamento.qtdSelante"
+                        [showButtons]="true" 
+                        [min]="1"
                         inputId="integeronly"
                     />
-                    <small class="text-bold"
-                        >Um selante rende de 4-5 metros linear.</small
-                    >
+                    <small class="text-bold">Um selante rende de 4-5 metros linear.</small>
                 </div>
             </div>
 
-            <div class="flex flex-column gap-1 mb-3">
-                <label for="vd" class="font-bold"
-                    >Valor do Vidro por m² (R$)</label
+            <!-- CHAPA SUPERIOR -->
+            <app-title title="Chapa de correção Superior"></app-title>
+            <hr class="mb-3 mt-2">
+
+            <div class="flex w-7 flex-column gap-2 mb-5">
+                    <div class="flex">
+                        <p-radioButton
+                            name="chapaFora"
+                            [value]="false"
+                            [(ngModel)]="orcamento.chapaSuperior"
+                            inputId="chapaFora"
+                        ></p-radioButton>
+                        <label for="aparador" class="ml-2">Sem chapa superior</label>
+                    </div>
+               
+                    <div class="flex">
+                        <p-radioButton
+                            name="chapaFora"
+                            [value]="true"
+                            [(ngModel)]="orcamento.chapaSuperior"
+                            inputId="chapaFora"
+                        ></p-radioButton>
+                        <label for="aparador" class="ml-2">Com chapa superior</label>
+                    </div>
+                <!-- <p-image
+                    class="w-4 sm:w-15rem md:w-10rem shadow-2 border-round"
+                    imageClass=" object-fit-cover w-full shadow-2 border-round"
+                    src="../../../assets/img/7-trilhos-superiores/aba-fora.jpg"
+                    [preview]="true"
+                    >
+                </p-image> -->
+            </div>
+
+            <!-- CHAPA INFERIOR -->
+            <app-title title="Chapa de correção Inferior"></app-title>
+            <hr class="mb-3 mt-2">
+
+            <div class="flex flex-column gap-3 mb-5">
+                <div class="flex">
+                    <p-radioButton
+                        name="chapaInferior"
+                        [value]="false"
+                        [(ngModel)]="orcamento.chapaInferior"
+                        inputId="chapaInferior"
+                    ></p-radioButton>
+                    <label for="aparador" class="ml-2">Sem chapa inferior</label>
+                </div>
+                <div class="flex">
+                    <p-radioButton
+                        name="chapaSuperior"
+                        [value]="true"
+                        [(ngModel)]="orcamento.chapaInferior"
+                        inputId="chapaSuperior"
+                    ></p-radioButton>
+                    <label for="aparador" class="ml-2">Com chapa inferior</label>
+                </div>
+                <!-- <p-image 
+                    class="w-4 sm:w-15rem md:w-10rem shadow-2 border-round"
+                    imageClass=" object-fit-cover w-full shadow-2 border-round"
+                    src="../../../assets/img/7-trilhos-superiores/aba-dentro.jpg"
+                    [preview]="true"
                 >
-                <p-inputNumber
-                    styleClass="w-full"
-                    id="vd"
-                    name="vd"
-                    [(ngModel)]="orcamento.vd"
-                    mode="currency"
-                    currency="BRL"
-                />
+                </p-image> -->
             </div>
-            <div class="flex flex-column gap-1 mb-3">
-                <label for="mar" class="font-bold">Meta de margem (%)</label>
-                <p-inputNumber
-                    styleClass="w-full"
-                    id="mar"
-                    name="mar"
-                    [(ngModel)]="orcamento.mar"
-                    inputId="percent"
-                    suffix="%"
-                />
+
+            <!-- PROLONGADOR -->
+            <app-title title="Prolongador"></app-title>
+            <hr class="mb-3 mt-2">
+            <div class="flex justify-content-between">
+
+                <div class="flex flex-column gap-3">
+                    <div class="flex">
+                    <p-radioButton
+                        name="prolongador"
+                        [value]="false"
+                        [(ngModel)]="orcamento.prolongador"
+                        inputId="prolongador"
+                    ></p-radioButton>
+                    <label for="aparador" class="ml-2">Sem prolongador</label>
+                    </div>
+                    <div class="flex">
+                    <p-radioButton
+                        name="prolongador"
+                        [value]="true"
+                        [(ngModel)]="orcamento.prolongador"
+                        inputId="prolongador"
+                    ></p-radioButton>
+                    <label for="" class="ml-2">Com prolongador</label>
+                    </div>
+                </div>
+              <div
+                    class="flex w-5 flex-column gap-1 mb-5"
+                    *ngIf="orcamento.prolongador"
+                >
+                    <label for="qtdProlongador" class="font-bold"
+                        >Quantidade
+                    </label>
+                    <p-inputNumber
+                        [inputStyle]="{ width: '100%' }"
+                        id="qtdProlongador"
+                        name="qtdProlongador"
+                        [(ngModel)]="orcamento.qtdProlongador"
+                        [showButtons]="true" 
+                        [min]="1"
+                        inputId="integeronly"
+                    />
+                    <small class="text-bold">Quantidade em metros. 1 = 1m</small>
+                </div>
             </div>
+              
             <button
                 pButton
                 pRipple

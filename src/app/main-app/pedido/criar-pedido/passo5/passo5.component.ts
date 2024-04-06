@@ -49,7 +49,6 @@ export class Passo5Component {
     ) { }
 
     ngOnInit() {
-        this.amountPieces = this.pedidoService.pedido.balcony.format
         if (this.pedidoService.pedido.balcony.format == 0)
                 this.selectedOption = '';
             else if (this.pedidoService.pedido.balcony.format == 1)
@@ -60,9 +59,8 @@ export class Passo5Component {
                 this.selectedOption = '"L" Direita';
             else if (this.pedidoService.pedido.balcony.format == 4)
                 this.selectedOption = 'Formato "U"';
-            else if (this.amountPieces == 5){
+            else if (this.pedidoService.pedido.balcony.format == 5){
                 this.selectedOption = 'Outro';
-                this.pedidoService.pedido.balcony.format = this.amountPieces
             }
 
         if (this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
@@ -74,8 +72,6 @@ export class Passo5Component {
         this.selectedOption = optionName;
         // Atualiza o formato do balcão com base na opção selecionada
         this.pedidoService.pedido.balcony.format = this.options.find(option => option.name === optionName)?.code || 0;
-
-        this.amountPieces = this.pedidoService.pedido.balcony.format
 
         // Limpa os dados relacionados ao formato do balcão
         this.pedidoService.pedido.balcony.dimensions.data = [];
@@ -95,6 +91,7 @@ export class Passo5Component {
             this.pedidoService.nextTab();
 
         }else if (obj >= 5) {
+            this.pedidoService.pedido.balcony.format = this.amountPieces
             this.pedidoService.nextTab();
         }
     }

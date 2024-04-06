@@ -54,15 +54,15 @@ export const MENUS = [
             },
         ],
     },
-    {
-        label: '4 Code SolutionS',
-        items: [
-            {
-                label: 'Visit Website',
-                icon: 'pi pi-fw pi-arrow-up-right',
-                url: ['https://4codesolutions.com/'],
-                target: '_blank',
-            },
-        ],
-    },
+    // {
+    //     label: '4 Code SolutionS',
+    //     items: [
+    //         {
+    //             label: 'Visit Website',
+    //             icon: 'pi pi-fw pi-arrow-up-right',
+    //             url: ['https://4codesolutions.com/'],
+    //             target: '_blank',
+    //         },
+    //     ],
+    // },
 ];

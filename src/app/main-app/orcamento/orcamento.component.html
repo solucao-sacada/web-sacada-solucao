@@ -189,13 +189,13 @@
                     class="flex w-5 flex-column gap-1 mb-3"
                     *ngIf="orcamento.selante"
                 >
-                    <label for="qtdAparador" class="font-bold"
+                    <label for="qtdSelante" class="font-bold"
                         >Quantidade</label
                     >
                     <p-inputNumber
                         [inputStyle]="{ width: '100%' }"
-                        id="qtdAparador"
-                        name="qtdAparador"
+                        id="qtdSelante"
+                        name="qtdSelante"
                         [(ngModel)]="orcamento.qtdSelante"
                         [showButtons]="true" 
                         [min]="1"
@@ -212,22 +212,22 @@
             <div class="flex w-7 flex-column gap-2 mb-5">
                     <div class="flex">
                         <p-radioButton
-                            name="chapaFora"
+                            name="chapaSuperior"
                             [value]="false"
                             [(ngModel)]="orcamento.chapaSuperior"
-                            inputId="chapaFora"
+                            inputId="chapaSuperior"
                         ></p-radioButton>
-                        <label for="aparador" class="ml-2">Sem chapa superior</label>
+                        <label class="ml-2">Sem chapa superior</label>
                     </div>
                
                     <div class="flex">
                         <p-radioButton
-                            name="chapaFora"
+                            name="chapaSuperior"
                             [value]="true"
                             [(ngModel)]="orcamento.chapaSuperior"
-                            inputId="chapaFora"
+                            inputId="chapaSuperior"
                         ></p-radioButton>
-                        <label for="aparador" class="ml-2">Com chapa superior</label>
+                        <label class="ml-2">Com chapa superior</label>
                     </div>
                 <!-- <p-image
                     class="w-4 sm:w-15rem md:w-10rem shadow-2 border-round"

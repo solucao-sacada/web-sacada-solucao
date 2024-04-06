@@ -11,57 +11,69 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo16Component {
     selante = '';
     aparador = '';
+    qtdSelante = 0;
+    qtdAparador = 0;
 
     pedidoService = inject(PedidoService)
     toaster = inject(ToasterService)
 
     ngOnInit(): void {
         this.pedidoService.getObservable().subscribe(() => {
-            if (this.pedidoService.pedido.accessories.selante) {
-                this.selante = 'selante';
-            }
-            else if (this.pedidoService.pedido.accessories.sem_selante) {
-                this.selante = 'sem_selante';
-            }
+            // if (this.pedidoService.pedido.accessories.selante) {
+            //     this.selante = 'selante';
+            // }
+            // else if (this.pedidoService.pedido.accessories.sem_selante) {
+            //     this.selante = 'sem_selante';
+            // }
             // else if (this.pedidoService.pedido.accessories.aparador_aluminio) {
             //     this.aparador = 'aparador_aluminio';
             // }
-            else if (this.pedidoService.pedido.accessories.aparador_inox) {
-                this.aparador = 'aparador_inox';
-            }
-            else if (this.pedidoService.pedido.accessories.sem_aparador) {
-                this.aparador = 'sem_aparador';
-            }
+            // else if (this.pedidoService.pedido.accessories.aparador_inox) {
+            //     this.aparador = 'aparador_inox';
+            // }
+            // else if (this.pedidoService.pedido.accessories.sem_aparador) {
+            //     this.aparador = 'sem_aparador';
+            // }
         });
     }
 
 
     nextTab(): void {
-        if(this.aparador === 'aparador_inox'){
+        if (this.aparador === 'aparador_inox') {
             this.pedidoService.pedido.accessories.aparador_inox = true;
             this.pedidoService.pedido.accessories.sem_aparador = false;
             this.pedidoService.pedido.accessories.aparador_aluminio = false;
 
-        }else if(this.aparador === 'aparador_aluminio'){
+        } else if (this.aparador === 'aparador_aluminio') {
             this.pedidoService.pedido.accessories.aparador_aluminio = true;
             this.pedidoService.pedido.accessories.sem_aparador = false;
             this.pedidoService.pedido.accessories.aparador_inox = false;
         }
 
-        if(this.selante === 'selante'){
+        if (this.selante === 'selante') {
             this.pedidoService.pedido.accessories.selante = true;
             this.pedidoService.pedido.accessories.sem_selante = false;
-        }else if(this.selante === 'sem_selante'){
+        } else if (this.selante === 'sem_selante') {
             this.pedidoService.pedido.accessories.sem_selante = true;
             this.pedidoService.pedido.accessories.selante = false;
         }
 
-        if (this.aparador !== '' && this.selante !== '') {
-            this.pedidoService.nextTab();
+        if (this.selante !== '' && this.aparador !== '') {
+            if (this.aparador === 'sem_aparador' || this.qtdAparador > 0) {
+                if (this.selante === 'sem_selante' || this.qtdSelante > 0) {
+                    this.pedidoService.nextTab();
+                } else {
+                    this.toaster.warn("A quantidade de selante deve ser maior que zero!");
+                }
+            } else {
+                this.toaster.warn("A quantidade de aparador deve ser maior que zero!");
+            }
         } else {
             this.toaster.warn(MESSAGES.UMA_OPCAO);
         }
+        
     }
+
     prevTab(): void {
         this.pedidoService.prevTab();
     }

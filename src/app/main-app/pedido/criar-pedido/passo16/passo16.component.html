@@ -9,21 +9,28 @@
             src="../../../../../assets/img//15-acessorios-finais/aparador_inox.jpg" [preview]="true">
         </p-image>
 
-        <div>
-            <div class="flex flex-row gap-1 mb-2">
-                <p-radioButton name="aparador" value="aparador_inox" [(ngModel)]="aparador"></p-radioButton>
-                <label for="aparador" class="ml-2">Aparador de inox</label>
-            </div>
-            <!-- <div class="flex flex-row gap-1 mb-2">
-                <p-radioButton name="aparador_aluminio" value="aparador_aluminio" [(ngModel)]="aparador"></p-radioButton>
-                <label for="aparador" class="ml-2">Aparador de aluminio</label>
-            </div> -->
+        <div class="flex flex-column gap-3">
             <div class="flex flex-row gap-1">
                 <p-radioButton name="aparador" value="sem_aparador" [(ngModel)]="aparador"></p-radioButton>
-                <label for="aparador" class="ml-2">Sem aparador</label>
+                <label for="sem_aparador" class="ml-2">Sem aparador</label>
+            </div>
+            <div class="flex flex-row gap-1 mb-2">
+                <p-radioButton name="aparador" value="aparador_inox" [(ngModel)]="aparador"></p-radioButton>
+                <label for="aparador_inox" class="ml-2">Aparador de inox</label>
+            </div>
+            <div class="flex w-5 flex-column gap-1 mb-3" *ngIf="aparador === 'aparador_inox'">
+                <label for="qtdAparador" class="font-bold">Quantidade</label>
+                <p-inputNumber 
+                    [inputStyle]="{ width: '100%' }" 
+                    id="qtdAparador" 
+                    name="qtdAparador" 
+                    [(ngModel)]="qtdAparador" 
+                    [showButtons]="true" 
+                    [min]="0" 
+                    inputId="integeronly">
+                </p-inputNumber>
             </div>
         </div>
-    </div>
 
     <div class="mt-5">
         <label class="w-full">Selecione selante</label>
@@ -32,15 +39,34 @@
             imageClass="object-fit-cover w-full shadow-2 block mx-auto border-round"
             src="../../../../../assets/img/15-acessorios-finais/selante.jpg" [preview]="true">
         </p-image>
-        <div>
+
+        <div class="flex flex-column gap-3">
+            <div class="flex flex-row gap-1">
+                <p-radioButton name="sem_selante" value="sem_selante" [(ngModel)]="selante"></p-radioButton>
+                <label for="sem_selante" class="ml-2">Sem selante</label>
+            </div>
             <div class="flex flex-row gap-1 mb-2">
                 <p-radioButton name="selante" value="selante" [(ngModel)]="selante"></p-radioButton>
                 <label for="selante" class="ml-2">Selante</label>
             </div>
-            <div class="flex flex-row gap-1">
-                <p-radioButton name="selante" value="sem_selante" [(ngModel)]="selante"></p-radioButton>
-                <label for="selante" class="ml-2">Sem selante</label>
-            </div>
+             <div
+                    class="flex w-5 flex-column gap-1 mb-3"
+                    *ngIf="selante === 'selante'"
+                >
+                    <label for="qtdSelante" class="font-bold"
+                        >Quantidade</label
+                    >
+                    <p-inputNumber
+                        [inputStyle]="{ width: '100%' }"
+                        id="qtdSelante"
+                        name="qtdSelante"
+                        [(ngModel)]="qtdSelante"
+                        [showButtons]="true" 
+                        [min]="0"
+                        inputId="integeronly"
+                    />
+                    <small class="text-bold">Um selante rende de 4-5 metros linear.</small>
+                </div>
         </div>
     </div>
 

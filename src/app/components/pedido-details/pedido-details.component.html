@@ -3,331 +3,247 @@
         <span class="p-2 w-12 border-1 font-bold">DADOS CLIENTE</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-5 border-bottom-1 border-x-1"
-            >Nome Cliente</span
-        >
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Nome Cliente</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.client.name
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Rua</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.client.address
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Número</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.client.num
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Bairro</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.client.neighborhood
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Estado</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.client.state
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-5 border-bottom-1 border-x-1"
-            >Ap/Loja/Casa</span
-        >
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Ap/Loja/Casa</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.client.apartment
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-5 border-bottom-1 border-x-1"
-            >Nome do Técnico</span
-        >
+        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Nome do Técnico</span>
         <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
             pedido?.technician
-        }}</span>
+            }}</span>
     </div>
     <div class="flex mt-3">
         <span class="col-title p-2 w-12 border-1 font-bold">DADOS PEDIDO</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Sacada do Tipo</span
-        >
-        <span
-            class="col-data col-title p-2 w-5 border-bottom-1 border-right-1"
-            >{{ getTipoSacada(pedido?.balcony.tip) }}</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Sacada do Tipo</span>
+        <span class="col-data col-title p-2 w-5 border-bottom-1 border-right-1">{{ getTipoSacada(pedido?.balcony.tip)
+            }}</span>
     </div>
     <div class="flex" *ngIf="pedido?.balcony.tip.defined.isDefined">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Quantidade de vidros</span
-        >
-        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            pedido?.balcony.tip.defined.glass_quantity
-        }}</span>
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Quantidade de vidros</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">
+            {{ pedido?.balcony.tip.defined.glass_quantity }}
+        </span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Espessura do Vidro</span
-        >
-        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            pedido?.balcony.glass.thickness["10mm"]
-                ? "5+5 ou 10mm"
-                : "4+4 ou 8mm"
-        }}</span>
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Espessura do Vidro</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">
+            {{ pedido?.balcony.glass.thickness["7mm"] ? "4+3 ou 7mm" : '' }}
+            {{ pedido?.balcony.glass.thickness["8mm"] ? "4+4 ou 8mm" : '' }}
+            {{ pedido?.balcony.glass.thickness["9mm"] ? "5+4 ou 9mm" : '' }}
+            {{ pedido?.balcony.glass.thickness["10mm"] ? "5+5 ou 10mm" : '' }}
+            {{ pedido?.balcony.glass.thickness["11mm"] ? "6+5 ou 11mm" : '' }}
+            {{ pedido?.balcony.glass.thickness["12mm"] ? "6+6 ou 12mm" : '' }}
+        </span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Tipo do Vidro</span
-        >
-        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
-            pedido?.balcony.glass.laminated ? "Laminado" : "Temperado"
-        }}</span>
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Tipo do Vidro</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">
+            {{ pedido?.balcony.glass.laminated ? "Laminado" : "Temperado"}}
+        </span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Cor do Alumínio</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Cor do Alumínio</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             getColorAluminiun(pedido?.balcony.aluminium.color)
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Formato da Sacada</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Formato da Sacada</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             getFormat(pedido?.balcony.format).toUpperCase()
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Quatidade Peças</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Quatidade Peças</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             getQtdPecas(pedido?.balcony.format)
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Alinhamento da viga</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Alinhamento da viga</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             alinhamentoDaViga
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Trilhos Superiores</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Trilhos Superiores</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             trilhosSuperiores
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Trilhos Inferiores - Linha de referência de medição</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Trilhos Inferiores - Linha de referência de
+            medição</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             trilhosInferioresLenhaRef
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Trilhos Inferiores</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Trilhos Inferiores</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             trilhosInferiores
-        }}</span>
+            }}</span>
     </div>
     <div class="flex mt-4">
         <span class="col-title p-2 w-5 border-y-1 border-x-1">Peça</span>
         <span class="col-data p-2 w-5 border-y-1 border-right-1">Ângulo</span>
         <span class="col-data p-2 w-5 border-y-1 border-right-1">Dimensão</span>
-        <span class="col-data p-2 w-5 border-y-1 border-right-1"
-            >Quantidade</span
-        >
+        <span class="col-data p-2 w-5 border-y-1 border-right-1">Quantidade</span>
     </div>
     <div class="flex" *ngFor="let item of linhas">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">{{
             item.piece
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             item.angle
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             item.dimension
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             item.quantity
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1"></span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             pedido?.balcony.dimensions.total
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1"></span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1"></span>
     </div>
     <div class="flex mt-4">
-        <span class="col-title p-2 w-7 border-y-1 border-x-1"
-            >Prumo das Paredes – Canto inferior esquerdo</span
-        >
+        <span class="col-title p-2 w-7 border-y-1 border-x-1">Prumo das Paredes – Canto inferior esquerdo</span>
         <span class="col-data p-2 w-5 border-y-1 border-right-1">{{
             pedido?.balcony.plumb.left_wall.bottom
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Prumo das Paredes – Canto superior esquerdo</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Prumo das Paredes – Canto superior esquerdo</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             pedido?.balcony.plumb.left_wall.top
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Prumo das Paredes – Canto inferior direito</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Prumo das Paredes – Canto inferior direito</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             pedido?.balcony.plumb.right_wall.bottom
-        }}</span>
+            }}</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-7 border-bottom-1 border-x-1"
-            >Prumo das Paredes – Canto superior direito</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Prumo das Paredes – Canto superior direito</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             pedido?.balcony.plumb.right_wall.top
-        }}</span>
+            }}</span>
     </div>
     <div class="flex mt-4">
-        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1"
-            >Abertura – Sentido das Aberturas</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >{{
-                pedido?.balcony.aperture.inside ? "Para Dentro" : "Para Fora"
-            }}</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1">Abertura – Sentido das Aberturas</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">{{
+            pedido?.balcony.aperture.inside ? "Para Dentro" : "Para Fora"
+            }}</span>
     </div>
     <div class="flex mt-4">
-        <span class="col-title p-2 w-5 border-bottom-1 border-top-1 border-x-1"
-            >Tipo</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >Peça / Perfil</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >Quantidade de vidros</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >Distribuição dos Vidros</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >Distância do Pivô Porta</span
-        >
+        <span class="col-title p-2 w-5 border-bottom-1 border-top-1 border-x-1">Tipo</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">Peça / Perfil</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">Quantidade de vidros</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">Distribuição dos Vidros</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">Distância do Pivô Porta</span>
     </div>
-    <div
-        class="flex"
-        *ngFor="let item of pedido?.balcony.aperture.locations; let i = index"
-    >
+    <div class="flex" *ngFor="let item of pedido?.balcony.aperture.locations; let i = index">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">{{
             item.tip
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             i + 1
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             item.glasses
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             item.stacking || "Fixo"
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             item.door_distance
-        }}</span>
+            }}</span>
     </div>
     <div class="flex mt-4">
-        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1"
-            >Fechaduras</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >{{
-                pedido?.balcony.lock.fechadura_para_porta
-                    ? "Fechadura para Porta"
-                    : "Fechadura para Vidro"
-            }}</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1">Fechaduras</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">{{
+            pedido?.balcony.lock.fechadura_para_porta
+            ? "Fechadura para Porta"
+            : "Fechadura para Vidro"
+            }}</span>
     </div>
     <div class="flex mt-4">
-        <span class="col-title p-2 w-5 border-bottom-1 border-top-1 border-x-1"
-            >Ponto</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >Medida Teto – laser até a viga</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >Medida Chão – laser a base inferior</span
-        >
+        <span class="col-title p-2 w-5 border-bottom-1 border-top-1 border-x-1">Ponto</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">Medida Teto – laser até a viga</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">Medida Chão – laser a base
+            inferior</span>
     </div>
-    <div
-        class="flex"
-        *ngFor="let item of pedido?.balcony.levels.measures.data; let i = index"
-    >
+    <div class="flex" *ngFor="let item of pedido?.balcony.levels.measures.data; let i = index">
         <span class="col-title p-2 w-5 border-bottom-1 border-x-1">{{
             incrementAlpha(i)
-        }}</span>
+            }}</span>
         <span class="col-title p-2 w-5 border-bottom-1 border-right-1">{{
             item[0]
-        }}</span>
+            }}</span>
         <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{
             item[1]
-        }}</span>
+            }}</span>
     </div>
     <div class="flex mt-4">
-        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1"
-            >Tabela de Níveis partindo do Guardacorpo – Menor Altura</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >{{ pedido?.balcony.levels.full_aperture }}</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1">Tabela de Níveis partindo do Guardacorpo
+            – Menor Altura</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">{{
+            pedido?.balcony.levels.full_aperture }}</span>
     </div>
     <div class="flex mt-4">
-        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1"
-            >Acessórios</span
-        >
-        <span
-            class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1"
-            >TODO</span
-        >
+        <span class="col-title p-2 w-7 border-bottom-1 border-top-1 border-x-1">Acessórios</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-top-1 border-right-1">TODO</span>
     </div>
     <div class="flex flex-column mt-4">
         <span class="col-title p-2 w-12 border-1">Observações</span>
         <span class="col-data p-2 w-12 border-bottom-1 border-x-1">{{
             pedido?.observation
-        }}</span>
+            }}</span>
     </div>
     <div class="flex justify-content-center w-full mt-4">
-        <p-image
-            [src]="pedido?.images ? pedido.images[0] : imageService.getImageUrl"
-            width="250"
-            [preview]="true"
+        <p-image [src]="pedido?.images ? pedido.images[0] : imageService.getImageUrl" width="250" [preview]="true"
             [imageStyle]="{ width: '30rem', height: '20rem', objectFit: 'cover', borderRadius: '10px'}">
-          </p-image>
+        </p-image>
     </div>
 </div>

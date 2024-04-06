@@ -139,7 +139,6 @@ export class Passo3Component {
             this.pedidoService.pedido.balcony.glass.thickness['11mm'] = true;
             this.pedidoService.pedido.balcony.glass.thickness['12mm'] = false;
         }
-
     }
 
     changeCorVidro() {
@@ -211,7 +210,7 @@ export class Passo3Component {
                     this.pedidoService.pedido.balcony.glass.thickness['11mm']
                 ) {
                     this.pedidoService.nextTab();
-                    // console.log(`Espessura do Vidro: ${this.getThicknessLabel(this.pedidoService.pedido.balcony.glass.thickness)}`);
+                    console.log(`Espessura do Vidro: ${this.getThicknessLabel(this.pedidoService.pedido.balcony.glass.thickness)}`);
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
             } else if (this.pedidoService.pedido.balcony.glass.color.other) {
                 this.pedidoService.nextTab();

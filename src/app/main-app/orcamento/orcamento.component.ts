@@ -12,7 +12,7 @@ import { OrcamentoService } from 'src/app/services/orcamento.service';
 })
 export class OrcamentoComponent {
     @ViewChild('resultado') resultadoSection: ElementRef;
-    backgroundColor: string = 'white'; 
+    backgroundColor: string = 'white';
     activeIndex = 0;
     isCalculeted = false;
     orcamento1 = new CalculoOrcamento();
@@ -26,6 +26,7 @@ export class OrcamentoComponent {
     route = inject(ActivatedRoute);
     toaster = inject(ToasterService);
     orcamentoService = inject(OrcamentoService);
+    
 
     ngOnInit() {
         this.load();
@@ -36,7 +37,13 @@ export class OrcamentoComponent {
             }
         });
     }
-
+    // MÉTODOS CHECKBOXES
+    onAparadorChange() {
+        if (typeof this.orcamento.aparador === 'string' && this.orcamento.aparador === 'sem_aparador') {
+            this.orcamento.qtdAparador = 0;
+        }
+    }
+    
     private load() {
         this.orcamentoService.list().subscribe((orcamentos) => {
             this.orcamentos = orcamentos;

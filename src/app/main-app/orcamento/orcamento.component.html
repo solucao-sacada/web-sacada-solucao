@@ -61,20 +61,21 @@
         <hr class="mb-3 mt-2">
 
         <form (ngSubmit)="onSubmit()" class="mt-4">
-
+            <!-- LARGURA VIDRO -->
             <div class="flex flex-column gap-1 mb-3">
-                <label for="ml" class="font-bold"> Largura Total (mm)</label>
+                <label for="wGlass" class="font-bold"> Largura Total (mm)</label>
                 <p-inputNumber
                     styleClass="w-full"
-                    id="ml"
-                    [(ngModel)]="orcamento.ml"
+                    id="wGlass"
+                    [(ngModel)]="orcamento.wGlass"
                     mode="decimal"
-                    name="ml"
+                    name="wGlass"
                     [minFractionDigits]="0"
                     [maxFractionDigits]="2"
                     placeholder="Largura em milímetros"
                 />
             </div>
+            <!-- ALTURA VIDRO -->
             <div class="flex flex-column gap-1 mb-3">
                 <label for="ml" class="font-bold">Altura Total (mm)</label>
                 <p-inputNumber
@@ -88,10 +89,21 @@
                     placeholder="Altura em milímetros"
                 />
             </div>
+            <!-- KIT METRO LINEAR -->
             <div class="flex flex-column gap-1 mb-3">
-                <label for="vd" class="font-bold"
-                    >Valor do Vidro por m² (R$)</label
-                >
+                <label for="ml" class="font-bold">Valor do kit metro linear (R$) *</label>
+                <p-inputNumber
+                    styleClass="w-full"
+                    id="ml"
+                    name="ml"
+                    [(ngModel)]="orcamento.ml"
+                    mode="currency"
+                    currency="BRL"
+                />
+            </div>
+            <!-- VALOR DO VIDRO -->
+            <div class="flex flex-column gap-1 mb-3">
+                <label for="vd" class="font-bold">Valor do Vidro por m² (R$)</label>
                 <p-inputNumber
                     styleClass="w-full"
                     id="vd"
@@ -101,6 +113,7 @@
                     currency="BRL"
                 />
             </div>
+            <!-- META MARGEM -->
             <div class="flex flex-column gap-1 mb-5">
                 <label for="mar" class="font-bold">Meta de margem (%)</label>
                 <p-inputNumber
@@ -135,9 +148,7 @@
                             [(ngModel)]="orcamento.aparador"
                             inputId="apInox"
                         ></p-radioButton>
-                        <label for="apInox" class="ml-2"
-                            >Aparador de Inox</label
-                        >
+                        <label for="apInox" class="ml-2">Aparador de Inox</label>
                     </div>
                 </div>
                 <div
@@ -254,10 +265,10 @@
                 </div>
                 <div class="flex">
                     <p-radioButton
-                        name="chapaSuperior"
+                        name="chapaInferior"
                         [value]="true"
                         [(ngModel)]="orcamento.chapaInferior"
-                        inputId="chapaSuperior"
+                        inputId="chapaInferior"
                     ></p-radioButton>
                     <label for="aparador" class="ml-2">Com chapa inferior</label>
                 </div>
@@ -283,7 +294,7 @@
                         [(ngModel)]="orcamento.prolongador"
                         inputId="prolongador"
                     ></p-radioButton>
-                    <label for="aparador" class="ml-2">Sem prolongador</label>
+                    <label for="prolongador" class="ml-2">Sem prolongador</label>
                     </div>
                     <div class="flex">
                     <p-radioButton
@@ -331,33 +342,31 @@
                         class="flex justify-content-between font-bold w-full px-7"
                     >
                         <span>Custo Total:</span>
-                        <span>{{
-                            orcamento.custoTotalAVista | currency : "BRL"
-                        }}</span>
+                        <span>{{ orcamento.custoTotalAVista | currency : "BRL" }}</span>
                     </div>
                 </ng-container>
                 <ng-container>
                     <div class="flex justify-content-between w-full px-7">
                         <span>Kit Solução:</span>
-                        <span>{{
-                            orcamento.kitAVista | currency : "BRL"
-                        }}</span>
+                        <span>{{ orcamento.kitAVista | currency : "BRL" }}</span>
                     </div>
                 </ng-container>
                 <ng-container>
                     <div class="flex justify-content-between w-full px-7">
                         <span>Custo Vidro:</span>
-                        <span>{{
-                            orcamento.valorVidro | currency : "BRL"
-                        }}</span>
+                        <span>{{ orcamento.valorVidro | currency : "BRL" }}</span>
                     </div>
                 </ng-container>
                 <ng-container>
                     <div class="flex justify-content-between w-full px-7">
                         <span>Custo Acessórios:</span>
-                        <span>{{
-                            orcamento.valorAcessorios | currency : "BRL"
-                        }}</span>
+                        <span>{{ orcamento.valorAcessorios | currency : "BRL" }}</span>
+                    </div>
+                </ng-container>
+                <ng-container>
+                    <div class="flex justify-content-between w-full px-7">
+                        <span>Custo Chapas:</span>
+                        <span>{{ orcamento.valorChapas | currency : "BRL" }}</span>
                     </div>
                 </ng-container>
                 <app-title title="Valor da Venda" class="my-3" />

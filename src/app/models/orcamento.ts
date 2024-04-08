@@ -20,10 +20,11 @@ export interface IConstsOrcamento {
 export interface IValuesClient {
     send: string;
     qt_abert: number;
-    vd: number;
-    mar: number;
-    ml: number;
-    h: number;
+    vd: number; // valor do vidro
+    mar: number; // meta de margem  
+    ml: number; // metro linear
+    wGlass: number; // largura do vidro
+    h: number; // altura
 }
 
 export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
@@ -52,8 +53,8 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     /**
      * Chapa de correção
      */
-    private _chapaInf = 50;
-    private _chapaSup = 50;
+    private _chapaInf = 175;
+    private _chapaSup = 175;
     /**
      * Prolongador
      */
@@ -109,10 +110,11 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     //variaveis do cliente
     send = '';
     qt_abert = null;
-    vd = 150;
-    mar = 70;
-    ml = null;
-    h = null;
+    vd = null;  //valor do vidro  
+    mar = null; //meta de margem 
+    ml = null; //largura total
+    wGlass = null; //largura do vidro
+    h = null; //altura do vidro
 
     //variaveis adicionadas
     cliente: string = '';
@@ -134,7 +136,7 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
      * Valor do Kit A Vista
      */
     get kitAVista(): number {
-        return this.Vsac_AVISTA * this.ml * 0.001;
+        return this.ml * this.wGlass * 0.001;
     }
 
     /**
@@ -148,7 +150,7 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
      * Custo do Vidro
      */
     get valorVidro(): number {
-        return this.ml * this.h * this.vd * 0.000001;
+        return this.wGlass * this.h * this.vd * 0.000001;
     }
 
     /**
@@ -164,19 +166,23 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     get valorAcessorios(): number {
         let valor = this.sel * this.qtdSelante + this.qtdAparador * this.apa + this.qtdProlongador * this.prolong;
     
-        // Adiciona o valor da chapa superior se estiver sendo usada
-        if (this.chapaSuperior) {
-            valor += this.chapaSup;
-        }
-    
-        // Adiciona o valor da chapa inferior se estiver sendo usada
-        if (this.chapaInferior) {
-            valor += this.chapaInf;
-        }
-    
         return valor;
     }
     
+     /**
+     * Custo total Chapas
+     */
+    get ValorChapas(): number {
+        let valor = this.chapaSup + this.chapaInf;
+        if (this.chapaSuperior) {
+            valor += this.chapaSup;
+        }
+        if (this.chapaInferior) {
+            valor += this.chapaInf;
+        }
+        return valor;
+    }
+
     
     /**
      * Custo total a vista
@@ -225,6 +231,7 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
             this.mar = value.mar;
             this.ml = value.ml;
             this.h = value.h;
+            this.wGlass = value.wGlass;
         }
     }
 }

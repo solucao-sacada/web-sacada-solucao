@@ -14,9 +14,7 @@ export class OrcamentoComponent {
     @ViewChild('resultado') resultadoSection: ElementRef;
     backgroundColor: string = 'white';
     activeIndex = 0;
-    isCalculeted = false;
-    orcamento1 = new CalculoOrcamento();
-    orcamento2 = new CalculoOrcamento();
+    isCalculeted = true;
 
     orcamentos: any[] = [];
     orcamento: CalculoOrcamento = new CalculoOrcamento();
@@ -26,7 +24,7 @@ export class OrcamentoComponent {
     route = inject(ActivatedRoute);
     toaster = inject(ToasterService);
     orcamentoService = inject(OrcamentoService);
-    
+
 
     ngOnInit() {
         this.load();
@@ -43,7 +41,7 @@ export class OrcamentoComponent {
             this.orcamento.qtdAparador = 0;
         }
     }
-    
+
     private load() {
         this.orcamentoService.list().subscribe((orcamentos) => {
             this.orcamentos = orcamentos;

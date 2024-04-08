@@ -21,11 +21,19 @@ export interface IValuesClient {
     send: string;
     qt_abert: number;
     vd: number; // valor do vidro
-    mar: number; // meta de margem  
+    mar: number; // meta de margem
     ml: number; // metro linear
     wGlass: number; // largura do vidro
     h: number; // altura
+    chapaInf: number; // chapas inferiores
+    chapaSup: number; // chapa superior
+    prolong: number;
+    fec: number
+    qtdAparador: number;
+    qtdSelante: number;
+    qtdProlongador: number;
 }
+
 
 export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     // constantes
@@ -53,12 +61,12 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     /**
      * Chapa de correção
      */
-    private _chapaInf = 175;
-    private _chapaSup = 175;
+    private _chapaInf = 70;
+    private _chapaSup = 70;
     /**
      * Prolongador
      */
-    private _prolong = 50;
+    private _prolong = 70;
     /**
      * TEXTO QUE SERÁ INFORMANDO NO
      * ORÇAMENTO DO CLIENTE FINAL PARA PAGAMENTO
@@ -110,8 +118,8 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     //variaveis do cliente
     send = '';
     qt_abert = null;
-    vd = null;  //valor do vidro  
-    mar = null; //meta de margem 
+    vd = null;  //valor do vidro
+    mar = null; //meta de margem
     ml = null; //largura total
     wGlass = null; //largura do vidro
     h = null; //altura do vidro
@@ -123,10 +131,10 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     chapaSuperior: boolean = false;
     chapaInferior: boolean = false;
     prolongador: boolean = false;
-    
-    qtdAparador: number | null = null;
-    qtdProlongador: number | null = null;
-    qtdSelante: number | null = null;
+
+    qtdAparador: number = 1;
+    qtdProlongador: number = 1;
+    qtdSelante: number = 1;
     valorFinal: number = null;
 
     set setCliente(value: string) {
@@ -164,31 +172,53 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
      * Valor dos acessórios
      */
     get valorAcessorios(): number {
-        let valor = this.sel * this.qtdSelante + this.qtdAparador * this.apa + this.qtdProlongador * this.prolong;
-    
-        return valor;
-    }
-    
-     /**
-     * Custo total Chapas
-     */
-    get ValorChapas(): number {
-        let valor = this.chapaSup + this.chapaInf;
-        if (this.chapaSuperior) {
-            valor += this.chapaSup;
+        let valor = 0
+
+
+        if(this.selante){
+            valor += this.qtdSelante * this.sel;
         }
-        if (this.chapaInferior) {
-            valor += this.chapaInf;
+
+        if(this.aparador){
+            valor += this.qtdAparador * this.apa;
         }
+
         return valor;
     }
 
-    
+    get valorProlongador(): number {
+        return this.qtdProlongador * this.prolong;
+    }
+
+    get areaTotal(): number {
+        return this.wGlass * this.h / 1000;
+    }
+
+     /**
+     * Custo total Chapas
+     */
+    get valorChapas(): number {
+        let valor = 0
+
+        if (this.chapaSuperior) {
+            valor += this.chapaSup * this.wGlass;
+        }
+
+        if (this.chapaInferior) {
+            valor += this.chapaInf * this.wGlass;
+        }
+
+        let calcValor = valor / 1000
+
+        return calcValor;
+    }
+
+
     /**
      * Custo total a vista
      */
     get custoTotalAVista(): number {
-        return this.kitAVista + this.valorVidro + this.valorAcessorios;
+        return this.kitAVista + this.valorVidro + this.valorAcessorios + this.valorChapas + this.valorProlongador;
     }
 
     /**
@@ -232,6 +262,12 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
             this.ml = value.ml;
             this.h = value.h;
             this.wGlass = value.wGlass;
+            this._chapaInf = value.chapaInf;
+            this._chapaSup = value.chapaSup;
+            this._prolong = value.prolong
+            this.qtdAparador = value.qtdAparador;
+            this.qtdSelante = value.qtdSelante;
+            this.qtdProlongador = value.qtdProlongador;
         }
     }
 }

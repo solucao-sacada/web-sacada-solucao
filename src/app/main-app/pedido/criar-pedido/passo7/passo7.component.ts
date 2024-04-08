@@ -17,17 +17,21 @@ export class Passo7Component implements OnInit {
     selected = '';
     options: any[] = [
         {
-            name: 'Normal',
-            image: '../../../../../assets/img/7-trilhos-superiores/normal.jpg',
-        },
-        {
             name: 'Chapa de correção para fora',
             image: '../../../../../assets/img/7-trilhos-superiores/aba-fora.jpg',
         },
+
+        {
+            name: 'Normal',
+            image: '../../../../../assets/img/7-trilhos-superiores/normal.jpg',
+        },
+
         {
             name: 'Chapa de correção para dentro',
             image: '../../../../../assets/img/7-trilhos-superiores/aba-dentro.jpg',
         },
+
+
     ];
 
     ngOnInit(): void {
@@ -45,12 +49,12 @@ export class Passo7Component implements OnInit {
         if (this.selected === optionName) {
             return;
         }
-        
+
         const selectedOption = this.options.find(option => option.name === optionName);
-        
+
         if (selectedOption) {
             const rail = this.pedidoService.pedido.balcony.rails.upper_rail;
-    
+
             if (optionName === 'Chapa de correção para dentro') {
                 rail.tab.inside = true;
                 rail.tab.outside = false;
@@ -62,41 +66,12 @@ export class Passo7Component implements OnInit {
                 rail.tab.outside = false;
                 rail.tab.inside = false;
             }
-            
+
             this.selected = optionName;
             this.pedidoService.notifyObservers();
         }
     }
-    
 
-    // select(value: string) {
-    //     if (value === 'Normal') {
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
-    //             true;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = false;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
-    //             false;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
-    //             false;
-    //     } else if (value === 'Chapa de correção para fora') {
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
-    //             false;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = true;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
-    //             true;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
-    //             false;
-    //     } else {
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.normal =
-    //             false;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tip.tab = true;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.outside =
-    //             false;
-    //         this.pedidoService.pedido.balcony.rails.upper_rail.tab.inside =
-    //             true;
-    //     }
-    //     this.selected = value;
-    // }
 
     nextTab(): void {
         const obj = this.pedidoService.pedido.balcony.rails.upper_rail;

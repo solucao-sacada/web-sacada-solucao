@@ -52,6 +52,7 @@
             <input
                 pInputText
                 id="cliente"
+                (ngModelChange)="hiddeCalculeted()"
                 name="cliente"
                 [(ngModel)]="orcamento.cliente"
             />
@@ -68,6 +69,7 @@
                     styleClass="w-full"
                     id="wGlass"
                     [(ngModel)]="orcamento.wGlass"
+                    (ngModelChange)="hiddeCalculeted()"
                     mode="decimal"
                     name="wGlass"
                     [minFractionDigits]="0"
@@ -87,6 +89,7 @@
                     [minFractionDigits]="0"
                     [maxFractionDigits]="2"
                     placeholder="Altura em milímetros"
+                    (ngModelChange)="hiddeCalculeted()"
                 />
             </div>
             <!-- KIT METRO LINEAR -->
@@ -97,6 +100,7 @@
                     id="ml"
                     name="ml"
                     [(ngModel)]="orcamento.ml"
+                    (ngModelChange)="hiddeCalculeted()"
                     mode="currency"
                     currency="BRL"
                 />
@@ -109,6 +113,7 @@
                     id="vd"
                     name="vd"
                     [(ngModel)]="orcamento.vd"
+                    (ngModelChange)="hiddeCalculeted()"
                     mode="currency"
                     currency="BRL"
                 />
@@ -121,6 +126,7 @@
                     id="mar"
                     name="mar"
                     [(ngModel)]="orcamento.mar"
+                    (ngModelChange)="hiddeCalculeted()"
                     inputId="percent"
                     suffix="%"
                 />
@@ -137,6 +143,7 @@
                             name="aparador"
                             [value]="false"
                             [(ngModel)]="orcamento.aparador"
+                            (ngModelChange)="hiddeCalculeted()"
                             inputId="aparator"
                         ></p-radioButton>
                         <label for="aparador" class="ml-2">Sem aparador</label>
@@ -145,6 +152,7 @@
                         <p-radioButton
                             name="apInox"
                             [value]="true"
+                            (ngModelChange)="hiddeCalculeted()"
                             [(ngModel)]="orcamento.aparador"
                             inputId="apInox"
                         ></p-radioButton>
@@ -163,6 +171,7 @@
                         id="qtdAparador"
                         name="qtdAparador"
                         [(ngModel)]="orcamento.qtdAparador"
+                        (ngModelChange)="hiddeCalculeted()"
                         [showButtons]="true"
                         [min]="1"
                         inputId="integeronly"
@@ -182,6 +191,7 @@
                             name="selante"
                             [value]="false"
                             [(ngModel)]="orcamento.selante"
+                            (ngModelChange)="hiddeCalculeted()"
                             inputId="selante"
                         ></p-radioButton>
                         <label for="selante" class="ml-2">Sem selante</label>
@@ -190,6 +200,7 @@
                         <p-radioButton
                             name="selante2"
                             [value]="true"
+                            (ngModelChange)="hiddeCalculeted()"
                             [(ngModel)]="orcamento.selante"
                             inputId="selante2"
                         ></p-radioButton>
@@ -207,6 +218,7 @@
                         [inputStyle]="{ width: '100%' }"
                         id="qtdSelante"
                         name="qtdSelante"
+                        (ngModelChange)="hiddeCalculeted()"
                         [(ngModel)]="orcamento.qtdSelante"
                         [showButtons]="true"
                         [min]="1"
@@ -225,6 +237,7 @@
                         <p-radioButton
                             name="chapaSuperior"
                             [value]="false"
+                            (ngModelChange)="hiddeCalculeted()"
                             [(ngModel)]="orcamento.chapaSuperior"
                             inputId="chapaSuperior"
                         ></p-radioButton>
@@ -235,6 +248,7 @@
                         <p-radioButton
                             name="chapaSuperior"
                             [value]="true"
+                            (ngModelChange)="hiddeCalculeted()"
                             [(ngModel)]="orcamento.chapaSuperior"
                             inputId="chapaSuperior"
                         ></p-radioButton>
@@ -258,6 +272,7 @@
                     <p-radioButton
                         name="chapaInferior"
                         [value]="false"
+                        (ngModelChange)="hiddeCalculeted()"
                         [(ngModel)]="orcamento.chapaInferior"
                         inputId="chapaInferior"
                     ></p-radioButton>
@@ -267,6 +282,7 @@
                     <p-radioButton
                         name="chapaInferior"
                         [value]="true"
+                        (ngModelChange)="hiddeCalculeted()"
                         [(ngModel)]="orcamento.chapaInferior"
                         inputId="chapaInferior"
                     ></p-radioButton>
@@ -291,6 +307,7 @@
                     <p-radioButton
                         name="prolongador"
                         [value]="false"
+                        (ngModelChange)="hiddeCalculeted()"
                         [(ngModel)]="orcamento.prolongador"
                         inputId="prolongador"
                     ></p-radioButton>
@@ -300,6 +317,7 @@
                     <p-radioButton
                         name="prolongador"
                         [value]="true"
+                        (ngModelChange)="hiddeCalculeted()"
                         [(ngModel)]="orcamento.prolongador"
                         inputId="prolongador"
                     ></p-radioButton>
@@ -319,6 +337,7 @@
                         name="qtdProlongador"
                         [(ngModel)]="orcamento.qtdProlongador"
                         [showButtons]="true"
+                        (ngModelChange)="hiddeCalculeted()"
                         [min]="1"
                         inputId="integeronly"
                     />

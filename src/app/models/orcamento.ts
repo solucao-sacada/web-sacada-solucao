@@ -187,7 +187,13 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     }
 
     get valorProlongador(): number {
-        return this.qtdProlongador * this.prolong;
+        let valor = 0
+
+        if(this.prolongador){
+            valor += this.qtdProlongador * this.prolong;
+        }
+
+        return valor
     }
 
     get areaTotal(): number {

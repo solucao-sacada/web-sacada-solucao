@@ -15,6 +15,7 @@ export class OrcamentoComponent {
     backgroundColor: string = 'white';
     activeIndex = 0;
     isCalculeted = false;
+    total = 0;
 
     orcamentos: any[] = [];
     orcamento: CalculoOrcamento = new CalculoOrcamento();
@@ -70,7 +71,6 @@ export class OrcamentoComponent {
                 behavior: 'smooth',
             });
         }, 50);
-        console.log(this.orcamento);
     }
 
     send() {
@@ -97,5 +97,9 @@ export class OrcamentoComponent {
                 this.isCalculeted = false;
                 this.activeIndex = 0;
             });
+    }
+
+    hiddeCalculeted() {
+        this.isCalculeted = false;
     }
 }

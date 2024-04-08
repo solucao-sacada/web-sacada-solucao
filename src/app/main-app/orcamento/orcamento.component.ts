@@ -14,7 +14,7 @@ export class OrcamentoComponent {
     @ViewChild('resultado') resultadoSection: ElementRef;
     backgroundColor: string = 'white';
     activeIndex = 0;
-    isCalculeted = true;
+    isCalculeted = false;
 
     orcamentos: any[] = [];
     orcamento: CalculoOrcamento = new CalculoOrcamento();

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoService } from 'src/app/services/pedido.service';
@@ -9,7 +9,7 @@ import { Pedido } from 'src/app/models/pedido';
     templateUrl: './passo5.component.html',
     styles: [],
 })
-export class Passo5Component {
+export class Passo5Component implements OnInit {
     @Input() pedido: Pedido;
 
     selected = '';
@@ -48,26 +48,33 @@ export class Passo5Component {
         private _toaster: ToasterService
     ) { }
 
-    ngOnInit() {
-        if (this.pedidoService.pedido.balcony.format == 0)
-                this.selectedOption = '';
-            else if (this.pedidoService.pedido.balcony.format == 1)
-                this.selectedOption = 'Reta';
-            else if (this.pedidoService.pedido.balcony.format == 2)
-                this.selectedOption = '"L" Esquerda';
-            else if (this.pedidoService.pedido.balcony.format == 3)
-                this.selectedOption = '"L" Direita';
-            else if (this.pedidoService.pedido.balcony.format == 4)
-                this.selectedOption = 'Formato "U"';
-            else if (this.pedidoService.pedido.balcony.format == 5){
-                this.selectedOption = 'Outro';
-            }
+    ngOnInit(): void {
+        // if(this.pedidoService.pedido.balcony){
+        //         if (this.pedidoService.pedido.balcony.format == 0)
+        //             this.selectedOption = '';
+        //         else if (this.pedidoService.pedido.balcony.format == 1)
+        //             this.selectedOption = 'Reta';
+        //         else if (this.pedidoService.pedido.balcony.format == 2)
+        //             this.selectedOption = '"L" Esquerda';
+        //         else if (this.pedidoService.pedido.balcony.format == 3)
+        //             this.selectedOption = '"L" Direita';
+        //         else if (this.pedidoService.pedido.balcony.format == 4)
+        //             this.selectedOption = 'Formato "U"';
+        //         else if (this.pedidoService.pedido.balcony.format == 5){
+        //             this.selectedOption = 'Outro';
+        //         }else{
 
-        if (this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
-            let novoData = this.pedidoService.pedido.balcony.dimensions.data[0];
-            this.selectedOption = String(novoData);
-        }
+        //         }
+
+        //         if (this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
+        //             let novoData = this.pedidoService.pedido.balcony.dimensions.data[0];
+        //             this.selectedOption = String(novoData);
+        //         }else{
+
+        //     }
+        // }
     }
+
     toggleSelection(optionName: string): void {
         this.selectedOption = optionName;
         // Atualiza o formato do balcão com base na opção selecionada

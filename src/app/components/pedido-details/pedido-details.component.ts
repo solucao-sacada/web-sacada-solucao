@@ -8,20 +8,19 @@ import { PedidoService } from 'src/app/services/pedido.service';
     templateUrl: './pedido-details.component.html',
     styleUrls: ['./pedido-details.component.scss'],
 })
-export class PedidoDetailsComponent implements OnInit {
+export class PedidoDetailsComponent {
     qtdLinhasDim: number;
     linhas: any[];
     constructor(
         public pedidoService: PedidoService,
         public imageService: ImageService
     ) {}
-    ngOnInit(): void {
-        console.log(this.pedido.images[0].url)
-    }
 
     @Input() set Pedido(value: PedidoJson) {
-        this.pedido = value;
-        this.dimensoes();
+        if(value){
+            this.pedido = value;
+            this.dimensoes();
+        }
     }
 
     pedido: PedidoJson;

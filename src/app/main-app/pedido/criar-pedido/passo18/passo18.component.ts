@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
+import { PedidoJson } from 'src/app/models/pedidoJson';
 import { ImageService } from 'src/app/services/image.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
@@ -11,6 +12,12 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo18Component {
+    pedido: PedidoJson = {
+        balcony:{
+            dimensions:{
+                data: []}
+        }
+    } as PedidoJson;
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService,

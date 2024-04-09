@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoService } from 'src/app/services/pedido.service';
@@ -24,7 +24,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
         `,
     ],
 })
-export class Passo15Component {
+export class Passo15Component implements OnInit {
     medidas: any[] = [];
     menorAltura = 0;
     menorAlturaTeto = 0;
@@ -43,30 +43,35 @@ export class Passo15Component {
     ngOnInit(): void {
         this.prolongadorPiso = 0
         this.prolongadorTeto = 0
-        this.inicializarLinhas();
-        this.menorAltura = this.verificarMenorAltura();
+        // if(this.pedidoService.pedido.balcony){
+        //     this.inicializarLinhas();
+        //     this.menorAltura = this.verificarMenorAltura();
+        // }
     }
 
     private inicializarLinhas(): void {
-
-        if (
-            this.pedidoService.pedido.balcony.levels.measures.data &&
-            this.pedidoService.pedido.balcony.levels.measures.data.length > 0
-        ) {
-            this.medidas =
-                this.pedidoService.pedido.balcony.levels.measures.data.map(
-                    (linha, index) => ({
-                        ponto: this.incrementAlpha(index),
-                        ceiling: linha[0] || '',
-                        floor: linha[1] || '',
-                    })
-                );
-        } else {
-            this.medidas = Array.from({ length: 1 }, (_, index) => ({
-                ponto: this.incrementAlpha(index),
-                ceiling: '',
-                floor: '',
-            }));
+        if(!this.pedidoService.pedido.balcony){
+           return
+        }{
+            if (
+                this.pedidoService.pedido.balcony.levels.measures.data &&
+                this.pedidoService.pedido.balcony.levels.measures.data.length > 0
+            ) {
+                this.medidas =
+                    this.pedidoService.pedido.balcony.levels.measures.data.map(
+                        (linha, index) => ({
+                            ponto: this.incrementAlpha(index),
+                            ceiling: linha[0] || '',
+                            floor: linha[1] || '',
+                        })
+                    );
+            } else {
+                this.medidas = Array.from({ length: 1 }, (_, index) => ({
+                    ponto: this.incrementAlpha(index),
+                    ceiling: '',
+                    floor: '',
+                }));
+            }
         }
     }
 
@@ -99,9 +104,11 @@ export class Passo15Component {
         let menorAlturaTeto = Infinity;
         let menorAlturaPiso = Infinity;
 
-        this.diferencaPrimeiraPontoUltimoPontoTeto = Math.abs(Number(this.medidas[0].ceiling) - Number(this.medidas[this.medidas.length - 1].ceiling))
+        if(this.medidas[0] && this.medidas[this.medidas.length - 1]){
+            this.diferencaPrimeiraPontoUltimoPontoTeto = Math.abs(Number(this.medidas[0].ceiling) - Number(this.medidas[this.medidas.length - 1].ceiling))
 
-        this.diferencaPrimeiraPontoUltimoPontoPiso = Math.abs(Number(this.medidas[0].floor) - Number(this.medidas[this.medidas.length - 1].floor))
+            this.diferencaPrimeiraPontoUltimoPontoPiso = Math.abs(Number(this.medidas[0].floor) - Number(this.medidas[this.medidas.length - 1].floor))
+        }
 
         for (let i = 0; i < this.medidas.length; i++) {
             const alturaTeto = +this.medidas[i].ceiling;

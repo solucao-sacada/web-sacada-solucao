@@ -56,14 +56,16 @@ export class Passo9Component implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.total = Number(this.pedidoService.pedido.balcony.dimensions.total)
-        this.pedidoService.getObservable().subscribe((data) => {
-            if (data) {
-                this.pedidoService.pedido = data;
-                this.update();
-            }
-        });
-        this.inicializarLinhas();
+        // this.total = Number(this.pedidoService.pedido.balcony.dimensions.total)
+        // this.pedidoService.getObservable().subscribe((data) => {
+        //     if (data) {
+        //         this.pedidoService.pedido = data;
+        //         this.update();
+        //     }
+        // });
+        // if(this.pedidoService.pedido.balcony){
+        //     this.inicializarLinhas();
+        // }
     }
 
     private inicializarLinhas(): void {

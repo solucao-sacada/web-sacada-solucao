@@ -14,6 +14,7 @@ export class Passo17Component {
 
     images: any[] = [];
     visible = false;
+    observation = '';
 
     constructor(
         public pedidoService: PedidoService,
@@ -50,5 +51,9 @@ export class Passo17Component {
     simContinuar(): void {
         this.nextTab()
         this.visible = false
+    }
+
+    updateObservation(): void {
+        this.pedidoService.pedido.observation = this.observation
     }
 }

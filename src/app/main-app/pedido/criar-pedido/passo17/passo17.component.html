@@ -10,7 +10,8 @@
     class="w-full mb-3"
     rows="5"
     pInputTextarea
-    [(ngModel)]="pedidoService.pedido.observation"
+    [(ngModel)]="observation"
+    (ngModelChange)="updateObservation()"
 ></textarea>
 
 <p-fileUpload

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
@@ -12,7 +12,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
     templateUrl: './criar-pedido.component.html',
     styles: [],
 })
-export class CriarPedidoComponent implements CanComponentDeactivate {
+export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
     pedidoString = this.pedidoService.getPedido();
 
     constructor(
@@ -22,8 +22,6 @@ export class CriarPedidoComponent implements CanComponentDeactivate {
     ) {}
 
     ngOnInit(): void {
-        this.router.navigate(['/novo/passo1']);
-
         if (this.pedidoString && !this.pedidoService.pedido.isDraft)
             this.confirmationService.confirm({
                 message:

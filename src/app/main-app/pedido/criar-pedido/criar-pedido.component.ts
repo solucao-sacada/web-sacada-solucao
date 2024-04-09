@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { CanComponentDeactivate } from 'src/app/guards/can-dectivate.guard';
 import { Pedido } from 'src/app/models/pedido';
@@ -16,10 +17,13 @@ export class CriarPedidoComponent implements CanComponentDeactivate {
 
     constructor(
         public pedidoService: PedidoService,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
+        this.router.navigate(['/novo/passo1']);
+
         if (this.pedidoString && !this.pedidoService.pedido.isDraft)
             this.confirmationService.confirm({
                 message:

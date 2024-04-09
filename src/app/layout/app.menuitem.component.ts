@@ -92,6 +92,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        console.log('Item do menu inicializado:', this.item.label);
         this.key = this.parentKey ? this.parentKey + '-' + this.index : String(this.index);
 
         if (this.item.routerLink) {

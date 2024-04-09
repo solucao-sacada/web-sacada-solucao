@@ -37,7 +37,6 @@ export class ListarPedidosComponent {
 
         this.pedidoService.pedido = this.pedidoService.intilizePedido();
         this.pedidoService.listByUser().subscribe((data) => {
-            console.log(data)
             this.pedidos = data;
             this.draftPedidos = this.pedidoService.getDraftPedidos();
         });

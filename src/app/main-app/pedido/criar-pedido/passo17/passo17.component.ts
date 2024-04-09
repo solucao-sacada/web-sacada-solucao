@@ -12,6 +12,9 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo17Component {
     @ViewChild('upload') upload: FileUpload;
 
+    images: any[] = [];
+    visible = false;
+
     constructor(
         public pedidoService: PedidoService,
         private imageService: ImageService,
@@ -26,8 +29,26 @@ export class Passo17Component {
     }
 
     uploadFile(event: any) {
-        this.imageService.storeFile(event.files[0]);
+        this.images.push(event.files[0]);
         this.upload.disabled = true;
+        this.imageService.storeFile(event.files[0]);
         this.toaster.success('Imagem enviada com sucesso');
+    }
+
+    show() {
+        if(this.images.length > 0) {
+            this.nextTab()
+        }else{
+            this.visible = true;
+        }
+    }
+
+    naoContinuar(): void {
+        this.visible = false
+    }
+
+    simContinuar(): void {
+        this.nextTab()
+        this.visible = false
     }
 }

@@ -25,8 +25,26 @@
 >
 </p-fileUpload>
 
+<p-dialog [(visible)]="visible" [style]="{width: '450px'}" header="Atenção" [modal]="true" class="p-fluid">
+    <p class="text-700">Percebemos que você não enviou nenhuma imagem, deseja continuar mesmo assim?</p>
+    <div class="flex flex-row gap-2 justify-content-end mt-4">
+        <button
+        pButton
+        style="width: 4.5rem;"
+        (click)="naoContinuar()">
+        Não
+        </button>
+        <button
+            pButton
+            style="width: 4.5rem;"
+            (click)="simContinuar()">
+            Sim
+        </button>
+    </div>
+</p-dialog>
+
 <app-navigation-tabs-btn
-    (nextTab)="nextTab()"
+    (nextTab)="show()"
     (prevTab)="prevTab()"
 ></app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

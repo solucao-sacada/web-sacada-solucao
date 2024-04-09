@@ -245,7 +245,7 @@
             }}</span>
     </div>
     <div class="flex justify-content-center w-full mt-4">
-        <p-image [src]="pedido?.images ? pedido.images[0].url : imageService.getImageUrl" width="250" [preview]="true"
+        <p-image *ngIf="pedido?.images || imageService.getImageUrl" [src]="pedido?.images ? pedido.images[0].url : imageService.getImageUrl" width="250" [preview]="true"
             [imageStyle]="{ width: '30rem', height: '20rem', objectFit: 'cover', borderRadius: '10px'}">
         </p-image>
     </div>

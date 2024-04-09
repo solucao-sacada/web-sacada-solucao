@@ -17,10 +17,8 @@ export class PedidoDetailsComponent {
     ) {}
 
     @Input() set Pedido(value: PedidoJson) {
-        if(value){
-            this.pedido = value;
-            this.dimensoes();
-        }
+        this.pedido = value;
+        this.dimensoes();
     }
 
     pedido: PedidoJson;

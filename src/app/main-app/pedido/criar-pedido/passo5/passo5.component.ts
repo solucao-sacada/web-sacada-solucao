@@ -14,7 +14,7 @@ export class Passo5Component {
 
     selected = '';
     selectedOption = '';
-    amountPieces: number = 0
+    amountPieces: number = 0;
 
     options: any[] = [
         {
@@ -81,7 +81,12 @@ export class Passo5Component {
     }
 
     nextTab(): void {
+        // if(this.amountPieces <= 0){
+        //     this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+        //     return
+        // }
         const obj = this.pedidoService.pedido.balcony.format
+        console.log(obj)
         if (
             obj == 1 ||
             obj == 2 ||
@@ -91,6 +96,10 @@ export class Passo5Component {
             this.pedidoService.nextTab();
 
         }else if (obj >= 5) {
+            if(this.amountPieces <= 0){
+                this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+                return
+            }
             this.pedidoService.pedido.balcony.format = this.amountPieces
             this.pedidoService.nextTab();
         }

@@ -11,6 +11,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class Passo17Component {
     @ViewChild('upload') upload: FileUpload;
+
     constructor(
         public pedidoService: PedidoService,
         private imageService: ImageService,

@@ -133,6 +133,10 @@ export class Passo9Component implements OnInit {
             ]
         );
 
+        if(this.total > 0){
+            this.pedidoService.pedido.balcony.dimensions.total = parseFloat(this.total.toString()).toFixed(1);
+        }
+
         this.atualizarVidrosRestantes();
     }
 

@@ -25,7 +25,6 @@ export class Passo18Component {
             .create(this.pedidoService.pedido)
             .pipe(finalize(() => (this.disableEnviar = true)))
             .subscribe((response) => {
-                console.log(response);
                 this.imageServive
                     .uploadOrderImageFromLocalStorage(response._id)
                     .subscribe((data) => {
@@ -33,7 +32,7 @@ export class Passo18Component {
 
                         this.pedidoService.removePedidosOk();
                         setTimeout(() => {
-                            this._router.navigate(['/admin']);
+                            this._router.navigate(['/app/pedidos/listar']);
                         }, 3000);
                     });
             });

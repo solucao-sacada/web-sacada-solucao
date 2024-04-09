@@ -43,13 +43,12 @@ export class Passo15Component {
     ngOnInit(): void {
         this.prolongadorPiso = 0
         this.prolongadorTeto = 0
-        this.pedidoService.getObservable().subscribe(() => {
-            this.inicializarLinhas();
-            this.menorAltura = this.verificarMenorAltura();
-        });
+        this.inicializarLinhas();
+        this.menorAltura = this.verificarMenorAltura();
     }
 
     private inicializarLinhas(): void {
+
         if (
             this.pedidoService.pedido.balcony.levels.measures.data &&
             this.pedidoService.pedido.balcony.levels.measures.data.length > 0

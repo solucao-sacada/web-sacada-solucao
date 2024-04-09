@@ -27,7 +27,6 @@ export class Passo13Component {
     ) {}
 
     ngOnInit() {
-        console.log(this.pedidoService.pedido?.balcony.aperture.locations)
         this.pedidoService.getObservable().subscribe((data) => {
             this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
             this.update();

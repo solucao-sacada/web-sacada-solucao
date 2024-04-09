@@ -7,16 +7,16 @@ export const MENUS = [
                 icon: 'pi pi-fw pi-home',
                 routerLink: ['/app'],
             },
-            {
-                label: 'Orçamentos',
-                icon: 'pi pi-fw pi-dollar',
-                routerLink: ['/app/orcamentos/listar'],
-            },
-            {
-                label: 'Pedidos',
-                icon: 'pi pi-fw pi-box',
-                routerLink: ['/app/pedidos/novo'],
-            },
+            // {
+            //     label: 'Orçamentos',
+            //     icon: 'pi pi-fw pi-dollar',
+            //     routerLink: ['/app/orcamentos/listar'],
+            // },
+            // {
+            //     label: 'Pedidos',
+            //     icon: 'pi pi-fw pi-box',
+            //     routerLink: ['/app/pedidos/novo'],
+            // },
         ],
     },
     {

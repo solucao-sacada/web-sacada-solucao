@@ -51,23 +51,6 @@ export class Passo3Component {
         });
     }
 
-    // tipoVidro(value: string) {
-    //     if (value === 'laminado') {
-    //         this.pedidoService.pedido.balcony.glass.laminated = true;
-    //         this.pedidoService.pedido.balcony.glass.tempered = false;
-    //     }
-    //     else if (value === 'Temperado') {
-    //         this.pedidoService.pedido.balcony.glass.laminated = false;
-    //         this.pedidoService.pedido.balcony.glass.tempered = true;
-    //     }
-    //     else if (value === 'laminadoTemperado') {
-    //         this.pedidoService.pedido.balcony.glass.laminated = true;
-    //         this.pedidoService.pedido.balcony.glass.tempered = true;
-    //     }
-    //     else {
-    //     }
-    // }
-
     tipoVidro(tipo: string) {
         this.selectedButton = tipo;
         if (tipo === 'laminado') {
@@ -217,17 +200,17 @@ export class Passo3Component {
             } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
         } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
     }
-    
+
     getThicknessLabel(thickness: any): string {
-     
+
         for (const key in thickness) {
             if (thickness[key]) {
                 return key;
             }
         }
-        return ''; 
+        return '';
     }
-    
+
 
     prevTab(): void {
         this.pedidoService.prevTab();

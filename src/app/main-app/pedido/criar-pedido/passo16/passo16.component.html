@@ -20,13 +20,13 @@
             </div>
             <div class="flex w-5 flex-column gap-1 mb-3" *ngIf="aparador === 'aparador_inox'">
                 <label for="qtdAparador" class="font-bold">Quantidade</label>
-                <p-inputNumber 
-                    [inputStyle]="{ width: '100%' }" 
-                    id="qtdAparador" 
-                    name="qtdAparador" 
-                    [(ngModel)]="qtdAparador" 
-                    [showButtons]="true" 
-                    [min]="0" 
+                <p-inputNumber
+                    [inputStyle]="{ width: '100%' }"
+                    id="qtdAparador"
+                    name="qtdAparador"
+                    [(ngModel)]="qtdAparador"
+                    [showButtons]="true"
+                    [min]="0"
                     inputId="integeronly">
                 </p-inputNumber>
             </div>
@@ -61,7 +61,7 @@
                         id="qtdSelante"
                         name="qtdSelante"
                         [(ngModel)]="qtdSelante"
-                        [showButtons]="true" 
+                        [showButtons]="true"
                         [min]="0"
                         inputId="integeronly"
                     />

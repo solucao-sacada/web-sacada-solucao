@@ -50,17 +50,17 @@ export class Passo14Component {
     ngOnInit() {
         this.pedidoService.getObservable().subscribe(() => {
             if (this.pedidoService.pedido.balcony.lock.pvc){
-                this.selectedVidro = 'PVC';
                 this.selected = 'PVC';
+                this.selectedVidro = 'PVC';
             }else if (this.pedidoService.pedido.balcony.lock.ferro){
-                this.selectedVidro = 'FERRO';
                 this.selected = 'FERRO';
+                this.selectedVidro = 'FERRO';
             }if (this.pedidoService.pedido.balcony.lock['1520/1531']){
-                this.selectedPorta = '1520/1531';
                 this.selected = '1520/1531';
+                this.selectedPorta = '1520/1531';
             }else if (this.pedidoService.pedido.balcony.lock['3210/3211']){
-                this.selectedPorta = '3210/3211';
                 this.selected = '3210/3211';
+                this.selectedPorta = '3210/3211';
             }
 
         });
@@ -72,8 +72,7 @@ export class Passo14Component {
             this.pedidoService.pedido.balcony.lock.fechadura_vidro_vidro = true;
         } else {
             this.pedidoService.pedido.balcony.lock.fechadura_para_porta = true;
-            this.pedidoService.pedido.balcony.lock.fechadura_vidro_vidro =
-                false;
+            this.pedidoService.pedido.balcony.lock.fechadura_vidro_vidro = false;
         }
     }
 
@@ -81,24 +80,23 @@ export class Passo14Component {
         this.selectedOption = optionName;
         this.selected = optionName;
 
-
         if (optionName.includes('PVC')) {
             this.pedidoService.pedido.balcony.lock.pvc = true;
             this.pedidoService.pedido.balcony.lock.ferro = false;
             this.selectedVidro = 'PVC';
         } else if(optionName.includes('FERRO')) {
-                this.pedidoService.pedido.balcony.lock.ferro == true;
-                this.pedidoService.pedido.balcony.lock.pvc == false;
+                this.pedidoService.pedido.balcony.lock.ferro = true;
+                this.pedidoService.pedido.balcony.lock.pvc = false;
                 this.selectedVidro = 'FERRO';
             }
 
         if (optionName.includes('1520/1531')) {
-            this.pedidoService.pedido.balcony.lock['1520/1531'] == true;
-            this.pedidoService.pedido.balcony.lock['3210/3211'] == false;
+            this.pedidoService.pedido.balcony.lock['1520/1531'] = true;
+            this.pedidoService.pedido.balcony.lock['3210/3211'] = false;
             this.selectedPorta = '1520/1531';
         } else if (optionName.includes('3210/3211')) {
-            this.pedidoService.pedido.balcony.lock['3210/3211'] == true;
-            this.pedidoService.pedido.balcony.lock['1520/1531'] == false;
+            this.pedidoService.pedido.balcony.lock['3210/3211'] = true;
+            this.pedidoService.pedido.balcony.lock['1520/1531'] = false;
             this.selectedPorta = '3210/3211';
         }
     }

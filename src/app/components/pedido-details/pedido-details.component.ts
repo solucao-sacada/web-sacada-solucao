@@ -100,7 +100,7 @@ export class PedidoDetailsComponent {
         this.qtdLinhasDim = this.pedidoService.getQtdPecas(
             this.pedido?.balcony.format
         );
-        this.linhas = this.pedido.balcony.dimensions.data.map(
+       return this.linhas = this.pedido.balcony.dimensions.data.map(
             (linha, index) => ({
                 piece: index + 1,
                 angle: linha[1] || '', // Índice 1 representa o ângulo, ajuste conforme necessário

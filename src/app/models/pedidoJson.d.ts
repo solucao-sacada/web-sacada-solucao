@@ -1,8 +1,15 @@
+export interface Image{
+    idUser: string
+    idOrder: string
+    name: string
+    hashName: string
+    url: string
+}
+
 export interface PedidoJson {
     _id?: string;
     idUser: string;
     code?: number;
-    createdAt?: Date;
     accessories: Accessories;
     balcony: Balcony;
     client: Client;
@@ -11,7 +18,8 @@ export interface PedidoJson {
     activeIndex?: number;
     isDraft?: boolean;
     status?: string;
-    images?: any[];
+    images?: Image[];
+    createdAt?: Date;
 }
 
 export interface Accessories {

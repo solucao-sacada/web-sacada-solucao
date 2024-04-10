@@ -37,24 +37,24 @@
                                 <div>
                                     <i class="pi pi-info-circle text-12"></i>
                                 </div>
-                                <span>CRIADO</span>
+                                <span class="text-sm">CRIADO</span>
                             </span>
                             <span *ngIf="pedido.status === 'PENDING'"
                                 class="flex gap-1 p-2 border border-round items-center justify-center bg-orange-700 text-white">
                                 <i class="pi pi-info-circle text-12 justify-center"></i>
-                                <span>PENDENTE</span>
+                                <span class="text-sm">PENDENTE</span>
                             </span>
                             <span *ngIf="pedido.status === 'CANCELED '"
                                 class="flex gap-1 p-2 border border-round items-center justify-center bg-red-700 text-white">
-                                <span>CANCELADO</span>
+                                <span class="text-sm">CANCELADO</span>
                             </span>
                             <span *ngIf="pedido.status === 'WAIT_ANSWER'"
                                 class="flex gap-1 p-2 border border-round items-center justify-center bg-purple-700 text-white">
-                                <span>AGUARDANDO RESPOSTA</span>
+                                <span class="text-sm">AGUARDANDO RESPOSTA</span>
                             </span>
                             <span *ngIf="pedido.status === 'DONE'"
                                 class="flex gap-1 p-2 border border-round items-center justify-center bg-green-700 text-white">
-                                <span>FINALIZADO</span>
+                                <span class="text-sm">FINALIZADO</span>
                             </span>
                         </div>
                     </td>

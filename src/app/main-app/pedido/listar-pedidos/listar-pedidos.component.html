@@ -1,22 +1,11 @@
 <!-- Div de botões -->
 <div class="flex justify-content-between ">
     <!-- Botão novo pedido -->
-    <button
-        pButton
-        pRipple
-        label="Novo Pedido"
-        icon="pi pi-plus"
-        class="mb-3"
-        routerLink="/app/pedidos/novo">
+    <button pButton pRipple label="Novo Pedido" icon="pi pi-plus" class="mb-3" routerLink="/app/pedidos/novo">
     </button>
 
     <!-- Botão de imprimir -->
-    <button
-        pButton
-        pRipple
-        icon="pi pi-print"
-        class="mb-3 p-button-rounded"
-        (click)="downloadAsPdf()"
+    <button pButton pRipple icon="pi pi-print" class="mb-3 p-button-rounded" (click)="downloadAsPdf()"
         [disabled]="!pedido">
     </button>
 </div>
@@ -24,11 +13,7 @@
 <p-tabView [(activeIndex)]="activeIndex">
     <!-- Tabela de pedidos com header e body -->
     <p-tabPanel header="Pedidos">
-        <p-table
-            [value]="pedidos"
-            selectionMode="single"
-            [(selection)]="pedido"
-            dataKey="code"
+        <p-table [value]="pedidos" selectionMode="single" [(selection)]="pedido" dataKey="code"
             (onRowSelect)="onSelectRow($event)">
 
             <ng-template pTemplate="header">
@@ -45,7 +30,45 @@
                     <td>{{ pedido.code }}</td>
                     <td>{{ pedido.client.name }}</td>
                     <td>{{ pedido.createdAt | date : "dd/MM/yyyy" }}</td>
-                    <td>{{ pedido.status }}</td>
+                    <td>
+                        <div class="status-style">
+                            <span *ngIf="pedido.status === 'CREATED'"
+                                class="flex gap-1 p-2 border border-round items-center justify-center bg-green-700 text-white">
+                                <div>
+                                    <i class="pi pi-info-circle text-12"></i>
+                                </div>
+                                <span class="text-sm">CRIADO</span>
+                            </span>
+                            <span *ngIf="pedido.status === 'PENDING'"
+                                class="flex gap-1 p-2 border border-round items-center justify-center bg-orange-700 text-white">
+                                <div>
+                                    <i class="pi pi-info-circle text-12 justify-center"></i>
+                                </div>
+                                <span class="text-sm">PENDENTE</span>
+                            </span>
+                            <span *ngIf="pedido.status === 'CANCELED '"
+                                class="flex gap-1 p-2 border border-round items-center justify-center bg-red-700 text-white">
+                                <div>
+                                    <i class="pi pi-info-circle text-12 justify-center"></i>
+                                </div>
+                                <span class="text-sm">CANCELADO</span>
+                            </span>
+                            <span *ngIf="pedido.status === 'WAIT_ANSWER'"
+                                class="flex gap-1 p-2 border border-round items-center justify-center bg-purple-700 text-white">
+                                <div>
+                                    <i class="pi pi-info-circle text-12 justify-center"></i>
+                                </div>
+                                <span class="text-sm">AGUARDANDO RESPOSTA</span>
+                            </span>
+                            <span *ngIf="pedido.status === 'DONE'"
+                                class="flex gap-1 p-2 border border-round items-center justify-center bg-green-700 text-white">
+                                <div>
+                                    <i class="pi pi-info-circle text-12 justify-center"></i>
+                                </div>
+                                <span class="text-sm">FINALIZADO</span>
+                            </span>
+                        </div>
+                    </td>
                 </tr>
             </ng-template>
         </p-table>
@@ -59,13 +82,8 @@
 
     <!-- Tabela de rascunhos -->
     <p-tabPanel header="Rascunhos" [disabled]="draftPedidos.length == 0">
-        <p-table
-            [value]="draftPedidos"
-            selectionMode="single"
-            [(selection)]="pedido"
-            dataKey="code"
-            (onRowSelect)="onSelectRow($event)"
-        >
+        <p-table [value]="draftPedidos" selectionMode="single" [(selection)]="pedido" dataKey="code"
+            (onRowSelect)="onSelectRow($event)">
             <ng-template pTemplate="header">
                 <tr>
                     <th>Name</th>
@@ -76,17 +94,11 @@
                 <tr [pSelectableRow]="pedido">
                     <td>{{ pedido.client.name }}</td>
                     <td>
-                        <button
-                            pButton
-                            pRipple
-                            label="Excluir"
-                            icon="pi pi-trash"
-                            (click)="excluirDraft(pedido)"
-                        ></button>
+                        <button pButton pRipple label="Excluir" icon="pi pi-trash"
+                            (click)="excluirDraft(pedido)"></button>
                     </td>
                 </tr>
-            </ng-template> </p-table
-    ></p-tabPanel>
+            </ng-template> </p-table></p-tabPanel>
 </p-tabView>
 <p-confirmDialog [breakpoints]="{ '600px': '90vw' }"></p-confirmDialog>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

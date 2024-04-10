@@ -24,12 +24,14 @@ export interface PedidoJson {
 
 export interface Accessories {
     aparador_aluminio: boolean;
-    aparador_inox: boolean;
+    aparador_inox?: boolean;
     sem_aparador: boolean;
     selante: boolean;
+    prolongador: boolean;
     sem_selante: boolean;
     qtdAparador: number;
     qtdSelante: number;
+    qtdProlongador: number;
 }
 
 export interface Balcony {

@@ -41,17 +41,19 @@ export class Passo1Component implements OnInit {
         public pedidoService: PedidoService
     ) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        console.log('aqui no passo 1')
+    }
 
 
     onChangeCep() {
         let cep = this.pedidoService.pedido.client.zipCode as string;
-        cep = cep.replace(/\D/g, ''); 
-        if (cep.length === 8) { 
-            this.buscaCep(cep); 
+        cep = cep.replace(/\D/g, '');
+        if (cep.length === 8) {
+            this.buscaCep(cep);
         }
     }
-    
+
     buscaCep(cep: string) { // Alteramos o tipo do parâmetro para string
         console.log(cep);
         this._loading.start();
@@ -61,19 +63,18 @@ export class Passo1Component implements OnInit {
                 take(1),
                 finalize(() => this._loading.stop())
             )
-            .subscribe((response) => {
-                if (!response.erro) {
+            .subscribe({
+                next: (response) => {
                     this.pedidoService.pedido.client.address = response.logradouro;
                     this.pedidoService.pedido.client.neighborhood = response.bairro;
                     this.pedidoService.pedido.client.city = response.localidade;
                     this.pedidoService.pedido.client.state = response.uf;
                     this.numeroInput.nativeElement.focus();
-                } else {
-                    this._toaster.warn('Cep não encontrado');
-                }
+                },
+                error: () => this._toaster.error('CEP inválido'),
             });
     }
-    
+
 
     nextTab(): void {
         if (

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { CanComponentDeactivate } from 'src/app/guards/can-dectivate.guard';
-import { Pedido } from 'src/app/models/pedido';
-import { PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -22,7 +19,6 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.router.navigate(['/app/pedidos/novo/passo1']);
         if (this.pedidoString && !this.pedidoService.pedido.isDraft)
             this.confirmationService.confirm({
                 message:
@@ -35,14 +31,13 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
                 accept: () => {
                     this.pedidoService.pedido = JSON.parse(this.pedidoString);
                     this.pedidoService.activeIndex =
-                        this.pedidoService.getActiveIndex();
+                    this.pedidoService.getActiveIndex();
                     this.pedidoService.notifyObservers();
                 },
                 reject: () => {
                     this.pedidoService.clearLocalStorage();
                     this.pedidoService.activeIndex = 0;
-                    this.pedidoService.pedido =
-                        this.pedidoService.intilizePedido();
+                    this.pedidoService.pedido = this.pedidoService.intilizePedido();
                     this.pedidoService.setActiveIndex(0);
                 },
             });
@@ -50,7 +45,12 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
             this.pedidoService.activeIndex =
                 this.pedidoService.pedido?.activeIndex || 0;
         }
+
+        if(!this.pedidoString){
+            this.pedidoService.pedido = this.pedidoService.intilizePedido();
+        }
         this.pedidoService.maxActiveIndex = 17;
+
     }
 
     canDeactivate(): boolean | Promise<boolean> {

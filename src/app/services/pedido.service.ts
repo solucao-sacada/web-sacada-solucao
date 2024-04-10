@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ToasterService } from '../components/toaster/toaster.service';
-import { PedidoJson } from '../models/pedidoJson';
+import { Accessories, PedidoJson } from '../models/pedidoJson';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -60,7 +60,7 @@ export class PedidoService {
 
     // METODOS INTERNOS
 
-    intilizePedido(): PedidoJson {
+    intilizePedido(acessories?: Accessories): PedidoJson {
         return {
             idUser: this._auth.getUser()?._id,
             code: Math.random() * 10,
@@ -72,6 +72,8 @@ export class PedidoService {
                 sem_selante: false,
                 qtdAparador: 0,
                 qtdSelante: 0,
+                qtdProlongador: 0,
+                prolongador: false,
             },
             balcony: {
                 aluminium: {

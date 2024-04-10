@@ -1,9 +1,11 @@
 export interface OrcamentoRequestModel {
+    _id?: string;
     idUser: string;
     client: string;
     emailClient: string;
     price: number;
 
+    aparador?: boolean
     selante?: boolean
     prolongador?: boolean
     chapaSuperior?: boolean

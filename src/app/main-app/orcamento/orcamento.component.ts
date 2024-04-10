@@ -2,9 +2,11 @@ import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
-import { CalculoOrcamento } from 'src/app/models/orcamento';
+import { CalculoOrcamento, OrcamentoRequestModel } from 'src/app/models/orcamento';
+import { Accessories } from 'src/app/models/pedidoJson';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
     selector: 'app-orcamento',
@@ -29,6 +31,9 @@ export class OrcamentoComponent {
     selectedOrcamento: CalculoOrcamento | null = null;
 
 
+    constructor(public pedidoService: PedidoService) {}
+
+
 
 
     ngOnInit() {
@@ -38,6 +43,7 @@ export class OrcamentoComponent {
                 this.activeIndex = 1;
             }
         });
+        this.pedidoService.pedido = this.pedidoService.intilizePedido();
     }
     // MÉTODOS CHECKBOXES
     onAparadorChange() {
@@ -114,8 +120,21 @@ export class OrcamentoComponent {
         this.isCalculeted = false;
     }
 
-    gerarPedido(){
-        console.log(this.orcamento)
+    gerarPedido(orcamento: OrcamentoRequestModel){
+        // const acessories = {
+        //     cliente: orcamento.client,
+        //     qtdAparador: orcamento.qtdAparador,
+        //     qtdSelante: orcamento.qtdSelante,
+        //     selante: orcamento.selante,
+        //     sem_selante: orcamento.selante,
+        //     aparador_aluminio: orcamento.aparador,
+        //     sem_aparador: orcamento.aparador,
+        //     aparador_inox: orcamento.aparador,
+        // }
+
+        this.pedidoService.pedido = this.pedidoService.intilizePedido();
+
+        this.router.navigate(['/app/pedidos/novo']);
     }
 
     onSelectRow(value: any) {

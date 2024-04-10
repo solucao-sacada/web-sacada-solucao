@@ -3,6 +3,14 @@ export interface OrcamentoRequestModel {
     client: string;
     emailClient: string;
     price: number;
+
+    selante?: boolean
+    prolongador?: boolean
+    chapaSuperior?: boolean
+    chapaInferior?: boolean
+    qtdAparador: number
+    qtdProlongador: number
+    qtdSelante: number
 }
 
 export interface IConstsOrcamento {

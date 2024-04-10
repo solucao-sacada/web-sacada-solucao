@@ -25,11 +25,11 @@ export class OrcamentoComponent {
     route = inject(ActivatedRoute);
     toaster = inject(ToasterService);
     orcamentoService = inject(OrcamentoService);
+    router = inject(Router);
 
 
     ngOnInit() {
         this.load();
-
         this.route.params.subscribe((params) => {
             if (params['new']) {
                 this.activeIndex = 1;
@@ -45,6 +45,7 @@ export class OrcamentoComponent {
 
     private load() {
         this.orcamentoService.list().subscribe((orcamentos) => {
+            console.log(orcamentos);
             this.orcamentos = orcamentos;
         });
     }
@@ -89,6 +90,13 @@ export class OrcamentoComponent {
                 emailClient: this.orcamento.send,
                 idUser: this.auth.getUser()._id,
                 price: this.orcamento.valorFinal,
+                qtdAparador: this.orcamento.qtdAparador,
+                qtdProlongador: this.orcamento.qtdProlongador,
+                qtdSelante: this.orcamento.qtdSelante,
+                selante: this.orcamento.selante,
+                chapaInferior: this.orcamento.chapaInferior,
+                chapaSuperior: this.orcamento.chapaSuperior,
+                prolongador: this.orcamento.prolongador,
             })
             .subscribe((response) => {
                 this.toaster.success('Orcamento salvo com sucesso!');
@@ -101,5 +109,16 @@ export class OrcamentoComponent {
 
     hiddeCalculeted() {
         this.isCalculeted = false;
+    }
+
+    gerarPedido(){
+    }
+
+    onSelectRow(value: any) {
+        if (value.data._id) {
+            this.orcamento = value.data;
+            this.activeIndex = 1;
+            this.router.navigate(['/app/orcamentos/listar']);
+        }
     }
 }

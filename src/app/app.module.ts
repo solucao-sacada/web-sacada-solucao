@@ -16,6 +16,7 @@ import { ProductService } from './demo/service/product.service';
 import { MainAppLayoutModule } from './layout/main-app-layout.module';
 import { MainAppModule } from './main-app/main-app.module';
 import { PedidoService } from './services/pedido.service';
+import { OrcamentoService } from './services/orcamento.service';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
@@ -30,6 +31,7 @@ import { PedidoService } from './services/pedido.service';
         PhotoService,
         ProductService,
         PedidoService,
+        OrcamentoService,
         ConfirmationService,
     ],
     bootstrap: [AppComponent],

@@ -1,8 +1,14 @@
 <p-toast life="4000" key="tst"></p-toast>
-<p-tabView [(activeIndex)]="activeIndex">
-    <p-tabPanel header="Meus Orçamentos">
+<p-tabView [(activeIndex)]="activeIndex" >
 
-        <p-table [value]="orcamentos" dataKey="nome" responsiveLayout="stack">
+    <p-tabPanel header="Meus Orçamentos">
+        <p-table
+            [value]="orcamentos"
+            selectionMode="single"
+            [(selection)]="orcamento"
+            dataKey="code"
+            (onRowSelect)="onSelectRow($event)"
+            responsiveLayout="stack">
             <ng-template pTemplate="header">
                 <tr>
                     <th>Código</th>
@@ -12,8 +18,9 @@
                     <th></th>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-orcamento>
-                <tr>
+                <tr [pSelectableRow]="orcamento">
                     <td>
                         <span class="p-column-title font-bold">Código</span>
                         {{ orcamento.code }}
@@ -44,6 +51,13 @@
             </ng-template>
         </p-table>
     </p-tabPanel>
+
+    <p-tabPanel header="Detalhes" [disabled]="!orcamento">
+        <div id="printable" #printable>
+            <app-orcamento-details [Orcamento]="orcamento" />
+        </div>
+    </p-tabPanel>
+
     <p-tabPanel header="Novo Orçamento">
         <p-image class="w-12 my-3 sm:w-17 md:w-3 block md:block mx-auto relative"
             [ngStyle]="{'background-color': backgroundColor}"
@@ -358,6 +372,7 @@
                 type="submit"
             ></button>
         </form>
+
         <ng-container *ngIf="isCalculeted">
             <div class="flex flex-column gap-2 align-items-center text-lg">
                 <app-title title="Resultados" class="mb-3" />

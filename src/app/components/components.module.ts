@@ -51,10 +51,12 @@ import { PedidoDetailsComponent } from './pedido-details/pedido-details.componen
 import { TitleComponent } from './title/title.component';
 import { ToasterService } from './toaster/toaster.service';
 import { AccordionModule } from 'primeng/accordion';
+import { OrcamentoDetailsComponent } from './orcamento-details/orcamento-details.component';
+import { OrcamentoService } from '../services/orcamento.service';
 
 @NgModule({
     declarations: [
-    TitleComponent,
+        TitleComponent,
         NavigationTabsBtnComponent,
         LoadingComponent,
         ModalVideoComponent,
@@ -62,6 +64,7 @@ import { AccordionModule } from 'primeng/accordion';
         MenuStepComponent,
         PedidoDetailsComponent,
         NotfoundComponent,
+        OrcamentoDetailsComponent,
     ],
     imports: [
         CommonModule,
@@ -145,10 +148,11 @@ import { AccordionModule } from 'primeng/accordion';
         CardModule,
         ButtonModule,
         NavigationTabsBtnComponent,
+        OrcamentoDetailsComponent,
         LoadingComponent,
         TitleComponent,
         AccordionModule,
     ],
-    providers: [LoadingService, ToasterService, MessageService, PedidoService],
+    providers: [LoadingService, ToasterService, MessageService, PedidoService, OrcamentoService],
 })
 export class ComponentsModule {}

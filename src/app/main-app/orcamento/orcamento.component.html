@@ -44,18 +44,12 @@
                             pRipple
                             type="button"
                             label="Gerar pedido"
-                            (click)="gerarPedido()"
+                            (click)="gerarPedido(); onSelectRow($event)"
                         ></button>
                     </td>
                 </tr>
             </ng-template>
         </p-table>
-    </p-tabPanel>
-
-    <p-tabPanel header="Detalhes" [disabled]="!orcamento">
-        <div id="printable" #printable>
-            <app-orcamento-details [Orcamento]="orcamento" />
-        </div>
     </p-tabPanel>
 
     <p-tabPanel header="Novo Orçamento">
@@ -522,5 +516,11 @@
             ></button>
             <div #resultado>&#32;</div>
         </ng-container>
+    </p-tabPanel>
+
+    <p-tabPanel header="Detalhes" [disabled]="!selectedOrcamento">
+        <div id="printable" #printable>
+            <app-orcamento-details [Orcamento]="orcamento" />
+        </div>
     </p-tabPanel>
 </p-tabView>

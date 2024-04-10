@@ -5,7 +5,6 @@ import { OrcamentoRoutingModule } from './orcamento-routing.module';
 import { OrcamentoComponent } from './orcamento.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import localePt from '@angular/common/locales/pt';
-import { OrcamentoDetailsComponent } from 'src/app/components/orcamento-details/orcamento-details.component';
 
 registerLocaleData(localePt);
 

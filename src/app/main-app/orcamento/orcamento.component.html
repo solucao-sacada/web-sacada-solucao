@@ -5,17 +5,22 @@
         <p-table [value]="orcamentos" dataKey="nome" responsiveLayout="stack">
             <ng-template pTemplate="header">
                 <tr>
+                    <th>Código</th>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>Valor</th>
-                    <!-- <th>Enviar</th> -->
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-orcamento>
                 <tr>
                     <td>
-                        <span class="p-column-title font-bold">Nome</span
-                        >{{ orcamento.client }}
+                        <span class="p-column-title font-bold">Código</span>
+                        {{ orcamento.code }}
+                    </td>
+                    <td>
+                        <span class="p-column-title font-bold">Nome</span>
+                        {{ orcamento.client }}
                     </td>
                     <td>
                         <span class="p-column-title font-bold">E-mail</span>
@@ -25,16 +30,16 @@
                         <span class="p-column-title font-bold">Valor</span>
                         {{ orcamento.price | currency : "BRL" }}
                     </td>
-                    <!-- <td>
+                    <td>
                         <span class="p-column-title font-bold"></span>
                         <button
                             pButton
                             pRipple
                             type="button"
-                            icon="pi pi-check"
-                            label="Criar pedido"
+                            label="Gerar pedido"
+                            (click)="gerarPedido()"
                         ></button>
-                    </td> -->
+                    </td>
                 </tr>
             </ng-template>
         </p-table>

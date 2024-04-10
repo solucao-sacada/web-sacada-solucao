@@ -121,7 +121,6 @@ export class OrcamentoComponent {
         if (value.data._id) {
             this.orcamento = value.data;
             this.activeIndex = 2;
-            this.router.navigate(['/app/orcamentos/listar/detalhe']);
         }
     }
 }

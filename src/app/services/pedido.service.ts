@@ -220,7 +220,7 @@ export class PedidoService {
                 apartment: '',
                 building: '',
                 city: '',
-                name: acessories?.client ? acessories.client : '',
+                name: acessories?.client ? acessories.client : 'Sem nome',
                 neighborhood: '',
                 state: '',
                 zipCode: '',

@@ -26,6 +26,7 @@ export class OrcamentoComponent {
     toaster = inject(ToasterService);
     orcamentoService = inject(OrcamentoService);
     router = inject(Router);
+    selectedOrcamento: CalculoOrcamento | null = null;
 
 
 
@@ -114,12 +115,13 @@ export class OrcamentoComponent {
     }
 
     gerarPedido(){
-
+        console.log(this.orcamento)
     }
 
     onSelectRow(value: any) {
         if (value.data._id) {
             this.orcamento = value.data;
+            this.selectedOrcamento = value.data;
             this.activeIndex = 2;
         }
     }

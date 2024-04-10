@@ -44,15 +44,13 @@
                             pRipple
                             type="button"
                             label="Gerar pedido"
-                            (click)="gerarPedido()"
+                            (click)="gerarPedido(); onSelectRow($event)"
                         ></button>
                     </td>
                 </tr>
             </ng-template>
         </p-table>
     </p-tabPanel>
-
-
 
     <p-tabPanel header="Novo Orçamento">
         <p-image class="w-12 my-3 sm:w-17 md:w-3 block md:block mx-auto relative"
@@ -520,7 +518,7 @@
         </ng-container>
     </p-tabPanel>
 
-    <p-tabPanel header="Detalhes" [disabled]="!orcamento">
+    <p-tabPanel header="Detalhes" [disabled]="!selectedOrcamento">
         <div id="printable" #printable>
             <app-orcamento-details [Orcamento]="orcamento" />
         </div>

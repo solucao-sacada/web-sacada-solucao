@@ -102,7 +102,7 @@ export class ListarPedidosComponent {
         if (value.data._id) {
             this.pedido = value.data;
             this.activeIndex = 1;
-        } else {
+        }else {
             this.pedidoService.pedido = value.data;
             this.pedidoService.pedido.isDraft = true;
             this.pedidoService.setActiveIndex(

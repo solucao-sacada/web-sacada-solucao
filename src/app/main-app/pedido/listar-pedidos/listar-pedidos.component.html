@@ -54,6 +54,8 @@
             <app-pedido-details [Pedido]="pedido" />
         </div>
     </p-tabPanel>
+
+    <!-- Tabela de rascunhos -->
     <p-tabPanel header="Rascunhos" [disabled]="draftPedidos.length == 0">
         <p-table
             [value]="draftPedidos"

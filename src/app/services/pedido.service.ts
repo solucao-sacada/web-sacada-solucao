@@ -61,7 +61,7 @@ export class PedidoService {
 
     // METODOS INTERNOS
 
-    intilizePedido(acessories?: OrcamentoRequestModel): PedidoJson {
+    intilizePedido(acessories?: OrcamentoRequestModel | null): PedidoJson {
         return {
             idUser: this._auth.getUser()?._id,
             code: Math.random() * 10,
@@ -220,7 +220,7 @@ export class PedidoService {
                 apartment: '',
                 building: '',
                 city: '',
-                name: acessories.client ? acessories.client : '',
+                name: acessories?.client ? acessories.client : '',
                 neighborhood: '',
                 state: '',
                 zipCode: '',

@@ -1,11 +1,56 @@
 <div class="flex flex-column mt-5">
     <div class="flex">
-        <span class="p-2 w-12 border-1 font-bold">DADOS ORÇAMENTO</span>
+        <span class="p-2 w-12 border-1 font-bold">DADOS DO CLIENTE</span>
     </div>
     <div class="flex">
-        <span class="col-title p-2 w-5 border-bottom-1 border-x-1">Nome Cliente</span>
-        <span class="col-data p-2 w-7 border-bottom-1 border-right-1">{{
-            orcamento.client
-            }}</span>
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Nome Cliente</span>
+        <span class="col-data p-2 w-7 border-bottom-1 border-right-1">
+            {{ orcamento.client }}
+        </span>
+
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">E-mail</span>
+        <span class="col-data p-2 w-7 border-bottom-1 border-right-1">
+            {{ orcamento.emailClient }}
+        </span>
+
     </div>
-</div>
+    <div class="flex mt-3">
+        <span class="p-2 w-12 border-1 font-bold">DADOS DO ORÇAMENTO</span>
+    </div>
+<!-- 
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Dimensão da sacada</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{ valores.wGlass }}</span>
+    </div> -->
+    
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Acessórios</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">Aparador Inox</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{ orcamento.qtdAparador }}</span>
+
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">Selante</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{ orcamento.qtdSelante }}</span>
+
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">Prolongador</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1">{{ orcamento.qtdProlongador }}</span>
+    </div>
+
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Chapa Superior</span>
+        <span *ngIf="orcamento.chapaSuperior === true; else noChapa ">
+            <span class="col-data p-2 w-5 border-bottom-1 border-right-1">Sim</span>
+        </span>
+
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1">Chapa Inferior</span>
+        <span *ngIf="orcamento.chapaInferior === true; else noChapa ">
+            <span class="col-data p-2 w-5 border-bottom-1 border-right-1">Sim</span>
+        </span>
+        <ng-template #noChapa>
+            <span class="col-data p-2 w-5 border-bottom-1 border-right-1">Não</span>
+        </ng-template>
+    </div>
+
+    <div class="flex">
+        <span class="col-title p-2 w-7 border-bottom-1 border-x-1 bg-gray-100 font-bold">Total</span>
+        <span class="col-data p-2 w-5 border-bottom-1 border-right-1 bg-gray-100 font-bold">{{ orcamento.price | currency: 'BRL'}}</span>
+    </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { CanComponentDeactivate } from 'src/app/guards/can-dectivate.guard';
+import { Accessories } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -47,7 +48,11 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
         }
 
         if(!this.pedidoString){
-            this.pedidoService.pedido = this.pedidoService.intilizePedido();
+            const acessories = JSON.parse(localStorage.getItem('acessories'));
+            this.pedidoService.pedido = this.pedidoService.intilizePedido(acessories);
+            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+
+            this.pedidoService.pedido.accessories = acessories as Accessories;
         }
         this.pedidoService.maxActiveIndex = 17;
 

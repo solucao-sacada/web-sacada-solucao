@@ -81,10 +81,6 @@ export class Passo5Component {
     }
 
     nextTab(): void {
-        // if(this.amountPieces <= 0){
-        //     this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-        //     return
-        // }
         const obj = this.pedidoService.pedido.balcony.format
         console.log(obj)
         if (

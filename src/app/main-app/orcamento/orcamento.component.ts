@@ -106,6 +106,7 @@ export class OrcamentoComponent {
                 chapaInferior: this.orcamento.chapaInferior,
                 chapaSuperior: this.orcamento.chapaSuperior,
                 prolongador: this.orcamento.prolongador,
+                aparador: this.orcamento.aparador,
             })
             .subscribe((response) => {
                 this.toaster.success('Orcamento salvo com sucesso!');
@@ -121,18 +122,21 @@ export class OrcamentoComponent {
     }
 
     gerarPedido(orcamento: OrcamentoRequestModel){
-        // const acessories = {
-        //     cliente: orcamento.client,
-        //     qtdAparador: orcamento.qtdAparador,
-        //     qtdSelante: orcamento.qtdSelante,
-        //     selante: orcamento.selante,
-        //     sem_selante: orcamento.selante,
-        //     aparador_aluminio: orcamento.aparador,
-        //     sem_aparador: orcamento.aparador,
-        //     aparador_inox: orcamento.aparador,
-        // }
+        console.log(orcamento)
+        const acessories = {
+            client: orcamento.client,
+            qtdAparador: orcamento.qtdAparador,
+            qtdSelante: orcamento.qtdSelante,
+            selante: orcamento.selante,
+            aparador: orcamento.aparador,
+            sem_selante: orcamento.selante ? false : true,
+            aparador_aluminio: false,
+            sem_aparador: orcamento.aparador ? false : true,
+            prolongador: orcamento.prolongador,
+            qtdProlongador: orcamento.qtdProlongador,
+        }
 
-        this.pedidoService.pedido = this.pedidoService.intilizePedido();
+        localStorage.setItem('acessories', JSON.stringify(acessories));
 
         this.router.navigate(['/app/pedidos/novo']);
     }

@@ -42,7 +42,6 @@ export class Passo1Component implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        console.log('aqui no passo 1')
     }
 
 

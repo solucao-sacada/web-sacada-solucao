@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ToasterService } from '../components/toaster/toaster.service';
 import { Accessories, PedidoJson } from '../models/pedidoJson';
 import { AuthService } from './auth.service';
+import { OrcamentoRequestModel } from '../models/orcamento';
 
 @Injectable({
     providedIn: 'root',
@@ -60,20 +61,20 @@ export class PedidoService {
 
     // METODOS INTERNOS
 
-    intilizePedido(acessories?: Accessories): PedidoJson {
+    intilizePedido(acessories?: OrcamentoRequestModel): PedidoJson {
         return {
             idUser: this._auth.getUser()?._id,
             code: Math.random() * 10,
             accessories: {
                 aparador_aluminio: false,
-                aparador_inox: false,
-                sem_aparador: false,
-                selante: false,
-                sem_selante: false,
-                qtdAparador: 0,
-                qtdSelante: 0,
-                qtdProlongador: 0,
-                prolongador: false,
+                aparador_inox: acessories?.aparador ? true : false,
+                sem_aparador: acessories?.aparador ? false : true,
+                selante: acessories?.selante ? true : false,
+                sem_selante: acessories?.selante ? false : true,
+                qtdAparador: acessories?.qtdAparador || 0,
+                qtdSelante: acessories?.qtdSelante || 0,
+                qtdProlongador: acessories?.qtdProlongador || 0,
+                prolongador: acessories?.prolongador ? true : false,
             },
             balcony: {
                 aluminium: {
@@ -219,7 +220,7 @@ export class PedidoService {
                 apartment: '',
                 building: '',
                 city: '',
-                name: '',
+                name: acessories.client ? acessories.client : '',
                 neighborhood: '',
                 state: '',
                 zipCode: '',

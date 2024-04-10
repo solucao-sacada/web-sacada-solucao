@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OrcamentoRequestModel } from 'src/app/models/orcamento';
+import { IValuesClient, OrcamentoRequestModel } from 'src/app/models/orcamento';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
 
 @Component({
@@ -20,4 +20,9 @@ export class OrcamentoDetailsComponent {
 
     orcamento: OrcamentoRequestModel;
 
+    // @Input() set Valores(value: IValuesClient){
+    //     this.valores = value;
+    // }
+
+    // valores: IValuesClient;
 }

@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as jspdf from 'jspdf';
 import { ConfirmationService } from 'primeng/api';
@@ -16,6 +17,7 @@ export class ListarPedidosComponent {
     draftPedidos: PedidoJson[] = [];
     pedido: PedidoJson;
     activeIndex: number = 0;
+    linkJSON!: SafeUrl
 
     @ViewChild('printable') public dataToExport: ElementRef;
 
@@ -24,7 +26,8 @@ export class ListarPedidosComponent {
         private router: Router,
         private activetedRoute: ActivatedRoute,
         private _toaster: ToasterService,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private sanatizer: DomSanitizer
     ) {}
 
     ngOnInit(): void {
@@ -110,5 +113,17 @@ export class ListarPedidosComponent {
             );
             this.router.navigate(['/app/pedidos/novo']);
         }
+    }
+
+    gerarJSON(pedido: PedidoJson){
+        const json = JSON.stringify(pedido);
+        const url = this.sanatizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(json));
+
+        this.linkJSON = url.toString();
+    }
+
+    verJSON(pedido: PedidoJson){
+        // abrir url no navegador
+        window.open(pedido.urlJSON, '_blank');
     }
 }

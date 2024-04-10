@@ -19,6 +19,7 @@ export interface PedidoJson {
     isDraft?: boolean;
     status?: string;
     images?: Image[];
+    urlJSON?: string;
     createdAt?: Date;
 }
 

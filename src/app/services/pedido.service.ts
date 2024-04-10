@@ -67,7 +67,7 @@ export class PedidoService {
             code: Math.random() * 10,
             accessories: {
                 aparador_aluminio: false,
-                aparador_inox: acessories?.aparador ? true : false,
+                aparador_inox: false,
                 sem_aparador: acessories?.aparador ? false : true,
                 selante: acessories?.selante ? true : false,
                 sem_selante: acessories?.selante ? false : true,

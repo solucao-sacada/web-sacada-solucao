@@ -22,6 +22,8 @@
                     <th>Name</th>
                     <th>Data</th>
                     <th>Status</th>
+                    <th>Baixar</th>
+                    <th>Visualizar</th>
                 </tr>
             </ng-template>
 
@@ -68,6 +70,27 @@
                                 <span class="text-sm">FINALIZADO</span>
                             </span>
                         </div>
+                    </td>
+                    <td>
+                        <span class="p-column-title font-bold"></span>
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            label="Baixar JSON"
+                            (click)="gerarJSON(pedido);"
+                        ></button>
+                    </td>
+                    <td>
+                        <span class="p-column-title font-bold"></span>
+                        <a
+                            pButton
+                            pRipple
+                            type="button"
+                            label="Visualizar JSON"
+
+                            (click)="verJSON(pedido);"
+                        ></a>
                     </td>
                 </tr>
             </ng-template>

@@ -125,15 +125,16 @@ export class OrcamentoComponent {
         console.log(orcamento)
         const acessories = {
             client: orcamento.client,
-            qtdAparador: orcamento.qtdAparador,
-            qtdSelante: orcamento.qtdSelante,
             selante: orcamento.selante,
             aparador: orcamento.aparador,
-            sem_selante: orcamento.selante ? false : true,
-            aparador_aluminio: false,
-            sem_aparador: orcamento.aparador ? false : true,
             prolongador: orcamento.prolongador,
+            aparador_aluminio: false,
+            aparador_inox: orcamento.aparador ? true : false,
+            sem_selante: orcamento.selante ? false : true,
+            sem_aparador: orcamento.aparador ? false : true,
             qtdProlongador: orcamento.qtdProlongador,
+            qtdAparador: orcamento.qtdAparador,
+            qtdSelante: orcamento.qtdSelante,
         }
 
         localStorage.setItem('acessories', JSON.stringify(acessories));

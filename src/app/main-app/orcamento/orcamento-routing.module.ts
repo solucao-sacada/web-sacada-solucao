@@ -5,6 +5,7 @@ import { OrcamentoDetailsComponent } from 'src/app/components/orcamento-details/
 
 const routes: Routes = [
     { path: 'listar', component: OrcamentoComponent },
+    { path: 'listar/detalhes', component: OrcamentoComponent },
     { path: 'novo/:new', component: OrcamentoComponent },
 ];
 

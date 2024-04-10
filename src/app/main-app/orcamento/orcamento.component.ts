@@ -28,6 +28,8 @@ export class OrcamentoComponent {
     router = inject(Router);
 
 
+
+
     ngOnInit() {
         this.load();
         this.route.params.subscribe((params) => {
@@ -112,13 +114,14 @@ export class OrcamentoComponent {
     }
 
     gerarPedido(){
+
     }
 
     onSelectRow(value: any) {
         if (value.data._id) {
             this.orcamento = value.data;
-            this.activeIndex = 1;
-            this.router.navigate(['/app/orcamentos/listar']);
+            this.activeIndex = 2;
+            this.router.navigate(['/app/orcamentos/listar/detalhe']);
         }
     }
 }

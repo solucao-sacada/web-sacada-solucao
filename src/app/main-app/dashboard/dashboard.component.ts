@@ -29,10 +29,12 @@ export class DashboardComponent {
     orcamentoService = inject(OrcamentoService);
 
     ngOnInit(): void {
-        this.pedidoService.listAll().subscribe((response) => {
-            this.pedidos = response;
-            this.qtdTotal = response.length;
-            this.qtdEntregue = 3; // TODO implementar logica para calcular os entregues baseado no status
+        this.pedidoService.listAll().subscribe((pedido) => {
+            this.pedidos = pedido;
+            this.qtdTotal = pedido.length;
+
+            // Alterar status para CREATED para DONE depois que tiver concluido os status
+            this.qtdEntregue = pedido.filter((p) => p.status === 'CREATED').length;
         });
         this.orcamentoService.list().subscribe((orcamentos) => {
             this.qtdOrcamentos = orcamentos.length;

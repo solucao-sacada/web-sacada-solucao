@@ -1,18 +1,29 @@
 <app-menu-step title="Especificações do Vidro" step="3 - Especificações do Vidro"
-    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT"></app-menu-step>
+    urlVideo="https://www.youtube.com/embed/u46qWPLSf6I?si=Wl21DMwyFBaEXemT">
+</app-menu-step>
 
 <h6>Tipo do Vidro</h6>
-<div class="flex flex-row gap-5 justify-content-center">
-    <button pButton pRipple label="Laminado" [ngClass]="{
-            'p-button-secondary': !pedidoService.pedido?.balcony.glass.laminated
-        }" (click)="tipoVidro('laminado')"></button>
-    <button pButton pRipple label="Temperado" [ngClass]="{
-            'p-button-secondary': !pedidoService.pedido?.balcony.glass.tempered
-        }" (click)="tipoVidro('Temperado')"></button>
-    <button pButton pRipple label="Laminado e Temperado" [ngClass]="{
-            'p-button-secondary': !pedidoService.pedido?.balcony.glass.laminatedTemperad
-        }" (click)="tipoVidro('laminadoTemperado')"></button>
+<div class="flex flex-row gap-2 justify-content-center">
+    <button pButton pRipple 
+        class="custom-button sm:custom-button-sm md:custom-button-md lg:custom-button-lg"
+        [ngClass]="{ 'p-button-secondary': !pedidoService.pedido?.balcony.glass.laminated }" 
+        (click)="tipoVidro('laminado')">
+        Laminado
+    </button>
+    <button pButton pRipple 
+        class="custom-button sm:custom-button-sm md:custom-button-md lg:custom-button-lg"
+        [ngClass]="{ 'p-button-secondary': !pedidoService.pedido?.balcony.glass.tempered }"
+        (click)="tipoVidro('Temperado')">
+        Temperado
+    </button>
+    <button pButton pRipple 
+        class="custom-button sm:custom-button-sm md:custom-button-md lg:custom-button-lg"
+        [ngClass]="{ 'p-button-secondary': !pedidoService.pedido?.balcony.glass.laminatedTemperad }" 
+        (click)="tipoVidro('laminadoTemperado')">
+        Laminado e Temperado
+    </button>
 </div>
+
 
 <div class="grid p-fluid mt-3 align-bottom">
     <div class="col-12 md:col-6 ,">

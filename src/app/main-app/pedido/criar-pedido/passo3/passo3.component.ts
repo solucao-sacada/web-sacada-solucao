@@ -9,7 +9,40 @@ import { PedidoService } from 'src/app/services/pedido.service';
 @Component({
     selector: 'app-passo3',
     templateUrl: './passo3.component.html',
-    styles: [],
+    styles: [
+    `
+            .custom-button {
+        font-size: 14px; 
+        min-width: 100px; 
+        max-width: 200px; 
+        }
+
+        /* Tamanhos responsivos */
+        @media screen and (max-width: 576px) {
+            .sm\:custom-button-sm {
+                font-size: 10px; 
+                min-width: 80px; 
+                max-width: 150px; 
+            }
+        }
+
+        @media screen and (min-width: 577px) and (max-width: 768px) {
+            .md\:custom-button-md {
+                font-size: 12px; 
+                min-width: 90px; 
+                max-width: 170px; 
+            }
+        }
+
+        @media screen and (min-width: 769px) {
+            .lg\:custom-button-lg {
+                font-size: 14px; 
+                min-width: 100px; 
+                max-width: 200px; 
+            }
+        }
+    `
+    ],
 })
 export class Passo3Component {
     corDoVidro: string;
@@ -193,7 +226,7 @@ export class Passo3Component {
                     this.pedidoService.pedido.balcony.glass.thickness['11mm']
                 ) {
                     this.pedidoService.nextTab();
-                    console.log(`Espessura do Vidro: ${this.getThicknessLabel(this.pedidoService.pedido.balcony.glass.thickness)}`);
+                    console.log(`Espessura do Vidro: ${ this.getThicknessLabel(this.pedidoService.pedido.balcony.glass.thickness) }`);
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
             } else if (this.pedidoService.pedido.balcony.glass.color.other) {
                 this.pedidoService.nextTab();

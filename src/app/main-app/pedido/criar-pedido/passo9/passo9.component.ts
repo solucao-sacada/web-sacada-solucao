@@ -70,7 +70,6 @@ export class Passo9Component implements OnInit {
     }
 
     private inicializarLinhas(): void {
-        console.log(this.pedidoService.pedido.balcony.dimensions.data);
         if (
             this.pedidoService.pedido.balcony.dimensions.data &&
             this.pedidoService.pedido.balcony.dimensions.data.length > 0

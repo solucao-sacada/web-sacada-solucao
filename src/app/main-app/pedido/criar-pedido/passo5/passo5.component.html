@@ -30,11 +30,13 @@
                                 id="qtdVidro"
                                 pInputText
                                 [(ngModel)]="amountPieces"
+                                (ngModelChange)="onAmountPiecesChange()"
                                 required
                             />
                             <label for="qtdVidro">Quantidade de Peças</label>
                         </span>
                     </div>
+                    
                 </div>
 
                 <div>

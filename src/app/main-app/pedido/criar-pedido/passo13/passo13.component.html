@@ -67,6 +67,8 @@
             <span>Pivô</span>
             <input
                 pInputText
+                min="40"
+                type="number"
                 [(ngModel)]="option.door_distance"
                 (ngModelChange)="atualizarQtdVidrosRestantes()"
             />

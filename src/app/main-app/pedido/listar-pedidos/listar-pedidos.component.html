@@ -115,12 +115,14 @@
             (onRowSelect)="onSelectRow($event)">
             <ng-template pTemplate="header">
                 <tr>
+                    <th>Código</th>
                     <th>Name</th>
                     <th>Excluir</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-pedido>
                 <tr [pSelectableRow]="pedido">
+                    <td>{{ pedido.code}}</td>
                     <td>{{ pedido.client.name }}</td>
                     <td>
                         <button pButton pRipple label="Excluir" icon="pi pi-trash"

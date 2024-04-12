@@ -20,7 +20,10 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
     ) {}
 
     ngOnInit(): void {
+        console.log('')
+
         if (this.pedidoString && !this.pedidoService.pedido.isDraft){
+            console.log('aqui2')
             this.confirmationService.confirm({
                 message:
                     'Encontramos um pedido em andamento, deseja dar prosseguimento?',
@@ -45,6 +48,7 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
         }else {
             this.pedidoService.activeIndex =
                 this.pedidoService.pedido?.activeIndex || 0;
+
         }
 
         if(!this.pedidoString){
@@ -54,6 +58,7 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
             this.pedidoService.setActiveIndex(0);
 
             localStorage.removeItem('acessories');
+            return
         }
 
         this.pedidoService.maxActiveIndex = 17;

@@ -35,7 +35,7 @@ export class Passo18Component {
                         this.pedidoService.removePedidosOk();
                         setTimeout(() => {
                             this._router.navigate(['/app/pedidos/listar']);
-                        }, 3000);
+                        }, 2000);
                     });
             });
 

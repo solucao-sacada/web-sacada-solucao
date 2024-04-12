@@ -65,7 +65,7 @@ export class PedidoService {
     intilizePedido(acessories?: OrcamentoRequestModel | null): PedidoJson {
         return {
             idUser: this._auth.getUser()?._id,
-            code: Math.random() * 10,
+            code: Math.floor(Math.random() * 10) + 1,
             accessories: {
                 aparador_aluminio: false,
                 aparador_inox: acessories?.aparador ? true : false,

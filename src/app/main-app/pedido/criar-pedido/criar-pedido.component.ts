@@ -20,7 +20,7 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
     ) {}
 
     ngOnInit(): void {
-        if (this.pedidoString && !this.pedidoService.pedido.isDraft)
+        if (this.pedidoString && !this.pedidoService.pedido.isDraft){
             this.confirmationService.confirm({
                 message:
                     'Encontramos um pedido em andamento, deseja dar prosseguimento?',
@@ -42,32 +42,22 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
                     this.pedidoService.setActiveIndex(0);
                 },
             });
-        else {
+        }else {
             this.pedidoService.activeIndex =
                 this.pedidoService.pedido?.activeIndex || 0;
         }
 
         if(!this.pedidoString){
             const acessories = JSON.parse(localStorage.getItem('acessories'));
-            this.pedidoService.pedido = this.pedidoService.intilizePedido();
-            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
-
+            this.pedidoService.pedido = this.pedidoService.intilizePedido(acessories);
             this.pedidoService.pedido.accessories = acessories as Accessories;
 
-            localStorage.setItem('acessories', JSON.stringify({
-                selante: false,
-                sem_selante: false,
-                sem_aparador: false,
-                qtdSelante: 0,
-                qtdAparador: 0,
-                qtdProlongador: 0,
-                prolongador: false,
-                client: '',
-                aparador_aluminio: false,
-                aparador_inox: false
-            }));
+            // localStorage.removeItem('acessories');
+        }else{
+            this.pedidoService.pedido = this.pedidoService.intilizePedido();
         }
         this.pedidoService.maxActiveIndex = 17;
+
 
     }
 

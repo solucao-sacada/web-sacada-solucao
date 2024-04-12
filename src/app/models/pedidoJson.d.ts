@@ -25,10 +25,10 @@ export interface PedidoJson {
 
 export interface Accessories {
     aparador_aluminio: boolean;
-    aparador_inox?: boolean;
-    sem_aparador: boolean;
+    aparador_inox: boolean;
     selante: boolean;
     prolongador: boolean;
+    sem_aparador: boolean;
     sem_selante: boolean;
     qtdAparador: number;
     qtdSelante: number;

@@ -122,7 +122,6 @@ export class OrcamentoComponent {
     }
 
     gerarPedido(orcamento: OrcamentoRequestModel){
-        console.log(orcamento)
         const acessories = {
             client: orcamento.client,
             selante: orcamento.selante,

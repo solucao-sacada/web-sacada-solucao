@@ -12,12 +12,6 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo18Component {
-    pedido: PedidoJson = {
-        balcony:{
-            dimensions:{
-                data: []}
-        }
-    } as PedidoJson;
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService,
@@ -45,6 +39,6 @@ export class Passo18Component {
                     });
             });
 
-        // this.pedidoService.clearLocalStorage();
+        this.pedidoService.clearLocalStorage();
     }
 }

@@ -23,20 +23,28 @@ export class Passo10Component {
             this.openOverlay();
         });
     }
-
     openOverlay() {
-        const result = Math.abs(
-            +this.pedidoService.pedido.balcony.plumb.left_wall.bottom -
-                +this.pedidoService.pedido.balcony.plumb.left_wall.top
+        const leftWall = this.pedidoService.pedido.balcony.plumb.left_wall;
+    
+        const differenceUp = Math.abs(
+            +leftWall.top - +leftWall.bottom  
         );
+    
+        const differenceBottom = Math.abs(
+            +leftWall.bottom - +leftWall.top
+        );
+    
+        const result = Math.min(differenceUp, differenceBottom);
+    
         this.difference = result.toString() + 'mm';
-        if (result >= 8) {
+    
+        if (result > 3) {
             this.visible = true;
         } else {
             this.visible = false;
         }
     }
-
+    
     nextTab(): void {
         const result = Math.abs(
             +this.pedidoService.pedido.balcony.plumb.left_wall.bottom -
@@ -47,7 +55,7 @@ export class Passo10Component {
             this.pedidoService.pedido.balcony.plumb.left_wall.top
         ) {
             this.pedidoService.nextTab();
-            if (result < 8) {
+            if (result < 4) {
             }
             else {
                 this._toaster.warn('Perfil fora do esquadro, por favor ajuste');

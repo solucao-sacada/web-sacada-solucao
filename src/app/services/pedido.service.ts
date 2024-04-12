@@ -26,7 +26,7 @@ export class PedidoService {
         private _http: HttpClient,
         private _toaster: ToasterService,
         private _auth: AuthService
-    ) {}
+    ) { }
 
     // METODOS BACKEND
 
@@ -317,30 +317,15 @@ export class PedidoService {
     }
 
     getQtdPecas(value?: any): number {
-        if (value)
-            switch (value) {
-                case 1:
-                    return 1;
-                case 2:
-                case 3:
-                    return 2;
-                case 4:
-                    return 3;
-                default:
-                    return +value;
-            }
-        else
-            switch (this.pedido?.balcony.format) {
-                case 1:
-                    return 1;
-                case 2:
-                case 3:
-                    return 2;
-                case 4:
-                    return 3;
-                default:
-                    return +this.pedido?.balcony.format;
-            }
+        if (value !== undefined) {
+            // Se um valor específico for fornecido, retorna esse valor
+            return value;
+        } else if (this.pedido?.balcony?.format !== undefined) {
+            // Se o formato estiver definido, retorna o valor de formato
+            return this.pedido?.balcony?.format;
+        } else {
+            return 0;
+        }
     }
 
     isTabDisabled(tabIndex: number): boolean {

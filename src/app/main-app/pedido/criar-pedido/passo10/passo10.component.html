@@ -11,6 +11,7 @@
             class="w-full"
             pInputText
             [(ngModel)]="pedidoService.pedido?.balcony.plumb.left_wall.top"
+            (ngModelChange)="openOverlay()"
         />
     </div>
 </div>

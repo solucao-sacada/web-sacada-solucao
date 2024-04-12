@@ -20,7 +20,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
         /* Tamanhos responsivos */
         @media screen and (max-width: 576px) {
             .sm\:custom-button-sm {
-                font-size: 10px; 
+                // font-size: 9px; 
                 min-width: 80px; 
                 max-width: 150px; 
             }
@@ -28,7 +28,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 
         @media screen and (min-width: 577px) and (max-width: 768px) {
             .md\:custom-button-md {
-                font-size: 12px; 
+                // font-size: 12px; 
                 min-width: 90px; 
                 max-width: 170px; 
             }
@@ -36,7 +36,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 
         @media screen and (min-width: 769px) {
             .lg\:custom-button-lg {
-                font-size: 14px; 
+                // font-size: 14px; 
                 min-width: 100px; 
                 max-width: 200px; 
             }

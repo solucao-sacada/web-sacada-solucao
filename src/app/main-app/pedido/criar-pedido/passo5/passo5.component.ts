@@ -50,18 +50,18 @@ export class Passo5Component {
 
     ngOnInit() {
         if (this.pedidoService.pedido.balcony.format == 0)
-                this.selectedOption = '';
-            else if (this.pedidoService.pedido.balcony.format == 1)
-                this.selectedOption = 'Reta';
-            else if (this.pedidoService.pedido.balcony.format == 2)
-                this.selectedOption = '"L" Esquerda';
-            else if (this.pedidoService.pedido.balcony.format == 3)
-                this.selectedOption = '"L" Direita';
-            else if (this.pedidoService.pedido.balcony.format == 4)
-                this.selectedOption = 'Formato "U"';
-            else if (this.pedidoService.pedido.balcony.format == 5){
-                this.selectedOption = 'Outro';
-            }
+            this.selectedOption = '';
+        else if (this.pedidoService.pedido.balcony.format == 1)
+            this.selectedOption = 'Reta';
+        else if (this.pedidoService.pedido.balcony.format == 2)
+            this.selectedOption = '"L" Esquerda';
+        else if (this.pedidoService.pedido.balcony.format == 3)
+            this.selectedOption = '"L" Direita';
+        else if (this.pedidoService.pedido.balcony.format == 4)
+            this.selectedOption = 'Formato "U"';
+        else if (this.pedidoService.pedido.balcony.format == 5) {
+            this.selectedOption = 'Outro';
+        }
 
         if (this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
             let novoData = this.pedidoService.pedido.balcony.dimensions.data[0];
@@ -70,33 +70,56 @@ export class Passo5Component {
     }
     toggleSelection(optionName: string): void {
         this.selectedOption = optionName;
-        // Atualiza o formato do balcão com base na opção selecionada
-        this.pedidoService.pedido.balcony.format = this.options.find(option => option.name === optionName)?.code || 0;
-
-        // Limpa os dados relacionados ao formato do balcão
+    
+        switch (optionName) {
+            case 'Formato "U"':
+                this.pedidoService.pedido.balcony.format = 3;
+                break;
+            case '"L" Esquerda':
+            case '"L" Direita':
+                this.pedidoService.pedido.balcony.format = 2;
+                break;
+            case 'Reta':
+                this.pedidoService.pedido.balcony.format = 1;
+                break;
+            case 'Outro':
+                this.pedidoService.pedido.balcony.format = 0;
+                break;
+        }
+    
         this.pedidoService.pedido.balcony.dimensions.data = [];
         this.pedidoService.pedido.balcony.dimensions.total = '';
-        // Notifica os observadores após qualquer mudança no formato do balcão
+    
         this.pedidoService.notifyObservers();
+    }
+    
+
+    onAmountPiecesChange(): void {
+        // Quando o valor do input muda, atribuímos o novo valor ao formato do pedido
+        this.pedidoService.pedido.balcony.format = this.amountPieces;
     }
 
     nextTab(): void {
-        const obj = this.pedidoService.pedido.balcony.format
-        console.log(obj)
+        const obj = this.pedidoService.pedido.balcony.format;
+    
+        if (obj === 0) {
+            this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
+            return;
+        }
+    
         if (
             obj == 1 ||
             obj == 2 ||
             obj == 3 ||
             obj == 4
-        ){
+        ) {
             this.pedidoService.nextTab();
-
-        }else if (obj >= 5) {
-            if(this.amountPieces <= 0){
+        } else if (obj >= 5) {
+            if (this.amountPieces <= 0) {
                 this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-                return
+                return;
             }
-            this.pedidoService.pedido.balcony.format = this.amountPieces
+            this.pedidoService.pedido.balcony.format = this.amountPieces;
             this.pedidoService.nextTab();
         }
     }

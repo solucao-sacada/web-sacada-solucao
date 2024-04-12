@@ -54,7 +54,6 @@ export class Passo1Component implements OnInit {
     }
 
     buscaCep(cep: string) { // Alteramos o tipo do parâmetro para string
-        console.log(cep);
         this._loading.start();
         this._buscaCep
             .buscaCep(cep) // Passa o CEP como número para a função buscaCep
@@ -88,7 +87,10 @@ export class Passo1Component implements OnInit {
             this._toaster.warn(
                 'Por favor preencha todos os campos obrigatórios'
             );
-        } else this.pedidoService.nextTab();
+        } else {
+            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            this.pedidoService.nextTab();
+        }
     }
 
     prevTab(): void {

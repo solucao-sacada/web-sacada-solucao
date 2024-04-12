@@ -37,9 +37,7 @@ export class ListarPedidosComponent {
                 this.activeIndex = 2;
             }
         });
-
         this.pedidoService.listByUser().subscribe((data) => {
-            console.log(data);
             this.pedidos = data;
             this.draftPedidos = this.pedidoService.getDraftPedidos();
         });
@@ -105,14 +103,17 @@ export class ListarPedidosComponent {
         if (value.data._id) {
             this.pedido = value.data;
             this.activeIndex = 1;
-        }else {
-            this.pedidoService.pedido = value.data;
-            this.pedidoService.pedido.isDraft = true;
-            this.pedidoService.setActiveIndex(
-                this.pedidoService.pedido.activeIndex || 0
-            );
-            this.router.navigate(['/app/pedidos/novo']);
+            return
         }
+
+        if(value.data.code){
+            this.pedidoService.pedido = value.data;
+            this.pedidoService.setPedido(value.data);
+            this.pedidoService.setActiveIndex(value.data.activeIndex);
+            this.router.navigate(['/app/pedidos/novo']);
+            return
+        }
+
     }
 
     gerarJSON(pedido: PedidoJson){

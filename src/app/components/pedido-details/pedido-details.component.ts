@@ -8,26 +8,16 @@ import { PedidoService } from 'src/app/services/pedido.service';
     templateUrl: './pedido-details.component.html',
     styleUrls: ['./pedido-details.component.scss'],
 })
-export class PedidoDetailsComponent implements OnInit {
+export class PedidoDetailsComponent {
     qtdLinhasDim: number;
     linhas: any[];
     constructor(
         public pedidoService: PedidoService,
         public imageService: ImageService
     ) {}
-    ngOnInit(): void {
-        const acessories = JSON.parse(localStorage.getItem('acessories'));
-        this.pedido = this.pedidoService.intilizePedido(acessories);
-        this.dimensoes();
-    }
 
     @Input() set Pedido(value: PedidoJson) {
-        if(value){
-            this.pedido = value
-        }else{
-            const acessories = JSON.parse(localStorage.getItem('acessories'));
-            this.pedido = this.pedidoService.intilizePedido(acessories);
-        }
+        this.pedido = value
         this.dimensoes();
     }
 

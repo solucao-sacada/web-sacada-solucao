@@ -274,12 +274,12 @@ export class PedidoService {
     }
 
     nextTab(): void {
-        if (this.activeIndex < this.maxActiveIndex) this.activeIndex += 1;
-        this.setActiveIndex(this.activeIndex);
+        if (this.activeIndex < this.maxActiveIndex)this.activeIndex += 1;
         this.pedido.activeIndex = this.activeIndex;
+        this.setActiveIndex(this.activeIndex);
         this.setPedido(this.pedido);
-        this.saveDraftPedido(this.pedido);
         this.notifyObservers();
+        // this.saveDraftPedido(this.pedido);
     }
 
     prevTab(): void {
@@ -343,16 +343,21 @@ export class PedidoService {
 
     saveDraftPedido(pedido: PedidoJson) {
         let pedidoEncontrado = null;
-        pedido.isDraft = true;
-        const pedidosStorage: PedidoJson[] =
-            JSON.parse(localStorage.getItem('draft-pedido')) || [];
-        pedidoEncontrado = pedidosStorage.findIndex(
-            (p) => p.code === pedido.code
-        );
 
-        if (pedidoEncontrado === -1) pedidosStorage.push(pedido);
-        else pedidosStorage[pedidoEncontrado] = pedido;
+        pedido.isDraft = true;
+
+        const pedidosStorage: PedidoJson[] = JSON.parse(localStorage.getItem('draft-pedido')) || [];
+
+        pedidoEncontrado = pedidosStorage.findIndex((p) => p.code === pedido.code);
+
+        if (pedidoEncontrado === -1) {
+            pedidosStorage.push(pedido);
+        }else{
+            pedidosStorage[pedidoEncontrado] = pedido;
+        }
+
         localStorage.setItem('draft-pedido', JSON.stringify(pedidosStorage));
+
         this.clearLocalStorage();
     }
 

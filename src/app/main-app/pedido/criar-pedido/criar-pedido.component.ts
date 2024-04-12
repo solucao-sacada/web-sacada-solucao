@@ -50,12 +50,12 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
         if(!this.pedidoString){
             const acessories = JSON.parse(localStorage.getItem('acessories'));
             this.pedidoService.pedido = this.pedidoService.intilizePedido(acessories);
-            this.pedidoService.pedido.accessories = acessories as Accessories;
+            this.pedidoService.activeIndex = 0;
+            this.pedidoService.setActiveIndex(0);
 
-            // localStorage.removeItem('acessories');
-        }else{
-            this.pedidoService.pedido = this.pedidoService.intilizePedido();
+            localStorage.removeItem('acessories');
         }
+
         this.pedidoService.maxActiveIndex = 17;
 
 

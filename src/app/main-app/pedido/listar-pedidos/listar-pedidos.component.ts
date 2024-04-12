@@ -113,15 +113,25 @@ export class ListarPedidosComponent {
             this.router.navigate(['/app/pedidos/novo']);
             return
         }
-
     }
 
-    gerarJSON(pedido: PedidoJson){
-        const json = JSON.stringify(pedido);
-        const url = this.sanatizer.bypassSecurityTrustUrl("data:text/json;charset=UTF-8," + encodeURIComponent(json));
+    gerarJSON(pedido: PedidoJson) {
+        const jsonString = JSON.stringify(pedido, null, 2);
 
-        this.linkJSON = url.toString();
+        // Criando um Blob a partir da string JSON
+        const blob = new Blob([jsonString], { type: 'application/json;charset=utf-8' });
+
+        // Criando um URL para o Blob
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Criando um link de download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = blobUrl;
+        downloadLink.download = `${pedido._id} - pedido.json`; // Nome do arquivo que será baixado
+        downloadLink.click();
     }
+
+
 
     verJSON(pedido: PedidoJson){
         // abrir url no navegador

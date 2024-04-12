@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ToasterService } from '../components/toaster/toaster.service';
-import { Accessories, PedidoJson } from '../models/pedidoJson';
+import { PedidoJson } from '../models/pedidoJson';
 import { AuthService } from './auth.service';
 import { OrcamentoRequestModel } from '../models/orcamento';
+
 
 @Injectable({
     providedIn: 'root',

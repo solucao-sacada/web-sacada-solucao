@@ -35,39 +35,39 @@
                     <td>{{ pedido.createdAt | date : "dd/MM/yyyy" }}</td>
                     <td class="custom-td">
                         <div class="status-style">
-                            <span *ngIf="pedido.status === 'CREATED'" 
+                            <span *ngIf="pedido.status === 'CREATED'"
                                 class="status-badge p-2 border border-round items-center justify-center bg-green-700 text-white">
                                 <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
                                 <span class="text-xs">AGUARDANDO</span>
                             </span>
 
-                            <span *ngIf="pedido.status === 'PENDING'" 
+                            <span *ngIf="pedido.status === 'PENDING'"
                                 class="status-badge p-2 border border-round bg-orange-700 text-white">
                                 <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
                                 <span class="text-xs">PENDENTE</span>
                             </span>
 
-                            <span *ngIf="pedido.status === 'CANCELED '" 
+                            <span *ngIf="pedido.status === 'CANCELED '"
                                 class="status-badge p-2 border border-round bg-red-700 text-white">
                                 <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
                                 <span class="text-xs">CANCELADO</span>
                             </span>
 
-                            <span *ngIf="pedido.status === 'WAIT_ANSWER'" 
+                            <span *ngIf="pedido.status === 'WAIT_ANSWER'"
                                 class="status-badge p-2 border border-round bg-purple-700 text-white">
                                 <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
                                 <span class="text-xs">AGUARDANDO</span>
                             </span>
-                            
-                            <span *ngIf="pedido.status === 'DONE'" 
+
+                            <span *ngIf="pedido.status === 'DONE'"
                                 class="status-badge bg-green-700 p-2 border border-round text-white">
                                 <i class="pi pi-info-circle text-sm mr-1"></i>
                                 <span class="text-xs">FINALIZADO</span>
                             </span>
                         </div>
                     </td>
-                    
-                        
+
+
                     <!-- <td>
                         <span class="p-column-title font-bold"></span>
                         <button pButton pRipple type="button" label="Baixar JSON" (click)="gerarJSON(pedido);"></button>
@@ -78,19 +78,19 @@
                     </td> -->
                     <td>
                         <span class="p-column-title font-bold"></span>
-                        <button pButton pRipple 
-                            type="button" 
+                        <button pButton pRipple
+                            type="button"
                             icon="pi pi-download"
                             (click)="gerarJSON(pedido);"
                             class="mr-1 mb-1"
                             title="Baixar"
                         >
                         </button>
-                        
+
                         <span class="p-column-title font-bold"></span>
-                        <button pButton pRipple 
-                            type="button" 
-                            icon="pi pi-eye" 
+                        <button pButton pRipple
+                            type="button"
+                            icon="pi pi-eye"
                             (click)="verJSON(pedido);"
                             class="mr-1 mb-1 hover:text-opacity-90"
                             title="Visualizar"

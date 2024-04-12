@@ -35,11 +35,35 @@
                     <td>{{ pedido.createdAt | date : "dd/MM/yyyy" }}</td>
                     <td class="custom-td">
                         <div class="status-style">
-                            <span *ngIf="pedido.status === 'CREATED'" class="status-badge p-2 border border-round bg-green-700 text-white">CRIADO</span>
-                            <span *ngIf="pedido.status === 'PENDING'" class="status-badge p-2 border border-round bg-orange-700 text-white">PENDENTE</span>
-                            <span *ngIf="pedido.status === 'CANCELED '" class="status-badge p-2 border border-round bg-red-700 text-white">CANCELADO</span>
-                            <span *ngIf="pedido.status === 'WAIT_ANSWER'" class="status-badge p-2 border border-round bg-purple-700 text-white">AGUARDANDO RESPOSTA</span>
-                            <span *ngIf="pedido.status === 'DONE'" class="status-badge bg-green-700 p-2 border border-round text-white">FINALIZADO</span>
+                            <span *ngIf="pedido.status === 'CREATED'" 
+                                class="status-badge p-2 border border-round items-center justify-center bg-green-700 text-white">
+                                <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
+                                <span class="text-xs">AGUARDANDO</span>
+                            </span>
+
+                            <span *ngIf="pedido.status === 'PENDING'" 
+                                class="status-badge p-2 border border-round bg-orange-700 text-white">
+                                <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
+                                <span class="text-xs">PENDENTE</span>
+                            </span>
+
+                            <span *ngIf="pedido.status === 'CANCELED '" 
+                                class="status-badge p-2 border border-round bg-red-700 text-white">
+                                <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
+                                <span class="text-xs">CANCELADO</span>
+                            </span>
+
+                            <span *ngIf="pedido.status === 'WAIT_ANSWER'" 
+                                class="status-badge p-2 border border-round bg-purple-700 text-white">
+                                <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
+                                <span class="text-xs">AGUARDANDO</span>
+                            </span>
+                            
+                            <span *ngIf="pedido.status === 'DONE'" 
+                                class="status-badge bg-green-700 p-2 border border-round text-white">
+                                <i class="pi pi-info-circle text-sm mr-1"></i>
+                                <span class="text-xs">FINALIZADO</span>
+                            </span>
                         </div>
                     </td>
                     

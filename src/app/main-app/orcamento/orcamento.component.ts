@@ -30,11 +30,7 @@ export class OrcamentoComponent {
     router = inject(Router);
     selectedOrcamento: CalculoOrcamento | null = null;
 
-
     constructor(public pedidoService: PedidoService) {}
-
-
-
 
     ngOnInit() {
         this.load();

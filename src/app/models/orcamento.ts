@@ -207,7 +207,7 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     }
 
     get areaTotal(): number {
-        return this.wGlass * this.h / 1000;
+        return (this.wGlass / 1000) * (this.h / 1000);
     }
 
      /**

@@ -118,6 +118,8 @@ export class Passo13Component {
         if(this.pedidoService.pedido.balcony.aperture.locations.length > 0) {
             let isNotHaveStacking = false
             for(let location of this.pedidoService.pedido?.balcony.aperture.locations){
+                let doorDistanceString = location.door_distance.toString();
+                this.pedidoService.pedido.balcony.aperture.locations[0].door_distance = doorDistanceString
                 if(location.stacking === 'Nenhum'){
                     isNotHaveStacking = true
                 }

@@ -134,6 +134,23 @@ export class Passo15Component implements OnInit {
         }
     }
 
+    checkHeightDifference(): void {
+        const firstCeiling = +this.medidas[0].ceiling;
+        const lastCeiling = +this.medidas[this.medidas.length - 1].ceiling;
+        const firstFloor = +this.medidas[0].floor;
+        const lastFloor = +this.medidas[this.medidas.length - 1].floor;
+    
+        const differenceCeiling = Math.abs(firstCeiling - lastCeiling);
+        const differenceFloor = Math.abs(firstFloor - lastFloor);
+    
+        if (differenceCeiling > 15 || differenceFloor > 15) {
+            this.visible = true;
+        } else {
+            this.visible = false;
+        }
+    }
+
+    
     salvar() {
         this.pedidoService.pedido.balcony.levels.measures.data =
             this.medidas.map((linha) => [linha.ceiling, linha.floor]);
@@ -197,6 +214,7 @@ export class Passo15Component implements OnInit {
 
     nextTab(): void {
         this.salvar();
+        this.checkHeightDifference();
         this.pedidoService.pedido.balcony.levels.measures.highest_prolongation = this.prolongadorTeto.toString();
         this.pedidoService.pedido.balcony.levels.measures.lower_prolongation = this.prolongadorPiso.toString();
 

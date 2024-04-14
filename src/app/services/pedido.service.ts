@@ -230,6 +230,7 @@ export class PedidoService {
             },
             technician: this._auth.getUser()?.name,
             observation: '',
+            createdAt: new Date().toLocaleDateString('pt-BR')
         };
     }
 

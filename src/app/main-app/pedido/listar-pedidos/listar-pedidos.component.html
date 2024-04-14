@@ -117,6 +117,7 @@
                 <tr>
                     <th>Código</th>
                     <th>Nome</th>
+                    <th>Data</th>
                     <th>Excluir</th>
                 </tr>
             </ng-template>
@@ -124,6 +125,7 @@
                 <tr [pSelectableRow]="pedido">
                     <td>{{ pedido.code }}</td>
                     <td>{{ pedido.client.name }}</td>
+                    <td>{{ pedido.createdAt}}</td>
                     <td>
                         <button pButton pRipple label="" icon="pi pi-trash"
                             (click)="excluirDraft(pedido)"></button>

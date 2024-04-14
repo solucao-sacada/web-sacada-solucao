@@ -20,7 +20,7 @@ export interface PedidoJson {
     status?: string;
     images?: Image[];
     urlJSON?: string;
-    createdAt?: Date;
+    createdAt?: Date | string;
 }
 
 export interface Accessories {

@@ -63,9 +63,10 @@ export class PedidoService {
     // METODOS INTERNOS
 
     intilizePedido(acessories?: OrcamentoRequestModel | null): PedidoJson {
+        const drafts = this.getDraftPedidos();
         return {
             idUser: this._auth.getUser()?._id,
-            code: Math.floor(Math.random() * 10) + 1,
+            code: drafts.length === 0 ? 1 : drafts.length + 1,
             accessories: {
                 aparador_aluminio: false,
                 aparador_inox: acessories?.aparador ? true : false,

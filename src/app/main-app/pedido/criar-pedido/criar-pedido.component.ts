@@ -77,7 +77,6 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
                     rejectLabel: 'Não',
                     rejectButtonStyleClass: 'p-button-text',
                     accept: () => {
-                        console.log('salvar pedido 1')
                         this.pedidoService.saveDraftPedido(
                             this.pedidoService.pedido
                         );

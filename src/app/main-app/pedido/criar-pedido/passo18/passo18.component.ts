@@ -25,12 +25,10 @@ export class Passo18Component implements OnInit {
     disableEnviar = false;
 
     enviar() {
-
         this.pedidoService
             .create(this.pedidoService.pedido)
             .pipe(finalize(() => (this.disableEnviar = true)))
             .subscribe((response) => {
-
                 this.imageServive
                     .uploadOrderImageFromLocalStorage(response._id)
                     .subscribe((data) => {

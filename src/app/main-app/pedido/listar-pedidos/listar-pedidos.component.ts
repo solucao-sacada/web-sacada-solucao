@@ -17,7 +17,8 @@ export class ListarPedidosComponent {
     draftPedidos: PedidoJson[] = [];
     pedido: PedidoJson;
     activeIndex: number = 0;
-    linkJSON!: SafeUrl
+    linkJSON!: SafeUrl;
+    code = 1;
 
     @ViewChild('printable') public dataToExport: ElementRef;
 
@@ -39,7 +40,7 @@ export class ListarPedidosComponent {
         });
         this.pedidoService.listByUser().subscribe((data) => {
             this.pedidos = data;
-            this.draftPedidos = this.pedidoService.getDraftPedidos();
+            this.draftPedidos = this.pedidoService.getDraftPedidos().reverse()
         });
     }
 
@@ -86,6 +87,7 @@ export class ListarPedidosComponent {
             rejectButtonStyleClass: 'p-button-text',
             accept: () => {
                 const drafts = this.pedidoService.getDraftPedidos();
+
                 this.pedidoService.removerDraft(pedido);
                 const draftsAfter = this.pedidoService.getDraftPedidos();
                 if (drafts > draftsAfter) {

@@ -91,6 +91,7 @@ export class Passo6Component implements OnInit {
         const position = this.pedidoService.pedido.balcony.beam.position;
 
         if (position && (position.aligned || position.inside || position.outside)) {
+            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         } else {
             this._toaster.warn(MESSAGES.UMA_OPCAO);

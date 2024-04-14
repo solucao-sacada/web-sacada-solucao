@@ -221,14 +221,14 @@ export class Passo8Component {
                     this.pedidoService.nextTab();
                 } else {
                     this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-                } 
+                }
             } else if (rails.tip.built_in) {
                 if (
                     rails.built_in.tip.A ||
                     rails.built_in.tip.B ||
                     rails.built_in.tip.C ||
                     rails.built_in.tip.D
-                ) 
+                )
                 if (
                     (rails.built_in.tip.A ||
                         rails.built_in.tip.B ||
@@ -252,6 +252,7 @@ export class Passo8Component {
                         rails.tab.tip.D ||
                         rails.tab.tip.E
                     ) {
+                        this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                         this.pedidoService.nextTab();
                     } else {
                         this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);

@@ -110,7 +110,6 @@ export class PedidoDetailsComponent {
         );
 
         return this.linhas
-        console.log(this.linhas);
     }
 
     incrementAlpha(index) {

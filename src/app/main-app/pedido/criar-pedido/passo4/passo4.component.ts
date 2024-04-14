@@ -61,9 +61,9 @@ export class Passo4Component {
         ) {
             if (this.outro) {
                 if (colors.other) {
-                    this.pedidoService.nextTab();
+                    {this.pedidoService.nextTab(); this.pedidoService.saveDraftPedido(this.pedidoService.pedido);}
                 } else this._toaster.warn(MESSAGES.UMA_OPCAO);
-            } else this.pedidoService.nextTab();
+            } else {this.pedidoService.nextTab();this.pedidoService.saveDraftPedido(this.pedidoService.pedido);}
         } else this._toaster.warn(MESSAGES.UMA_OPCAO);
     }
 

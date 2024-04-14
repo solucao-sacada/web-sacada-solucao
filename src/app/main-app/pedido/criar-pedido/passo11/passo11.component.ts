@@ -27,26 +27,26 @@ export class Passo11Component {
 
     openOverlay() {
         const rightWall = this.pedidoService.pedido.balcony.plumb.right_wall;
-    
+
         const differenceUp = Math.abs(
-            +rightWall.top - +rightWall.bottom  
+            +rightWall.top - +rightWall.bottom
         );
-    
+
         const differenceBottom = Math.abs(
             +rightWall.bottom - +rightWall.top
         );
-    
+
         const result = Math.min(differenceUp, differenceBottom);
-    
+
         this.difference = result.toString() + 'mm';
-    
+
         if (result > 3) {
             this.visible = true;
         } else {
             this.visible = false;
         }
     }
-    
+
     nextTab(): void {
         const result = Math.abs(
             +this.pedidoService.pedido.balcony.plumb.right_wall.bottom -
@@ -56,6 +56,7 @@ export class Passo11Component {
             this.pedidoService.pedido.balcony.plumb.right_wall.bottom &&
             this.pedidoService.pedido.balcony.plumb.right_wall.top
         ) {
+            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
             if (result < 4) {
             } else {

@@ -55,6 +55,7 @@ export class Passo12Component {
     }
 
     nextTab(): void {
+        this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
         this.pedidoService.nextTab();
     }
 

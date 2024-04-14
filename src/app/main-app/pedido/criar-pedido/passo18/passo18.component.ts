@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
@@ -11,24 +11,30 @@ import { PedidoService } from 'src/app/services/pedido.service';
     templateUrl: './passo18.component.html',
     styles: [],
 })
-export class Passo18Component {
+export class Passo18Component implements OnInit {
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService,
         private _router: Router,
         private imageServive: ImageService
     ) {}
+    ngOnInit(): void {
+        console.log(this.pedidoService.pedido)
+    }
 
     disableEnviar = false;
 
     enviar() {
+
         this.pedidoService
             .create(this.pedidoService.pedido)
             .pipe(finalize(() => (this.disableEnviar = true)))
             .subscribe((response) => {
+
                 this.imageServive
                     .uploadOrderImageFromLocalStorage(response._id)
                     .subscribe((data) => {
+                        this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                         this.pedidoService.pedido.images = data;
                         this._toaster.success('Pedido Salvo com Sucesso');
 

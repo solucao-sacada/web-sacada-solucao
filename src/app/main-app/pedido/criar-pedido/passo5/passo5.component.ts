@@ -70,7 +70,7 @@ export class Passo5Component {
     }
     toggleSelection(optionName: string): void {
         this.selectedOption = optionName;
-    
+
         switch (optionName) {
             case 'Formato "U"':
                 this.pedidoService.pedido.balcony.format = 3;
@@ -86,13 +86,13 @@ export class Passo5Component {
                 this.pedidoService.pedido.balcony.format = 0;
                 break;
         }
-    
+
         this.pedidoService.pedido.balcony.dimensions.data = [];
         this.pedidoService.pedido.balcony.dimensions.total = '';
-    
+
         this.pedidoService.notifyObservers();
     }
-    
+
 
     onAmountPiecesChange(): void {
         // Quando o valor do input muda, atribuímos o novo valor ao formato do pedido
@@ -101,18 +101,19 @@ export class Passo5Component {
 
     nextTab(): void {
         const obj = this.pedidoService.pedido.balcony.format;
-    
+
         if (obj === 0) {
             this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
             return;
         }
-    
+
         if (
             obj == 1 ||
             obj == 2 ||
             obj == 3 ||
             obj == 4
         ) {
+            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         } else if (obj >= 5) {
             if (this.amountPieces <= 0) {
@@ -120,6 +121,7 @@ export class Passo5Component {
                 return;
             }
             this.pedidoService.pedido.balcony.format = this.amountPieces;
+            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         }
     }

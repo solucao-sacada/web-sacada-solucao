@@ -44,8 +44,14 @@ export class Passo2Component {
                 this._toaster.warn(
                     'Por favor, defina uma quantidade de vidros!'
                 );
-            else this.pedidoService.nextTab();
-        } else this.pedidoService.nextTab();
+            else {
+                this.pedidoService.nextTab()
+                this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            }
+        } else {
+            this.pedidoService.nextTab();
+            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+        }
     }
 
     prevTab(): void {

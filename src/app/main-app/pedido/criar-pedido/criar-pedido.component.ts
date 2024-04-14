@@ -20,7 +20,12 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
     ) {}
 
     ngOnInit(): void {
+        const pedido = localStorage.getItem('pedido');
 
+        if(pedido) {
+            localStorage.removeItem('pedido');
+            this.pedidoService.setActiveIndex(0);
+        }
         if (this.pedidoString && !this.pedidoService.pedido.isDraft){
             this.confirmationService.confirm({
                 message:

@@ -12,33 +12,33 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [
     `
             .custom-button {
-        font-size: 14px; 
-        min-width: 100px; 
-        max-width: 200px; 
+        font-size: 14px;
+        min-width: 100px;
+        max-width: 200px;
         }
 
         /* Tamanhos responsivos */
         @media screen and (max-width: 576px) {
             .sm\:custom-button-sm {
-                // font-size: 9px; 
-                min-width: 80px; 
-                max-width: 150px; 
+                // font-size: 9px;
+                min-width: 80px;
+                max-width: 150px;
             }
         }
 
         @media screen and (min-width: 577px) and (max-width: 768px) {
             .md\:custom-button-md {
-                // font-size: 12px; 
-                min-width: 90px; 
-                max-width: 170px; 
+                // font-size: 12px;
+                min-width: 90px;
+                max-width: 170px;
             }
         }
 
         @media screen and (min-width: 769px) {
             .lg\:custom-button-lg {
-                // font-size: 14px; 
-                min-width: 100px; 
-                max-width: 200px; 
+                // font-size: 14px;
+                min-width: 100px;
+                max-width: 200px;
             }
         }
     `
@@ -226,10 +226,12 @@ export class Passo3Component {
                     this.pedidoService.pedido.balcony.glass.thickness['11mm']
                 ) {
                     this.pedidoService.nextTab();
+                    this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                     console.log(`Espessura do Vidro: ${ this.getThicknessLabel(this.pedidoService.pedido.balcony.glass.thickness) }`);
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
             } else if (this.pedidoService.pedido.balcony.glass.color.other) {
                 this.pedidoService.nextTab();
+                this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
         } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
     }

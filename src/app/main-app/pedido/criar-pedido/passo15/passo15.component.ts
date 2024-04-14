@@ -139,10 +139,10 @@ export class Passo15Component implements OnInit {
         const lastCeiling = +this.medidas[this.medidas.length - 1].ceiling;
         const firstFloor = +this.medidas[0].floor;
         const lastFloor = +this.medidas[this.medidas.length - 1].floor;
-    
+
         const differenceCeiling = Math.abs(firstCeiling - lastCeiling);
         const differenceFloor = Math.abs(firstFloor - lastFloor);
-    
+
         if (differenceCeiling > 15 || differenceFloor > 15) {
             this.visible = true;
         } else {
@@ -150,7 +150,7 @@ export class Passo15Component implements OnInit {
         }
     }
 
-    
+
     salvar() {
         this.pedidoService.pedido.balcony.levels.measures.data =
             this.medidas.map((linha) => [linha.ceiling, linha.floor]);
@@ -225,7 +225,7 @@ export class Passo15Component implements OnInit {
         });
         if (hasError) {
             this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-        } else this.pedidoService.nextTab();
+        } else {this.pedidoService.nextTab();this.pedidoService.saveDraftPedido(this.pedidoService.pedido);}
     }
     prevTab(): void {
         this.pedidoService.prevTab();

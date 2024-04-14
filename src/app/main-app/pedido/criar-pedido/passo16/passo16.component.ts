@@ -44,11 +44,6 @@ export class Passo16Component {
 
 
     nextTab(): void {
-        console.log(this.selante)
-        console.log(this.aparador)
-        console.log(this.qtdAparador)
-        console.log(this.qtdSelante)
-
         if (this.aparador === 'aparador_inox') {
             this.pedidoService.pedido.accessories.aparador_inox = true;
             this.pedidoService.pedido.accessories.sem_aparador = false;
@@ -70,6 +65,7 @@ export class Passo16Component {
         if (this.selante !== '' && this.aparador !== '') {
             if (this.aparador === 'sem_aparador' || this.qtdAparador > 0) {
                 if (this.selante === 'sem_selante' || this.qtdSelante > 0) {
+                    this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                     this.pedidoService.nextTab();
                 } else {
                     this.toaster.warn("A quantidade de selante deve ser maior que zero!");

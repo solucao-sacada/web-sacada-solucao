@@ -11,16 +11,13 @@ import { PedidoService } from 'src/app/services/pedido.service';
     templateUrl: './passo18.component.html',
     styles: [],
 })
-export class Passo18Component implements OnInit {
+export class Passo18Component{
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService,
         private _router: Router,
         private imageServive: ImageService
     ) {}
-    ngOnInit(): void {
-        console.log(this.pedidoService.pedido)
-    }
 
     disableEnviar = false;
 

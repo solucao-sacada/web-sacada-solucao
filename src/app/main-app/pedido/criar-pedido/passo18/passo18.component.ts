@@ -19,6 +19,8 @@ export class Passo18Component{
         private imageServive: ImageService
     ) {}
 
+
+
     disableEnviar = false;
 
     enviar() {

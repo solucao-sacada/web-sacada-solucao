@@ -77,12 +77,14 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
                     rejectLabel: 'Não',
                     rejectButtonStyleClass: 'p-button-text',
                     accept: () => {
+                        this.pedidoService.setActiveIndex(0);
                         this.pedidoService.saveDraftPedido(
                             this.pedidoService.pedido
                         );
                         resolve(true);
                     },
                     reject: () => {
+                        this.pedidoService.setActiveIndex(0);
                         resolve(true);
                     },
                 });

@@ -136,6 +136,7 @@ export class Passo9Component implements OnInit {
             ]
         );
 
+
         if(this.total > 0){
             this.pedidoService.pedido.balcony.dimensions.total = parseFloat(this.total.toString()).toFixed(1);
         }
@@ -166,7 +167,6 @@ export class Passo9Component implements OnInit {
 
     _nextTab(): void {
         this.salvarDimensoes();
-
         // Verifica se todos os campos obrigatórios foram preenchidos
         if (
             this.linhas.some(
@@ -192,6 +192,7 @@ export class Passo9Component implements OnInit {
                 if (vidrosDimensao500Mais !== totalVidros) {
                     this._toster.warn('A quantidade de vidros selecionada não corresponde à quantidade de peças quando a dimensão é 500 ou mais.');
                 } else {
+                    this.pedidoService.notifyObservers();
                     this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                     this.pedidoService.nextTab();
                 }

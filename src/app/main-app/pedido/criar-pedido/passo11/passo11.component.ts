@@ -56,7 +56,6 @@ export class Passo11Component {
             this.pedidoService.pedido.balcony.plumb.right_wall.bottom &&
             this.pedidoService.pedido.balcony.plumb.right_wall.top
         ) {
-            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
             if (result < 4) {
             } else {

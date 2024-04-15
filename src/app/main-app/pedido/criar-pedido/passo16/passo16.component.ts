@@ -65,7 +65,6 @@ export class Passo16Component {
         if (this.selante !== '' && this.aparador !== '') {
             if (this.aparador === 'sem_aparador' || this.qtdAparador > 0) {
                 if (this.selante === 'sem_selante' || this.qtdSelante > 0) {
-                    // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                     this.pedidoService.nextTab();
                 } else {
                     this.toaster.warn("A quantidade de selante deve ser maior que zero!");

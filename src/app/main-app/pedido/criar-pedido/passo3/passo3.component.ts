@@ -226,10 +226,8 @@ export class Passo3Component {
                     this.pedidoService.pedido.balcony.glass.thickness['11mm']
                 ) {
                     this.pedidoService.nextTab();
-                    this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
             } else if (this.pedidoService.pedido.balcony.glass.color.other) {
-                // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                 this.pedidoService.nextTab();
             } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
         } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);

@@ -250,7 +250,6 @@ export class Passo8Component {
                         rails.tab.tip.D ||
                         rails.tab.tip.E
                     ) {
-                        // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                         this.pedidoService.nextTab();
                     } else {
                         this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);

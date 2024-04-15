@@ -19,12 +19,12 @@ export class Passo18Component{
         private imageServive: ImageService
     ) {}
 
-
-
     disableEnviar = false;
 
     enviar() {
-        this.pedidoService
+        const imagem = localStorage.getItem('imagemBase64')
+        if(imagem){
+            this.pedidoService
             .create(this.pedidoService.pedido)
             .pipe(finalize(() => (this.disableEnviar = true)))
             .subscribe((response) => {
@@ -39,10 +39,24 @@ export class Passo18Component{
                         this.pedidoService.removePedidosOk();
                         setTimeout(() => {
                             this._router.navigate(['/app/pedidos/listar']);
-                        }, 2000);
+                        }, 1500);
                     });
             });
+        }else{
+            this.pedidoService
+            .create(this.pedidoService.pedido)
+            .pipe(finalize(() => (this.disableEnviar = true)))
+            .subscribe((response) => {
+                this.pedidoService.dimensionOK = false;
+                this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+                this._toaster.success('Pedido Salvo com Sucesso');
 
-        this.pedidoService.clearLocalStorage();
+                this.pedidoService.removePedidosOk();
+                setTimeout(() => {
+                    this._router.navigate(['/app/pedidos/listar']);
+                }, 1500);
+            });
+        }
+
     }
 }

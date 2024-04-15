@@ -23,6 +23,7 @@ export class Passo17Component {
     ) {}
 
     nextTab(): void {
+        // this.pedidoService.setPedidosOK(this.pedidoService.pedido);
         this.pedidoService.nextTab();
     }
     prevTab(): void {

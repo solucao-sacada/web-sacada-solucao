@@ -23,7 +23,7 @@ export class Passo17Component {
     ) {}
 
     nextTab(): void {
-        this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+        // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
         this.pedidoService.nextTab();
     }
     prevTab(): void {

@@ -227,11 +227,10 @@ export class Passo3Component {
                 ) {
                     this.pedidoService.nextTab();
                     this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
-                    console.log(`Espessura do Vidro: ${ this.getThicknessLabel(this.pedidoService.pedido.balcony.glass.thickness) }`);
                 } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
             } else if (this.pedidoService.pedido.balcony.glass.color.other) {
+                // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                 this.pedidoService.nextTab();
-                this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
         } else this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
     }

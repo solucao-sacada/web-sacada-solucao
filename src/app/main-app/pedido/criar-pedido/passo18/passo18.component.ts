@@ -31,6 +31,7 @@ export class Passo18Component{
                 this.imageServive
                     .uploadOrderImageFromLocalStorage(response._id)
                     .subscribe((data) => {
+                        this.pedidoService.dimensionOK = false;
                         this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                         this.pedidoService.pedido.images = data;
                         this._toaster.success('Pedido Salvo com Sucesso');

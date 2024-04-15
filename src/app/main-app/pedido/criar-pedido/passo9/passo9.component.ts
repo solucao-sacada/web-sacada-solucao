@@ -192,8 +192,7 @@ export class Passo9Component implements OnInit {
                 if (vidrosDimensao500Mais !== totalVidros) {
                     this._toster.warn('A quantidade de vidros selecionada não corresponde à quantidade de peças quando a dimensão é 500 ou mais.');
                 } else {
-                    this.pedidoService.notifyObservers();
-                    this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+                    this.pedidoService.dimensionOK = true;
                     this.pedidoService.nextTab();
                 }
             }

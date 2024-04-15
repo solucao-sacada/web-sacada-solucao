@@ -155,7 +155,7 @@ export class Passo13Component {
                 this._toaster.warn(mensagem);
             });
         } else {
-            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         }
     }

@@ -45,12 +45,12 @@ export class Passo2Component {
                     'Por favor, defina uma quantidade de vidros!'
                 );
             else {
+                // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                 this.pedidoService.nextTab()
-                this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             }
         } else {
+            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
-            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
         }
     }
 

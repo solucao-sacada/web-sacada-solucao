@@ -225,7 +225,10 @@ export class Passo15Component implements OnInit {
         });
         if (hasError) {
             this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
-        } else {this.pedidoService.nextTab();this.pedidoService.saveDraftPedido(this.pedidoService.pedido);}
+        } else {
+            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            this.pedidoService.nextTab();
+        }
     }
     prevTab(): void {
         this.pedidoService.prevTab();

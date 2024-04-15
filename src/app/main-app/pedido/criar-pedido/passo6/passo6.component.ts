@@ -91,7 +91,7 @@ export class Passo6Component implements OnInit {
         const position = this.pedidoService.pedido.balcony.beam.position;
 
         if (position && (position.aligned || position.inside || position.outside)) {
-            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         } else {
             this._toaster.warn(MESSAGES.UMA_OPCAO);
@@ -101,32 +101,5 @@ export class Passo6Component implements OnInit {
     prevTab(): void {
         this.pedidoService.prevTab();
     }
-
-
-    // select(value: string, code: number) {
-    //     this.pedidoService.pedido.balcony.format = code;
-    //     this.pedidoService.pedido.balcony.dimensions.data = [];
-    //     this.pedidoService.pedido.balcony.dimensions.total = '';
-    //     this.selected = value;
-    //     this.selectedOption[value] = true;
-    //     this.pedidoService.notifyObservers();
-    // }
-
-
-    // nextTab(): void {
-    //     const position = this.pedidoService.pedido.balcony.beam.position;
-
-    //     if (
-    //         position == 1 ||
-    //         position == 2 ||
-    //         position == 3
-    //         ) {
-    //             this.pedidoService.nextTab();
-    //     } else {
-    //         this._toaster.warn(MESSAGES.UMA_OPCAO);
-    //     }
-
-    // }
-
 
 }

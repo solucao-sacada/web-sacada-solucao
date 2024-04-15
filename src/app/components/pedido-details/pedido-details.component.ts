@@ -11,6 +11,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class PedidoDetailsComponent {
     qtdLinhasDim: number;
     linhas: any[];
+    notLoadingDimension: boolean = false;
     constructor(
         public pedidoService: PedidoService,
         public imageService: ImageService
@@ -18,6 +19,7 @@ export class PedidoDetailsComponent {
 
     @Input() set Pedido(value: PedidoJson) {
         this.pedido = value
+        this.initializarLinhas()
     }
 
     pedido: PedidoJson;
@@ -26,6 +28,7 @@ export class PedidoDetailsComponent {
         if (value?.defined.isDefined) return 'DEFINIDO';
         else return 'MELHOR AJUSTE';
     }
+
     getColorAluminiun(value: Color): string {
         if (value?.black) return 'PRETO';
         else if (value?.bz1001) return 'BZ1001';
@@ -96,16 +99,31 @@ export class PedidoDetailsComponent {
     }
 
     get dimensoes() {
-        this.qtdLinhasDim = this.pedidoService.getQtdPecas(
-            this.pedido?.balcony.format
-        );
+        if(this.pedidoService.dimensionOK) {
+            this.qtdLinhasDim = this.pedidoService.getQtdPecas(
+                this.pedido?.balcony.format
+            );
 
-        this.linhas = this.pedido.balcony.dimensions.data.map(
-            (linha, index) => ({
+            this.linhas = this.pedido.balcony.dimensions.data.map(
+                (linha, index) => ({
+                    piece: index + 1,
+                    angle: linha[1] || '', // Índice 1 representa o ângulo, ajuste conforme necessário
+                    dimension: linha[2] || '', // Índice 2 representa a dimensão, ajuste conforme necessário
+                    quantity: linha[3] || '', // Índice 3 representa a quantidade, ajuste conforme necessário
+                })
+            );
+        }
+        return this.linhas
+    }
+
+    initializarLinhas() {
+        this.linhas = Array.from(
+            { length: 0},
+            (_, index) => ({
                 piece: index + 1,
-                angle: linha[1] || '', // Índice 1 representa o ângulo, ajuste conforme necessário
-                dimension: linha[2] || '', // Índice 2 representa a dimensão, ajuste conforme necessário
-                quantity: linha[3] || '', // Índice 3 representa a quantidade, ajuste conforme necessário
+                angle: '',
+                dimension: '',
+                quantity: '',
             })
         );
 

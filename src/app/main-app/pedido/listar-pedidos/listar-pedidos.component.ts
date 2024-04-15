@@ -32,6 +32,7 @@ export class ListarPedidosComponent {
     ) {}
 
     ngOnInit(): void {
+        this.pedidoService.dimensionOK = false;
         this.activetedRoute.params.subscribe((params) => {
             const draft = params['draft'];
             if (draft) {
@@ -111,6 +112,7 @@ export class ListarPedidosComponent {
         if(value.data.code){
             this.pedidoService.pedido = value.data;
             this.pedidoService.setPedido(value.data);
+            this.pedidoService.dimensionOK = true;
             this.pedidoService.setActiveIndex(value.data.activeIndex);
             this.router.navigate(['/app/pedidos/novo']);
             return

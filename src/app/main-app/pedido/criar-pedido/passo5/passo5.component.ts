@@ -113,7 +113,7 @@ export class Passo5Component {
             obj == 3 ||
             obj == 4
         ) {
-            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         } else if (obj >= 5) {
             if (this.amountPieces <= 0) {
@@ -121,7 +121,7 @@ export class Passo5Component {
                 return;
             }
             this.pedidoService.pedido.balcony.format = this.amountPieces;
-            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         }
     }

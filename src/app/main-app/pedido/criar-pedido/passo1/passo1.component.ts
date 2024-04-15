@@ -88,7 +88,7 @@ export class Passo1Component implements OnInit {
                 'Por favor preencha todos os campos obrigatórios'
             );
         } else {
-            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         }
     }

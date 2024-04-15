@@ -61,7 +61,6 @@ export class InfoPessoalComponent {
         this.imageService
             .uploadImageUser(this.user._id, this.croppedImage)
             .subscribe((data) => {
-                console.log(data);
                 this.user.image = this.croppedImage;
                 this.visible = false;
             });

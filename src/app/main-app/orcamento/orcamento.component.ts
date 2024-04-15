@@ -50,7 +50,6 @@ export class OrcamentoComponent {
 
     private load() {
         this.orcamentoService.list().subscribe((orcamentos) => {
-            console.log(orcamentos);
             this.orcamentos = orcamentos;
         });
     }

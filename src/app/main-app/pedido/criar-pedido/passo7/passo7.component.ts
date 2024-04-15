@@ -80,7 +80,7 @@ export class Passo7Component implements OnInit {
             obj.tab.inside ||
             obj.tab.outside
         ) {
-            this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+            // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
             this.pedidoService.nextTab();
         } else this._toaster.warn(MESSAGES.UMA_OPCAO);
     }

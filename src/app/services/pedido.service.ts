@@ -21,6 +21,8 @@ export class PedidoService {
 
     activeIndex = 0;
 
+    dimensionOK: boolean = false;
+
     maxActiveIndex = 0;
 
     constructor(
@@ -104,7 +106,7 @@ export class PedidoService {
                 },
                 dimensions: {
                     data: [],
-                    total: '',
+                    total: '0',
                 },
                 glass: {
                     color: {
@@ -282,7 +284,7 @@ export class PedidoService {
         this.setActiveIndex(this.activeIndex);
         this.setPedido(this.pedido);
         this.notifyObservers();
-        // this.saveDraftPedido(this.pedido);
+        this.saveDraftPedido(this.pedido);
     }
 
     prevTab(): void {

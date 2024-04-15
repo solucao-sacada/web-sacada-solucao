@@ -104,10 +104,10 @@ export class Passo14Component {
         const option = this.pedidoService.pedido.balcony.lock;
         if (option.fechadura_para_porta || option.fechadura_vidro_vidro) {
             if (option.pvc || option.ferro) {
-                this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+                // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                 this.pedidoService.nextTab();
             } else if (option['1520/1531'] || option['3210/3211']) {
-                this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+                // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                 this.pedidoService.nextTab();
             } else {
                 this._toaster.warn(MESSAGES.UMA_OPCAO);

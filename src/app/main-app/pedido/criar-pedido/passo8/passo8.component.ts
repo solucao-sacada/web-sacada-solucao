@@ -105,7 +105,6 @@ export class Passo8Component {
     }
 
     changeNormalOption(value: any) {
-        console.log(value);
         this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.A =
             value === 'A';
         this.pedidoService.pedido.balcony.rails.lower_rail.normal.tip.B =
@@ -134,7 +133,6 @@ export class Passo8Component {
     }
 
     changeBuiltInOption(value: any) {
-        console.log(value);
         this.pedidoService.pedido.balcony.rails.lower_rail.built_in.ref.A =
             value === 'A';
         this.pedidoService.pedido.balcony.rails.lower_rail.built_in.ref.B =
@@ -252,7 +250,7 @@ export class Passo8Component {
                         rails.tab.tip.D ||
                         rails.tab.tip.E
                     ) {
-                        this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
+                        // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                         this.pedidoService.nextTab();
                     } else {
                         this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);

@@ -104,6 +104,7 @@ export class ListarPedidosComponent {
 
     onSelectRow(value: any) {
         if (value.data._id) {
+            this.pedidoService.dimensionOK = true;
             this.pedido = value.data;
             this.activeIndex = 1;
             return

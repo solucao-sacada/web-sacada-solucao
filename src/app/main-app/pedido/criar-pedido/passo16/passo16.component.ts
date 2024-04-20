@@ -18,28 +18,19 @@ export class Passo16Component {
     toaster = inject(ToasterService)
 
     ngOnInit(): void {
-        this.pedidoService.getObservable().subscribe(() => {
-            if (this.pedidoService.pedido.accessories.selante) {
+            if (this.pedidoService.pedido.accessories.qtdSelante > 0) {
                 this.selante = 'selante';
-            }
-
-            if (this.pedidoService.pedido.accessories.sem_selante) {
+                this.qtdSelante = this.pedidoService.pedido.accessories.qtdSelante
+            }else{
                 this.selante = 'sem_selante';
-            }
 
-            if (this.pedidoService.pedido.accessories.aparador_aluminio) {
-                this.aparador = 'aparador_aluminio';
             }
-
-            if (this.pedidoService.pedido.accessories.aparador_inox) {
+            if (this.pedidoService.pedido.accessories.qtdAparador > 0) {
                 this.aparador = 'aparador_inox';
                 this.qtdAparador = this.pedidoService.pedido.accessories.qtdAparador
+            }else{
+                    this.aparador = 'sem_aparador';
             }
-
-            if (this.pedidoService.pedido.accessories.sem_aparador) {
-                this.aparador = 'sem_aparador';
-            }
-        });
     }
 
 

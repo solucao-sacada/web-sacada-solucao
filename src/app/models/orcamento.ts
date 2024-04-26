@@ -13,6 +13,13 @@ export interface OrcamentoRequestModel {
     qtdAparador: number
     qtdProlongador: number
     qtdSelante: number
+
+    area: number
+    pricePlates: number
+    priceGlasses: number
+    priceAcessories: number
+    priceProlongador: number
+    priceKitSolutions: number
 }
 
 export interface IConstsOrcamento {
@@ -142,9 +149,9 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     chapaInferior: boolean = false;
     prolongador: boolean = false;
 
-    qtdAparador: number = 1;
-    qtdProlongador: number = 1;
-    qtdSelante: number = 1;
+    qtdAparador: number = 0;
+    qtdProlongador: number = 0;
+    qtdSelante: number = 0;
     valorFinal: number = null;
 
     set setCliente(value: string) {

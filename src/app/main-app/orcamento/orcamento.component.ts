@@ -70,6 +70,21 @@ export class OrcamentoComponent {
             return;
         }
 
+        if(this.orcamento.aparador === true && this.orcamento.qtdAparador === 0){
+            this.toaster.warn('Por favor, preencha o campo Quantidade de Aparador');
+            return;
+        }
+
+        if(this.orcamento.prolongador === true && this.orcamento.qtdProlongador === 0){
+            this.toaster.warn('Por favor, preencha o campo Quantidade de Prolongador');
+            return;
+        }
+
+        if(this.orcamento.selante === true && this.orcamento.qtdSelante === 0){
+            this.toaster.warn('Por favor, preencha o campo Quantidade de Selante');
+            return;
+        }
+
         this.isCalculeted = true;
         setTimeout(() => {
             this.resultadoSection.nativeElement.scrollIntoView({
@@ -102,6 +117,12 @@ export class OrcamentoComponent {
                 chapaSuperior: this.orcamento.chapaSuperior,
                 prolongador: this.orcamento.prolongador,
                 aparador: this.orcamento.aparador,
+                area: this.orcamento.areaTotal,
+                pricePlates: this.orcamento.valorChapas,
+                priceGlasses: this.orcamento.valorVidro,
+                priceAcessories: this.orcamento.valorAcessorios,
+                priceProlongador: this.orcamento.valorProlongador,
+                priceKitSolutions: this.orcamento.kitAVista,
             })
             .subscribe((response) => {
                 this.toaster.success('Orcamento salvo com sucesso!');

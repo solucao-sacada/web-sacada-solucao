@@ -14,7 +14,7 @@ export class Passo5Component {
 
     selected = '';
     selectedOption = '';
-    amountPieces: number = 0;
+    amountPieces: number = 5;
 
     options: any[] = [
         {
@@ -59,8 +59,9 @@ export class Passo5Component {
             this.selectedOption = '"L" Direita';
         else if (this.pedidoService.pedido.balcony.format == 4)
             this.selectedOption = 'Formato "U"';
-        else if (this.pedidoService.pedido.balcony.format == 5) {
+        else if (this.pedidoService.pedido.balcony.format >= 5) {
             this.selectedOption = 'Outro';
+            this.amountPieces = this.pedidoService.pedido.balcony.format;
         }
 
         if (this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
@@ -83,7 +84,7 @@ export class Passo5Component {
                 this.pedidoService.pedido.balcony.format = 1;
                 break;
             case 'Outro':
-                this.pedidoService.pedido.balcony.format = 0;
+                this.pedidoService.pedido.balcony.format = 5;
                 break;
         }
 
@@ -95,6 +96,10 @@ export class Passo5Component {
 
 
     onAmountPiecesChange(): void {
+        if(this.amountPieces < 5){
+            this._toaster.warn('Informe um formato de sacada com pelo menos 5 pecas');
+            return
+        }
         // Quando o valor do input muda, atribuímos o novo valor ao formato do pedido
         this.pedidoService.pedido.balcony.format = this.amountPieces;
     }

@@ -259,22 +259,23 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
     }
 
     get valorFinalMargem(): number {
-        return Math.round(
-            this.custoTotalAVista + this.mar * this.custoTotalAVista * 0.01
+        return parseFloat(
+            (this.custoTotalAVista + this.mar * this.custoTotalAVista * 0.01).toFixed(2)
         );
     }
+    
     get valorFinalMargem2(): number {
-        return Math.round(
-            this.custoTotalAVista +
-                (this.mar + 5) * this.custoTotalAVista * 0.01
+        return parseFloat(
+            (this.custoTotalAVista + (this.mar + 5) * this.custoTotalAVista * 0.01).toFixed(2)
         );
     }
+    
     get valorFinalMargem3(): number {
-        return Math.round(
-            this.custoTotalAVista +
-                (this.mar + 10) * this.custoTotalAVista * 0.01
+        return parseFloat(
+            (this.custoTotalAVista + (this.mar + 10) * this.custoTotalAVista * 0.01).toFixed(2)
         );
     }
+    
 
     constructor(value?: IValuesClient) {
         if (value) {

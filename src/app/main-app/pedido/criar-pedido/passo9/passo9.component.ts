@@ -97,16 +97,26 @@ export class Passo9Component implements OnInit {
     }
 
     private atualizarVidrosRestantes(): void {
+        let glassDefined = Number(this.pedidoService.pedido.balcony.tip.defined.glass_quantity)
+
+
         // Calcula a quantidade total de peças
         const totalPieces = this.linhas.reduce(
-            (total, linha) => total + (linha.quantity ? +linha.quantity : 0),
-            0
-        );
-        // Define a quantidade de vidros restantes como a diferença entre a quantidade inicial de peças e a quantidade de peças adicionadas
-        this.vidrosRestantes = this.linhasTabela - Number(totalPieces);
+            (total, linha) => total + (linha.quantity ? +linha.quantity : 0), 0
+        )
+
+        this.vidrosRestantes = totalPieces ? totalPieces : 0
+
+        if(this.pedidoService.pedido.balcony.tip.better_adjustment === true) {
+            // Define a quantidade de vidros restantes como a diferença entre a quantidade inicial de peças e a quantidade de peças adicionadas
+            this.vidrosRestantes = this.linhasTabela - totalPieces
+            return
+        }
+
+        let calcVidros = glassDefined - totalPieces
 
         // Garante que os vidros restantes não sejam negativos
-        this.vidrosRestantes = Math.max(0, this.vidrosRestantes);
+        this.vidrosRestantes = calcVidros
     }
 
     update() {
@@ -162,7 +172,11 @@ export class Passo9Component implements OnInit {
     }
 
     private getTotalVidros(): number {
-        return this.linhas.reduce((total, linha) => total + (linha.quantity ? +linha.quantity : 0), 0);
+        if(this.pedidoService.pedido.balcony.tip.defined){
+            return this.linhas.reduce((total, linha) => total + (linha.quantity ? +linha.quantity : 0), 0);
+        }else{
+            return Number(this.pedidoService.pedido.balcony.tip.defined.glass_quantity);
+        }
     }
 
     _nextTab(): void {
@@ -183,9 +197,13 @@ export class Passo9Component implements OnInit {
             const totalVidros = this.getTotalVidros();
 
             // Verifica se a quantidade total de vidros excede a quantidade total de peças
-            if (totalVidros > this.linhasTabela) {
+            if (totalVidros > this.linhasTabela && this.pedidoService.pedido.balcony.tip.defined.isDefined === false) {
                 this._toster.warn('Você selecionou mais vidros do que peças disponíveis. Por favor, ajuste as quantidades.');
-            } else {
+            }else if(this.vidrosRestantes < 0 ){
+                this._toster.warn('Quantidade de vidros excedidas para o formato da sacada. Por favor, ajuste as quantidades.');
+            }else if(this.vidrosRestantes > 0){
+                this._toster.warn('Adicione o restante dos vidros para o formato da sacada. Por favor, ajuste as quantidades.');
+            }else {
                 // Verifica se a quantidade total de vidros corresponde à quantidade de peças quando a dimensão é 500 ou mais
                 const vidrosDimensao500Mais = this.linhas.filter(linha => parseFloat(linha.dimension) >= 500)
                                                              .reduce((total, linha) => total + (linha.quantity ? +linha.quantity : 0), 0);

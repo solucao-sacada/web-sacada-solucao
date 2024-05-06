@@ -3,7 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { CalculoOrcamento, OrcamentoRequestModel } from 'src/app/models/orcamento';
-import { Accessories } from 'src/app/models/pedidoJson';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
 import { PedidoService } from 'src/app/services/pedido.service';

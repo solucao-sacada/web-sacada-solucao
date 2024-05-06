@@ -16,6 +16,10 @@ import { PedidoService } from 'src/app/services/pedido.service';
 })
 export class ListarPedidosComponent {
     pedidos: PedidoJson[] = [];
+    status = ['Pendente',  'Em andamento', 'Cancelado', 'Finalizado', 'Aguardando Resposta'];
+    selectedStatus = 'Selecionar novo status';
+    newStatus = ''
+
     draftPedidos: PedidoJson[] = [];
     pedido: PedidoJson;
     activeIndex: number = 0;
@@ -128,6 +132,21 @@ export class ListarPedidosComponent {
             this.pedidoService.dimensionOK = true;
             this.pedido = value.data;
             this.activeIndex = 1;
+            this.newStatus = value.data.status;
+
+            if(this.newStatus === 'PENDING'){
+                this.newStatus = 'Pendente';
+            }else if(this.newStatus === 'APPROVED'){
+                this.newStatus = 'Aprovado';
+            }else if(this.newStatus === 'IN_PROGRESS'){
+                this.newStatus = 'Em andamento';
+            }else if(this.newStatus === 'CANCELED'){
+                this.newStatus = 'Cancelado';
+            }else if(this.newStatus === 'WAIT_ANSWER'){
+                this.newStatus = 'Aguardando Resposta';
+            }if(this.newStatus === 'DONE'){
+                this.newStatus = 'Finalizado';
+            }
             return
         }
 
@@ -160,5 +179,51 @@ export class ListarPedidosComponent {
     verJSON(pedido: PedidoJson){
         // abrir url no navegador
         window.open(pedido.urlJSON, '_blank');
+    }
+
+    alterStatusPedido(id:string){
+        let status = this.selectedStatus;
+
+        if(this.selectedStatus){
+            if(status === 'Cancelado'){
+                status = 'CANCELED';
+            }else if(status === 'Pendente'){
+                status = 'PENDING';
+            }else if(status === 'Aguardando'){
+                status = 'WAITING';
+            }else if(status === 'Finalizado'){
+                status = 'DONE';
+            }else if(status === 'Aguardando Resposta'){
+                status = 'WAIT_ANSWER';
+            }else if(status === 'Em andamento'){
+                status = 'IN_PROGRESS'
+            }
+        }
+
+        this.pedidoService.alterStatus(this.pedido._id, status).subscribe({
+            next: (pedido) => {
+                this.newStatus = status;
+                if(this.newStatus === 'PENDING'){
+                    this.newStatus = 'Pendente';
+                }else if(this.newStatus === 'APPROVED'){
+                    this.newStatus = 'Aprovado';
+                }else if(this.newStatus === 'IN_PROGRESS'){
+                    this.newStatus = 'Em andamento';
+                }else if(this.newStatus === 'CANCELED'){
+                    this.newStatus = 'Cancelado';
+                }else if(this.newStatus === 'DONE'){
+                    this.newStatus = 'Finalizado';
+                }else if(this.newStatus === 'WAIT_ANSWER'){
+                    this.newStatus = 'Aguardando Resposta';
+                }
+                console.log(status)
+                this.loadPedidos();
+                this._toaster.success('Status alterado com sucesso');
+            },
+            error: (error) => {
+                this._toaster.error('Erro ao alterar status');
+            },
+        })
+        this.selectedStatus = 'Selecionar novo status';
     }
 }

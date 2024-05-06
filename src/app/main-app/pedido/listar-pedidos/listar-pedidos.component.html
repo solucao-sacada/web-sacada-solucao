@@ -45,6 +45,12 @@
                                 <span class="text-xs">PENDENTE</span>
                             </span>
 
+                            <span *ngIf="pedido.status === 'IN_PROGRESS'"
+                                class="status-badge p-2 border border-round bg-yellow-700 text-white">
+                                <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
+                                <span class="text-xs">EM ANDAMENTO</span>
+                            </span>
+
                             <span *ngIf="pedido.status === 'CANCELED '"
                                 class="status-badge p-2 border border-round bg-red-700 text-white">
                                 <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
@@ -93,6 +99,29 @@
     </p-tabPanel>
 
     <p-tabPanel header="Detalhes" [disabled]="!pedido">
+        <label>Status: <strong [ngClass]="{'text-green-500': newStatus === 'Finalizado', 'text-blue-500': newStatus === 'Aguardando Resposta', 'text-yellow-500': newStatus === 'Em andamento', 'text-green-700': newStatus === 'Aprovado', 'text-red-500': newStatus === 'Cancelado', 'text-orange-600': newStatus === 'Pendente'}" for="">{{ newStatus }}</strong></label>
+
+        <div class="flex flex-col gap-2 mt-2">
+            <select id="product-status" [(ngModel)]="selectedStatus"
+                class="py-3 px-4 block border w-20 border-gray-400 rounded-lg text-sm
+                        hover:border-blueDark focus:border-blueDark outline-none
+                        focus:ring-blue-400 focus:ring-1 bg-white">
+                <option value="Selecionar novo status" disabled selected>Selecionar novo status</option>
+                <option *ngFor="let statusValue of status" [ngValue]="statusValue">
+                    {{statusValue}}
+                </option>
+            </select>
+
+            <button pButton pRipple
+                type="button"
+                icon="pi pi-pencil"
+                (click)="alterStatusPedido(pedido._id);"
+                class="mr-1 mb-1"
+                title="Alterar"
+            >
+            Alterar
+            </button>
+        </div>
         <div id="printable" #printable>
             <app-pedido-details [Pedido]="pedido" />
         </div>

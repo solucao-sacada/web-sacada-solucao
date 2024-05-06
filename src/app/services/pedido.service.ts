@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, catchError } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -60,6 +60,11 @@ export class PedidoService {
                 throw error;
             })
         );
+    }
+
+
+    alterStatus(idOrder:string, status: string): Observable<PedidoJson> {
+        return this._http.patch<PedidoJson>(this.apiUrl + '/status', {idOrder, status});
     }
 
     // METODOS INTERNOS
@@ -378,4 +383,5 @@ export class PedidoService {
             localStorage.setItem('draft-pedido', JSON.stringify(drafts));
         }
     }
+
 }

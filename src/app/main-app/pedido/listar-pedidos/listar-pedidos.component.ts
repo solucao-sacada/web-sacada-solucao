@@ -5,6 +5,8 @@ import * as jspdf from 'jspdf';
 import { ConfirmationService } from 'primeng/api';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoJson } from 'src/app/models/pedidoJson';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -19,6 +21,7 @@ export class ListarPedidosComponent {
     activeIndex: number = 0;
     linkJSON!: SafeUrl;
     code = 1;
+    user: User = {} as User;
 
     @ViewChild('printable') public dataToExport: ElementRef;
 
@@ -28,7 +31,8 @@ export class ListarPedidosComponent {
         private activetedRoute: ActivatedRoute,
         private _toaster: ToasterService,
         private confirmationService: ConfirmationService,
-        private sanatizer: DomSanitizer
+        private sanatizer: DomSanitizer,
+        private authService: AuthService
     ) {}
 
     ngOnInit(): void {
@@ -39,10 +43,27 @@ export class ListarPedidosComponent {
                 this.activeIndex = 2;
             }
         });
-        this.pedidoService.listByUser().subscribe((data) => {
-            this.pedidos = data;
-            this.draftPedidos = this.pedidoService.getDraftPedidos().reverse()
+        this.loadPedidos();
+    }
+
+    loadPedidos() {
+        this.user = this.authService.getUser();
+
+       if(this.user.role === 'ADMIN' || this.user.role === 'SUPER'){
+        this.pedidoService.listAll().subscribe({
+            next: (data) => {
+                this.pedidos = data;
+            },
+            error: (error) => {
+                console.log(error);
+            },
         });
+
+       }else{
+        this.pedidoService.listByUser(this.user._id).subscribe((data) => {
+            this.pedidos = data;
+        });
+       }
     }
 
     print() {
@@ -135,8 +156,6 @@ export class ListarPedidosComponent {
         downloadLink.download = `${pedido._id} - pedido.json`; // Nome do arquivo que será baixado
         downloadLink.click();
     }
-
-
 
     verJSON(pedido: PedidoJson){
         // abrir url no navegador

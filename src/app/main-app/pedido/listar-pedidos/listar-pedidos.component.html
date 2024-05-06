@@ -22,7 +22,7 @@
                     <th>Nome</th>
                     <th>Data</th>
                     <th>Status</th>
-                    <th>Arquivo JSON</th>
+                    <th *ngIf="user.role === 'ADMIN' || user.role === 'SUPER'">Arquivo JSON</th>
                 </tr>
             </ng-template>
 
@@ -65,7 +65,7 @@
                         </div>
                     </td>
 
-                    <td>
+                    <td *ngIf="user.role === 'ADMIN' || user.role === 'SUPER'">
                         <span class="p-column-title font-bold"></span>
                         <button pButton pRipple
                             type="button"

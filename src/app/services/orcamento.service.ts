@@ -19,4 +19,8 @@ export class OrcamentoService {
     list(): Observable<any> {
         return this.http.get<any>(this.apiUrl);
     }
+
+    listByClient(id: string): Observable<any> {
+        return this.http.get<any>(`${this.apiUrl}/client/${id}`);
+    }
 }

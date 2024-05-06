@@ -37,8 +37,8 @@ export class PedidoService {
         return this._http.get<PedidoJson[]>(this.apiUrl);
     }
 
-    listByUser(): Observable<PedidoJson[]> {
-        return this._http.get<PedidoJson[]>(this.apiUrl + '/user/' + this._auth.getUser()._id);
+    listByUser(idUser: string): Observable<PedidoJson[]> {
+        return this._http.get<PedidoJson[]>(this.apiUrl + '/user/' + idUser);
     }
 
     create(pedido: PedidoJson): Observable<any> {

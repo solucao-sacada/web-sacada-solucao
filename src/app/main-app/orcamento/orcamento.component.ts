@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { CalculoOrcamento, OrcamentoRequestModel } from 'src/app/models/orcamento';
@@ -30,7 +30,9 @@ export class OrcamentoComponent {
     router = inject(Router);
     selectedOrcamento: CalculoOrcamento | null = null;
 
-    constructor(public pedidoService: PedidoService) {}
+    constructor(
+        public pedidoService: PedidoService,
+    ) {}
 
     ngOnInit() {
         this.load();
@@ -49,9 +51,10 @@ export class OrcamentoComponent {
     }
 
     private load() {
-        this.orcamentoService.list().subscribe((orcamentos) => {
+        const user = this.auth.getUser();
+        this.orcamentoService.listByClient(user._id).subscribe((orcamentos) => {
             this.orcamentos = orcamentos;
-        });
+        })
     }
 
     onSubmit() {

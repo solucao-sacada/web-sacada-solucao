@@ -36,8 +36,8 @@ import { RedirectGuard } from './guards/redirect.guard';
                         ),
                     canActivate: [RedirectGuard],
                 },
-                // { path: 'notfound', component: NotfoundComponent },
-                // { path: '**', redirectTo: '/notfound' },
+                { path: 'notfound', component: NotfoundComponent },
+                { path: '**', redirectTo: '/notfound' },
             ],
             {
                 scrollPositionRestoration: 'enabled',

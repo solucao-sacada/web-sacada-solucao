@@ -35,12 +35,9 @@
     <div class="col-3 p-1 text-center border-right-1">
         <p-inputNumber
             [(ngModel)]="linha.dimension"
-            [format]="'n'"
-            [step]="0.1"
-            [minFractionDigits]="1"
             [className]="'.p-inputtext'"
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes(); verificarAtualizarQuantidadeDeVidro(linha)"
-            [maxFractionDigits]="1">
+            >
         </p-inputNumber>
     </div>
     <div class="col-3 p-1 text-center border-right-1 bg-green-200">

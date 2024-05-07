@@ -8,12 +8,12 @@ import { User, UserResponse } from '../models/user.model';
     providedIn: 'root',
 })
 export class AuthService {
-    apiUrl = environment.API_URL + '/login';
+    apiUrl = environment.API_URL;
 
     constructor(private _http: HttpClient) {}
 
     signIn(email: string, password: string): Observable<UserResponse> {
-        return this._http.post<UserResponse>(this.apiUrl, { email, password });
+        return this._http.post<UserResponse>(this.apiUrl + '/login', { email, password });
     }
 
     setUser(user: User) {
@@ -26,5 +26,9 @@ export class AuthService {
 
     isLogged(): boolean {
         return localStorage.getItem('user') ? true : false;
+    }
+
+    createAccount(user: User): Observable<any> {
+        return this._http.post<any>(this.apiUrl + '/users', user);
     }
 }

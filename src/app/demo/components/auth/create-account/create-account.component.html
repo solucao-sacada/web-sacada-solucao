@@ -1,0 +1,122 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <img src="assets/sacada/logo/soluca-logo.webp" alt="Solução Logo" class="my-5 w-20rem flex-shrink-0" />
+        <div style="
+            border-radius: 56px;
+            padding: 0.3rem;
+            background: linear-gradient(
+                180deg,
+                var(--primary-color) 10%,
+                rgba(33, 150, 243, 0) 30%
+            );
+        ">
+            <div class="w-full surface-card py-4 px-5 sm:px-8" style="border-radius: 53px">
+                <div class="text-center mb-5">
+                    <div class="text-900 text-3xl font-medium mb-3">
+                        Criar conta
+                    </div>
+                    <div class="flex align-items-center justify-content-between pb-5">
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer" routerLink=""
+                            style="color: var(--primary-color)">Já possui conta?
+                        </a>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <h4 class="extra_field_heading">Dados da empresa</h4>
+                </div>
+
+                <div class="field-group">
+                    <label for="tradingName" class="font-bold mb-4">Nome Fantasia<span
+                            class="required">*</span></label><br>
+                    <input id="tradingName" type="text" pInputText maxlength="70" name="tradingName"
+                        [(ngModel)]="user.company.tradingName" required class="w-full md:w-30rem mb-5" >
+                </div>
+                <div class="field-group">
+                    <label for="legalName" class="font-bold mb-4">Razão Social<span
+                            class="required">*</span></label><br>
+                    <input id="legalName" type="text" pInputText maxlength="70" name="legalName"
+                        [(ngModel)]="user.company.legalName" required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="cnpj" class="font-bold mb-4">CNPJ<span class="required">*</span></label><br>
+                    <input id="cnpj" type="text" pInputText maxlength="70" name="cnpj" [(ngModel)]="user.company.cnpj"
+                        required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="stateRegistration" class="font-bold mb-4">Inscrição Estadual</label><br>
+                    <input id="stateRegistration" type="text" pInputText maxlength="70" name="stateRegistration"
+                        [(ngModel)]="user.company.stateRegistration" class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="streetAddress" class="font-bold mb-4">Logradouro<span
+                            class="required">*</span></label><br>
+                    <input id="streetAddress" type="text" pInputText maxlength="70" name="streetAddress"
+                        [(ngModel)]="user.company.streetAddress" required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="num" class="font-bold mb-4">Número<span class="required">*</span></label><br>
+                    <input id="num" type="number" pInputText name="num" [(ngModel)]="user.company.num" required
+                        class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="complement" class="font-bold mb-4">Complemento</label><br>
+                    <input id="complement" type="text" pInputText maxlength="70" name="complement"
+                        [(ngModel)]="user.company.complement" class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="zipCode" class="font-bold mb-4">CEP<span class="required">*</span></label><br>
+                    <input id="zipCode" type="number" pInputText maxlength="70" name="zipCode"
+                        [(ngModel)]="user.company.zipCode" required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="neighborhood" class="font-bold mb-4">Bairro<span class="required">*</span></label><br>
+                    <input id="neighborhood" type="text" pInputText maxlength="70" name="neighborhood"
+                        [(ngModel)]="user.company.neighborhood" required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="city" class="font-bold mb-4">Cidade<span class="required">*</span></label><br>
+                    <input id="city" type="text" pInputText maxlength="70" name="city" [(ngModel)]="user.company.city"
+                        required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="state" class="font-bold mb-4">Estado<span class="required">*</span></label><br>
+                    <input id="state" type="text" pInputText maxlength="70" name="state"
+                        [(ngModel)]="user.company.state" required class="w-full md:w-30rem mb-5">
+                </div>
+
+                <div class="field-group">
+                    <h4 class="extra_field_heading">Dados do usuário</h4>
+                </div>
+
+                <div class="field-group">
+                    <label for="name" class="font-bold">Nome<span>*</span></label><br>
+                    <input id="name" type="name" pInputText maxlength="70" name="name" [(ngModel)]="user.name" required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="email" class="font-bold">E-mail<span>*</span></label><br>
+                    <input id="email" type="email" pInputText maxlength="70" name="email" [(ngModel)]="user.email" required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="phone" class="font-bold">Telefone<span>*</span></label><br>
+                    <p-inputMask mask="(99) 99999-9999" [(ngModel)]="user.phone" styleClass="w-full md:w-30rem mb-5"></p-inputMask>
+                </div>
+                <div class="field-group">
+                    <label for="password" class="font-bold">Senha<span>*</span></label><br>
+                    <input id="password" type="password" pInputText name="password" [(ngModel)]="user.password" required class="w-full md:w-30rem mb-5">
+                </div>
+                <div class="field-group">
+                    <label for="confirmPassword" class="font-bold">Confirmar Senha<span
+                        >*</span></label><br>
+                    <input id="confirmPassword" type="password" pInputText name="confirmPassword" required
+                        [(ngModel)]="confirmPassword"
+                        class="w-full md:w-30rem mb-5">
+                </div>
+
+                <button pButton pRipple label="Registrar" (click)="submitCreateAccount()"
+                    class="w-full p-3 text-xl"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast position="bottom-center" life="4000" key="tst"></p-toast>

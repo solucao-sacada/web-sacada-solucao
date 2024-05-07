@@ -1,15 +1,8 @@
-<div
-    class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden"
->
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
     <div class="flex flex-column align-items-center justify-content-center">
         <!-- <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="Sakai logo" class="mb-5 w-6rem flex-shrink-0">                 -->
-        <img
-            src="assets/sacada/logo/soluca-logo.webp"
-            alt="Solução Logo"
-            class="my-5 w-20rem flex-shrink-0"
-        />
-        <div
-            style="
+        <img src="assets/sacada/logo/soluca-logo.webp" alt="Solução Logo" class="my-5 w-20rem flex-shrink-0" />
+        <div style="
                 border-radius: 56px;
                 padding: 0.3rem;
                 background: linear-gradient(
@@ -17,78 +10,40 @@
                     var(--primary-color) 10%,
                     rgba(33, 150, 243, 0) 30%
                 );
-            "
-        >
-            <div
-                class="w-full surface-card py-4 px-5 sm:px-8"
-                style="border-radius: 53px"
-            >
+            ">
+            <div class="w-full surface-card py-4 px-5 sm:px-8" style="border-radius: 53px">
                 <div class="text-center mb-5">
                     <div class="text-900 text-3xl font-medium mb-3">
                         Bem-vindo!
                     </div>
-                    <span class="text-600 font-medium"
-                        >Faça o login para continuar</span
-                    >
+                    <span class="text-600 font-medium">Faça o login para continuar</span>
                 </div>
 
                 <div>
-                    <label
-                        for="email1"
-                        class="block text-900 text-xl font-medium mb-2"
-                        >Email</label
-                    >
-                    <input
-                        id="email1"
-                        type="text"
-                        placeholder="Email address"
-                        pInputText
-                        type="email"
-                        class="w-full md:w-30rem mb-5"
-                        style="padding: 1rem"
-                        [(ngModel)]="email"
-                    />
+                    <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
+                    <input id="email1" type="text" placeholder="Email address" pInputText type="email"
+                        class="w-full md:w-30rem mb-5" style="padding: 1rem" [(ngModel)]="email" />
 
-                    <label
-                        for="password1"
-                        class="block text-900 font-medium text-xl mb-2"
-                        >Senha</label
-                    >
-                    <p-password
-                        id="password1"
-                        class="w-full"
-                        [(ngModel)]="password"
-                        placeholder="Password"
-                        [toggleMask]="true"
-                        [feedback]="false"
-                        styleClass="mb-5 w-full"
-                        inputStyleClass="w-full p-3 md:w-30rem"
-                    ></p-password>
+                    <label for="password1" class="block text-900 font-medium text-xl mb-2">Senha</label>
+                    <p-password id="password1" class="w-full" [(ngModel)]="password" placeholder="Password"
+                        [toggleMask]="true" [feedback]="false" styleClass="mb-5 w-full"
+                        inputStyleClass="w-full p-3 md:w-30rem"></p-password>
 
-                    <div
-                        class="flex align-items-center justify-content-between mb-5 gap-5"
-                    >
+                    <div class="flex align-items-center justify-content-between mb-5 gap-5">
                         <div class="flex align-items-center">
-                            <p-checkbox
-                                id="rememberme1"
-                                [binary]="true"
-                                styleClass="mr-2"
-                            ></p-checkbox>
+                            <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
                             <label for="rememberme1">Lembrar-me</label>
                         </div>
-                        <a
-                            class="font-medium no-underline ml-2 text-right cursor-pointer"
-                            style="color: var(--primary-color)"
-                            >Esqueceu a senha?</a
-                        >
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+                            style="color: var(--primary-color)">Esqueceu a senha?</a>
                     </div>
-                    <button
-                        pButton
-                        pRipple
-                        label="Login"
-                        class="w-full p-3 text-xl"
-                        (click)="login()"
-                    ></button>
+                    <div class="flex align-items-center justify-content-between pb-5">
+                        <label for="createAccount"></label>
+                        <a class="font-medium no-underline ml-2 text-right cursor-pointer" routerLink="/auth/create-account"
+                            style="color: var(--primary-color)">Criar uma conta
+                        </a>
+                    </div>
+                    <button pButton pRipple label="Login" class="w-full p-3 text-xl" (click)="login()"></button>
                 </div>
             </div>
         </div>

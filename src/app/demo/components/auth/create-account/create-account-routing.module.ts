@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AccessComponent } from './access.component';
+import { CreateAccountComponent } from './create-account.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: '', component: AccessComponent }
+        { path: '', component: CreateAccountComponent }
     ])],
     exports: [RouterModule]
 })
-export class AccessRoutingModule { }
+export class CreateAccountRoutingModule { }

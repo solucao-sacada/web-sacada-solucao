@@ -4,6 +4,7 @@ import { MainAppLayoutComponent } from './layout/main-app-layout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RedirectGuard } from './guards/redirect.guard';
+import { CreateAccountComponent } from './demo/components/auth/create-account/create-account.component';
 
 @NgModule({
     imports: [
@@ -38,6 +39,8 @@ import { RedirectGuard } from './guards/redirect.guard';
                 },
                 { path: 'notfound', component: NotfoundComponent },
                 { path: '**', redirectTo: '/notfound' },
+
+
             ],
             {
                 scrollPositionRestoration: 'enabled',

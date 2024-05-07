@@ -51,9 +51,26 @@ export class OrcamentoComponent {
 
     private load() {
         const user = this.auth.getUser();
-        this.orcamentoService.listByClient(user._id).subscribe((orcamentos) => {
-            this.orcamentos = orcamentos;
-        })
+
+        if(user.role === "ADMIN" || user.role === "SUPER"){
+            this.orcamentoService.list().subscribe({
+                next: (orcamentos) => {
+                    this.orcamentos = orcamentos;
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            })
+        }else{
+            this.orcamentoService.listByClient(user._id).subscribe({
+                next: (orcamentos) => {
+                    this.orcamentos = orcamentos;
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            })
+        }
     }
 
     onSubmit() {

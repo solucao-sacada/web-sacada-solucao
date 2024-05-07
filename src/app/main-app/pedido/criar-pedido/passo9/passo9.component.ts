@@ -97,7 +97,7 @@ export class Passo9Component implements OnInit {
     }
 
     private atualizarVidrosRestantes(): void {
-        let glassDefined = Number(this.pedidoService.pedido.balcony.tip.defined.glass_quantity)
+        let glassDefined = Number(this.pedidoService.pedido.balcony.tip.defined.glass_quantity);
 
 
         // Calcula a quantidade total de peças

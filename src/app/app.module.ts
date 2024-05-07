@@ -17,10 +17,18 @@ import { MainAppLayoutModule } from './layout/main-app-layout.module';
 import { MainAppModule } from './main-app/main-app.module';
 import { PedidoService } from './services/pedido.service';
 import { OrcamentoService } from './services/orcamento.service';
+import { Interceptor } from './app.interceptor.module';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [AppRoutingModule, MainAppLayoutModule, MainAppModule, ComponentsModule, NgbModule],
+    imports: [
+        AppRoutingModule,
+        MainAppLayoutModule,
+        MainAppModule,
+        ComponentsModule,
+        NgbModule,
+        Interceptor
+    ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService,

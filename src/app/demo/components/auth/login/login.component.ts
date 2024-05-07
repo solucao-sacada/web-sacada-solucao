@@ -31,8 +31,9 @@ export class LoginComponent {
 
     login() {
         this._auth.signIn(this.email, this.password).subscribe((response) => {
-            console.log(response);
             this._auth.setUser(response.user);
+            localStorage.setItem('token', response.accessToken);
+            localStorage.setItem('refreshToken', JSON.stringify(response.refreshToken));
             this._router.navigate(['/app']);
         });
     }

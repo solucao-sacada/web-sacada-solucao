@@ -1,0 +1,41 @@
+<div
+  class="flex w-full h-screen justify-content-center align-items-center"
+  *ngIf="!isActived"
+>
+  <p-progressSpinner></p-progressSpinner>
+</div>
+<div
+  class="p-grid p-justify-center p-align-center p-fluid"
+  style="height: 100vh"
+  *ngIf="isActived"
+>
+
+  <div class="p-col-6 p-md-6">
+    <div class="p-4 border-round text-center">
+      <div class="p-card-body">
+        <div class="verification-icon mb-2">
+          <img
+            src="./assets/img/check.svg"
+            alt="Ícone Check"
+            class="mx-auto"
+            style="width: 350px; height: 350px"
+          />
+        </div>
+        <p-messages [(value)]="msgs"></p-messages>
+        <div class="p-grid">
+          <div style="width: 100%">
+            <p-message
+              severity="info"
+              text="Sua conta foi verificada com sucesso!!"
+            ></p-message>
+          </div>
+          <div class="p-col-12 mt-4">
+            <button
+              pButton
+              label="Ir para a Home"
+              class="bg-green-600 text-white hover:bg-green-700 border-none"
+              (click)="navigateToLogin()"
+              style="width: 40%"
+            ></button>
+          </div>
+        </div>

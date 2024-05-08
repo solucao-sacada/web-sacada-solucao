@@ -5,6 +5,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RedirectGuard } from './guards/redirect.guard';
 import { CreateAccountComponent } from './demo/components/auth/create-account/create-account.component';
+import { VerificationComponent } from './demo/components/auth/verification/verification.component';
 
 @NgModule({
     imports: [
@@ -37,16 +38,22 @@ import { CreateAccountComponent } from './demo/components/auth/create-account/cr
                         ),
                     canActivate: [RedirectGuard],
                 },
+                
+                {
+                    path: 'verification/:token/:email',
+                    component: VerificationComponent,
+                },
+
                 { path: 'notfound', component: NotfoundComponent },
                 { path: '**', redirectTo: '/notfound' },
-
 
             ],
             {
                 scrollPositionRestoration: 'enabled',
                 anchorScrolling: 'enabled',
                 onSameUrlNavigation: 'reload',
-            }
+            },
+           
         ),
     ],
     exports: [RouterModule],

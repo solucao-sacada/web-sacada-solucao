@@ -6,6 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { RedirectGuard } from './guards/redirect.guard';
 import { CreateAccountComponent } from './demo/components/auth/create-account/create-account.component';
 import { VerificationComponent } from './demo/components/auth/verification/verification.component';
+import { AccountDetailsComponent } from './demo/components/auth/account-details/account-details.component';
 
 @NgModule({
     imports: [
@@ -38,14 +39,18 @@ import { VerificationComponent } from './demo/components/auth/verification/verif
                         ),
                     canActivate: [RedirectGuard],
                 },
-                
                 {
-                    path: 'verification/:token/:email',
-                    component: VerificationComponent,
+                    path: 'verification/:token/:email', component: VerificationComponent,
                 },
-
-                { path: 'notfound', component: NotfoundComponent },
-                { path: '**', redirectTo: '/notfound' },
+                {
+                    path: 'account-details', component: AccountDetailsComponent,
+                },
+                { 
+                    path: 'notfound', component: NotfoundComponent 
+                },
+                { 
+                    path: '**', redirectTo: '/notfound' 
+                },
 
             ],
             {

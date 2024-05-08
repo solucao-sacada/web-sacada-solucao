@@ -36,6 +36,10 @@ export class AuthService {
         return this._http.post<any>(this.apiUrl + '/users', user);
     }
 
+    updateAccount(user: User): Observable<any> {
+        return this._http.put<any>(this.apiUrl + '/users', user);
+    }
+
     validateAccount(email: string, token: string): Observable<any> {
         this.ldService.start();
         const params = new HttpParams()

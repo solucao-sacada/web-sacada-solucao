@@ -1,0 +1,55 @@
+<div class="bg-white sm:px-8 radius-10 w-[70%] h-vh min-h-screen min-w-screen overflow-hidden">
+    <div class="flex align-items-center justify-content-center cursor-pointer">
+        <img src="../../../../../assets/sacada/logo/soluca-logo.webp" alt="Solução Logo"
+            class="my-5 w-15rem flex-shrink-0" routerLink="/">
+    </div>
+    <div class="flex flex-column align-items-center justify-content-center">
+        <div class="bg-surface-ground px-4 py-8 md:px-8 shadow-2">
+
+            <div class="text-center mb-3">
+                <div class="text-900 text-3xl font-medium mb-3">
+                    Informações do usuário
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="name" class="font-bold">Nome</label><br>
+                <input id="name" type="name" pInputText maxlength="70" name="name" [(ngModel)]="user.name" required
+                    class="w-full md:w-30rem mb-3">
+            </div>
+            <div class="field-group">
+                <label for="email" class="font-bold">E-mail</label><br>
+                <input id="email" type="email" pInputText maxlength="70" name="email" [(ngModel)]="user.email" required
+                    class="w-full md:w-30rem mb-3">
+            </div>
+            <div class="field-group">
+                <label for="phone" class="font-bold">Telefone</label><br>
+                <p-inputMask mask="(99) 99999-9999" [(ngModel)]="user.phone"
+                    styleClass="w-full md:w-30rem mb-3"></p-inputMask>
+            </div>
+            <div class="field-group">
+                <label for="password" class="font-bold">Senha</label><br>
+                <input id="password" type="password" pInputText name="password" [(ngModel)]="user.password" required
+                    class="w-full md:w-30rem mb-3">
+            </div>
+            <div class="field-group">
+                <label for="confirmPassword" class="font-bold">Confirmar Senha</label><br>
+                <input id="confirmPassword" type="password" pInputText name="confirmPassword" required
+                    [(ngModel)]="confirmPassword" class="w-full md:w-30rem mb-3">
+            </div>
+
+            <div class="text-center py-3">
+                <div class="text-900 text-3xl font-medium mb-3">
+                    Informações da compania
+                </div>
+            </div>
+            
+
+
+            <button pButton pRipple label="Salvar" (click)="submit()" class="w-full md:w-30rem p-3 text-xl"></button>
+        </div>
+    </div>
+
+
+
+</div>

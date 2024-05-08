@@ -34,18 +34,18 @@ export class CreateAccountComponent {
 
   private http = inject(Router);
   private authService = inject(AuthService);
-  private toster = inject(ToasterService);
+  private toaster = inject(ToasterService);
 
   submitCreateAccount() {
     if (this.user.password !== this.confirmPassword) {
-      this.toster.error('As senhas precisam ser iguais!');
+      this.toaster.error('As senhas precisam ser iguais!');
       return
     }
 
     this.authService.createAccount(this.user).subscribe({
       next: (response) => {
         console.log(response);
-        this.toster.success('Conta criada com sucesso!');
+        this.toaster.success('Conta criada com sucesso!');
         setTimeout(() => {
             this.http.navigate(['']);
         }, 1000);
@@ -53,7 +53,7 @@ export class CreateAccountComponent {
 
       error: (error) => {
         console.log(error.error.message);
-        this.toster.error(error.error.message);
+        this.toaster.error(error.error.message);
       }
     })
   }

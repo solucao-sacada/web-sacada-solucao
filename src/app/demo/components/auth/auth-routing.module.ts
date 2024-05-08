@@ -25,6 +25,11 @@ import { RouterModule } from '@angular/router';
                 path: 'create-account',
                 loadChildren: () =>
                     import('./create-account/create-account.module').then((m)=> m.CreateAccountModule),
+            },
+            {
+                path: 'verrification',
+                loadChildren: () =>
+                    import('./verification/verification.module').then((m)=> m.VerificationModule),
             }
         ]),
     ],

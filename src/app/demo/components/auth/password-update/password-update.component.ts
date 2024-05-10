@@ -10,9 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class PasswordUpdateComponent {
 
-  user: any = {
-    password: '',
-  }
+    token: string = '';
+    password: string = '';
 
   confirmPassword: string = '';
 
@@ -21,10 +20,21 @@ export class PasswordUpdateComponent {
   private toaster = inject(ToasterService);
 
   submitPasswordUpdate() {
-    if (this.user.password !== this.confirmPassword) {
-      this.toaster.error('As senhas precisam ser iguais!');
-      return
-    }
+  //   if (this.user.password !== this.confirmPassword) {
+  //     this.toaster.error('As senhas precisam ser iguais!');
+  //     return
+  //   }
+  //   this.authService.resetPasswordUser(this.newPassword, this.oldPassword).subscribe({
+  //     next: () => {
+  //       this.toaster.success('Senha atualizada com sucesso!');
+  //       this.http.navigate(['/']);
+  //     },
+  //     error: (err) => {
+  //       if (err) {
+  //         this.toaster.error('Erro ao atualizar a senha');
+  //       }
+  //     }
+  //   })
   }
 
 }

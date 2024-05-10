@@ -1,10 +1,11 @@
-<div class="bg-white sm:px-8 radius-10 w-[70%] h-vh min-h-screen min-w-screen overflow-hidden">
+
+<div class="sm:px-8 radius-10 w-[70%] h-vh min-h-screen min-w-screen overflow-hidden">
     <div class="flex align-items-center justify-content-center cursor-pointer">
         <img src="../../../../../assets/sacada/logo/soluca-logo.webp" alt="Solução Logo"
             class="my-5 w-15rem flex-shrink-0" routerLink="/">
     </div>
     <div class="flex flex-column align-items-center justify-content-center">
-        <div class="bg-surface-ground px-4 py-8 md:px-8 shadow-2">
+        <div class="px-4 py-8 md:px-8 items-center">
 
             <div class="text-center mb-3">
                 <div class="text-900 text-3xl font-medium mb-3">
@@ -24,8 +25,8 @@
             </div>
             <div class="field-group">
                 <label for="phone" class="font-bold">Telefone</label><br>
-                <p-inputMask mask="(99) 99999-9999" [(ngModel)]="user.phone"
-                    styleClass="w-full md:w-30rem mb-3"></p-inputMask>
+                <p-inputMask mask="(99) 99999-9999" [(ngModel)]="user.phone" class="w-full md:w-30rem mb-3">
+                </p-inputMask>
             </div>
             <div class="field-group">
                 <label for="password" class="font-bold">Senha</label><br>
@@ -38,15 +39,118 @@
                     [(ngModel)]="confirmPassword" class="w-full md:w-30rem mb-3">
             </div>
 
+            <!-- INFORMACOES DA EMPRESA -->
             <div class="text-center py-3">
                 <div class="text-900 text-3xl font-medium mb-3">
                     Informações da compania
                 </div>
+            </div> 
+
+             <div class="field-group">
+                <label for="companyTradingName" class="font-bold">Nome Fantasia</label><br>
+                <input id="companyTradingName" type="text" pInputText name="companyTradingName" required
+                    [(ngModel)]="user.company.tradingName" class="w-full md:w-30rem mb-3">
+
+            </div> 
+
+            <div class="field-group">
+                <label for="companyLegalName" class="font-bold">Razão Social</label><br>
+                <input id="companyLegalName" type="text" pInputText name="companyLegalName"
+                    [(ngModel)]="user.company.legalName" class="w-full md:w-30rem mb-3">
             </div>
             
+            <div class="field-group">
+                <label for="companyCnpj" class="font-bold">CNPJ</label><br>
+                <input id="companyCnpj" type="text" pInputText name="companyCnpj"
+                    [(ngModel)]="user.company.cnpj" class="w-full md:w-30rem mb-3">
+            </div>
+            
+            <div class="field-group">
+                <label for="companyStateRegistration" class="font-bold">Inscrição Estadual</label><br>
+                <input id="companyStateRegistration" type="text" pInputText name="companyStateRegistration"
+                    [(ngModel)]="user.company.stateRegistration" class="w-full md:w-30rem mb-3">
+            </div>
+            
+            <div class="field-group">
+                <label for="companyStreetAddress" class="font-bold">Endereço</label><br>
+                <input id="companyStreetAddress" type="text" pInputText name="companyStreetAddress"
+                    [(ngModel)]="user.company.streetAddress" class="w-full md:w-30rem mb-3">
+            </div>
+            
+            <div class="field-group">
+                <label for="companyNum" class="font-bold">Número</label><br>
+                <input id="companyNum" type="number" pInputText name="companyNum"
+                    [(ngModel)]="user.company.num" class="w-full md:w-30rem mb-3">
+            </div>
+            
+            <div class="field-group">
+                <label for="companyComplement" class="font-bold">Complemento</label><br>
+                <input id="companyComplement" type="text" pInputText name="companyComplement"
+                    [(ngModel)]="user.company.complement" class="w-full md:w-30rem mb-3">
+            </div>
+            
+            <div class="field-group">
+                <label for="companyZipCode" class="font-bold">CEP</label><br>
+                <input id="companyZipCode" type="number" pInputText name="companyZipCode"
+                    [(ngModel)]="user.company.zipCode" class="w-full md:w-30rem mb-3">
+            </div>
+            
+            <div class="field-group">
+                <label for="companyNeighborhood" class="font-bold">Bairro</label><br>
+                <input id="companyNeighborhood" type="text" pInputText name="companyNeighborhood"
+                    [(ngModel)]="user.company.neighborhood" class="w-full md:w-30rem mb-3">
+            </div>
+            
+            <div class="field-group">
+                <label for="companyCity" class="font-bold">Cidade</label><br>
+                <input id="companyCity" type="text" pInputText name="companyCity"
+                    [(ngModel)]="user.company.city" class="w-full md:w-30rem mb-3">
+            </div>
+            
+            <div class="field-group">
+                <label for="companyState" class="font-bold">Estado</label><br>
+                <input id="companyState" type="text" pInputText name="companyState"
+                    [(ngModel)]="user.company.state" class="w-full md:w-30rem mb-3">
+            </div>
+
+            <button pButton pRipple label="Salvar" class="w-full md:w-30rem p-3 text-xl" (click)="updateAccount()" ></button>
+
+            <!-- Excluir Conta -->
+            <div class="text-center py-3">
+                <div class="text-900 text-3xl font-medium mb-3">
+                    Excluir Conta
+                </div>
+            </div>
+
+            <button pButton pRipple label="Excluir"  class="w-full md:w-30rem p-3 text-xl" (click)="handleOpenModal()"></button>
 
 
-            <button pButton pRipple label="Salvar" (click)="submit()" class="w-full md:w-30rem p-3 text-xl"></button>
+            <!-- Confirmar cancelamento -->
+            <div class="">
+                <p-dialog header="Exclusão de Conta" [(visible)]="visible" [modal]="true" [baseZIndex]="10000"
+                    *ngIf="visible" [style]="{'width': '80%', 'max-width': '40rem'}">
+
+                    <p class="text-xl">Você está prestes a excluir permanentemente sua conta.</p>
+                    <p class="text-xl">Tem certeza que deseja continuar?</p>
+
+                    <div class="flex flex-col gap-1 mt-4">
+                        <label *ngIf="user.oauth" class="text-gray-600 font-bold text-[15px]"
+                            style="display: block;">Senha:</label>
+                        <p-password *ngIf="user.oauth" [feedback]="false" [toggleMask]="true"
+                            StyleClass="border rounded-lg h-12 md:w-314 px-3 mt-1"
+                            class="focus:outline-none focus:border-orangeDark text-black ng-pristine ng-valid ng-touched"
+                            [(ngModel)]="user.password" (onPaste)="preventPaste($event)">
+                        </p-password>
+
+                        <div class="flex flex-end mt-3 gap-3">
+                            <button pButton pRipple label="Cancelar"  class="w-full p-3 text-md bg-red-500 border-red-500 hover:opacity-70" (click)="handleCancelModal()"></button>
+                            <button pButton pRipple label="Confirmar"  class="w-full p-3 text-md hover:opacity-70" (click)="handleDeleteAccount()"></button>
+                        </div>
+
+                    </div>
+                </p-dialog>
+            </div>
+
         </div>
     </div>
 

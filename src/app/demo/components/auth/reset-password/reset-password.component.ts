@@ -17,7 +17,7 @@ export class ResetPasswordComponent {
 
 
   sendResetPassword() {
-    this.authService.sendLinkResetPassword(this.email).subscribe({
+    this.authService.sendLinkResetPassword(this.email,).subscribe({
       next: () => {
         this.toaster.success('Um e-mail de redefinição de senha foi enviado para ' + this.email);
         this.email = '';

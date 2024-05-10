@@ -48,7 +48,7 @@ export class AuthService {
     updateAccount(user: User): Observable<User> {
         return this._http.put<User>(this.apiUrl + '/users', user);
     }
-    
+
     updateCompany(company: Company): Observable<Company> {
         return this._http.put<Company>(this.apiUrl + '/companies', company);
     }
@@ -63,14 +63,14 @@ export class AuthService {
             .pipe(finalize(() => this.ldService.stop())
             );
     }
-
     sendLinkResetPassword(email: string): Observable<any> {
-        this.ldService.start();
-        const params = new HttpParams()
-            .set('email', email)
-        return this._http
-            .patch(this.apiUrl + '/users/reset-password', {}, { params })
-            .pipe(finalize(() => this.ldService.stop())
-            );
+        return this._http.post<any>(this.apiUrl + '/users/forgot-password', { email: email });
+    }
+
+    resetPasswordUser(idUser: string, newPassword: string, oldPassword: string): Observable<any> {
+        return this._http.patch<any>(this.apiUrl + `/users/password-update/${idUser}`, {
+            newPassword: newPassword,
+            oldPassword: oldPassword
+        })
     }
 }

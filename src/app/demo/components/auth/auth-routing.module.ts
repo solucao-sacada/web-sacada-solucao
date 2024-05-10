@@ -35,6 +35,16 @@ import { RouterModule } from '@angular/router';
                 path: 'verrification',
                 loadChildren: () =>
                     import('./verification/verification.module').then((m)=> m.VerificationModule),
+            },
+            {
+                path: 'reset-password',
+                loadChildren: () =>
+                    import('./reset-password/reset-password.module').then((m)=> m.ResetPasswordModule),
+            },
+            {
+                path: 'password-update',
+                loadChildren: () =>
+                    import('./password-update/password-update.module').then((m)=> m.PasswordUpdateModule),
             }
         ]),
     ],

@@ -27,14 +27,12 @@
                 </div>
 
                 <div class="field-group">
-                    <label for="tradingName" class="font-bold mb-4">Nome Fantasia<span
-                            class="required">*</span></label><br>
+                    <label for="tradingName" class="font-bold mb-4">Nome Fantasia<span class="required">*</span></label><br>
                     <input id="tradingName" type="text" pInputText maxlength="70" name="tradingName"
                         [(ngModel)]="user.company.tradingName" required class="w-full md:w-30rem mb-5" >
                 </div>
                 <div class="field-group">
-                    <label for="legalName" class="font-bold mb-4">Razão Social<span
-                            class="required">*</span></label><br>
+                    <label for="legalName" class="font-bold mb-4">Razão Social<span class="required">*</span></label><br>
                     <input id="legalName" type="text" pInputText maxlength="70" name="legalName"
                         [(ngModel)]="user.company.legalName" required class="w-full md:w-30rem mb-5">
                 </div>
@@ -44,13 +42,12 @@
                         required class="w-full md:w-30rem mb-5">
                 </div>
                 <div class="field-group">
-                    <label for="stateRegistration" class="font-bold mb-4">Inscrição Estadual</label><br>
+                    <label for="stateRegistration" class="font-bold mb-4">Inscrição Estadual<span class="required">*</span></label><br>
                     <input id="stateRegistration" type="text" pInputText maxlength="70" name="stateRegistration"
                         [(ngModel)]="user.company.stateRegistration" class="w-full md:w-30rem mb-5">
                 </div>
                 <div class="field-group">
-                    <label for="streetAddress" class="font-bold mb-4">Logradouro<span
-                            class="required">*</span></label><br>
+                    <label for="streetAddress" class="font-bold mb-4">Logradouro<span class="required">*</span></label><br>
                     <input id="streetAddress" type="text" pInputText maxlength="70" name="streetAddress"
                         [(ngModel)]="user.company.streetAddress" required class="w-full md:w-30rem mb-5">
                 </div>
@@ -119,4 +116,4 @@
         </div>
     </div>
 </div>
-<p-toast position="bottom-center" life="4000" key="tst"></p-toast>
+<p-toast position="top-center" life="4000" key="tst"></p-toast>

@@ -42,18 +42,35 @@ export class CreateAccountComponent {
       return
     }
 
+    if (
+      !this.user.name ||
+      !this.user.email ||
+      !this.user.phone ||
+      !this.user.password ||
+      !this.user.company.tradingName ||
+      !this.user.company.legalName ||
+      !this.user.company.cnpj ||
+      !this.user.company.stateRegistration ||
+      !this.user.company.streetAddress ||
+      !this.user.company.num ||
+      !this.user.company.zipCode ||
+      !this.user.company.neighborhood ||
+      !this.user.company.city ||
+      !this.user.company.state
+    ) {
+      this.toaster.error('Todos os campos precisam ser preenchidos!');
+      return
+    }
     this.authService.createAccount(this.user).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
         this.toaster.success('Conta criada com sucesso!');
         setTimeout(() => {
             this.http.navigate(['']);
-        }, 1000);
+        }, 1100);
       },
 
       error: (error) => {
-        console.log(error.error.message);
-        this.toaster.error(error.error.message);
+        this.toaster.error(error.message);
       }
     })
   }

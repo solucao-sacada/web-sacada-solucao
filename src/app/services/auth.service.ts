@@ -5,6 +5,7 @@ import { catchError, finalize, map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User, UserResponse } from '../models/user.model';
 import { LoadingService } from '../components/loading/loading.service';
+import { Company } from '../models/company';
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +15,7 @@ export class AuthService {
     private ldService = inject(LoadingService);
 
 
-    constructor(private _http: HttpClient) {}
+    constructor(private _http: HttpClient) { }
 
     signIn(email: string, password: string): Observable<UserResponse> {
         return this._http.post<UserResponse>(this.apiUrl + '/login', { email, password });
@@ -28,6 +29,14 @@ export class AuthService {
         return JSON.parse(localStorage.getItem('user'));
     }
 
+    deleteUser(id: string, password?: string): Observable<any> {
+        return this._http.delete<any>(this.apiUrl + '/users/' + id, { body: { password: password } });
+    }
+
+    getCompany(): Company {
+        return JSON.parse(localStorage.getItem('/companies'));
+    }
+
     isLogged(): boolean {
         return localStorage.getItem('user') ? true : false;
     }
@@ -36,19 +45,32 @@ export class AuthService {
         return this._http.post<any>(this.apiUrl + '/users', user);
     }
 
-    updateAccount(user: User): Observable<any> {
-        return this._http.put<any>(this.apiUrl + '/users', user);
+    updateAccount(user: User): Observable<User> {
+        return this._http.put<User>(this.apiUrl + '/users', user);
+    }
+    
+    updateCompany(company: Company): Observable<Company> {
+        return this._http.put<Company>(this.apiUrl + '/companies', company);
     }
 
     validateAccount(email: string, token: string): Observable<any> {
         this.ldService.start();
         const params = new HttpParams()
-        .set('email', email)
-        .set('token', token)
+            .set('email', email)
+            .set('token', token)
         return this._http
-          .patch(this.apiUrl + '/users/verify-email', {}, { params })
-          .pipe(finalize(() => this.ldService.stop())
-          );
-    
-      }
+            .patch(this.apiUrl + '/users/verify-email', {}, { params })
+            .pipe(finalize(() => this.ldService.stop())
+            );
+    }
+
+    sendLinkResetPassword(email: string): Observable<any> {
+        this.ldService.start();
+        const params = new HttpParams()
+            .set('email', email)
+        return this._http
+            .patch(this.apiUrl + '/users/reset-password', {}, { params })
+            .pipe(finalize(() => this.ldService.stop())
+            );
+    }
 }

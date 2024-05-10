@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -26,15 +27,27 @@ export class LoginComponent {
     constructor(
         public layoutService: LayoutService,
         private _auth: AuthService,
-        private _router: Router
+        private _router: Router,
+        private toaster: ToasterService
     ) {}
 
     login() {
-        this._auth.signIn(this.email, this.password).subscribe((response) => {
-            this._auth.setUser(response.user);
-            localStorage.setItem('token', response.accessToken);
-            localStorage.setItem('refreshToken', JSON.stringify(response.refreshToken));
-            this._router.navigate(['/app']);
-        });
+        this._auth.signIn(this.email, this.password).subscribe({
+            next: (response) => {
+                    this._auth.setUser(response.user);
+                    localStorage.setItem('token', response.accessToken);
+                    localStorage.setItem('refreshToken', JSON.stringify(response.refreshToken));
+                    this._router.navigate(['/app']);
+                },
+            error: (error) => {
+                this.toaster.error(error.message);
+            }
+        })
+        // this._auth.signIn(this.email, this.password).subscribe((response) => {
+        //     this._auth.setUser(response.user);
+        //     localStorage.setItem('token', response.accessToken);
+        //     localStorage.setItem('refreshToken', JSON.stringify(response.refreshToken));
+        //     this._router.navigate(['/app']);
+        // });
     }
 }

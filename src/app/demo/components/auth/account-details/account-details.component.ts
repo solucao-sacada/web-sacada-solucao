@@ -10,6 +10,7 @@ interface UserUpdated {
   email: string;
   phone: string;
   company?: {
+    id: string;
     tradingName: string;
     legalName: string;
     cnpj: string;
@@ -23,6 +24,11 @@ interface UserUpdated {
     state: string;
   } | null;
 }
+
+interface IUserData{
+    user: User
+}
+
 
 @Component({
   selector: 'app-account-details',
@@ -70,20 +76,21 @@ export class AccountDetailsComponent {
   }
   updateAccount() {
     this.authService.updateAccount(this.user).subscribe({
-      next: (user) => {
-        console.log(user);
+      next: (user) => { // retorno do backend que veio do service user
+        const userDataDesestructured = user as unknown as IUserData
         this.userUpdate = {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
+            id: userDataDesestructured.user._id,
+            name: userDataDesestructured.user.name,
+            email: userDataDesestructured.user.email,
+            phone: userDataDesestructured.user.phone
         }
+
         this.authService.updateCompany(this.user.company).subscribe({
           next: (company) => {
-            console.log(this.userUpdate);
             this.userUpdate = {
               ...this.userUpdate,
               company: {
+                id: company._id as string,
                 tradingName: company.tradingName,
                 legalName: company.legalName,
                 cnpj: company.cnpj,
@@ -97,8 +104,6 @@ export class AccountDetailsComponent {
                 state: company.state
               }
             }
-            console.log(this.userUpdate);
-
             this.authService.setUser(this.userUpdate as unknown as User);
             this.loadUser();
             this.toaster.success('Dados alterados com sucesso!');

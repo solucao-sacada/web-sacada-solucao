@@ -25,8 +25,8 @@ interface UserUpdated {
   } | null;
 }
 
-interface IUserData{
-    user: User
+interface IUserData {
+  user: User
 }
 
 
@@ -71,6 +71,22 @@ export class AccountDetailsComponent {
     this.loadUser();
   }
 
+  sendEmailVerification(): void {
+    if (this.authService.token) {
+    this.authService.verificationEmail(this.user.email, this.authService.token).subscribe({
+      next: (data) => {
+        this.toaster.info('E-mail de verificação enviado. Verifique sua caixa de entrada!')
+        console.log('E-mail de verificação enviado com sucesso', data);
+      },
+      error: (error) => {
+        this.toaster.error('Erro ao enviar e-mail de verificação');
+        console.error('Erro ao enviar e-mail de verificação', error);
+      }
+    })
+  }
+}
+
+
   loadUser() {
     this.user = this.authService.getUser();
   }
@@ -79,10 +95,10 @@ export class AccountDetailsComponent {
       next: (user) => { // retorno do backend que veio do service user
         const userDataDesestructured = user as unknown as IUserData
         this.userUpdate = {
-            id: userDataDesestructured.user._id,
-            name: userDataDesestructured.user.name,
-            email: userDataDesestructured.user.email,
-            phone: userDataDesestructured.user.phone
+          id: userDataDesestructured.user._id,
+          name: userDataDesestructured.user.name,
+          email: userDataDesestructured.user.email,
+          phone: userDataDesestructured.user.phone
         }
 
         this.authService.updateCompany(this.user.company).subscribe({
@@ -144,7 +160,6 @@ export class AccountDetailsComponent {
     })
   }
 
-
   handleOpenModal() {
     this.visible = true
   }
@@ -152,4 +167,5 @@ export class AccountDetailsComponent {
   handleCancelModal() {
     this.visible = false
   }
+
 }

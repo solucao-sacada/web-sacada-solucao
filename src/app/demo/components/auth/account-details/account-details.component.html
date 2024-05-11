@@ -20,9 +20,32 @@
             </div>
             <div class="field-group">
                 <label for="email" class="font-bold">E-mail</label><br>
-                <input id="email" type="email" pInputText maxlength="70" name="email" [(ngModel)]="user.email" required
-                    class="w-full md:w-30rem mb-3">
+                <div class="flex flex-row items-center">
+                    <div class="mr-2">
+                        <input  *ngIf="!user.emailActive" id="email" type="email" pInputText maxlength="70" name="email" 
+                            [(ngModel)]="user.email" required
+                            class="w-full md:w-30rem mb-3"
+                        >
+                        
+                        <input  *ngIf="user.emailActive" id="email" type="email" pInputText maxlength="70" name="email"
+                            disabled [(ngModel)]="user.email" required
+                            class="w-full md:w-30rem mb-3"
+                        >
+                        <div class="flex justify-content-end w-full">
+                            <small *ngIf="!user.emailActive" class="text-red-500">E-mail não verificado</small>
+                          </div>
+                    </div>
+                   <div>
+                       <button pbutton="" pripple="" class="p-element p-ripple w-auto p-button p-component"
+                         [disabled]="user.emailActive" (click)="sendEmailVerification()">
+                         <span class="p-button-label">Verificar</span><span class="p-ink"></span>
+                       </button>
+                   </div>
+                </div>
+                
+                
             </div>
+
             <div class="field-group">
                 <label for="phone" class="font-bold">Telefone</label><br>
                 <p-inputMask mask="(99) 99999-9999" [(ngModel)]="user.phone" class="w-full md:w-30rem mb-3">

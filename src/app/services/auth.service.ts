@@ -6,16 +6,25 @@ import { environment } from 'src/environments/environment';
 import { User, UserResponse } from '../models/user.model';
 import { LoadingService } from '../components/loading/loading.service';
 import { Company } from '../models/company';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
+
+    token: string | null;
+    RefreshToken: string | null;
+
     apiUrl = environment.API_URL;
     private ldService = inject(LoadingService);
 
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: HttpClient, private router: Router) 
+        {
+        this.token = localStorage.getItem('token');
+        this.RefreshToken = localStorage.getItem('refreshToken');
+      }
 
     signIn(email: string, password: string): Observable<UserResponse> {
         return this._http.post<UserResponse>(this.apiUrl + '/login', { email, password });
@@ -73,4 +82,10 @@ export class AuthService {
             oldPassword: oldPassword
         })
     }
+
+    verificationEmail(email: string, token: string): Observable<User> {
+        const payload = { token };
+        const endpoint = `${this.apiUrl}/send-verification-email/${email}`;
+        return this._http.post<User>(endpoint, payload);
+      }
 }

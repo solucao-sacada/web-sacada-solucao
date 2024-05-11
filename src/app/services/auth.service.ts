@@ -45,7 +45,7 @@ export class AuthService {
         return this._http.post<any>(this.apiUrl + '/users', user);
     }
 
-    updateAccount(user: User): Observable<User> {
+    updateAccount(user: User): Observable<User> { //backend retornar oque? USER? USER COMO? assim: user: {} ou assim: {user:{}} Oque fazer? Criar interface como o retorno no console log!
         return this._http.put<User>(this.apiUrl + '/users', user);
     }
 

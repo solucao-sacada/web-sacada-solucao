@@ -1,17 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
-import { ComponentsModule } from 'src/app/components/components.module';
-import { VerificationComponent } from './verification.component';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { VerificationRoutingModule } from "./verification-routing.module";
+import { VerificationComponent } from "./verification.component";
 
-@NgModule({
+NgModule({
     imports: [
         CommonModule,
-        ButtonModule,
-        FormsModule,
-        ComponentsModule
+        VerificationRoutingModule
     ],
-    declarations: [VerificationComponent]
+    declarations: [ VerificationComponent ]
 })
+
 export class VerificationModule { }

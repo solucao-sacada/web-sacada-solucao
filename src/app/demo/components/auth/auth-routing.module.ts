@@ -32,7 +32,7 @@ import { RouterModule } from '@angular/router';
                     import('./account-details/account-details.module').then((m)=> m.AccountDetailsModule),
             },
             {
-                path: 'verrification',
+                path: 'verification',
                 loadChildren: () =>
                     import('./verification/verification.module').then((m)=> m.VerificationModule),
             },

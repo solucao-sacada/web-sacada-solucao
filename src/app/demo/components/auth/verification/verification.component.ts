@@ -1,29 +1,29 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from 'primeng/api';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-verification',
   templateUrl: './verification.component.html',
-  styleUrls: ['./verification.component.scss']
+  styles: [],
 })
 export class VerificationComponent {
   msgs: Message[] = [];
   isActived = false;
   userAlreadyVerificated = false;
-
-
-  private router = inject(Router);
-  private _auth = inject(AuthService);
-  private _activeRoute = inject(ActivatedRoute);
-
+  constructor(
+    private router: Router,
+    private _activeRoute: ActivatedRoute,
+    private _auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     const user = this._auth.getUser();
 
     if (user.emailActive) {
-      this.router.navigate(['/']);
+      this.router.navigate(['']);
       return;
     }
 
@@ -40,7 +40,7 @@ export class VerificationComponent {
   }
 
   navigateToLogin() {
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   showMessage(severity: string, summary: string, detail: string) {

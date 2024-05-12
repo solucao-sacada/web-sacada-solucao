@@ -78,7 +78,7 @@ export class AccountDetailsComponent {
       this.toaster.error('As senhas precisam ser iguais!')
       return
     }
-    this.authService.resetPasswordUser(this.user._id as string, this.confirmPassword, this.user.password as string).subscribe((data: User) => {
+    this.authService.resetPasswordUser(this.user._id as string, this.user.password as string, this.user.oldPassword).subscribe((data: User) => {
       localStorage.removeItem('user');
       localStorage.setItem('user', JSON.stringify(data));
       this.toaster.success('Senha atualizada com sucesso!')

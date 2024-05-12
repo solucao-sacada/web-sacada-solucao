@@ -10,6 +10,7 @@ export interface User{
     firstAccess: boolean;
     emailActive: boolean;
     password: string;
+    oldPassword: string;
     _id: string;
     name: string;
     email: string;

@@ -9,6 +9,7 @@ interface UserUpdated {
   name: string;
   email: string;
   phone: string;
+  password: string;
   company?: {
     id: string;
     tradingName: string;
@@ -43,6 +44,7 @@ export class AccountDetailsComponent {
     email: '',
     phone: '',
     password: '',
+    oldPassword:'',
     company: {
       tradingName: '',
       legalName: '',
@@ -69,6 +71,20 @@ export class AccountDetailsComponent {
 
   ngOnInit() {
     this.loadUser();
+  }
+
+  updatePassword(){
+    if(this.user.password != this.confirmPassword ){
+      this.toaster.error('As senhas precisam ser iguais!')
+      return
+    }
+    this.authService.resetPasswordUser(this.user._id as string, this.confirmPassword, this.user.password as string).subscribe((data: User) => {
+      localStorage.removeItem('user');
+      localStorage.setItem('user', JSON.stringify(data));
+      this.toaster.success('Senha atualizada com sucesso!')
+
+      return data;
+    })
   }
 
   sendEmailVerification(): void {
@@ -98,7 +114,8 @@ export class AccountDetailsComponent {
           id: userDataDesestructured.user._id,
           name: userDataDesestructured.user.name,
           email: userDataDesestructured.user.email,
-          phone: userDataDesestructured.user.phone
+          phone: userDataDesestructured.user.phone,
+          password: userDataDesestructured.user.password
         }
 
         this.authService.updateCompany(this.user.company).subscribe({

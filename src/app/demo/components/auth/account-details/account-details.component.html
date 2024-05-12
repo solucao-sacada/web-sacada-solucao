@@ -29,6 +29,7 @@
                             <input id="name" type="name" pInputText maxlength="70" name="name" [(ngModel)]="user.name" required
                                 class="w-full mb-3">
                         </div>
+
                         <div class="field-group">
                             <label for="email" class="font-bold">E-mail</label><br>
                             <div class="flex flex-row items-center">
@@ -42,7 +43,7 @@
                                         disabled [(ngModel)]="user.email" required
                                         class="w-full mb-1"
                                     >
-                                    <div class="flex justify-content-end w-full mb-3">
+                                    <div class="flex justify-content-end w-full mb-2">
                                         <small *ngIf="!user.emailActive" class="text-red-500">E-mail não verificado</small>
                                     </div>
                                 </div>
@@ -55,13 +56,14 @@
                             </div>
                         </div>
 
-                        <div class="field-group">
+                        <div class="field-group mb-3">
                             <label for="phone" class="font-bold">Telefone</label><br>
-                            <p-inputMask mask="(99) 99999-9999" [(ngModel)]="user.phone" class="w-full mb-3">
+                            <p-inputMask 
+                                mask="(99) 99999-9999" [(ngModel)]="user.phone" styleClass="w-full">
                             </p-inputMask>
                         </div>
 
-                        <div class="field-group mt-5">
+                        <div class="field-group">
                             <label for="oldPassword" class="font-bold">Senha antiga</label><br>
                             <input id="oldPassword" type="password" pInputText name="oldPassword" placeholder="************" 
                             [(ngModel)]="user.oldPassword" required

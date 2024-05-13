@@ -83,10 +83,8 @@ export class AuthService {
         })
     }
 
-    verificationEmail(email: string, token: string): Observable<User> {
-        const payload = { token };
-        const endpoint = `${this.apiUrl}/send-verification-email/${email}`;
-        return this._http.post<User>(endpoint, payload);
+    verificationEmail(email: string): Observable<string> {
+        return this._http.post<string>(this.apiUrl + '/users/send-verification-email/' + email, {});
     }
 
     resetPasswordByToken(token: string, password: string): Observable<string> {

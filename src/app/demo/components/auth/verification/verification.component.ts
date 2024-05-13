@@ -1,5 +1,5 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from 'primeng/api';
 import { finalize } from 'rxjs';
@@ -9,7 +9,7 @@ import { finalize } from 'rxjs';
   templateUrl: './verification.component.html',
   styles: [],
 })
-export class VerificationComponent {
+export class VerificationComponent implements OnInit {
   msgs: Message[] = [];
   isActived = false;
   userAlreadyVerificated = false;
@@ -22,8 +22,8 @@ export class VerificationComponent {
   ngOnInit(): void {
     const user = this._auth.getUser();
 
-    if (user.emailActive) {
-      this.router.navigate(['']);
+    if (user.emailActive === true) {
+      this.router.navigate(['/']);
       return;
     }
 
@@ -40,7 +40,7 @@ export class VerificationComponent {
   }
 
   navigateToLogin() {
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 
   showMessage(severity: string, summary: string, detail: string) {

@@ -50,12 +50,12 @@ export class PasswordUpdateComponent implements OnInit {
     this.authService.resetPasswordByToken(this.token, this.password).subscribe({
       next: () => {
         this.toaster.success('Senha atualizada com sucesso!')
-        this.http.navigate(['/']);
+        setTimeout(() => {
+            this.http.navigate(['/']);
+        }, 1000)
       },
       error: (err) => {
-        if(err){
-          this.toaster.error('Token inválido ou inexistente');
-        }
+        this.toaster.error(err.message);
       }
     })
   }

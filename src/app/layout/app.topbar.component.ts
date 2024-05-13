@@ -24,7 +24,10 @@ export class AppTopBarComponent {
     ) {}
 
     logout() {
-        localStorage.clear()
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        localStorage.removeItem('refreshToken')
+
         location.reload();
     }
 }

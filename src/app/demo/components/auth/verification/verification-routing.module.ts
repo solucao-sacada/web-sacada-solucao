@@ -3,7 +3,7 @@ import { VerificationComponent } from "./verification.component";
 import { RouterModule } from "@angular/router";
 
 
-NgModule({
+@NgModule({
     imports: [RouterModule.forChild([
         { path: '', component: VerificationComponent }
     ])],

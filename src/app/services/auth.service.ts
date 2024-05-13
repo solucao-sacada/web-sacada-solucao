@@ -96,7 +96,7 @@ export class AuthService {
     }
 
     verifyToken(token: string): Observable<boolean> {
-        const params = new HttpParams().set('token', token);
-        return this._http.get<boolean>(this.apiUrl + '/users/verify-token', { params });
+        this.ldService.start();
+        return this._http.get<boolean>(this.apiUrl + '/users/verify-token/'+ token).pipe(finalize(() => this.ldService.stop()));
     }
 }

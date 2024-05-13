@@ -28,21 +28,18 @@ export class PasswordUpdateComponent implements OnInit {
         if (!this.token) this.http.navigate(['/']);
       });
 
-      this.ldService.start();
-      this.authService
-        .verifyToken(this.token)
-        .pipe(
-          catchError((error) => {
-            this.http.navigate(['/']);
-            return of(error);
-          }),
-          finalize(() => this.ldService.stop())
-        )
-        .subscribe((isValid) => {
-          if (!isValid) {
+      this.authService.verifyToken(this.token).subscribe({
+        next: (value) => {
+          if(!value) {
             this.http.navigate(['/']);
           }
-        });
+        },
+        error: (err) => {
+          this.ldService.stop();
+          this.http.navigate(['/']);
+        }
+      })
+
     }
   submitPasswordUpdate() {
     if (this.password !== this.confirmPassword) {
@@ -51,14 +48,14 @@ export class PasswordUpdateComponent implements OnInit {
     }
 
     this.authService.resetPasswordByToken(this.token, this.password).subscribe({
-      next: () => {
+      next: (message) => {
         this.toaster.success('Senha atualizada com sucesso!')
-        this.http.navigate(['/']);
+        setTimeout(() => {
+            this.http.navigate(['/']);
+        }, 1000)
       },
       error: (err) => {
-        if(err){
-          this.toaster.error('Token inválido ou inexistente');
-        }
+        this.toaster.error(err.message);
       }
     })
   }

@@ -7,6 +7,7 @@ import { RedirectGuard } from './guards/redirect.guard';
 import { CreateAccountComponent } from './demo/components/auth/create-account/create-account.component';
 import { VerificationComponent } from './demo/components/auth/verification/verification.component';
 import { AccountDetailsComponent } from './demo/components/auth/account-details/account-details.component';
+import { PasswordUpdateComponent } from './demo/components/auth/password-update/password-update.component';
 
 @NgModule({
     imports: [
@@ -45,20 +46,22 @@ import { AccountDetailsComponent } from './demo/components/auth/account-details/
                 {
                     path: 'account-details', component: AccountDetailsComponent,
                 },
-                { 
-                    path: 'notfound', component: NotfoundComponent 
+                {
+                    path: 'notfound', component: NotfoundComponent
                 },
-                { 
-                    path: '**', redirectTo: '/notfound' 
+                {
+                    path: 'reset-password', component: PasswordUpdateComponent,
                 },
-
+                {
+                    path: '**', redirectTo: '/notfound'
+                }
             ],
             {
                 scrollPositionRestoration: 'enabled',
                 anchorScrolling: 'enabled',
                 onSameUrlNavigation: 'reload',
             },
-           
+
         ),
     ],
     exports: [RouterModule],

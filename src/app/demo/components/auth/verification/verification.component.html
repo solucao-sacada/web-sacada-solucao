@@ -15,7 +15,7 @@
       <div class="p-card-body">
         <div class="verification-icon mb-2">
           <img
-            src="./assets/img/check.svg"
+            src="./assets/img/checked.png"
             alt="Ícone Check"
             class="mx-auto"
             style="width: 350px; height: 350px"
@@ -33,9 +33,12 @@
             <button
               pButton
               label="Ir para a Home"
-              class="bg-green-600 text-white hover:bg-green-700 border-none"
+              class="text-white border-none"
+              [style]="{ background: '#35A8E0' }"
               (click)="navigateToLogin()"
               style="width: 40%"
             ></button>
           </div>
         </div>
+    </div>
+</div>

@@ -47,6 +47,12 @@ export class AuthService {
     }
 
     isLogged(): boolean {
+        const isLogged =  localStorage.getItem('token') ? true : false;
+
+        if(!isLogged){
+            return false
+        }
+
         return localStorage.getItem('user') ? true : false;
     }
 

@@ -39,7 +39,7 @@ export class VerificationComponent implements OnInit {
   }
 
   navigateToLogin() {
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   showMessage(severity: string, summary: string, detail: string) {

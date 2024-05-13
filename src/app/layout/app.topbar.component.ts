@@ -24,7 +24,7 @@ export class AppTopBarComponent {
     ) {}
 
     logout() {
-        localStorage.removeItem('user')
+        localStorage.clear()
         location.reload();
     }
 }

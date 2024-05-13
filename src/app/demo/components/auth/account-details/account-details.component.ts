@@ -101,7 +101,7 @@ export class AccountDetailsComponent {
   sendEmailVerification(): void {
     this.authService.verificationEmail(this.user.email).subscribe({
       next: (data) => {
-        this.toaster.info('E-mail de verificação enviado. Verifique sua caixa de entrada!')
+        this.toaster.success('E-mail de verificação enviado. Verifique sua caixa de entrada!')
         console.log('E-mail de verificação enviado com sucesso', data);
       },
       error: (error) => {

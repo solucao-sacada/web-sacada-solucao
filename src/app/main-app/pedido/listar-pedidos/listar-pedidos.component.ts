@@ -48,6 +48,7 @@ export class ListarPedidosComponent {
             }
         });
         this.loadPedidos();
+        this.loadDraftPedidos();
     }
 
     loadPedidos() {
@@ -68,6 +69,10 @@ export class ListarPedidosComponent {
             this.pedidos = data;
         });
        }
+    }
+
+    loadDraftPedidos(){
+        this.draftPedidos = this.pedidoService.getDraftPedidos()
     }
 
     print() {

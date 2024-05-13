@@ -1,6 +1,13 @@
 <h4>Trilhos inferiores</h4>
 
-<div class="flex justify-content-end text-2xl">
+
+<!-- Mostra a div vazia quando better_adjustment é verdadeiro -->
+<ng-template [ngIf]="pedidoService.pedido?.balcony?.tip?.better_adjustment">
+    <div></div>
+</ng-template>
+
+<!-- Mostra a div com informações sobre vidros restantes quando better_adjustment é falso -->
+<div *ngIf="pedidoService.pedido?.balcony?.tip?.better_adjustment" class="flex justify-content-end text-2xl">
     Vidros restantes:
     <span class="ml-2 font-bold">{{ vidrosRestantes }}</span>
 </div>
@@ -13,37 +20,33 @@
         Qtd. Vidro
     </div>
 </div>
-<div
-    class="grid m-0 md:mx-4 border-bottom-1"
-    *ngFor="let linha of linhas; let i = index"
->
+
+<div class="grid m-0 md:mx-4 border-bottom-1" *ngFor="let linha of linhas; let i = index">
     <div class="col-3 p-1 text-center border-x-1">{{ linha.piece }}</div>
     <div class="col-3 p-1 text-center border-right-1">
-        <p-inputNumber
-        [(ngModel)]="linha.angle"
-        [format]="'n'"
-        [step]="0.1"
-        [minFractionDigits]="1"
-        [className]="'.p-inputtext'"
+        <p-inputNumber [(ngModel)]="linha.angle" [format]="'n'" [step]="0.1" [minFractionDigits]="2"
+            [className]="'.p-inputtext'" (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()"
+            [maxFractionDigits]="2"
+            [selectAllOnFocus]="true">
+        </p-inputNumber>
+        <!-- <input 
+        type="text"
+        class="p-inputtext" 
+        [(ngModel)]="linha.angle" 
         (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()"
-        [maxFractionDigits]="1">
-    </p-inputNumber>
-
+        (focus)="selecionarTexto($event.target)"
+        style="border: none; outline: none; width: 100%; text-align: center;"
+    > -->
 
     </div>
 
     <div class="col-3 p-1 text-center border-right-1">
-        <p-inputNumber
-            [(ngModel)]="linha.dimension"
-            [className]="'.p-inputtext'"
-            (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes(); verificarAtualizarQuantidadeDeVidro(linha)"
-            >
+        <p-inputNumber [(ngModel)]="linha.dimension" [className]="'.p-inputtext'"
+            (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes(); verificarAtualizarQuantidadeDeVidro(linha)">
         </p-inputNumber>
     </div>
     <div class="col-3 p-1 text-center border-right-1 bg-green-200">
-        <p-inputNumber
-            [(ngModel)]="linha.quantity"
-            [className]="'green-300 p-inputtext'"
+        <p-inputNumber [(ngModel)]="linha.quantity" [className]="'green-300 p-inputtext'"
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()">
         </p-inputNumber>
     </div>
@@ -52,15 +55,9 @@
 <div class="grid m-0 md:mx-4 mb-5">
     <div class="col-3 p-1 text-center">&nbsp;</div>
     <div class="col-3 p-1 text-center border-bottom-1 border-x-1">
-        <p-inputNumber
-            [(ngModel)]="total"
-            [format]="'n'"
-            [step]="0.1"
-            [minFractionDigits]="1"
-            style="border: none; outline: none"
-            [className]="'.p-inputtext'"
-            (input)="updatePedido($event.target.value)"
-            [maxFractionDigits]="1">
+        <p-inputNumber [(ngModel)]="total" [format]="'n'" [step]="0.1" [minFractionDigits]="2"
+            style="border: none; outline: none" [className]="'.p-inputtext'" (input)="updatePedido($event.target.value)"
+            [maxFractionDigits]="2">
         </p-inputNumber>
     </div>
     <div class="flex flex-end ml-2">
@@ -71,16 +68,11 @@
 </div>
 
 
-<div
-    class="flex flex-column align-items-center mt-5 justify-content-center text-xl font-light text-gray-800"
->
+<div class="flex flex-column align-items-center mt-5 justify-content-center text-xl font-light text-gray-800">
     <p class="text-center">Ângulos em decimal, exemplo: 12,5</p>
     <p class="text-center">Quantidade de vidros em inteiros, exemplo: 4</p>
     <p class="text-center">Dimensão em milimetros, exemplo: 20mm</p>
 </div>
 
-<app-navigation-tabs-btn
-    (nextTab)="_nextTab()"
-    (prevTab)="_prevTab()"
-></app-navigation-tabs-btn>
+<app-navigation-tabs-btn (nextTab)="_nextTab()" (prevTab)="_prevTab()"></app-navigation-tabs-btn>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

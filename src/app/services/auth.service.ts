@@ -96,6 +96,6 @@ export class AuthService {
     }
 
     verifyToken(token: string): Observable<boolean> {
-        return this._http.get<boolean>(this.apiUrl + '/users/verify-token'+ token);
+        return this._http.get<boolean>(this.apiUrl + '/users/verify-token/'+ token);
     }
 }

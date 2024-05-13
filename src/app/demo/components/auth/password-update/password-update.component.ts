@@ -48,7 +48,7 @@ export class PasswordUpdateComponent implements OnInit {
     }
 
     this.authService.resetPasswordByToken(this.token, this.password).subscribe({
-      next: () => {
+      next: (message) => {
         this.toaster.success('Senha atualizada com sucesso!')
         setTimeout(() => {
             this.http.navigate(['/']);

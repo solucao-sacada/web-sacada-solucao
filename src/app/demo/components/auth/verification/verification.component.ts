@@ -22,11 +22,10 @@ export class VerificationComponent implements OnInit {
   ngOnInit(): void {
     const user = this._auth.getUser();
 
-    if (user.emailActive === true) {
+    if (user && user.emailActive === true) {
       this.router.navigate(['/']);
       return;
     }
-
     const email = this._activeRoute.snapshot.paramMap.get('email') || '';
     const token = this._activeRoute.snapshot.paramMap.get('token') || '';
 

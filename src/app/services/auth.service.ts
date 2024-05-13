@@ -76,9 +76,9 @@ export class AuthService {
         return this._http.post<any>(this.apiUrl + '/users/forgot-password', { email: email });
     }
 
-    resetPasswordUser(idUser: string, newPassword: string, oldPassword: string): Observable<any> {
-        return this._http.patch<any>(this.apiUrl + `/users/password-update`, {
-            idUser,
+    resetPasswordUser(idUser: string, newPassword: string, oldPassword: string): Observable<string> {
+        return this._http.patch<string>(this.apiUrl + `/users/update-password`, {
+            idUser: idUser,
             newPassword: newPassword,
             oldPassword: oldPassword
         })

@@ -4,6 +4,7 @@ import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
+
 interface UserUpdated {
   id: string;
   name: string;
@@ -38,13 +39,15 @@ interface IUserData {
 })
 
 export class AccountDetailsComponent {
+  oldPassword: string = '';
+  newPassword: string = '';
+  confirmPassword: string = '';
 
   user = {
     name: '',
     email: '',
     phone: '',
     password: '',
-    oldPassword:'',
     company: {
       tradingName: '',
       legalName: '',
@@ -62,7 +65,6 @@ export class AccountDetailsComponent {
 
   userUpdate: UserUpdated = {} as UserUpdated
 
-  confirmPassword: string = '';
   visible: boolean = false;
 
   private router = inject(Router);
@@ -74,17 +76,25 @@ export class AccountDetailsComponent {
   }
 
   updatePassword(){
-    if(this.user.password != this.confirmPassword ){
+    if(this.newPassword != this.confirmPassword ){
       this.toaster.error('As senhas precisam ser iguais!')
       return
     }
-    console.log(this.user)
-    this.authService.resetPasswordUser(this.user._id as string, this.user.password as string, this.user.oldPassword).subscribe((data: User) => {
-      localStorage.removeItem('user');
-      localStorage.setItem('user', JSON.stringify(data));
-      this.toaster.success('Senha atualizada com sucesso!')
 
-      return data;
+    const user = this.authService.getUser() as unknown as UserUpdated
+
+    this.authService.resetPasswordUser(user.id, this.newPassword, this.oldPassword).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.toaster.success('Senha atualizada com sucesso!')
+      },
+      error: (error) => {
+        if(error.message.includes('Campo inválido')){
+          this.toaster.error('Minimo de 6 caracteres para a nova senha')
+          return
+        }
+        this.toaster.error(error.message)
+      }
     })
   }
 

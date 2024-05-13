@@ -25,23 +25,18 @@ export class Passo11Component {
         });
     }
 
+
     openOverlay() {
         const rightWall = this.pedidoService.pedido.balcony.plumb.right_wall;
-
-        const differenceUp = Math.abs(
-            +rightWall.top - +rightWall.bottom
-        );
-
-        const differenceBottom = Math.abs(
-            +rightWall.bottom - +rightWall.top
-        );
-
-        const result = Math.min(differenceUp, differenceBottom);
-
-        this.difference = result.toString() + 'mm';
-
-        if (result > 3) {
+    
+        const differenceRight = +rightWall.top - +rightWall.bottom;
+    
+        if (Math.abs(differenceRight) > 3 || differenceRight < -3) {
             this.visible = true;
+    
+            // Converte +rightWall.bottom para negativo e +rightWall.top para positivo
+            const formattedDifference = differenceRight.toString() + 'mm';
+            this.difference = formattedDifference;
         } else {
             this.visible = false;
         }

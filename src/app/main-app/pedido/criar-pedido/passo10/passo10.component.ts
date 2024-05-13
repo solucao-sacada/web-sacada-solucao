@@ -25,25 +25,20 @@ export class Passo10Component {
     }
     openOverlay() {
         const leftWall = this.pedidoService.pedido.balcony.plumb.left_wall;
-
-        const differenceUp = Math.abs(
-            +leftWall.top - +leftWall.bottom
-        );
-
-        const differenceBottom = Math.abs(
-            +leftWall.bottom - +leftWall.top
-        );
-
-        const result = Math.min(differenceUp, differenceBottom);
-
-        this.difference = result.toString() + 'mm';
-
-        if (result > 3) {
+    
+        const differenceLeft = +leftWall.top - +leftWall.bottom;
+    
+        if (Math.abs(differenceLeft) > 3 || differenceLeft < -3) {
             this.visible = true;
+    
+            // Converte +leftWall.bottom para negativo e +leftWall.top para positivo
+            const formattedDifference = differenceLeft.toString() + 'mm';
+            this.difference = formattedDifference;
         } else {
             this.visible = false;
         }
     }
+    
 
     nextTab(): void {
         const result = Math.abs(

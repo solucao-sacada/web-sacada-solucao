@@ -1,13 +1,11 @@
 <h4>Trilhos inferiores</h4>
 
 
-<!-- Mostra a div vazia quando better_adjustment é verdadeiro -->
-<ng-template [ngIf]="pedidoService.pedido?.balcony?.tip?.better_adjustment">
-    <div></div>
-</ng-template>
+<div *ngIf="pedidoService.pedido?.balcony?.tip?.better_adjustment === true" class="flex justify-content-end text-2xl">
 
-<!-- Mostra a div com informações sobre vidros restantes quando better_adjustment é falso -->
-<div *ngIf="pedidoService.pedido?.balcony?.tip?.better_adjustment" class="flex justify-content-end text-2xl">
+</div>
+
+<div *ngIf="pedidoService.pedido?.balcony?.tip?.better_adjustment === false" class="flex justify-content-end text-2xl">
     Vidros restantes:
     <span class="ml-2 font-bold">{{ vidrosRestantes }}</span>
 </div>

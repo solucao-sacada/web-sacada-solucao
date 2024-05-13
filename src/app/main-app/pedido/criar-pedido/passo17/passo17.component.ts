@@ -32,7 +32,7 @@ export class Passo17Component {
 
     uploadFile(event: any) {
         this.images.push(event.files[0]);
-        this.upload.disabled = true;
+        this.upload.disabled = false;
         this.imageService.storeFile(event.files[0]);
         this.toaster.success('Imagem enviada com sucesso');
     }

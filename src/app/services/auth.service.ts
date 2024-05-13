@@ -20,7 +20,7 @@ export class AuthService {
     private ldService = inject(LoadingService);
 
 
-    constructor(private _http: HttpClient, private router: Router) 
+    constructor(private _http: HttpClient, private router: Router)
         {
         this.token = localStorage.getItem('token');
         this.RefreshToken = localStorage.getItem('refreshToken');
@@ -87,5 +87,16 @@ export class AuthService {
         const payload = { token };
         const endpoint = `${this.apiUrl}/send-verification-email/${email}`;
         return this._http.post<User>(endpoint, payload);
-      }
+    }
+
+    resetPasswordByToken(token: string, password: string): Observable<string> {
+        const params = new HttpParams().set('token', token);
+
+        return this._http.patch<string>(this.apiUrl + '/users/reset-password', { password }, { params });
+    }
+
+    verifyToken(token: string): Observable<boolean> {
+        const params = new HttpParams().set('token', token);
+        return this._http.get<boolean>(this.apiUrl + '/users/verify-token', { params });
+    }
 }

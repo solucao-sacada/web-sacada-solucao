@@ -3,13 +3,13 @@ import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  selector: 'app-send-forgot-password',
+  templateUrl: './send-forgot-password.component.html',
+  styleUrls: ['./send-forgot-password.component.scss']
 })
 
-export class ResetPasswordComponent {
-  
+export class SendForgotPasswordComponent {
+
   private authService = inject(AuthService);
   private toaster = inject(ToasterService);
 

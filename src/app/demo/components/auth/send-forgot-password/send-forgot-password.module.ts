@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { ResetPasswordComponent } from "./reset-password.component";
-import { ResetPasswordRoutingModule } from "./reset-password-routing.module";
+import { SendForgotPasswordComponent } from "./send-forgot-password.component";
 import { ButtonModule } from "primeng/button";
 import { ComponentsModule } from "src/app/components/components.module";
+import { SendForgotPasswordRoutingModule } from "./send-forgot-password-routing.module";
 
 
 
@@ -12,11 +12,11 @@ import { ComponentsModule } from "src/app/components/components.module";
     imports: [
         CommonModule,
         FormsModule,
-        ResetPasswordRoutingModule,
+        SendForgotPasswordRoutingModule,
         ButtonModule,
         ComponentsModule,
     ],
-    declarations: [ResetPasswordComponent]
+    declarations: [SendForgotPasswordComponent]
 })
 
-export class ResetPasswordModule { }
+export class SendForgotPasswordModule { }

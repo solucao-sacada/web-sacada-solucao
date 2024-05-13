@@ -37,12 +37,12 @@ import { RouterModule } from '@angular/router';
                     import('./verification/verification.module').then((m)=> m.VerificationModule),
             },
             {
-                path: 'reset-password',
+                path: 'send-forgot-password',
                 loadChildren: () =>
-                    import('./reset-password/reset-password.module').then((m)=> m.ResetPasswordModule),
+                    import('./send-forgot-password/send-forgot-password.module').then((m)=> m.SendForgotPasswordModule),
             },
             {
-                path: 'password-update',
+                path: 'reset-password',
                 loadChildren: () =>
                     import('./password-update/password-update.module').then((m)=> m.PasswordUpdateModule),
             }

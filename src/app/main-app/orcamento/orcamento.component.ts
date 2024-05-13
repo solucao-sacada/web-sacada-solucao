@@ -142,6 +142,8 @@ export class OrcamentoComponent {
                 priceAcessories: this.orcamento.valorAcessorios,
                 priceProlongador: this.orcamento.valorProlongador,
                 priceKitSolutions: this.orcamento.kitAVista,
+                height: this.orcamento.h,
+                width: this.orcamento.wGlass,
             })
             .subscribe((response) => {
                 this.toaster.success('Orcamento salvo com sucesso!');

@@ -20,6 +20,9 @@ export interface OrcamentoRequestModel {
     priceAcessories: number
     priceProlongador: number
     priceKitSolutions: number
+
+    height: number
+    width: number
 }
 
 export interface IConstsOrcamento {
@@ -263,19 +266,19 @@ export class CalculoOrcamento implements IConstsOrcamento, IValuesClient {
             (this.custoTotalAVista + this.mar * this.custoTotalAVista * 0.01).toFixed(2)
         );
     }
-    
+
     get valorFinalMargem2(): number {
         return parseFloat(
             (this.custoTotalAVista + (this.mar + 5) * this.custoTotalAVista * 0.01).toFixed(2)
         );
     }
-    
+
     get valorFinalMargem3(): number {
         return parseFloat(
             (this.custoTotalAVista + (this.mar + 10) * this.custoTotalAVista * 0.01).toFixed(2)
         );
     }
-    
+
 
     constructor(value?: IValuesClient) {
         if (value) {

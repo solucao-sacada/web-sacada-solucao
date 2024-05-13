@@ -26,7 +26,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
                 border:none;
                 text-align: center;
                 padding: 0;
-                width: 4rem;
+                width: 10rem;
             }
 
             :host ::ng-deep .p-inputtext:enabled:focus {
@@ -225,6 +225,16 @@ export class Passo9Component implements OnInit {
 
     _prevTab(): void {
         this.pedidoService.prevTab();
+    }
+
+    selectText(event: MouseEvent): void {
+        const inputElement = event.target as HTMLInputElement;
+        const cursorPosition = inputElement.selectionStart;
+        const inputLength = inputElement.value.length;
+
+        if (cursorPosition === inputLength) {
+          inputElement.select();
+        }
     }
 
     updatePedido(value: string): void {

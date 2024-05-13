@@ -25,24 +25,21 @@ export class PasswordUpdateComponent implements OnInit {
     ngOnInit(): void {
       this.activatedRoute.queryParams.subscribe((queryParams) => {
         this.token = queryParams['token'];
-        if (!this.token) this.http.navigate(['/']);
+        // if (!this.token) this.http.navigate(['/']);
       });
 
+      console.log(this.token)
       this.ldService.start();
-      this.authService
-        .verifyToken(this.token)
-        .pipe(
-          catchError((error) => {
-            this.http.navigate(['/']);
-            return of(error);
-          }),
-          finalize(() => this.ldService.stop())
-        )
-        .subscribe((isValid) => {
-          if (!isValid) {
-            this.http.navigate(['/']);
-          }
-        });
+      this.authService.verifyToken(this.token).subscribe({
+        next: () => {
+          this.ldService.stop();
+        },
+        error: (err) => {
+          this.ldService.stop();
+        //   this.http.navigate(['/']);
+        }
+      })
+
     }
   submitPasswordUpdate() {
     if (this.password !== this.confirmPassword) {

@@ -1,28 +1,22 @@
-
-   
-    <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden mt-4">
-        <div class="flex flex-column align-items-center justify-content-center">
-            <div style="
-                border-radius: 56px;
-                padding: 0.3rem;
-                background: linear-gradient(
-                    180deg,
-                    var(--primary-color) 10%,
-                    rgba(33, 150, 243, 0) 30%
-                );
-            ">
-
-            
-            <div class="w-full surface-card mb-4 px-5 sm:mb-8" style="border-radius: 53px">
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <img src="assets/sacada/logo/soluca-logo.webp" alt="Solução Logo" 
+        class="my-5 w-20rem flex-shrink-0 cursor-pointer" routerLink="" />
+        <div style="
+            border-radius: 56px;
+            padding: 0.3rem;
+            background: linear-gradient(
+                180deg,
+                var(--primary-color) 10%,
+                rgba(33, 150, 243, 0) 30%
+            );
+        ">
+        
+        <div class="w-full surface-card py-4 px-5 sm:px-8" style="border-radius: 53px">
 
                 <div class="flex flex-column align-items-center justify-content-center">
-                   
-                    <div class="flex align-items-center justify-content-center cursor-pointer">
-                        <img src="../../../../../assets/sacada/logo/soluca-logo.webp" alt="Solução Logo"
-                            class="my-5 w-15rem flex-shrink-0" routerLink="/">
-                    </div>
 
-                    <div class="px-4 mb-4 items-center">
+                    <div class="px-4 mb-4 items-center mt-4">
                         <div class="py-3">
                             <div class="text-900 text-3xl text-center font-medium mb-3">
                                 Informações do usuário
@@ -41,12 +35,12 @@
                                 <div class="mr-3">
                                     <input  *ngIf="!user.emailActive" id="email" type="email" pInputText maxlength="70" name="email" 
                                         [(ngModel)]="user.email" required
-                                        class="w-full mb-1"
+                                        class="w-full md:w-30rem mb-1"
                                     >
                                     
                                     <input  *ngIf="user.emailActive" id="email" type="email" pInputText maxlength="70" name="email"
                                         disabled [(ngModel)]="user.email" required
-                                        class="w-full mb-1"
+                                        class="w-full md:w-30rem mb-1"
                                     >
                                     <div class="flex justify-content-end w-full mb-2">
                                         <small *ngIf="!user.emailActive" class="text-red-500">E-mail não verificado</small>
@@ -87,7 +81,7 @@
                             <div class="flex flex-row items-center">
                                 <div class="mr-3">
                                     <input id="confirmPassword" type="password" placeholder="************" pInputText name="confirmPassword" required
-                                        [(ngModel)]="confirmPassword" class="w-full mb-3">
+                                        [(ngModel)]="confirmPassword" class="w-full md:w-30rem mb-3">
                                 </div>
                                 
                                 <div>

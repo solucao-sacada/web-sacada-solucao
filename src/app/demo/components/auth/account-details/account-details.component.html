@@ -1,6 +1,6 @@
 <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
     <div class="flex flex-column align-items-center justify-content-center">
-        <img src="assets/sacada/logo/soluca-logo.webp" alt="Solução Logo" 
+        <img src="assets/sacada/logo/soluca-logo.webp" alt="Solução Logo"
         class="my-5 w-20rem flex-shrink-0 cursor-pointer" routerLink="" />
         <div style="
             border-radius: 56px;
@@ -11,7 +11,7 @@
                 rgba(33, 150, 243, 0) 30%
             );
         ">
-        
+
         <div class="w-full surface-card py-4 px-5 sm:px-8" style="border-radius: 53px">
 
                 <div class="flex flex-column align-items-center justify-content-center">
@@ -33,17 +33,18 @@
                             <label for="email" class="font-bold">E-mail</label><br>
                             <div class="flex flex-row items-center">
                                 <div class="mr-3">
-                                    <input  *ngIf="!user.emailActive" id="email" type="email" pInputText maxlength="70" name="email" 
+                                    <input  *ngIf="!user.emailActive" id="email" type="email" pInputText maxlength="70" name="email"
                                         [(ngModel)]="user.email" required
                                         class="w-full md:w-30rem mb-1"
                                     >
-                                    
+
                                     <input  *ngIf="user.emailActive" id="email" type="email" pInputText maxlength="70" name="email"
                                         disabled [(ngModel)]="user.email" required
                                         class="w-full md:w-30rem mb-1"
                                     >
                                     <div class="flex justify-content-end w-full mb-2">
                                         <small *ngIf="!user.emailActive" class="text-red-500">E-mail não verificado</small>
+                                        <small *ngIf="user.emailActive" class="text-green-500">E-mail verificado</small>
                                     </div>
                                 </div>
                                 <div>
@@ -57,21 +58,21 @@
 
                         <div class="field-group mb-3">
                             <label for="phone" class="font-bold">Telefone</label><br>
-                            <p-inputMask 
+                            <p-inputMask
                                 mask="(99) 99999-9999" [(ngModel)]="user.phone" styleClass="w-full">
                             </p-inputMask>
                         </div>
 
                         <div class="field-group">
                             <label for="oldPassword" class="font-bold">Senha antiga</label><br>
-                            <input id="oldPassword" type="password" pInputText name="oldPassword" placeholder="************" 
+                            <input id="oldPassword" type="password" pInputText name="oldPassword" placeholder="************"
                             [(ngModel)]="user.oldPassword" required
                                 class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="password" class="font-bold">Senha</label><br>
-                            <input id="password" type="password" pInputText name="password" placeholder="************" 
+                            <input id="password" type="password" pInputText name="password" placeholder="************"
                             [(ngModel)]="user.password" required
                                 class="w-full mb-3">
                         </div>
@@ -83,7 +84,7 @@
                                     <input id="confirmPassword" type="password" placeholder="************" pInputText name="confirmPassword" required
                                         [(ngModel)]="confirmPassword" class="w-full md:w-30rem mb-3">
                                 </div>
-                                
+
                                 <div>
                                     <button pbutton="" pripple="" class="p-element p-ripple w-auto p-button p-component"
                                         (click)="updatePassword()">
@@ -97,69 +98,69 @@
                             <div class="text-900 text-2xl md:text-3xl text-center font-medium mb-3">
                                 Informações da compania
                             </div>
-                        </div> 
+                        </div>
 
                         <div class="field-group">
                             <label for="companyTradingName" class="font-bold">Nome Fantasia</label><br>
                             <input id="companyTradingName" type="text" pInputText name="companyTradingName" required
                                 [(ngModel)]="user.company.tradingName" class="w-full mb-3">
 
-                        </div> 
+                        </div>
 
                         <div class="field-group">
                             <label for="companyLegalName" class="font-bold">Razão Social</label><br>
                             <input id="companyLegalName" type="text" pInputText name="companyLegalName"
                                 [(ngModel)]="user.company.legalName" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyCnpj" class="font-bold">CNPJ</label><br>
                             <input id="companyCnpj" type="text" pInputText name="companyCnpj"
                                 [(ngModel)]="user.company.cnpj" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyStateRegistration" class="font-bold">Inscrição Estadual</label><br>
                             <input id="companyStateRegistration" type="text" pInputText name="companyStateRegistration"
                                 [(ngModel)]="user.company.stateRegistration" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyStreetAddress" class="font-bold">Endereço</label><br>
                             <input id="companyStreetAddress" type="text" pInputText name="companyStreetAddress"
                                 [(ngModel)]="user.company.streetAddress" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyNum" class="font-bold">Número</label><br>
                             <input id="companyNum" type="number" pInputText name="companyNum"
                                 [(ngModel)]="user.company.num" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyComplement" class="font-bold">Complemento</label><br>
                             <input id="companyComplement" type="text" pInputText name="companyComplement"
                                 [(ngModel)]="user.company.complement" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyZipCode" class="font-bold">CEP</label><br>
                             <input id="companyZipCode" type="number" pInputText name="companyZipCode"
                                 [(ngModel)]="user.company.zipCode" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyNeighborhood" class="font-bold">Bairro</label><br>
                             <input id="companyNeighborhood" type="text" pInputText name="companyNeighborhood"
                                 [(ngModel)]="user.company.neighborhood" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyCity" class="font-bold">Cidade</label><br>
                             <input id="companyCity" type="text" pInputText name="companyCity"
                                 [(ngModel)]="user.company.city" class="w-full mb-3">
                         </div>
-                        
+
                         <div class="field-group">
                             <label for="companyState" class="font-bold">Estado</label><br>
                             <input id="companyState" type="text" pInputText name="companyState"

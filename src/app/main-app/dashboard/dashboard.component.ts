@@ -29,7 +29,7 @@ export class DashboardComponent {
     orcamentoService = inject(OrcamentoService);
 
     ngOnInit(): void {
-        this.pedidoService.listByUser(this.user._id).subscribe((pedido) => {
+        this.pedidoService.listByUser(this.user.id).subscribe((pedido) => {
             this.pedidos = pedido;
             this.qtdTotal = pedido.length;
 

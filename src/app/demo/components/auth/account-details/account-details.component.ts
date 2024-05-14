@@ -120,7 +120,7 @@ export class AccountDetailsComponent {
       next: (user) => { // retorno do backend que veio do service user
         const userDataDesestructured = user as unknown as IUserData
         this.userUpdate = {
-          id: userDataDesestructured.user._id,
+          id: userDataDesestructured.user.id,
           name: userDataDesestructured.user.name,
           email: userDataDesestructured.user.email,
           phone: userDataDesestructured.user.phone,
@@ -167,7 +167,7 @@ export class AccountDetailsComponent {
     // Remover underline do id antes de enviar
     const userForDelete = {
       ...this.user,
-      id: this.user._id, // Renomeia a chave _id para id
+      id: this.user.id, // Renomeia a chave _id para id
       _id: undefined // Remove a chave _id
     };
     console.log(userForDelete);

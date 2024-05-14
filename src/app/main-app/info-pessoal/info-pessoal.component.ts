@@ -59,7 +59,7 @@ export class InfoPessoalComponent {
 
     save() {
         this.imageService
-            .uploadImageUser(this.user._id, this.croppedImage)
+            .uploadImageUser(this.user.id, this.croppedImage)
             .subscribe((data) => {
                 this.user.image = this.croppedImage;
                 this.visible = false;

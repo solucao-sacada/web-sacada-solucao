@@ -66,7 +66,7 @@ export class OrcamentoComponent {
                 },
             })
         }else{
-            this.orcamentoService.listByClient(user._id).subscribe({
+            this.orcamentoService.listByClient(user.id).subscribe({
                 next: (orcamentos) => {
                     this.orcamentos = orcamentos;
                 },

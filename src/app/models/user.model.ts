@@ -11,7 +11,7 @@ export interface User{
     emailActive: boolean;
     password: string;
     oldPassword: string;
-    _id: string;
+    id: string;
     name: string;
     email: string;
     phone: string;

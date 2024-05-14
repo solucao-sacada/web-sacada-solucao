@@ -5,7 +5,7 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 
-interface UserUpdated {
+export interface UserUpdated {
   id: string;
   name: string;
   email: string;

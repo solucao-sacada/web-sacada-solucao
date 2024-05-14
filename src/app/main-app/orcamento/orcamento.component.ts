@@ -2,11 +2,15 @@ import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
+import { UserUpdated } from 'src/app/demo/components/auth/account-details/account-details.component';
 import { CalculoOrcamento, OrcamentoRequestModel } from 'src/app/models/orcamento';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
+interface IDataID{
+    id: string
+}
 @Component({
     selector: 'app-orcamento',
     templateUrl: './orcamento.component.html',
@@ -122,11 +126,12 @@ export class OrcamentoComponent {
             this.toaster.warn('Por favor, preencha o campo E-MAIL');
             return;
         }
+        const user = this.auth.getUser() as unknown as UserUpdated;
         this.orcamentoService
             .create({
                 client: this.orcamento.cliente,
                 emailClient: this.orcamento.send,
-                idUser: this.auth.getUser()._id,
+                idUser: user.id,
                 price: this.orcamento.valorFinal,
                 qtdAparador: this.orcamento.qtdAparador,
                 qtdProlongador: this.orcamento.qtdProlongador,

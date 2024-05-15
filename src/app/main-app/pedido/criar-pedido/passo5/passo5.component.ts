@@ -49,6 +49,7 @@ export class Passo5Component {
     ) { }
 
     ngOnInit() {
+        console.log(this.pedidoService.pedido.balcony.format)
         if (this.pedidoService.pedido.balcony.format == 0)
             this.selectedOption = '';
         else if (this.pedidoService.pedido.balcony.format == 1)
@@ -64,11 +65,12 @@ export class Passo5Component {
             this.amountPieces = this.pedidoService.pedido.balcony.format;
         }
 
+        this.toggleSelection(this.selectedOption);
+
         if (this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
             let novoData = this.pedidoService.pedido.balcony.dimensions.data[0];
-            this.selectedOption = String(novoData);
+            this.selectedOption = String(novoData)
         }
-        this.toggleSelection(this.selectedOption);
     }
     toggleSelection(optionName: string): void {
         this.selectedOption = optionName;

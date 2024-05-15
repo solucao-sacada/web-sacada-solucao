@@ -82,6 +82,18 @@ export class Passo3Component {
         this.pedidoService.getObservable().subscribe(() => {
             this.verify();
         });
+
+        if(this.pedidoService.pedido.balcony.glass.laminated === true){
+            this.showDiv1 = true;
+        }
+
+        if(this.pedidoService.pedido.balcony.glass.tempered === true){
+            this.showDiv1 = true;
+        }
+
+        if(this.pedidoService.pedido.balcony.glass.laminatedTemperad === true){
+            this.showDiv2 = true;
+        }
     }
 
     tipoVidro(tipo: string) {

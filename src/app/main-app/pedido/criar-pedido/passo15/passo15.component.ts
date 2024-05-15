@@ -33,12 +33,18 @@ export class Passo15Component implements OnInit {
     prolongadorTeto = 0;
     prolongadorPiso = 0;
     visible = false
+    addProlongadorTeto = false
+    messageFixViga = false
+    addProlongadorPiso = false
+    messageFixBase = false
+    showHR = false
+
 
 
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
-    ) {}
+    ) { }
 
     ngOnInit(): void {
         this.prolongadorPiso = 0
@@ -50,9 +56,9 @@ export class Passo15Component implements OnInit {
     }
 
     private inicializarLinhas(): void {
-        if(!this.pedidoService.pedido.balcony){
-           return
-        }{
+        if (!this.pedidoService.pedido.balcony) {
+            return
+        } {
             if (
                 this.pedidoService.pedido.balcony.levels.measures.data &&
                 this.pedidoService.pedido.balcony.levels.measures.data.length > 0
@@ -104,7 +110,7 @@ export class Passo15Component implements OnInit {
         let menorAlturaTeto = Infinity;
         let menorAlturaPiso = Infinity;
 
-        if(this.medidas[0] && this.medidas[this.medidas.length - 1]){
+        if (this.medidas[0] && this.medidas[this.medidas.length - 1]) {
             this.diferencaPrimeiraPontoUltimoPontoTeto = Math.abs(Number(this.medidas[0].ceiling) - Number(this.medidas[this.medidas.length - 1].ceiling))
 
             this.diferencaPrimeiraPontoUltimoPontoPiso = Math.abs(Number(this.medidas[0].floor) - Number(this.medidas[this.medidas.length - 1].floor))
@@ -193,31 +199,78 @@ export class Passo15Component implements OnInit {
     }
 
     verificarProlongadores(): void {
-        if(this.prolongadorPiso === 0 && this.prolongadorTeto === 0){
-            if(this.diferencaPrimeiraPontoUltimoPontoPiso >= 21 || this.diferencaPrimeiraPontoUltimoPontoTeto >= 20){
-                this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS)
-                return
-            }else{
-                this.nextTab()
-            }
-            return
-        }
-
-        if(this.prolongadorPiso > 35 || this.prolongadorTeto > 40){
+        const fixValues = this.fixedValues();
+        if (fixValues) return
+        this.resetValues()
+        if (this.prolongadorPiso > 35 || this.prolongadorTeto > 40) {
             this.visible = true
             return
-        }else{
+        } else {
             this.nextTab()
         }
 
     }
 
+    resetValues(): void {
+        if (this.diferencaPrimeiraPontoUltimoPontoTeto < 21) {
+            this.prolongadorTeto = 0
+        }
+
+        if (this.diferencaPrimeiraPontoUltimoPontoPiso < 20) {
+            this.prolongadorPiso = 0
+        }
+    }
+
+
+    fixedValues(): boolean {
+        let block = false
+
+        if (!block) {
+            // mostrar valores para corrigir a viga
+            if (this.diferencaPrimeiraPontoUltimoPontoTeto >= 21 && this.prolongadorTeto === 0) {
+                this.addProlongadorTeto = true
+                block = true
+            }
+
+            if (this.diferencaPrimeiraPontoUltimoPontoTeto >= 41 && this.prolongadorTeto === 0) {
+                this.messageFixViga = true
+                block = true
+            }
+
+            // mostrar valores para corrigir a base
+            if (this.diferencaPrimeiraPontoUltimoPontoPiso >= 20 && this.prolongadorPiso === 0) {
+                this.addProlongadorPiso = true
+                block = true
+            }
+
+            if (this.diferencaPrimeiraPontoUltimoPontoPiso >= 35 && this.prolongadorPiso === 0) {
+                this.messageFixBase = true
+                block = true
+            }
+
+            if (this.diferencaPrimeiraPontoUltimoPontoTeto >= 21 &&
+                this.diferencaPrimeiraPontoUltimoPontoPiso >= 20 &&
+                this.prolongadorTeto === 0 &&
+                this.prolongadorPiso === 0
+            ) {
+                this.showHR = true
+                block = true
+            }
+        }
+
+        if (block) {
+            this._toaster.warn('Preencha os campos para corrigir a viga ou a base')
+            return true
+        }
+
+        return false
+    }
+
     nextTab(): void {
-        this.salvar();
         this.checkHeightDifference();
+        this.salvar();
         this.pedidoService.pedido.balcony.levels.measures.highest_prolongation = this.prolongadorTeto.toString();
         this.pedidoService.pedido.balcony.levels.measures.lower_prolongation = this.prolongadorPiso.toString();
-
         let hasError = true;
         this.medidas.map((medida) => {
             if (medida.ceiling && medida.floor) hasError = false;
@@ -226,6 +279,7 @@ export class Passo15Component implements OnInit {
         if (hasError) {
             this._toaster.warn(MESSAGES.CAMPOS_OBRIGATORIOS);
         } else {
+            this.visible = false
             this.pedidoService.nextTab();
         }
     }

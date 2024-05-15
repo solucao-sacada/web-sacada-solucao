@@ -49,7 +49,7 @@
             type="text"
             class="border-0 shadow-none text-center w-full"
             [(ngModel)]="linha.ceiling"
-            (ngModelChange)="checkHeightDifference()"
+
         />
     </div>
     <div
@@ -59,7 +59,7 @@
             type="text"
             class="border-0 shadow-none text-center w-full"
             [(ngModel)]="linha.floor"
-            (ngModelChange)="checkHeightDifference()"
+
         />
     </div>
     <div
@@ -77,44 +77,44 @@
 
 <div class="flex flex-column align-items-center gap-2 mt-5 justify-content-center text-xl font-light text-gray-800 my-2 relative">
     <div class="flex flex-column align-items-center gap-2 justify-content-center">
-            <strong *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21">Necessário correção da viga</strong>
-            <span class="text-red-600" *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 41">
+            <strong *ngIf="addProlongadorTeto">Necessário correção da viga</strong>
+            <span class="text-red-600" *ngIf="messageFixViga">
                 A diferença de nível na VIGA ultraprassa os 40mm. Entre em contato com fornecedor.
             </span>
-            <span *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21">
+            <span *ngIf="addProlongadorTeto">
                 Informe o tamanho do prolongador em milimetros (mm).
             </span>
-            <p-inputNumber *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21" 
-                [(ngModel)]="prolongadorTeto" 
-                [format]="'n'" 
+            <p-inputNumber *ngIf="addProlongadorTeto"
+                [(ngModel)]="prolongadorTeto"
+                [format]="'n'"
             >
             </p-inputNumber>
-            <!-- <p-inputNumber *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21" 
-                [(ngModel)]="prolongadorTeto" 
-                [format]="'n'" 
-                [step]="0.1" 
+            <!-- <p-inputNumber *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21"
+                [(ngModel)]="prolongadorTeto"
+                [format]="'n'"
+                [step]="0.1"
                 [minFractionDigits]="1" [maxFractionDigits]="1">
             </p-inputNumber> -->
-          
+
         <hr *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21 && diferencaPrimeiraPontoUltimoPontoPiso >= 20" class="m-2">
 
-            <strong *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20">Necessário correção da base</strong>
-            <span class="text-red-600" *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 35">
+            <strong *ngIf="addProlongadorPiso">Necessário correção da base</strong>
+            <span class="text-red-600" *ngIf="messageFixBase">
                 A diferença de nível na Base ultraprassa os 35mm. Entre em contato com fornecedor.
             </span>
-            <span *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20">
+            <span *ngIf="addProlongadorPiso">
                 Informe o tamanho do prolongador em milimetros (mm).
             </span>
-            <p-inputNumber class="mb-4" *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20" 
-                [(ngModel)]="prolongadorPiso" 
-                [format]="'n'" 
+            <p-inputNumber class="mb-4" *ngIf="addProlongadorPiso"
+                [(ngModel)]="prolongadorPiso"
+                [format]="'n'"
             >
             </p-inputNumber>
-            <!-- <p-inputNumber class="mb-4" *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20" 
-                [(ngModel)]="prolongadorPiso" 
-                [format]="'n'" 
-                [step]="0.1" 
-                [minFractionDigits]="1" 
+            <!-- <p-inputNumber class="mb-4" *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20"
+                [(ngModel)]="prolongadorPiso"
+                [format]="'n'"
+                [step]="0.1"
+                [minFractionDigits]="1"
                 [maxFractionDigits]="1">
             </p-inputNumber> -->
     </div>
@@ -156,19 +156,6 @@
 
 
 </div>
-<!-- <p-dialog
-    [showHeader]="false"
-    [(visible)]="visible"
-    [breakpoints]="{ '500px': '90vw' }"
-    [style]="{
-        width: '50vw',
-        border: 'solid 1px #9a2530',
-    }"
->
-    <div class="font-bold text-xl mt-5 text-center">
-        <span class="text-red-700">Atenção:</span> A diferença ultraprassa os 15mm.
-    </div>
-</p-dialog> -->
 <app-navigation-tabs-btn
     (nextTab)="verificarProlongadores()"
     (prevTab)="prevTab()"

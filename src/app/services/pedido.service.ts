@@ -72,7 +72,7 @@ export class PedidoService {
     intilizePedido(acessories?: OrcamentoRequestModel | null): PedidoJson {
         const drafts = this.getDraftPedidos();
         return {
-            idUser: this._auth.getUser()?._id,
+            idUser: this._auth.getUser()?.id,
             code: drafts.length === 0 ? 1 : drafts.length + 1,
             accessories: {
                 aparador_aluminio: false,

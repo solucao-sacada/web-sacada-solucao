@@ -65,7 +65,7 @@ export class ListarPedidosComponent {
         });
 
        }else{
-        this.pedidoService.listByUser(this.user._id).subscribe((data) => {
+        this.pedidoService.listByUser(this.user.id).subscribe((data) => {
             this.pedidos = data;
         });
        }

@@ -14,15 +14,15 @@
     (ngModelChange)="updateObservation()"
 ></textarea>
 
-<p-fileUpload
+<p-fileUpload    
     #upload
     class="mt-3"
-    [showCancelButton]="false"
+    [showCancelButton]="true"
     maxFileSize="1000000"
     [customUpload]="true"
-    (uploadHandler)="uploadFile($event)"
+    [auto]="true"
     [chooseLabel]="'Adicionar'"
-    [uploadLabel]="'Enviar'"
+    (onSelect)="onFileSelect($event)"
 >
 </p-fileUpload>
 

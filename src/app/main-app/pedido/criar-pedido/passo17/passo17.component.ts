@@ -10,9 +10,9 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo17Component {
-    @ViewChild('upload') upload: FileUpload;
+    @ViewChild('upload', { static: false }) upload: FileUpload;
 
-    images: any[] = [];
+    images: File[] = [];
     visible = false;
     observation = '';
 
@@ -22,10 +22,28 @@ export class Passo17Component {
         private toaster: ToasterService
     ) {}
 
+    onFileSelect(event): void {
+        const files = event.files; 
+        this.images = [];
+        for (let i = 0; i < files.length; i++) {
+            this.images.push(files[i]);
+        }
+        this.enviarImagens();
+    }
+
+    enviarImagens(): void {
+        if (this.images.length > 0) {
+            const imagem = this.images[0];
+            this.imageService.storeFile(imagem);
+        }
+    }
+
     nextTab(): void {
-        // this.pedidoService.setPedidosOK(this.pedidoService.pedido);
+        this.enviarImagens();
+
         this.pedidoService.nextTab();
     }
+
     prevTab(): void {
         this.pedidoService.prevTab();
     }

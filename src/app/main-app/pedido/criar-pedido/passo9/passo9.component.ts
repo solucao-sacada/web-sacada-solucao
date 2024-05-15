@@ -60,7 +60,19 @@ export class Passo9Component implements OnInit {
         this.total = Number(this.pedidoService.pedido.balcony.dimensions.total);
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
+                const codePedido = this.pedidoService.pedido.code
+                const draft = this.pedidoService.getDraftPedidos();
+                const fitlerPedido = draft.find((pedido)=> pedido.code === codePedido)
+
+                if(fitlerPedido){
+                    this.pedidoService.pedido = fitlerPedido;
+
+                    this.update();
+                    return
+                }
+
                 this.pedidoService.pedido = data;
+
                 this.update();
             }
         });

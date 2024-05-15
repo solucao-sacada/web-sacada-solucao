@@ -66,29 +66,33 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
 
     canDeactivate(): boolean | Promise<boolean> {
         if (this.pedidoService.activeIndex > 0) {
-            localStorage.removeItem('imagemBase64');
-            return new Promise<boolean>((resolve, reject) => {
-                this.confirmationService.confirm({
-                    message:
-                        'Deseja salvar este pedido como rascunho para completar mais tarde?',
-                    header: 'Confirmação',
-                    icon: 'pi pi-exclamation-triangle',
-                    acceptLabel: 'Sim',
-                    rejectLabel: 'Não',
-                    rejectButtonStyleClass: 'p-button-text',
-                    accept: () => {
-                        this.pedidoService.setActiveIndex(0);
-                        this.pedidoService.saveDraftPedido(
-                            this.pedidoService.pedido
-                        );
-                        resolve(true);
-                    },
-                    reject: () => {
-                        this.pedidoService.setActiveIndex(0);
-                        resolve(true);
-                    },
-                });
-            });
+            this.pedidoService.saveDraftPedido(
+                this.pedidoService.pedido
+            );
+            return true
+            // localStorage.removeItem('imagemBase64');
+            // return new Promise<boolean>((resolve, reject) => {
+            //     this.confirmationService.confirm({
+            //         message:
+            //             'Deseja salvar este pedido como rascunho para completar mais tarde?',
+            //         header: 'Confirmação',
+            //         icon: 'pi pi-exclamation-triangle',
+            //         acceptLabel: 'Sim',
+            //         rejectLabel: 'Não',
+            //         rejectButtonStyleClass: 'p-button-text',
+            //         accept: () => {
+            //             this.pedidoService.setActiveIndex(0);
+            //             this.pedidoService.saveDraftPedido(
+            //                 this.pedidoService.pedido
+            //             );
+            //             resolve(true);
+            //         },
+            //         reject: () => {
+            //             this.pedidoService.setActiveIndex(0);
+            //             resolve(true);
+            //         },
+            //     });
+            // });
         } else return true;
     }
 }

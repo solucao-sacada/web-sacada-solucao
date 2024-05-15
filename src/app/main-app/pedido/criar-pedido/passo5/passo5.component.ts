@@ -68,6 +68,7 @@ export class Passo5Component {
             let novoData = this.pedidoService.pedido.balcony.dimensions.data[0];
             this.selectedOption = String(novoData);
         }
+        this.toggleSelection(this.selectedOption);
     }
     toggleSelection(optionName: string): void {
         this.selectedOption = optionName;

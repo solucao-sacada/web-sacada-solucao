@@ -52,7 +52,7 @@
         <label>Complemento</label>
         <input pInputText [(ngModel)]="pedidoService.pedido?.client.building" />
     </div>
- 
+
     <div class="field col-12 sm:col-3">
         <label>Bairro *</label>
         <input
@@ -84,8 +84,25 @@
 </div>
 <app-navigation-tabs-btn
     [showPrev]="false"
-    (nextTab)="nextTab()"
-    (prevTab)="prevTab()"
+    (nextTab)="showMessageDraft()"
 >
 </app-navigation-tabs-btn>
+<div>
+    <p-dialog [(visible)]="visible" [style]="{width: '450px'}" header="Aviso" [modal]="true" class="p-fluid">
+        <p class="text-700">Olá, {{user.name}}</p>
+        <p>
+            Seu pedido está protegido! Será salvo automaticamente como rascunho para facilitar sua experiência. Para acessá-lo, basta ir aos rascunhos.
+        </p>
+        <div class="flex flex-row gap-2 justify-content-end mt-4">
+            <button
+                pButton
+                style="width: 7.1rem;"
+                (click)="simContinuar()">
+                Continuar
+            </button>
+        </div>
+    </p-dialog>
+
+
+</div>
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

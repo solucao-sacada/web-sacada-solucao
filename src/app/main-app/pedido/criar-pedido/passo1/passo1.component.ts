@@ -13,6 +13,8 @@ import { BuscaCepService } from 'src/app/services/busca-cep.service';
 import { LoadingService } from 'src/app/components/loading/loading.service';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
     selector: 'app-passo1',
@@ -33,17 +35,19 @@ export class Passo1Component implements OnInit {
     @Output() isOk = new EventEmitter();
 
     visible = false;
+    user: User = {} as User;
 
     constructor(
         private _buscaCep: BuscaCepService,
         private _loading: LoadingService,
         private _toaster: ToasterService,
-        public pedidoService: PedidoService
+        public pedidoService: PedidoService,
+        private _auth: AuthService
     ) { }
 
     ngOnInit(): void {
+        this.user = this._auth.getUser();
     }
-
 
     onChangeCep() {
         let cep = this.pedidoService.pedido.client.zipCode as string;
@@ -73,6 +77,17 @@ export class Passo1Component implements OnInit {
             });
     }
 
+    showMessageDraft() {
+        this.visible = true
+    }
+    naoContinuar(): void {
+        this.visible = false
+    }
+
+    simContinuar(): void {
+        this.nextTab()
+        this.visible = false
+    }
 
     nextTab(): void {
         if (

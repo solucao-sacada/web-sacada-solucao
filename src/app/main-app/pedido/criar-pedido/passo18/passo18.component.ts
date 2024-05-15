@@ -34,6 +34,7 @@ export class Passo18Component{
                         this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
                         this.pedidoService.pedido.images = data;
                         this._toaster.success('Pedido Salvo com Sucesso');
+                        localStorage.removeItem('imagemBase64');
 
                         this.pedidoService.removePedidosOk();
                         setTimeout(() => {

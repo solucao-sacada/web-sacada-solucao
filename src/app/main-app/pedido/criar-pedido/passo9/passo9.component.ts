@@ -57,19 +57,38 @@ export class Passo9Component implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.total = Number(this.pedidoService.pedido.balcony.dimensions.total)
+        this.total = Number(this.pedidoService.pedido.balcony.dimensions.total);
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
                 this.pedidoService.pedido = data;
                 this.update();
             }
         });
-        if(this.pedidoService.pedido.balcony){
+        if(this.pedidoService.pedido.balcony.dimensions.data.length > 0){
             this.inicializarLinhas();
         }
+
+        this.loadDraftPedido();
     }
 
-    private inicializarLinhas(): void {
+    private inicializarLinhas(pedido?: PedidoJson): void {
+       if(pedido){
+        if (
+            pedido.balcony.dimensions.data &&
+            pedido.balcony.dimensions.data.length > 0
+        ) {
+            this.linhas = pedido.balcony.dimensions.data.map(
+                (linha, index) => ({
+                    piece: index + 1,
+                    angle: linha[1] || '',
+                    dimension: linha[2] || '',
+                    quantity: linha[3] || '',
+                })
+            );
+        }
+        this.total = Number(pedido.balcony.dimensions.total);
+        this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
+       }else{
         if (
             this.pedidoService.pedido.balcony.dimensions.data &&
             this.pedidoService.pedido.balcony.dimensions.data.length > 0
@@ -94,6 +113,7 @@ export class Passo9Component implements OnInit {
             );
         }
         this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
+       }
     }
 
     private atualizarVidrosRestantes(): void {
@@ -239,5 +259,14 @@ export class Passo9Component implements OnInit {
 
     updatePedido(value: string): void {
         this.pedidoService.pedido.balcony.dimensions.total = parseFloat(value).toFixed(1);
+    }
+
+    loadDraftPedido(): void {
+        const codePedido = this.pedidoService.pedido.code
+        const draft = this.pedidoService.getDraftPedidos();
+        const fitlerPedido = draft.find((pedido)=> pedido.code === codePedido)
+        if(fitlerPedido){
+           this.inicializarLinhas(fitlerPedido);
+        }
     }
 }

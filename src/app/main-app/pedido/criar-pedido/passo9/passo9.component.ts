@@ -60,17 +60,6 @@ export class Passo9Component implements OnInit {
         this.total = Number(this.pedidoService.pedido.balcony.dimensions.total);
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
-                const codePedido = this.pedidoService.pedido.code
-                const draft = this.pedidoService.getDraftPedidos();
-                const fitlerPedido = draft.find((pedido)=> pedido.code === codePedido)
-
-                if(fitlerPedido){
-                    this.pedidoService.pedido = fitlerPedido;
-
-                    this.update();
-                    return
-                }
-
                 this.pedidoService.pedido = data;
 
                 this.update();
@@ -79,17 +68,42 @@ export class Passo9Component implements OnInit {
         if(this.pedidoService.pedido.balcony.dimensions.data.length > 0){
             this.inicializarLinhas();
         }
-
-        this.loadDraftPedido();
     }
 
-    private inicializarLinhas(pedido?: PedidoJson): void {
-       if(pedido){
-        if (
-            pedido.balcony.dimensions.data &&
-            pedido.balcony.dimensions.data.length > 0
-        ) {
-            this.linhas = pedido.balcony.dimensions.data.map(
+    private inicializarLinhas(): void {
+        if(this.pedidoService.pedido.balcony.plumb.left_wall.bottom === null){
+            if (this.pedidoService.pedido.balcony.dimensions.data &&
+                this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
+                this.linhas = this.pedidoService.pedido.balcony.dimensions.data.map(
+                    (linha, index) => ({
+                        piece: index + 1,
+                        angle: linha[1] || '',
+                        dimension: linha[2] || '',
+                        quantity: linha[3] || '',
+                    })
+                );
+            }else{
+                this.linhas = Array.from(
+                    { length: this.linhasTabela },
+                    (_, index) => ({
+                        piece: index + 1,
+                        angle: '',
+                        dimension: '',
+                        quantity: '',
+                    })
+                );
+            }
+
+
+            this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
+            this.total = Number(this.pedidoService.pedido.balcony.dimensions.total);
+
+        }else{
+            const codePedido = this.pedidoService.pedido.code
+            const draft = this.pedidoService.getDraftPedidos();
+            const fitlerPedido = draft.find((pedido)=> pedido.code === codePedido)
+            console.log(fitlerPedido)
+            this.linhas = fitlerPedido.balcony.dimensions.data.map(
                 (linha, index) => ({
                     piece: index + 1,
                     angle: linha[1] || '',
@@ -97,35 +111,8 @@ export class Passo9Component implements OnInit {
                     quantity: linha[3] || '',
                 })
             );
+            this.total = Number(fitlerPedido.balcony.dimensions.total);
         }
-        this.total = Number(pedido.balcony.dimensions.total);
-        this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
-       }else{
-        if (
-            this.pedidoService.pedido.balcony.dimensions.data &&
-            this.pedidoService.pedido.balcony.dimensions.data.length > 0
-        ) {
-            this.linhas = this.pedidoService.pedido.balcony.dimensions.data.map(
-                (linha, index) => ({
-                    piece: index + 1,
-                    angle: linha[1] || '',
-                    dimension: linha[2] || '',
-                    quantity: linha[3] || '',
-                })
-            );
-        } else {
-            this.linhas = Array.from(
-                { length: this.linhasTabela },
-                (_, index) => ({
-                    piece: index + 1,
-                    angle: '',
-                    dimension: '',
-                    quantity: '',
-                })
-            );
-        }
-        this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
-       }
     }
 
     private atualizarVidrosRestantes(): void {
@@ -206,7 +193,7 @@ export class Passo9Component implements OnInit {
             const valorDimension = parseFloat(linha.dimension);
             const quantidadeCalculada = Math.ceil(valorDimension / 810);
             linha.quantity = quantidadeCalculada.toString();
-        } else {
+        }else {
             linha.quantity = ''; // Limpar quantity se dimension estiver vazio
         }
     }
@@ -273,12 +260,4 @@ export class Passo9Component implements OnInit {
         this.pedidoService.pedido.balcony.dimensions.total = parseFloat(value).toFixed(1);
     }
 
-    loadDraftPedido(): void {
-        const codePedido = this.pedidoService.pedido.code
-        const draft = this.pedidoService.getDraftPedidos();
-        const fitlerPedido = draft.find((pedido)=> pedido.code === codePedido)
-        if(fitlerPedido){
-           this.inicializarLinhas(fitlerPedido);
-        }
-    }
 }

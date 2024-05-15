@@ -23,19 +23,24 @@ export class PasswordUpdateComponent implements OnInit {
     private ldService = inject(LoadingService);
 
     ngOnInit(): void {
+      this.ldService.start();
       this.activatedRoute.queryParams.subscribe((queryParams) => {
         this.token = queryParams['token'];
-        if (!this.token) this.http.navigate(['/']);
+        if (!this.token) {
+          this.ldService.stop();
+          this.http.navigate(['/']);
+        }
       });
 
       this.authService.verifyToken(this.token).subscribe({
         next: (value) => {
-          if(!value) {
-            this.http.navigate(['/']);
-          }
-        },
-        error: (err) => {
           this.ldService.stop();
+          
+          if(value === false) {
+            this.http.navigate(['/']);
+            return
+          }
+        },        error: (err) => {
           this.http.navigate(['/']);
         }
       })

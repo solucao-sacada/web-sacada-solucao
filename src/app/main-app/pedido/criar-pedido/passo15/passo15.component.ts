@@ -49,10 +49,10 @@ export class Passo15Component implements OnInit {
     ngOnInit(): void {
         this.prolongadorPiso = 0
         this.prolongadorTeto = 0
-        // if(this.pedidoService.pedido.balcony){
-        //     this.inicializarLinhas();
-        //     this.menorAltura = this.verificarMenorAltura();
-        // }
+        if(this.pedidoService.pedido.balcony){
+            this.inicializarLinhas();
+            this.menorAltura = this.verificarMenorAltura();
+        }
     }
 
     private inicializarLinhas(): void {

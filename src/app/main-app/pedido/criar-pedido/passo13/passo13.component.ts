@@ -74,18 +74,13 @@ export class Passo13Component {
 
     atualizarQtdVidrosRestantes(): void {
         let qtdVidrosRestantes = this.qtdVidros;
-        for (
-            let i = 0;
-            i < this.pedidoService.pedido.balcony.aperture.locations.length;
-            i++
-        ) {
-            const qtdVidros =
-                +this.pedidoService.pedido.balcony.aperture.locations[i]
-                    .glasses || 0;
+        for (let i = 0; i < this.pedidoService.pedido.balcony.aperture.locations.length;i++) {
+            const qtdVidros = +this.pedidoService.pedido.balcony.aperture.locations[i].glasses || 0;
+
             qtdVidrosRestantes -= qtdVidros;
         }
 
-        this.vidrosRestantes = qtdVidrosRestantes;
+        this.vidrosRestantes = qtdVidrosRestantes <= 0 ? 0 : qtdVidrosRestantes;
         this.verifyStep();
     }
 

@@ -99,9 +99,9 @@
     </p-tabPanel>
 
     <p-tabPanel header="Detalhes" [disabled]="!pedido">
-        <label>Status: <strong [ngClass]="{'text-green-500': newStatus === 'Finalizado', 'text-purple-500': newStatus === 'Aguardando Resposta', 'text-yellow-500': newStatus === 'Em andamento', 'text-green-700': newStatus === 'Aprovado', 'text-red-500': newStatus === 'Cancelado', 'text-orange-600': newStatus === 'Pendente'}" for="">{{ newStatus }}</strong></label>
+        <label *ngIf="user.role === 'ADMIN' || user.role === 'SUPER'">Status: <strong [ngClass]="{'text-green-500': newStatus === 'Finalizado', 'text-purple-500': newStatus === 'Aguardando Resposta', 'text-yellow-500': newStatus === 'Em andamento', 'text-green-700': newStatus === 'Aprovado', 'text-red-500': newStatus === 'Cancelado', 'text-orange-600': newStatus === 'Pendente'}" for="">{{ newStatus }}</strong></label>
 
-        <div class="flex flex-col gap-2 mt-2">
+        <div *ngIf="user.role === 'ADMIN' || user.role === 'SUPER'" class="flex flex-col gap-2 mt-2">
             <select id="product-status" [(ngModel)]="selectedStatus"
                 class="py-3 px-4 block border w-20 border-gray-400 rounded-lg text-sm
                         hover:border-blueDark focus:border-blueDark outline-none
@@ -112,7 +112,7 @@
                 </option>
             </select>
 
-            <button pButton pRipple
+            <button *ngIf="user.role === 'ADMIN' || user.role === 'SUPER'" pButton pRipple
                 type="button"
                 icon="pi pi-pencil"
                 (click)="alterStatusPedido(pedido._id);"

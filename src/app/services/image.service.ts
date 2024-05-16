@@ -20,7 +20,7 @@ export class ImageService {
     uploadOrderImageFromLocalStorage(idOrder: string): Observable<any> {
         const formData = new FormData();
         const file = this.dataURItoBlob();
-        formData.append('images', file, `image.${file.type.split('/')[0]}`);
+        formData.append('images', file, `image.${file.type.split('/')[1]}`);
         return this.http.post<any>(this.apiUrl + '/order/' + idOrder, formData);
     }
 

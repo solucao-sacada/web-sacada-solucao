@@ -7,7 +7,9 @@ import { LoadingService } from './loading.service';
     styles: [
         `
             .loading {
-                position: absolute;
+                position: fixed;
+                top: 0;
+                left: 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -15,10 +17,10 @@ import { LoadingService } from './loading.service';
                 height: 100vh;
                 opacity: 0.5;
                 background-color: black;
-                z-index: 1000;
+                z-index: 2000;
             }
             .spinner {
-                z-index: 1100;
+                z-index: 2100;
             }
         `,
     ],

@@ -7,16 +7,16 @@ export interface UserResponse {
 }
 
 export interface User{
-    firstAccess: boolean;
-    emailActive: boolean;
-    password: string;
-    oldPassword: string;
+    firstAccess?: boolean;
+    emailActive?: boolean;
+    password?: string;
+    oldPassword?: string;
     id: string;
     name: string;
     email: string;
     phone: string;
-    role: string;
-    createdAt: string;
+    role?: string;
+    createdAt?: string;
     image?: string;
-    company: Company
+    company?: Company
 }

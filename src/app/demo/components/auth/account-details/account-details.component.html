@@ -25,7 +25,8 @@
 
                         <div class="field-group">
                             <label for="name" class="font-bold">Nome</label><br>
-                            <input id="name" type="name" pInputText maxlength="70" name="name" [(ngModel)]="user.name" required
+                            <input id="name" type="name" pInputText maxlength="70" (ngModelChange)="updateUser(user)"
+                            name="name" [(ngModel)]="user.name" required
                                 class="w-full mb-3">
                         </div>
 
@@ -33,13 +34,15 @@
                             <label for="email" class="font-bold">E-mail</label><br>
                             <div class="flex flex-row items-center">
                                 <div class="mr-3">
-                                    <input  *ngIf="!user.emailActive" id="email" type="email" pInputText maxlength="70" name="email"
+                                    <input  *ngIf="!user.emailActive" id="email"  type="email" pInputText maxlength="70" name="email"
                                         [(ngModel)]="user.email" required
+                                        (ngModelChange)="updateUser(user)"
                                         class="w-full md:w-30rem mb-1"
                                     >
 
                                     <input  *ngIf="user.emailActive" id="email" type="email" pInputText maxlength="70" name="email"
                                         disabled [(ngModel)]="user.email" required
+                                        (ngModelChange)="updateUser(user)"
                                         class="w-full md:w-30rem mb-1"
                                     >
                                     <div class="flex justify-content-end w-full mb-2">
@@ -59,7 +62,7 @@
                         <div class="field-group mb-3">
                             <label for="phone" class="font-bold">Telefone</label><br>
                             <p-inputMask
-                                mask="(99) 99999-9999" [(ngModel)]="user.phone" styleClass="w-full">
+                                mask="(99) 99999-9999" [(ngModel)]="user.phone" styleClass="w-full" (ngModelChange)="updateUser(user)">
                             </p-inputMask>
                         </div>
 
@@ -103,6 +106,7 @@
                         <div class="field-group">
                             <label for="companyTradingName" class="font-bold">Nome Fantasia</label><br>
                             <input id="companyTradingName" type="text" pInputText name="companyTradingName" required
+                                (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.tradingName" class="w-full mb-3">
 
                         </div>
@@ -110,60 +114,70 @@
                         <div class="field-group">
                             <label for="companyLegalName" class="font-bold">Razão Social</label><br>
                             <input id="companyLegalName" type="text" pInputText name="companyLegalName"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.legalName" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyCnpj" class="font-bold">CNPJ</label><br>
                             <input id="companyCnpj" type="text" pInputText name="companyCnpj"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.cnpj" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyStateRegistration" class="font-bold">Inscrição Estadual</label><br>
                             <input id="companyStateRegistration" type="text" pInputText name="companyStateRegistration"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.stateRegistration" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyStreetAddress" class="font-bold">Endereço</label><br>
                             <input id="companyStreetAddress" type="text" pInputText name="companyStreetAddress"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.streetAddress" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyNum" class="font-bold">Número</label><br>
                             <input id="companyNum" type="number" pInputText name="companyNum"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.num" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyComplement" class="font-bold">Complemento</label><br>
                             <input id="companyComplement" type="text" pInputText name="companyComplement"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.complement" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyZipCode" class="font-bold">CEP</label><br>
                             <input id="companyZipCode" type="number" pInputText name="companyZipCode"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.zipCode" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyNeighborhood" class="font-bold">Bairro</label><br>
                             <input id="companyNeighborhood" type="text" pInputText name="companyNeighborhood"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.neighborhood" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyCity" class="font-bold">Cidade</label><br>
                             <input id="companyCity" type="text" pInputText name="companyCity"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.city" class="w-full mb-3">
                         </div>
 
                         <div class="field-group">
                             <label for="companyState" class="font-bold">Estado</label><br>
                             <input id="companyState" type="text" pInputText name="companyState"
+                            (ngModelChange)="updateUser(user)"
                                 [(ngModel)]="user.company.state" class="w-full mb-3">
                         </div>
 

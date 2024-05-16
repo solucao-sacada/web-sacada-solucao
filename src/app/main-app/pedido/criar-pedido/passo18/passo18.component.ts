@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { LoadingService } from 'src/app/components/loading/loading.service';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
+import { PedidoJson } from 'src/app/models/pedidoJson';
 import { ImageService } from 'src/app/services/image.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
@@ -18,6 +19,10 @@ import { PedidoService } from 'src/app/services/pedido.service';
     ],
 })
 export class Passo18Component {
+    draftPedidos: PedidoJson[] = [];
+    pedido: PedidoJson;
+    disableEnviar = false;
+
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService,
@@ -26,11 +31,11 @@ export class Passo18Component {
         private ldService: LoadingService
     ) { }
 
-    disableEnviar = false;
 
     enviar() {
-        const imagem = localStorage.getItem('imagemBase64')
+        const imagem = localStorage.getItem('imagemBase64');
         this.ldService.start();
+
         if (imagem) {
             this.pedidoService
                 .create(this.pedidoService.pedido)
@@ -45,31 +50,29 @@ export class Passo18Component {
                             this._toaster.success('Pedido Salvo com Sucesso');
                             localStorage.removeItem('imagemBase64');
 
-                            this.pedidoService.removePedidosOk();
                             setTimeout(() => {
-                                this._router.navigate(['/app/pedidos/listar']);
-                                this.ldService.stop();
+                                this._router.navigate(['/app/pedidos/listar']).then(() => {
+                                    this.pedidoService.removerDraft(this.pedidoService.pedido);
+                                    this.ldService.stop();
+                                });
                             }, 1000);
                         });
-                    return
                 });
-        }
-        else {
+        } else {
             this.pedidoService
                 .create(this.pedidoService.pedido)
                 .pipe(finalize(() => (this.disableEnviar = true)))
                 .subscribe((response) => {
                     this.pedidoService.dimensionOK = false;
-                    // this.pedidoService.saveDraftPedido(this.pedidoService.pedido);
-                    // this._toaster.success('Pedido Salvo com Sucesso');
 
-                    this.pedidoService.removePedidosOk();
                     setTimeout(() => {
-                        this._router.navigate(['/app/pedidos/listar']);
-                        this.ldService.stop();
+                        this._router.navigate(['/app/pedidos/listar']).then(() => {
+                            this.pedidoService.removerDraft(this.pedidoService.pedido);
+                            this.ldService.stop();
+                        });
                     }, 1500);
                 });
         }
-
     }
+
 }

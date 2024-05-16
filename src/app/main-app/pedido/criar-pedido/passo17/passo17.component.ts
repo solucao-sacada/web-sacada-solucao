@@ -20,10 +20,10 @@ export class Passo17Component {
         public pedidoService: PedidoService,
         private imageService: ImageService,
         private toaster: ToasterService
-    ) {}
+    ) { }
 
     onFileSelect(event): void {
-        const files = event.files; 
+        const files = event.files;
         this.images = [];
         for (let i = 0; i < files.length; i++) {
             this.images.push(files[i]);
@@ -32,10 +32,8 @@ export class Passo17Component {
     }
 
     enviarImagens(): void {
-        if (this.images.length > 0) {
-            const imagem = this.images[0];
-            this.imageService.storeFile(imagem);
-        }
+        const imagem = this.images[0];
+        this.imageService.storeFile(imagem);
     }
 
     nextTab(): void {
@@ -56,9 +54,9 @@ export class Passo17Component {
     }
 
     show() {
-        if(this.images.length > 0) {
+        if (this.images.length > 0) {
             this.nextTab()
-        }else{
+        } else {
             this.visible = true;
         }
     }

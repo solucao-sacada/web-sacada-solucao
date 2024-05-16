@@ -74,7 +74,8 @@ export class Passo9Component implements OnInit {
         const codePedido = this.pedidoService.pedido.code
         const draft = this.pedidoService.getDraftPedidos()
         const fitlerPedido = draft.find((pedido)=> pedido.code === codePedido)
-        this.pedidoService.pedido = fitlerPedido.balcony.dimensions.data.length > 0 ? fitlerPedido : this.pedidoService.pedido
+        const activeIndex = this.pedidoService.getActiveIndex()
+        this.pedidoService.pedido = activeIndex === 8 ?  fitlerPedido : this.pedidoService.pedido
 
         if(this.pedidoService.pedido.balcony.dimensions.data.length >= 0){
             if (this.pedidoService.pedido.balcony.dimensions.data &&

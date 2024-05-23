@@ -10,7 +10,6 @@ export interface UserUpdated {
   name: string;
   email: string;
   phone: string;
-  password: string;
   company?: {
     id: string;
     tradingName: string;
@@ -49,6 +48,7 @@ export class AccountDetailsComponent {
     phone: '',
     password: '',
     company: {
+      id: '',
       tradingName: '',
       legalName: '',
       cnpj: '',
@@ -85,7 +85,6 @@ export class AccountDetailsComponent {
 
     this.authService.resetPasswordUser(user.id, this.newPassword, this.oldPassword).subscribe({
       next: (data) => {
-        console.log(data);
         this.toaster.success('Senha atualizada com sucesso!')
       },
       error: (error) => {
@@ -102,11 +101,9 @@ export class AccountDetailsComponent {
     this.authService.verificationEmail(this.user.email).subscribe({
       next: (data) => {
         this.toaster.success('E-mail de verificação enviado. Verifique sua caixa de entrada!')
-        console.log('E-mail de verificação enviado com sucesso', data);
       },
       error: (error) => {
         this.toaster.error('Erro ao enviar e-mail de verificação');
-        console.error('Erro ao enviar e-mail de verificação', error);
       }
     })
 }
@@ -115,52 +112,54 @@ export class AccountDetailsComponent {
   loadUser() {
     this.user = this.authService.getUser();
   }
-  updateAccount() {
-    this.authService.updateAccount(this.user).subscribe({
-      next: (user) => { // retorno do backend que veio do service user
-        const userDataDesestructured = user as unknown as IUserData
-        this.userUpdate = {
-          id: userDataDesestructured.user.id,
-          name: userDataDesestructured.user.name,
-          email: userDataDesestructured.user.email,
-          phone: userDataDesestructured.user.phone,
-          password: userDataDesestructured.user.password
-        }
 
-        this.authService.updateCompany(this.user.company).subscribe({
-          next: (company) => {
-            this.userUpdate = {
-              ...this.userUpdate,
-              company: {
-                id: company._id as string,
-                tradingName: company.tradingName,
-                legalName: company.legalName,
-                cnpj: company.cnpj,
-                stateRegistration: company.stateRegistration,
-                streetAddress: company.streetAddress,
-                num: company.num,
-                complement: company.complement,
-                zipCode: company.zipCode,
-                neighborhood: company.neighborhood,
-                city: company.city,
-                state: company.state
-              }
+  updateUser(user: User) {
+    this.user = user
+  }
+  updateAccount() {
+    const userStorage = this.authService.getUser();
+
+    if(this.user.name !== userStorage.name ||
+        this.user.email !== userStorage.email ||
+        this.user.phone !== userStorage.phone
+      ){
+        this.authService.updateAccount({
+            id: this.user.id,
+            name: this.user.name,
+            email: this.user.email,
+            phone: this.user.phone,
+        }).subscribe({
+          next: (user) => { // retorno do backend que veio do service user
+            this.toaster.success('Informações do perfil alteradas com sucesso!');
+            this.user = {
+                ...this.user,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
             }
-            this.authService.setUser(this.userUpdate as unknown as User);
-            this.loadUser();
-            this.toaster.success('Dados alterados com sucesso!');
+            this.authService.setUser(this.user)
+            this.loadUser()
           },
-          error: () => {
-            this.toaster.error('Erro ao alterar conta');
+          error: (error) => {
+            this.toaster.error('Erro ao alterar conta')
           }
         })
-      },
-
-
-      error: () => {
-        this.toaster.error('Erro ao alterar conta');
+      }else{
+        this.authService.updateCompany(this.user.company).subscribe({
+        next: (company) => {
+        this.toaster.success('Empresa alterada com sucesso!');
+        this.user = {
+            ...this.user,
+            company: company
+        }
+            this.authService.setUser(this.user);
+            this.loadUser();
+        },
+        error: () => {
+            this.toaster.error('Erro ao alterar conta');
+        }
+        })
       }
-    })
   }
 
   handleDeleteAccount() {
@@ -170,7 +169,6 @@ export class AccountDetailsComponent {
       id: this.user.id, // Renomeia a chave _id para id
       _id: undefined // Remove a chave _id
     };
-    console.log(userForDelete);
     this.authService.deleteUser(userForDelete.id).subscribe({
       next: () => {
         this.toaster.success('Conta excluída com sucesso!');
@@ -180,7 +178,6 @@ export class AccountDetailsComponent {
         }, 1000);
       },
       error: (err) => {
-        console.error('Erro ao excluir conta:', err);
         this.toaster.error('Erro ao excluir conta, tente novamente mais tarde');
       }
     })

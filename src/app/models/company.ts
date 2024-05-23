@@ -1,5 +1,5 @@
 export interface Company {
-    _id?:string | null;
+    id?:string | null;
     idUser?: string | null;
     tradingName: string;
     legalName: string;

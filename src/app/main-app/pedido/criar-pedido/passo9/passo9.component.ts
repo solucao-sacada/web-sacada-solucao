@@ -72,23 +72,12 @@ export class Passo9Component implements OnInit {
 
     private inicializarLinhas(): void {
         const codePedido = this.pedidoService.pedido.code
-        const draft = this.pedidoService.getDraftPedidos();
+        const draft = this.pedidoService.getDraftPedidos()
         const fitlerPedido = draft.find((pedido)=> pedido.code === codePedido)
+        const activeIndex = this.pedidoService.getActiveIndex()
+        this.pedidoService.pedido = activeIndex === 8 ?  fitlerPedido : this.pedidoService.pedido
 
-        if(fitlerPedido.balcony.dimensions.data.length > 0){
-            this.linhas = fitlerPedido.balcony.dimensions.data.map(
-                (linha, index) => ({
-                    piece: index + 1,
-                    angle: linha[1] || '',
-                    dimension: linha[2] || '',
-                    quantity: linha[3] || '',
-                })
-            );
-            this.total = Number(fitlerPedido.balcony.dimensions.total);
-            return
-        }
-
-        if(this.pedidoService.pedido.balcony.dimensions.data.length === 0){
+        if(this.pedidoService.pedido.balcony.dimensions.data.length >= 0){
             if (this.pedidoService.pedido.balcony.dimensions.data &&
                 this.pedidoService.pedido.balcony.dimensions.data.length > 0) {
                 this.linhas = this.pedidoService.pedido.balcony.dimensions.data.map(
@@ -111,13 +100,11 @@ export class Passo9Component implements OnInit {
                 );
             }
 
-
+            // this.update();
             this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
             this.total = Number(this.pedidoService.pedido.balcony.dimensions.total);
             return
         }
-
-
 
     }
 

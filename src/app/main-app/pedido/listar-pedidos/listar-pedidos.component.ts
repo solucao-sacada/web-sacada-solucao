@@ -72,7 +72,7 @@ export class ListarPedidosComponent {
     }
 
     loadDraftPedidos(){
-        this.draftPedidos = this.pedidoService.getDraftPedidos()
+        this.draftPedidos = this.pedidoService.getDraftPedidos().reverse();
     }
 
     print() {

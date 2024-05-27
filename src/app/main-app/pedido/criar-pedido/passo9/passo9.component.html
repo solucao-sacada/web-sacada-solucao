@@ -24,7 +24,7 @@
     <div class="col-3 p-1 text-center border-right-1">
         <input [(ngModel)]="linha.angle"
             (click)="selectText($event)"
-            class="text-center"
+            class="text-center w-full"
              (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()"
             [selectAllOnFocus]="true">
 
@@ -33,11 +33,11 @@
     <div class="col-3 p-1 text-center border-right-1">
         <input [(ngModel)]="linha.dimension"
             (click)="selectText($event)"
-            class="text-center"
+            class="text-center w-full"
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes(); verificarAtualizarQuantidadeDeVidro(linha)">
     </div>
     <div class="col-3 p-1 text-center border-right-1 bg-green-200">
-        <input [(ngModel)]="linha.quantity" class="bg-green-200 text-center"
+        <input [(ngModel)]="linha.quantity" class="bg-green-200 text-center w-full"
         (click)="selectText($event)"
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()">
     </div>
@@ -48,7 +48,7 @@
     <div class="col-3 p-1 text-center border-bottom-1 border-x-1">
         <input [(ngModel)]="total"
         (click)="selectText($event)"
-        class="text-center"
+        class="text-center w-full"
             style="border: none; outline: none"  (input)="updatePedido($event.target.value)"
             >
     </div>

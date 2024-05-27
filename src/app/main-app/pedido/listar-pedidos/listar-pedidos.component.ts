@@ -188,11 +188,12 @@ export class ListarPedidosComponent {
         // Criando um link de download
         const downloadLink = document.createElement('a');
         downloadLink.href = blobUrl;
-        downloadLink.download = `${pedido._id} - pedido.json`; // Nome do arquivo que será baixado
+        downloadLink.download = `${pedido.code}-${pedido.client.name}.json`; // Nome do arquivo que será baixado
         downloadLink.click();
     }
 
     verJSON(pedido: PedidoJson){
+        console.log(pedido)
         // abrir url no navegador
         window.open(pedido.urlJSON, '_blank');
     }

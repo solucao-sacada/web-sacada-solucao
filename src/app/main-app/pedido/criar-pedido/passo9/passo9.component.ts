@@ -46,7 +46,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo9Component implements OnInit {
     linhasTabela: number = 0;
     linhas: any[] = [];
-    total: number = 0;
+    total: number | string = '';
 
     vidrosRestantes!: number;
     showVidrosRestantes = true;
@@ -57,7 +57,7 @@ export class Passo9Component implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.total = Number(this.pedidoService.pedido.balcony.dimensions.total);
+        this.total = Number(this.pedidoService.pedido.balcony.dimensions.total)
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
                 this.pedidoService.pedido = data;
@@ -102,7 +102,7 @@ export class Passo9Component implements OnInit {
 
             // this.update();
             this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
-            this.total = Number(this.pedidoService.pedido.balcony.dimensions.total);
+            this.total = Number(this.pedidoService.pedido.balcony.dimensions.total) === 0 ? '' : Number(this.pedidoService.pedido.balcony.dimensions.total)
             return
         }
 
@@ -167,10 +167,9 @@ export class Passo9Component implements OnInit {
         );
 
 
-        if(this.total > 0){
+        if(Number(this.total) > 0){
             this.pedidoService.pedido.balcony.dimensions.total = parseFloat(this.total.toString()).toFixed(1);
         }
-
         this.atualizarVidrosRestantes();
     }
 

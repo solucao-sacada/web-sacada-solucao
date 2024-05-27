@@ -22,45 +22,35 @@
 <div class="grid m-0 md:mx-4 border-bottom-1" *ngFor="let linha of linhas; let i = index">
     <div class="col-3 p-1 text-center border-x-1">{{ linha.piece }}</div>
     <div class="col-3 p-1 text-center border-right-1">
-        <p-inputNumber [(ngModel)]="linha.angle" [format]="'n'" [step]="0.1" [minFractionDigits]="2"
+        <input [(ngModel)]="linha.angle"
             (click)="selectText($event)"
-            [className]="'.p-inputtext'" (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()"
-            [maxFractionDigits]="2"
+            class="text-center"
+             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()"
             [selectAllOnFocus]="true">
-        </p-inputNumber>
-        <!-- <input
-        type="text"
-        class="p-inputtext"
-        [(ngModel)]="linha.angle"
-        (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()"
-        (focus)="selecionarTexto($event.target)"
-        style="border: none; outline: none; width: 100%; text-align: center;"
-    > -->
 
     </div>
 
     <div class="col-3 p-1 text-center border-right-1">
-        <p-inputNumber [(ngModel)]="linha.dimension" [className]="'.p-inputtext'"
+        <input [(ngModel)]="linha.dimension"
             (click)="selectText($event)"
+            class="text-center"
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes(); verificarAtualizarQuantidadeDeVidro(linha)">
-        </p-inputNumber>
     </div>
     <div class="col-3 p-1 text-center border-right-1 bg-green-200">
-        <p-inputNumber [(ngModel)]="linha.quantity" [className]="'green-300 p-inputtext'"
+        <input [(ngModel)]="linha.quantity" class="bg-green-200 text-center"
         (click)="selectText($event)"
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()">
-        </p-inputNumber>
     </div>
 </div>
 
 <div class="grid m-0 md:mx-4 mb-5">
     <div class="col-3 p-1 text-center">&nbsp;</div>
     <div class="col-3 p-1 text-center border-bottom-1 border-x-1">
-        <p-inputNumber [(ngModel)]="total" [format]="'n'" [step]="0.1" [minFractionDigits]="2"
+        <input [(ngModel)]="total"
         (click)="selectText($event)"
-            style="border: none; outline: none" [className]="'.p-inputtext'" (input)="updatePedido($event.target.value)"
-            [maxFractionDigits]="2">
-        </p-inputNumber>
+        class="text-center"
+            style="border: none; outline: none"  (input)="updatePedido($event.target.value)"
+            >
     </div>
     <div class="flex flex-end ml-2">
         <span class="sm:text-sm md:text-lg">*campo referente ao último grau da parede à direita</span>

@@ -166,7 +166,18 @@ export class ListarPedidosComponent {
     }
 
     gerarJSON(pedido: PedidoJson) {
-        const jsonString = JSON.stringify(pedido, null, 2);
+        const formatPedido: PedidoJson = {
+            idUser: pedido.idUser,
+            code: pedido.code,
+            accessories: pedido.accessories,
+            balcony: pedido.balcony,
+            client: pedido.client,
+            technician: pedido.technician,
+            observation: pedido.observation,
+            status: pedido.status,
+            images: pedido.images,
+        }
+        const jsonString = JSON.stringify(formatPedido, null, 2);
 
         // Criando um Blob a partir da string JSON
         const blob = new Blob([jsonString], { type: 'application/json;charset=utf-8' });

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
@@ -9,7 +9,8 @@ import { PedidoService } from 'src/app/services/pedido.service';
     templateUrl: './passo10.component.html',
     styles: [],
 })
-export class Passo10Component {
+export class Passo10Component implements AfterViewInit {
+    @ViewChild('inputElement') inputElement: ElementRef;
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
@@ -23,14 +24,19 @@ export class Passo10Component {
             this.openOverlay();
         });
     }
+
+    ngAfterViewInit(): void {
+        this.setCursorToStart();
+    }
+
     openOverlay() {
         const leftWall = this.pedidoService.pedido.balcony.plumb.left_wall;
-    
+
         const differenceLeft = +leftWall.top - +leftWall.bottom;
-    
+
         if (Math.abs(differenceLeft) > 3 || differenceLeft < -3) {
             this.visible = true;
-    
+
             // Converte +leftWall.bottom para negativo e +leftWall.top para positivo
             const formattedDifference = differenceLeft.toString() + 'mm';
             this.difference = formattedDifference;
@@ -38,7 +44,14 @@ export class Passo10Component {
             this.visible = false;
         }
     }
-    
+
+    setCursorToStart() {
+    const input = this.inputElement.nativeElement;
+      input.focus();
+      input.setSelectionRange(0, 0);
+  }
+
+
 
     nextTab(): void {
         const result = Math.abs(

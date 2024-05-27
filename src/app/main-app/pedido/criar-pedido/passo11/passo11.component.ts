@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { MESSAGES } from 'src/app/main-app/utils/messages';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
@@ -10,6 +10,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
     styles: [],
 })
 export class Passo11Component {
+    // @ViewChild('inputElement') inputElement: ElementRef;
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
@@ -25,21 +26,33 @@ export class Passo11Component {
         });
     }
 
+    // ngAfterViewInit() {
+    //   }
+
+    //   setCursorToEnd() {
+    //     const input = this.inputElement.nativeElement;
+    //     input.focus();
+    //     const value = input.value;
+    //     input.value = '';
+    //     input.value = value;
+    //   }
+
 
     openOverlay() {
         const rightWall = this.pedidoService.pedido.balcony.plumb.right_wall;
-    
+
         const differenceRight = +rightWall.top - +rightWall.bottom;
-    
+
         if (Math.abs(differenceRight) > 3 || differenceRight < -3) {
             this.visible = true;
-    
+
             // Converte +rightWall.bottom para negativo e +rightWall.top para positivo
             const formattedDifference = differenceRight.toString() + 'mm';
             this.difference = formattedDifference;
         } else {
             this.visible = false;
         }
+
     }
 
     nextTab(): void {

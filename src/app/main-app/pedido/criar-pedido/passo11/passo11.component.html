@@ -8,7 +8,7 @@
     <div class="w-9 md:w-3">
         <label>Medida Superior</label>
         <input
-            class="w-full"
+            class="w-full text-right"
             pInputText
             [(ngModel)]="pedidoService.pedido?.balcony.plumb.right_wall.top"
             (ngModelChange)="openOverlay()"
@@ -26,7 +26,7 @@
     <div class="w-9 md:w-3 relative">
         <label>Medida Inferior</label>
         <input
-            class="w-full"
+            class="w-full text-right"
             pInputText
             [(ngModel)]="pedidoService.pedido?.balcony.plumb.right_wall.bottom"
             (ngModelChange)="openOverlay()"

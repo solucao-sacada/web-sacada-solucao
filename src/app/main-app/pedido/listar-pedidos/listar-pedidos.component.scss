@@ -1,0 +1,16 @@
+:host ::ng-deep .btn-download {
+    margin-right: 1rem;
+}   
+
+@media screen and (max-width: 600px) {
+    :host ::ng-deep .btn-download {
+        display: flex;
+        width: 80%;
+        margin-right: 2rem;
+    }   
+
+    :host ::ng-deep .btn-view {
+        display: flex;
+        width: 80%;
+    }   
+}

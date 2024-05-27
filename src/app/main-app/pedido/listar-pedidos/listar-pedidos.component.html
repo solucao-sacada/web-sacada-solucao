@@ -13,7 +13,7 @@
 <p-tabView [(activeIndex)]="activeIndex">
     <!-- Tabela de pedidos com header e body -->
     <p-tabPanel header="Pedidos">
-        <p-table [value]="pedidos" selectionMode="single" [(selection)]="pedido" dataKey="code"
+        <p-table [value]="pedidos" selectionMode="single" [(selection)]="pedido" dataKey="code" responsiveLayout="stack"
             (onRowSelect)="onSelectRow($event)">
 
             <ng-template pTemplate="header">
@@ -32,6 +32,7 @@
                     <td>{{ pedido.client.name }}</td>
                     <td>{{ pedido.createdAt | date : "dd/MM/yyyy" }}</td>
                     <td class="custom-td">
+                       
                         <div class="status-style">
                             <span *ngIf="pedido.status === 'CREATED'"
                                 class="status-badge p-2 border border-round items-center justify-center bg-green-700 text-white">
@@ -77,22 +78,20 @@
                             type="button"
                             icon="pi pi-download"
                             (click)="gerarJSON(pedido);"
-                            class="mr-1 mb-1"
+                            class="btn-download"
                             title="Baixar"
                         >
                         </button>
-
                         <span class="p-column-title font-bold"></span>
                         <button pButton pRipple
                             type="button"
                             icon="pi pi-eye"
                             (click)="verJSON(pedido);"
-                            class="mr-1 mb-1 hover:text-opacity-90"
+                            class="btn-view"
                             title="Visualizar"
                             >
                         </button>
                     </td>
-
                 </tr>
             </ng-template>
         </p-table>

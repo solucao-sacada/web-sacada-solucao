@@ -26,7 +26,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
                 border:none;
                 text-align: center;
                 padding: 0;
-                width: 10rem;
+                width: 4rem;
             }
 
             :host ::ng-deep .p-inputtext:enabled:focus {

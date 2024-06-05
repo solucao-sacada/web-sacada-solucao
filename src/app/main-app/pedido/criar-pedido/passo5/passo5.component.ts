@@ -49,7 +49,6 @@ export class Passo5Component {
     ) { }
 
     ngOnInit() {
-        console.log(this.pedidoService.pedido.balcony.format)
         if (this.pedidoService.pedido.balcony.format == 0)
             this.selectedOption = '';
         else if (this.pedidoService.pedido.balcony.format == 1)

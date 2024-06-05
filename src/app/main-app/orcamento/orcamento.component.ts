@@ -55,7 +55,6 @@ export class OrcamentoComponent {
 
     private load() {
         const user = this.auth.getUser();
-
         if(user.role === "ADMIN" || user.role === "SUPER"){
             this.orcamentoService.list().subscribe({
                 next: (orcamentos) => {

@@ -36,8 +36,25 @@ export class DashboardComponent {
             // Alterar status para CREATED para DONE depois que tiver concluido os status
             this.qtdEntregue = pedido.filter((p) => p.status === 'DONE').length;
         });
-        this.orcamentoService.list().subscribe((orcamentos) => {
-            this.qtdOrcamentos = orcamentos.length;
-        });
+        const user = this.auth.getUser();
+        if(user.role === "ADMIN" || user.role === "SUPER"){
+            this.orcamentoService.list().subscribe({
+                next: (orcamentos) => {
+                    this.qtdOrcamentos = orcamentos.length;
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            })
+        }else{
+            this.orcamentoService.listByClient(user.id).subscribe({
+                next: (orcamentos) => {
+                    this.qtdOrcamentos = orcamentos.length;
+                },
+                error: (error) => {
+                    console.log(error);
+                },
+            })
+        }
     }
 }

@@ -57,7 +57,7 @@ export class Passo9Component implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.total = Number(this.pedidoService.pedido.balcony.dimensions.total)
+        this.total = parseFloat(this.pedidoService.pedido.balcony.dimensions.total.toString()).toFixed(1);
         this.pedidoService.getObservable().subscribe((data) => {
             if (data) {
                 this.pedidoService.pedido = data;
@@ -100,9 +100,8 @@ export class Passo9Component implements OnInit {
                 );
             }
 
-            // this.update();
             this.linhas.forEach((linha) => this.calcularAtualizarQuantity(linha));
-            this.total = Number(this.pedidoService.pedido.balcony.dimensions.total) === 0 ? '' : Number(this.pedidoService.pedido.balcony.dimensions.total)
+            this.total = Number(this.pedidoService.pedido.balcony.dimensions.total) === 0 ? '' : parseFloat(this.pedidoService.pedido.balcony.dimensions.total.toString()).toFixed(1);
             return
         }
 
@@ -183,7 +182,7 @@ export class Passo9Component implements OnInit {
     calcularAtualizarQuantity(linha: any): void {
         if (linha.dimension) {
             const valorDimension = parseFloat(linha.dimension);
-            const quantidadeCalculada = Math.ceil(valorDimension / 810);
+            const quantidadeCalculada = Math.ceil(valorDimension / 500);
             linha.quantity = quantidadeCalculada.toString();
         }else {
             linha.quantity = ''; // Limpar quantity se dimension estiver vazio

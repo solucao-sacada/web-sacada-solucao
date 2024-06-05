@@ -23,7 +23,6 @@ export class AppMenuComponent implements OnInit {
 
     loadMenu() {
         const user = this.authService.getUser()
-        console.log(user.role)
         if(user.role === 'ADMIN'){
             this.model = MENUS;
         }else{

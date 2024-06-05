@@ -196,7 +196,6 @@ export class ListarPedidosComponent {
     }
 
     verJSON(pedido: PedidoJson){
-        console.log(pedido)
         // abrir url no navegador
         window.open(pedido.urlJSON, '_blank');
     }
@@ -236,7 +235,6 @@ export class ListarPedidosComponent {
                 }else if(this.newStatus === 'WAIT_ANSWER'){
                     this.newStatus = 'Aguardando Resposta';
                 }
-                console.log(status)
                 this.loadPedidos();
                 this._toaster.success('Status alterado com sucesso');
             },

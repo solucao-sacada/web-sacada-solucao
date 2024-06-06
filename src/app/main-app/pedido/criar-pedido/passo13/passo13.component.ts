@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { LocationP } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
@@ -8,7 +8,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
     templateUrl: './passo13.component.html',
     styles: [],
 })
-export class Passo13Component {
+export class Passo13Component implements OnInit {
     @Output() isOk = new EventEmitter();
 
     qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
@@ -27,15 +27,24 @@ export class Passo13Component {
     ) {}
 
     ngOnInit() {
-        this.pedidoService.getObservable().subscribe((data) => {
-            this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
-            this.update();
+        if(this.qtdVidros > 0){
             this.atualizarQtdVidrosRestantes();
-        });
+            this.update();
+        }else{
+            this.pedidoService.getObservable().subscribe({
+                next: (data) => {
+                 console.log(data);
+                 this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
+                 console.log(this.qtdVidros)
+                 this.update();
+                 this.atualizarQtdVidrosRestantes();
+                }
+            });
+        }
     }
 
     update() {
-        this.qtdPecas = this.pedidoService.getQtdPecas();
+        this.qtdPecas = this.pedidoService.pedido.balcony.format;
         this.optionsPieces = [];
         for (let i = 1; i < this.qtdPecas + 1; i++) {
             this.optionsPieces.push({
@@ -62,7 +71,6 @@ export class Passo13Component {
             this.getVidroInicial(index) +
             +this.pedidoService.pedido.balcony.aperture.locations[index].glasses
         }`);
-        this.verifyStep();
     }
 
     delete(index: number) {
@@ -74,6 +82,7 @@ export class Passo13Component {
 
     atualizarQtdVidrosRestantes(): void {
         let qtdVidrosRestantes = this.qtdVidros;
+        console.log(qtdVidrosRestantes);
         for (let i = 0; i < this.pedidoService.pedido.balcony.aperture.locations.length;i++) {
             const qtdVidros = +this.pedidoService.pedido.balcony.aperture.locations[i].glasses || 0;
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
     templateUrl: './passo12.component.html',
     styles: [],
 })
-export class Passo12Component {
+export class Passo12Component implements OnInit {
     options: any[] = [
         {
             code: 1,
@@ -24,7 +24,9 @@ export class Passo12Component {
     selectedOption = '';
 
     ngOnInit() {
-        this.pedidoService.getObservable().subscribe(() => {
+        console.log('aqui');
+        this.pedidoService.getObservable().subscribe((data) => {
+            console.log(data);
             if (this.pedidoService.pedido.balcony.aperture.inside){
                 this.selected = 'Para Dentro';
                 this.selectedOption = 'Para Dentro';

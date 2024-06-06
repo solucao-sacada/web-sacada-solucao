@@ -247,10 +247,12 @@ export class PedidoService {
     }
 
     notifyObservers(): void {
+        console.log('aqui');
         this.observableDataSubject.next(this.pedido);
     }
 
     getObservable(): Subject<PedidoJson> {
+        console.log('aqui')
         return this.observableDataSubject;
     }
 

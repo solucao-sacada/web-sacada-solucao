@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { CanComponentDeactivate } from 'src/app/guards/can-dectivate.guard';
-import { Accessories } from 'src/app/models/pedidoJson';
+import { Accessories, PedidoJson } from 'src/app/models/pedidoJson';
 import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
@@ -49,6 +49,9 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
                 },
             });
         }else {
+            this.pedidoService.pedido = JSON.parse(this.pedidoString);
+            this.pedidoService.activeIndex = this.pedidoService.getActiveIndex();
+            this.pedidoService.notifyObservers();
             this.pedidoService.activeIndex = this.pedidoService.pedido?.activeIndex || 0;
         }
 

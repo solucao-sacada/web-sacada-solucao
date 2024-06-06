@@ -3,6 +3,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as jspdf from 'jspdf';
 import { ConfirmationService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { PedidoJson } from 'src/app/models/pedidoJson';
 import { User } from 'src/app/models/user.model';
@@ -243,5 +244,34 @@ export class ListarPedidosComponent {
             },
         })
         this.selectedStatus = 'Selecionar novo status';
+    }
+
+    onGlobalFilter(table: Table, event: Event) {
+        let value = (event.target as HTMLInputElement).value.toLowerCase();
+
+        // CREATED, PENDING, APPROVED, IN_PROGRESS, CANCELED, DONE, WAIT_ANSWER
+         // Mapeamento dos status em português para inglês
+        const statusMap = {
+            'realizado': 'CREATED',
+            'pendente': 'PENDING',
+            'em andamento': 'IN_PROGRESS',
+            'cancelado': 'CANCELED',
+            'aguardando': 'WAIT_ANSWER',
+            'finalizado': 'DONE'
+        };
+
+        // Verifica se o valor inserido é um status em português e o mapeia para inglês
+        const mappedValue = statusMap[value] || value;
+
+        // Adiciona a lógica de conversão de data
+        const datePattern = /^\d{2}\/\d{2}\/\d{4}$/; // Verifica se o valor está no formato "dd/MM/yyyy"
+        let finalValue = mappedValue;
+
+        if (datePattern.test(value)) {
+            const [day, month, year] = value.split('/');
+            finalValue = `${year}-${month}-${day}`;
+        }
+
+        table.filterGlobal(finalValue, 'contains');
     }
 }

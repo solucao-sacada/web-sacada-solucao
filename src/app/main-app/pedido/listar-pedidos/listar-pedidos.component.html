@@ -13,9 +13,25 @@
 <p-tabView [(activeIndex)]="activeIndex">
     <!-- Tabela de pedidos com header e body -->
     <p-tabPanel header="Pedidos">
-        <p-table [value]="pedidos" selectionMode="single" [(selection)]="pedido" dataKey="code" responsiveLayout="stack"
-            (onRowSelect)="onSelectRow($event)">
+        <span class="block mt-2 md:mt-0 p-input-icon-left mb-2">
+            <i class="fa fa-search"></i>
+            <input pInputText
+              type="text"
+              (input)="onGlobalFilter(dt, $event)"
+              placeholder="Pesquisar..."
+              class="w-full sm:w-auto"
+            />
+        </span>
 
+        <p-table
+            #dt
+            [value]="pedidos"
+            selectionMode="single"
+            [(selection)]="pedido"
+            [globalFilterFields]="['code', 'client.name', 'status', 'createdAt']"
+            dataKey="code"
+            responsiveLayout="stack"
+            (onRowSelect)="onSelectRow($event)">
             <ng-template pTemplate="header">
                 <tr>
                     <th>Código</th>
@@ -31,13 +47,15 @@
                     <td>{{ pedido.code }}</td>
                     <td>{{ pedido.client.name }}</td>
                     <td>{{ pedido.createdAt | date : "dd/MM/yyyy" }}</td>
+
+                    <!-- Status -->
                     <td class="custom-td">
-                       
+
                         <div class="status-style">
                             <span *ngIf="pedido.status === 'CREATED'"
                                 class="status-badge p-2 border border-round items-center justify-center bg-green-700 text-white">
                                 <!-- <i class="pi pi-info-circle text-sm mr-1"></i> -->
-                                <span class="text-xs">AGUARDANDO</span>
+                                <span class="text-xs">REALIZADO</span>
                             </span>
 
                             <span *ngIf="pedido.status === 'PENDING'"
@@ -72,6 +90,7 @@
                         </div>
                     </td>
 
+                    <!-- Botoes de download e visualizar -->
                     <td *ngIf="user.role === 'ADMIN' || user.role === 'SUPER'">
                         <span class="p-column-title font-bold"></span>
                         <button pButton pRipple

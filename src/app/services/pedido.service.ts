@@ -319,7 +319,7 @@ export class PedidoService {
 
         const quantidadeTotal = this.pedido?.balcony.dimensions.data.reduce(
             (total, linha) => {
-                const quantidadeVidros = linha[3] ? +linha[3] : 0;
+                const quantidadeVidros = +linha[3]
                 return total + quantidadeVidros;
             },
             0

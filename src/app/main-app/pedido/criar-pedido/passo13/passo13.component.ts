@@ -84,12 +84,12 @@ export class Passo13Component implements OnInit {
         let qtdVidrosRestantes = this.qtdVidros;
         console.log(qtdVidrosRestantes);
         for (let i = 0; i < this.pedidoService.pedido.balcony.aperture.locations.length;i++) {
-            const qtdVidros = +this.pedidoService.pedido.balcony.aperture.locations[i].glasses || 0;
+            const qtdVidros = +this.pedidoService.pedido.balcony.aperture.locations[i].glasses
 
             qtdVidrosRestantes -= qtdVidros;
         }
 
-        this.vidrosRestantes = qtdVidrosRestantes <= 0 ? 0 : qtdVidrosRestantes;
+        this.vidrosRestantes = qtdVidrosRestantes
         this.verifyStep();
     }
 

@@ -32,7 +32,6 @@ import { User } from 'src/app/models/user.model';
 export class Passo1Component implements OnInit {
     @ViewChild('numeroInput') numeroInput!: ElementRef;
     @ViewChild('cepInput') cepInput!: ElementRef;
-    @Output() isOk = new EventEmitter();
 
     visible = false;
     user: User = {} as User;

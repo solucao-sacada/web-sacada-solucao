@@ -27,23 +27,20 @@ export class Passo13Component implements OnInit {
     ) {}
 
     ngOnInit() {
-        console.log('aqui')
         if(this.qtdVidros > 0){
-            console.log('aqui')
             this.atualizarQtdVidrosRestantes();
             this.update();
-        }else{
-            console.log('aqui')
-            this.pedidoService.getObservable().subscribe({
-                next: (pedido) => {
-                 this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
-                 console.log(pedido)
-                 console.log(this.qtdVidros)
-                 this.update();
-                 this.atualizarQtdVidrosRestantes();
-                }
-            });
         }
+
+        // else{
+        //     this.pedidoService.getObservable().subscribe({
+        //         next: (pedido) => {
+        //          this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
+        //          this.update();
+        //          this.atualizarQtdVidrosRestantes();
+        //         }
+        //     });
+        // }
     }
 
     update() {
@@ -85,7 +82,6 @@ export class Passo13Component implements OnInit {
 
     atualizarQtdVidrosRestantes(): void {
         let qtdVidrosRestantes = this.qtdVidros;
-        console.log(qtdVidrosRestantes);
         for (let i = 0; i < this.pedidoService.pedido.balcony.aperture.locations.length;i++) {
             const qtdVidros = +this.pedidoService.pedido.balcony.aperture.locations[i].glasses
 
@@ -175,7 +171,7 @@ export class Passo13Component implements OnInit {
         if (this.vidrosRestantes < 0) {
             this.isOk.emit(false);
         } else if (this.vidrosRestantes > 0) {
-            this.isOk.emit(false);
+            this.isOk.emit(true);
         } else if (
             this.pedidoService.pedido.balcony.aperture.locations.some(
                 (linha) =>

@@ -10,6 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./create-account.component.scss']
 })
 export class CreateAccountComponent {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+
+  showOldPassword = false;
+  showNewPassword = false;
+  showConfirmPassword = false;
+
   user: User = {
       name: '',
       email: '',
@@ -30,7 +38,6 @@ export class CreateAccountComponent {
       },
   } as User
 
-  confirmPassword: string = '';
 
   private http = inject(Router);
   private authService = inject(AuthService);
@@ -73,5 +80,15 @@ export class CreateAccountComponent {
         this.toaster.error(error.message);
       }
     })
+  }
+
+  togglePasswordVisibility(field: string): void {
+    if (field === 'old') {
+      this.showOldPassword = !this.showOldPassword;
+    } else if (field === 'new') {
+      this.showNewPassword = !this.showNewPassword;
+    } else if (field === 'confirm') {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    }
   }
 }

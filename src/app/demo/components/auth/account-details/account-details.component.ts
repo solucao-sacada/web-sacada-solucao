@@ -38,9 +38,13 @@ interface IUserData {
 })
 
 export class AccountDetailsComponent {
-  oldPassword: string = '';
-  newPassword: string = '';
-  confirmPassword: string = '';
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+
+  showOldPassword = false;
+  showNewPassword = false;
+  showConfirmPassword = false;
 
   user = {
     name: '',
@@ -75,8 +79,8 @@ export class AccountDetailsComponent {
     this.loadUser();
   }
 
-  updatePassword(){
-    if(this.newPassword != this.confirmPassword ){
+  updatePassword() {
+    if (this.newPassword != this.confirmPassword) {
       this.toaster.error('As senhas precisam ser iguais!')
       return
     }
@@ -88,7 +92,7 @@ export class AccountDetailsComponent {
         this.toaster.success('Senha atualizada com sucesso!')
       },
       error: (error) => {
-        if(error.message.includes('Campo inválido')){
+        if (error.message.includes('Campo inválido')) {
           this.toaster.error('Minimo de 6 caracteres para a nova senha')
           return
         }
@@ -106,7 +110,7 @@ export class AccountDetailsComponent {
         this.toaster.error('Erro ao enviar e-mail de verificação');
       }
     })
-}
+  }
 
 
   loadUser() {
@@ -119,47 +123,47 @@ export class AccountDetailsComponent {
   updateAccount() {
     const userStorage = this.authService.getUser();
 
-    if(this.user.name !== userStorage.name ||
-        this.user.email !== userStorage.email ||
-        this.user.phone !== userStorage.phone
-      ){
-        this.authService.updateAccount({
-            id: this.user.id,
-            name: this.user.name,
-            email: this.user.email,
-            phone: this.user.phone,
-        }).subscribe({
-          next: (user) => { // retorno do backend que veio do service user
-            this.toaster.success('Informações do perfil alteradas com sucesso!');
-            this.user = {
-                ...this.user,
-                name: user.name,
-                email: user.email,
-                phone: user.phone,
-            }
-            this.authService.setUser(this.user)
-            this.loadUser()
-          },
-          error: (error) => {
-            this.toaster.error('Erro ao alterar conta')
+    if (this.user.name !== userStorage.name ||
+      this.user.email !== userStorage.email ||
+      this.user.phone !== userStorage.phone
+    ) {
+      this.authService.updateAccount({
+        id: this.user.id,
+        name: this.user.name,
+        email: this.user.email,
+        phone: this.user.phone,
+      }).subscribe({
+        next: (user) => { // retorno do backend que veio do service user
+          this.toaster.success('Informações do perfil alteradas com sucesso!');
+          this.user = {
+            ...this.user,
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
           }
-        })
-      }else{
-        this.authService.updateCompany(this.user.company).subscribe({
+          this.authService.setUser(this.user)
+          this.loadUser()
+        },
+        error: (error) => {
+          this.toaster.error('Erro ao alterar conta')
+        }
+      })
+    } else {
+      this.authService.updateCompany(this.user.company).subscribe({
         next: (company) => {
-        this.toaster.success('Empresa alterada com sucesso!');
-        this.user = {
+          this.toaster.success('Empresa alterada com sucesso!');
+          this.user = {
             ...this.user,
             company: company
-        }
-            this.authService.setUser(this.user);
-            this.loadUser();
+          }
+          this.authService.setUser(this.user);
+          this.loadUser();
         },
         error: () => {
-            this.toaster.error('Erro ao alterar conta');
+          this.toaster.error('Erro ao alterar conta');
         }
-        })
-      }
+      })
+    }
   }
 
   handleDeleteAccount() {
@@ -191,4 +195,13 @@ export class AccountDetailsComponent {
     this.visible = false
   }
 
+  togglePasswordVisibility(field: string): void {
+    if (field === 'old') {
+      this.showOldPassword = !this.showOldPassword;
+    } else if (field === 'new') {
+      this.showNewPassword = !this.showNewPassword;
+    } else if (field === 'confirm') {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    }
+  }
 }

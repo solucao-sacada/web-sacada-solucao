@@ -1,0 +1,22 @@
+.field-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.pi {
+    position: absolute;
+    right: 10px;
+    margin-top: 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #333;
+    z-index: 1;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}

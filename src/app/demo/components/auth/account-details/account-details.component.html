@@ -68,34 +68,39 @@
 
                         <div class="field-group">
                             <label for="oldPassword" class="font-bold">Senha antiga</label><br>
-                            <input id="oldPassword" type="password" pInputText name="oldPassword" placeholder="************"
-                            [(ngModel)]="oldPassword" required
-                                class="w-full mb-3">
-                        </div>
-
-                        <div class="field-group">
-                            <label for="password" class="font-bold">Senha</label><br>
-                            <input id="password" type="password" pInputText name="password" placeholder="************"
-                            [(ngModel)]="newPassword" required
-                                class="w-full mb-3">
-                        </div>
-                        <div class="field-group">
-
-                            <label for="confirmPassword" class="font-bold">Confirmar Senha</label><br>
-                            <div class="flex flex-row items-center">
-                                <div class="mr-3">
-                                    <input id="confirmPassword" type="password" placeholder="************" pInputText name="confirmPassword" required
-                                        [(ngModel)]="confirmPassword" class="w-full md:w-30rem mb-3">
-                                </div>
-
-                                <div>
-                                    <button pbutton="" pripple="" class="p-element p-ripple w-auto p-button p-component"
-                                        (click)="updatePassword()">
-                                        <span class="p-button-label">Atualizar</span><span class="p-ink"></span>
-                                    </button>
-                                </div>
+                            <div class="flex items-center">
+                                <input id="oldPassword" [type]="showOldPassword ? 'text' : 'password'" pInputText name="oldPassword" placeholder="************"
+                                [(ngModel)]="oldPassword" required class="w-full mb-3 p-inputtext">
+                                <i class="pi" [ngClass]="showOldPassword ? 'pi-eye-slash' : 'pi-eye'" (click)="togglePasswordVisibility('old')"></i>
                             </div>
                         </div>
+                        
+                        <div class="field-group">
+                            <label for="password" class="font-bold">Senha</label><br>
+                            <div class="flex items-center">
+                                <input id="password" [type]="showNewPassword ? 'text' : 'password'" pInputText name="password" placeholder="************"
+                                [(ngModel)]="newPassword" required class="w-full mb-3 p-inputtext">
+                                <i class="pi" [ngClass]="showNewPassword ? 'pi-eye-slash' : 'pi-eye'" (click)="togglePasswordVisibility('new')"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="field-group">
+                            <label for="confirmPassword" class="font-bold">Confirmar Senha</label><br>
+
+                            <div class="flex items-center">
+                                <input id="password" [type]="showConfirmPassword ? 'text' : 'password'" pInputText name="password" placeholder="************"
+                                [(ngModel)]="confirmPassword" required class="w-full mb-3 p-inputtext">
+                                <i class="pi" [ngClass]="showConfirmPassword ? 'pi-eye-slash' : 'pi-eye'" (click)="togglePasswordVisibility('confirm')"></i>
+                            </div>
+                        </div>
+                      
+                        <div>
+                            <button pbutton="" pripple="" class="p-element p-ripple w-auto p-button p-component"
+                                (click)="updatePassword()">
+                                <span class="p-button-label">Atualizar</span>
+                            </button>
+                        </div>
+                        
                         <!-- INFORMACOES DA EMPRESA -->
                         <div class="py-3">
                             <div class="text-900 text-2xl md:text-3xl text-center font-medium mb-3">

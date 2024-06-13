@@ -14,16 +14,23 @@
     (ngModelChange)="updateObservation()"
 ></textarea>
 
-<p-fileUpload    
+<button pButton type="button" label="Adicionar Foto" icon="pi pi-camera" (click)="openFilePicker()"></button>
+<input type="file" #fileInput accept="image/*" style="display: none;" (change)="handleFileSelect($event)">
+
+<p-fileUpload
     #upload
     class="mt-3"
     [showCancelButton]="true"
     [customUpload]="true"
     [auto]="true"
     [chooseLabel]="'Adicionar'"
-    (onSelect)="onFileSelect($event)"
+    (onSelect)="uploadFile($event)"
+    accept="image/*"
+    capture="environment"
+    style="display: none;"
 >
 </p-fileUpload>
+
 
 <p-dialog [(visible)]="visible" [style]="{width: '450px'}" header="Atenção" [modal]="true" class="p-fluid">
     <p class="text-700">Percebemos que você não enviou nenhuma imagem, deseja continuar mesmo assim?</p>

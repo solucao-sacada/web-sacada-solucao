@@ -32,15 +32,15 @@ export class Passo13Component implements OnInit {
             this.update();
         }
 
-        // else{
-        //     this.pedidoService.getObservable().subscribe({
-        //         next: (pedido) => {
-        //          this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
-        //          this.update();
-        //          this.atualizarQtdVidrosRestantes();
-        //         }
-        //     });
-        // }
+        if(this.qtdVidros === 0){
+            this.pedidoService.getObservable().subscribe({
+                next: (pedido) => {
+                 this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
+                 this.update();
+                 this.atualizarQtdVidrosRestantes();
+                }
+            });
+        }
     }
 
     update() {

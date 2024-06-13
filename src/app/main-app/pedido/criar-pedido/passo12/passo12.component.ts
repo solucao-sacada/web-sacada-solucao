@@ -53,7 +53,7 @@ export class Passo12Component implements OnInit {
             this.pedidoService.pedido.balcony.aperture.inside = false;
         }
     }
-
+//
     nextTab(): void {
         this.pedidoService.nextTab();
     }

@@ -30,6 +30,7 @@ export class Passo13Component implements OnInit {
         if(this.qtdVidros > 0){
             this.atualizarQtdVidrosRestantes();
             this.update();
+            return
         }
 
         if(this.qtdVidros === 0){
@@ -40,6 +41,7 @@ export class Passo13Component implements OnInit {
                  this.atualizarQtdVidrosRestantes();
                 }
             });
+            return
         }
     }
 

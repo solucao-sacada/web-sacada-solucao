@@ -26,7 +26,10 @@ export class Passo10Component implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.setCursorToStart();
+        let activeIndex = this.pedidoService.getActiveIndex();
+        if(activeIndex === 9){
+            this.setCursorToStart();
+        }
     }
 
     openOverlay() {
@@ -46,10 +49,10 @@ export class Passo10Component implements AfterViewInit {
     }
 
     setCursorToStart() {
-    const input = this.inputElement.nativeElement;
-      input.focus();
-      input.setSelectionRange(0, 0);
-  }
+        const input = this.inputElement.nativeElement;
+        input.focus();
+        input.setSelectionRange(0, 0);
+    }
 
 
 

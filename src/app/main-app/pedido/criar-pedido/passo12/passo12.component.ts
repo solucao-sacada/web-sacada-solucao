@@ -24,9 +24,7 @@ export class Passo12Component implements OnInit {
     selectedOption = '';
 
     ngOnInit() {
-        console.log('aqui');
         this.pedidoService.getObservable().subscribe((data) => {
-            console.log(data);
             if (this.pedidoService.pedido.balcony.aperture.inside){
                 this.selected = 'Para Dentro';
                 this.selectedOption = 'Para Dentro';

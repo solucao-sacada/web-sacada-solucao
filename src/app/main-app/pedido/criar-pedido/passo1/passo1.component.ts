@@ -67,13 +67,17 @@ export class Passo1Component implements OnInit {
             )
             .subscribe({
                 next: (response) => {
+                    if(response.erro){
+                        this._toaster.warn('CEP não encontrado');
+                        return
+                    }
                     this.pedidoService.pedido.client.address = response.logradouro;
                     this.pedidoService.pedido.client.neighborhood = response.bairro;
                     this.pedidoService.pedido.client.city = response.localidade;
                     this.pedidoService.pedido.client.state = response.uf;
                     this.numeroInput.nativeElement.focus();
                 },
-                error: () => this._toaster.error('CEP inválido'),
+                error: () => this._toaster.error('Error ao consultar CEP'),
             });
     }
 

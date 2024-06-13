@@ -247,12 +247,10 @@ export class PedidoService {
     }
 
     notifyObservers(): void {
-        console.log('aqui');
         this.observableDataSubject.next(this.pedido);
     }
 
     getObservable(): Subject<PedidoJson> {
-        console.log('aqui')
         return this.observableDataSubject;
     }
 
@@ -310,12 +308,12 @@ export class PedidoService {
     }
 
     getQuantidadeTotalVidros(): number {
-        if (
-            !this.pedido?.balcony.dimensions.data ||
-            this.pedido?.balcony.dimensions.data.length === 0
-        ) {
-            return 0;
-        }
+        // if (
+        //     !this.pedido?.balcony.dimensions.data ||
+        //     this.pedido?.balcony.dimensions.data.length === 0
+        // ) {
+        //     return 0;
+        // }
 
         const quantidadeTotal = this.pedido?.balcony.dimensions.data.reduce(
             (total, linha) => {

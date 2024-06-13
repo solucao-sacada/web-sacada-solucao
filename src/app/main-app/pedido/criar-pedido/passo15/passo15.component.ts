@@ -114,7 +114,15 @@ export class Passo15Component implements OnInit {
             this.diferencaPrimeiraPontoUltimoPontoTeto = Math.abs(Number(this.medidas[0].ceiling) - Number(this.medidas[this.medidas.length - 1].ceiling))
 
             this.diferencaPrimeiraPontoUltimoPontoPiso = Math.abs(Number(this.medidas[0].floor) - Number(this.medidas[this.medidas.length - 1].floor))
+
+            if(this.diferencaPrimeiraPontoUltimoPontoTeto === 0 && this.diferencaPrimeiraPontoUltimoPontoPiso === 0){
+                // zerar prolongadores
+                this.resetAllValues();
+            }
         }
+
+        console.log(this.diferencaPrimeiraPontoUltimoPontoTeto, this.diferencaPrimeiraPontoUltimoPontoPiso)
+
 
         for (let i = 0; i < this.medidas.length; i++) {
             const alturaTeto = +this.medidas[i].ceiling;
@@ -129,7 +137,6 @@ export class Passo15Component implements OnInit {
             }
         }
 
-
         // Check if both values are valid (not Infinity) before returning their sum
         if (menorAlturaTeto !== Infinity && menorAlturaPiso !== Infinity) {
             let menorAltura = menorAlturaTeto + menorAlturaPiso;
@@ -138,6 +145,7 @@ export class Passo15Component implements OnInit {
         } else {
             return 0;
         }
+
     }
 
     checkHeightDifference(): void {
@@ -155,7 +163,6 @@ export class Passo15Component implements OnInit {
             this.visible = false;
         }
     }
-
 
     salvar() {
         this.pedidoService.pedido.balcony.levels.measures.data =
@@ -220,7 +227,20 @@ export class Passo15Component implements OnInit {
             this.prolongadorPiso = 0
         }
     }
+    resetAllValues(): void {
+        this.menorAlturaTeto = 0;
+        this.diferencaPrimeiraPontoUltimoPontoTeto = 0;
+        this.diferencaPrimeiraPontoUltimoPontoPiso = 0;
+        this.prolongadorTeto = 0;
+        this.prolongadorPiso = 0;
+        this.visible = false
+        this.addProlongadorTeto = false
+        this.messageFixViga = false
+        this.addProlongadorPiso = false
+        this.messageFixBase = false
+        this.showHR = false
 
+    }
 
     fixedValues(): boolean {
         let block = false
@@ -259,7 +279,7 @@ export class Passo15Component implements OnInit {
         }
 
         if (block) {
-            this._toaster.warn('Preencha os campos para corrigir a viga ou a base')
+            // this._toaster.warn('Preencha os campos para corrigir a viga ou a base')
             return true
         }
 

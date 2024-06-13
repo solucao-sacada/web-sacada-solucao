@@ -34,7 +34,6 @@ export class Passo13Component implements OnInit {
             this.pedidoService.getObservable().subscribe({
                 next: (pedido) => {
                  this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
-                 console.log(this.qtdVidros)
                  this.update();
                  this.atualizarQtdVidrosRestantes();
                 }

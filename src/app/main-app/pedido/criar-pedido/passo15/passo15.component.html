@@ -48,6 +48,7 @@
         <input
             type="text"
             class="border-0 shadow-none text-center w-full"
+            (ngModelChange)="fixedValues();"
             [(ngModel)]="linha.ceiling"
 
         />
@@ -58,6 +59,7 @@
         <input
             type="text"
             class="border-0 shadow-none text-center w-full"
+            (ngModelChange)="fixedValues()"
             [(ngModel)]="linha.floor"
 
         />
@@ -89,12 +91,6 @@
                 [format]="'n'"
             >
             </p-inputNumber>
-            <!-- <p-inputNumber *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21"
-                [(ngModel)]="prolongadorTeto"
-                [format]="'n'"
-                [step]="0.1"
-                [minFractionDigits]="1" [maxFractionDigits]="1">
-            </p-inputNumber> -->
 
         <hr *ngIf="diferencaPrimeiraPontoUltimoPontoTeto >= 21 && diferencaPrimeiraPontoUltimoPontoPiso >= 20" class="m-2">
 
@@ -110,13 +106,6 @@
                 [format]="'n'"
             >
             </p-inputNumber>
-            <!-- <p-inputNumber class="mb-4" *ngIf="diferencaPrimeiraPontoUltimoPontoPiso >= 20"
-                [(ngModel)]="prolongadorPiso"
-                [format]="'n'"
-                [step]="0.1"
-                [minFractionDigits]="1"
-                [maxFractionDigits]="1">
-            </p-inputNumber> -->
     </div>
 </div>
 

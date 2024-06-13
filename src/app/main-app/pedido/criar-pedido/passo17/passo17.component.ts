@@ -6,7 +6,31 @@ import { PedidoService } from 'src/app/services/pedido.service';
 @Component({
     selector: 'app-passo17',
     templateUrl: './passo17.component.html',
-    styles: [],
+    styles: [
+        `
+        .image-preview {
+            text-align: center;
+        }
+
+        .img-responsive {
+            max-width: 70%;
+            height: 10rem;
+            margin: 1rem;
+        }
+        .delete-icon {
+            position: absolute;
+            font-size: 1em;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-icon:hover {
+            opacity: 0.8;
+        }
+        `
+    ],
 })
 export class Passo17Component {
     @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
@@ -33,17 +57,28 @@ export class Passo17Component {
             for (let i = 0; i < files.length; i++) {
                 this.images.push(files[i]);
             }
-            this.enviarImagens();
+            this.sendImages();
         }
     }
 
-    enviarImagens(): void {
+    getImageUrl(): any {
+        if (this.images.length > 0) {
+            return URL.createObjectURL(this.images[0]);
+        }
+        return '';
+    }
+
+    deleteImage(): void {
+        this.images = [];
+    }
+
+    sendImages(): void {
         const imagem = this.images[0];
         this.imageService.storeFile(imagem);
     }
 
     nextTab(): void {
-        this.enviarImagens();
+        this.sendImages();
         this.pedidoService.nextTab();
     }
 
@@ -57,6 +92,7 @@ export class Passo17Component {
             this.images.push(files[0]);
             this.imageService.storeFile(files[0]);
             this.toaster.success('Imagem enviada com sucesso');
+            (event.target as HTMLInputElement).value = '';
         }
     }
 

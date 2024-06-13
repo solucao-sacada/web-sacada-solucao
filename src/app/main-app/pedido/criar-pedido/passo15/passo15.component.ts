@@ -121,9 +121,6 @@ export class Passo15Component implements OnInit {
             }
         }
 
-        console.log(this.diferencaPrimeiraPontoUltimoPontoTeto, this.diferencaPrimeiraPontoUltimoPontoPiso)
-
-
         for (let i = 0; i < this.medidas.length; i++) {
             const alturaTeto = +this.medidas[i].ceiling;
             const alturaPiso = +this.medidas[i].floor;

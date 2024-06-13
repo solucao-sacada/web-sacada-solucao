@@ -27,13 +27,18 @@ export class Passo13Component implements OnInit {
     ) {}
 
     ngOnInit() {
+        console.log('aqui')
         if(this.qtdVidros > 0){
+            console.log('aqui')
             this.atualizarQtdVidrosRestantes();
             this.update();
         }else{
+            console.log('aqui')
             this.pedidoService.getObservable().subscribe({
                 next: (pedido) => {
                  this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
+                 console.log(pedido)
+                 console.log(this.qtdVidros)
                  this.update();
                  this.atualizarQtdVidrosRestantes();
                 }

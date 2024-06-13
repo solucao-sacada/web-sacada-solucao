@@ -308,22 +308,19 @@ export class PedidoService {
     }
 
     getQuantidadeTotalVidros(): number {
-        // if (
-        //     !this.pedido?.balcony.dimensions.data ||
-        //     this.pedido?.balcony.dimensions.data.length === 0
-        // ) {
-        //     return 0;
-        // }
-
-        const quantidadeTotal = this.pedido?.balcony.dimensions.data.reduce(
-            (total, linha) => {
-                const quantidadeVidros = +linha[3]
+       // Verifique se this.pedido, this.pedido.balcony, e this.pedido.balcony.dimensions existem antes de reduzir
+        if (this.pedido?.balcony?.dimensions?.data.length > 0) {
+            const quantidadeTotal = this.pedido.balcony.dimensions.data.reduce((total, linha) => {
+                // Utilize Number() para converter o valor em vez de operador unário +
+                const quantidadeVidros = Number(linha[3]);
                 return total + quantidadeVidros;
-            },
-            0
-        );
+            }, 0);
 
-        return quantidadeTotal;
+            return quantidadeTotal;
+        } else {
+            // Retorne 0 ou outra valor padrão caso os dados não estejam disponíveis
+            return 0;
+        }
     }
 
     getQtdPecas(value?: any): number {

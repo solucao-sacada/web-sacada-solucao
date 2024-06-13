@@ -11,7 +11,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo13Component implements OnInit {
     @Output() isOk = new EventEmitter();
 
-    qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
+    qtdVidros = 0;
 
     vidrosRestantes: number;
 
@@ -27,6 +27,8 @@ export class Passo13Component implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
+
         if(this.qtdVidros > 0){
             this.atualizarQtdVidrosRestantes();
             this.update();

@@ -60,7 +60,7 @@
             src="../../../assets/img/Orcamento/sacada.jpeg">
         </p-image>
 
-        <div class="flex flex-column gap-1 mb-5">
+        <div class="flex flex-column gap-1 mb-3">
             <label for="cliente" class="font-bold">Cliente</label>
             <input
                 pInputText
@@ -68,6 +68,19 @@
                 (ngModelChange)="hiddeCalculeted()"
                 name="cliente"
                 [(ngModel)]="orcamento.cliente"
+            />
+        </div>
+
+        <!-- Endereço -->
+        <div class="flex flex-column gap-1 mb-3">
+            <label for="address" class="font-bold">Endereço</label>
+            <input
+                pInputText
+                id="address"
+                placeholder="Rua, Bairro, Cidade, Estado, CEP"
+                (ngModelChange)="hiddeCalculeted()"
+                [(ngModel)]="address"
+                name="address"
             />
         </div>
 

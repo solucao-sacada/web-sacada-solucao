@@ -3,17 +3,7 @@ export interface OrcamentoRequestModel {
     idUser: string;
     client: string;
     emailClient: string;
-    price: number;
-
-    aparador?: boolean
-    selante?: boolean
-    prolongador?: boolean
-    chapaSuperior?: boolean
-    chapaInferior?: boolean
-    qtdAparador: number
-    qtdProlongador: number
-    qtdSelante: number
-
+    address: string;
     area: number
     pricePlates: number
     priceGlasses: number
@@ -21,6 +11,15 @@ export interface OrcamentoRequestModel {
     priceProlongador: number
     priceKitSolutions: number
 
+    aparador?: boolean
+    selante?: boolean
+    prolongador?: boolean
+    chapaSuperior: boolean
+    chapaInferior: boolean
+    qtdAparador: number
+    qtdProlongador: number
+    qtdSelante: number
+    price: number;
     height: number
     width: number
 }

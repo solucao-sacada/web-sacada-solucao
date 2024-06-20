@@ -23,6 +23,7 @@ export class OrcamentoComponent {
     total = 0;
 
     orcamentos: any[] = [];
+    address: string = '';
     orcamento: CalculoOrcamento = new CalculoOrcamento();
     selected: CalculoOrcamento;
     fb = inject(FormBuilder);
@@ -128,9 +129,10 @@ export class OrcamentoComponent {
         const user = this.auth.getUser() as unknown as UserUpdated;
         this.orcamentoService
             .create({
+                idUser: user.id,
                 client: this.orcamento.cliente,
                 emailClient: this.orcamento.send,
-                idUser: user.id,
+                address: this.address,
                 price: this.orcamento.valorFinal,
                 qtdAparador: this.orcamento.qtdAparador,
                 qtdProlongador: this.orcamento.qtdProlongador,

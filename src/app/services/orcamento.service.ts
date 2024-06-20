@@ -12,8 +12,54 @@ export class OrcamentoService {
 
     constructor(private http: HttpClient) {}
 
-    create(orcamento: OrcamentoRequestModel): Observable<any> {
-        return this.http.post<any>(this.apiUrl, orcamento);
+    create({
+        idUser,
+        area,
+        pricePlates,
+        priceGlasses,
+        priceAcessories,
+        priceProlongador,
+        chapaInferior,
+        chapaSuperior,
+        qtdAparador,
+        emailClient,
+        qtdProlongador,
+        qtdSelante,
+        client,
+        height,
+        width,
+        address,
+        selante,
+        price,
+        aparador,
+        prolongador,
+        priceKitSolutions,
+    }: OrcamentoRequestModel): Observable<any> {
+        return this.http.post<any>(this.apiUrl, {
+            idUser,
+            area,
+            pricePlates,
+            priceGlasses,
+            priceAcessories,
+            priceProlongador,
+            chapaInferior,
+            chapaSuperior,
+            qtdAparador,
+            qtdProlongador,
+            qtdSelante,
+            height,
+            width,
+            selante,
+            price,
+            aparador,
+            prolongador,
+            priceKitSolutions,
+            client:{
+                name: client,
+                email: emailClient,
+                address
+            }
+        });
     }
 
     list(): Observable<any> {

@@ -7,7 +7,8 @@
 <div class="flex justify-content-center">
     <div class="w-9 md:w-3">
         <label>Medida Superior</label>
-        <input
+        <input type="text" 
+        (keydown)="validateNumberInput($event)"
         class="w-full text-left"
         pInputText
         [(ngModel)]="pedidoService.pedido?.balcony.plumb.left_wall.top"
@@ -25,7 +26,8 @@
 <div class="flex justify-content-center">
     <div class="w-9 md:w-3 relative">
         <label>Medida Inferior</label>
-        <input
+        <input type="text" 
+            (keydown)="validateNumberInput($event)"
             class="w-full text-left"
             pInputText
             [(ngModel)]="pedidoService.pedido?.balcony.plumb.left_wall.bottom"

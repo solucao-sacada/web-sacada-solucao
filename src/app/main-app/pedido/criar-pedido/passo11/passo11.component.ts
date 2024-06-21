@@ -14,7 +14,7 @@ export class Passo11Component {
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
-    ) {}
+    ) { }
 
     difference = '';
 
@@ -37,7 +37,15 @@ export class Passo11Component {
     //     input.value = value;
     //   }
 
+    validateNumberInput(event: KeyboardEvent) {
+        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
+        const isNumber = /\d/.test(event.key);
 
+        if (!isNumber && !allowedKeys.includes(event.key)) {
+            event.preventDefault();
+        }
+    }
+    
     openOverlay() {
         const rightWall = this.pedidoService.pedido.balcony.plumb.right_wall;
 
@@ -58,7 +66,7 @@ export class Passo11Component {
     nextTab(): void {
         const result = Math.abs(
             +this.pedidoService.pedido.balcony.plumb.right_wall.bottom -
-                +this.pedidoService.pedido.balcony.plumb.right_wall.top
+            +this.pedidoService.pedido.balcony.plumb.right_wall.top
         );
         if (
             this.pedidoService.pedido.balcony.plumb.right_wall.bottom &&

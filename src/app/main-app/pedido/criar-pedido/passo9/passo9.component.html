@@ -22,17 +22,21 @@
 <div class="grid m-0 md:mx-4 border-bottom-1" *ngFor="let linha of linhas; let i = index">
     <div class="col-3 p-1 text-center border-x-1">{{ linha.piece }}</div>
     <div class="col-3 p-1 text-center border-right-1">
-        <input [(ngModel)]="linha.angle"
+        <input type="text" 
+            [(ngModel)]="linha.angle"
             (click)="selectText($event)"
             class="text-center w-full"
+            (keydown)="validateNumberInput($event)"
              (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()"
             [selectAllOnFocus]="true">
 
     </div>
 
     <div class="col-3 p-1 text-center border-right-1">
-        <input [(ngModel)]="linha.dimension"
+        <input type="text" 
+            [(ngModel)]="linha.dimension"
             (click)="selectText($event)"
+            (keydown)="validateNumberInput($event)"
             class="text-center w-full"
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes(); verificarAtualizarQuantidadeDeVidro(linha)">
     </div>

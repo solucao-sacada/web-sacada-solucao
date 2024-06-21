@@ -14,7 +14,7 @@ export class Passo10Component implements AfterViewInit {
     constructor(
         public pedidoService: PedidoService,
         private _toaster: ToasterService
-    ) {}
+    ) { }
 
     difference = '';
     visible = false;
@@ -27,8 +27,17 @@ export class Passo10Component implements AfterViewInit {
 
     ngAfterViewInit(): void {
         let activeIndex = this.pedidoService.getActiveIndex();
-        if(activeIndex === 9){
+        if (activeIndex === 9) {
             this.setCursorToStart();
+        }
+    }
+
+    validateNumberInput(event: KeyboardEvent) {
+        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
+        const isNumber = /\d/.test(event.key);
+
+        if (!isNumber && !allowedKeys.includes(event.key)) {
+            event.preventDefault();
         }
     }
 

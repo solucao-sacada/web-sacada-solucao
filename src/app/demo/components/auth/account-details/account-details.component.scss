@@ -20,3 +20,12 @@
 .ml-2 {
     margin-left: 0.5rem;
 }
+
+.back-button {
+   display: flex;
+   justify-items: flex-start;
+   cursor: pointer;
+   position: absolute;
+   margin-left: 2rem;
+   margin-bottom: 5rem
+}

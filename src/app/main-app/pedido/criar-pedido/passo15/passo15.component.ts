@@ -55,6 +55,15 @@ export class Passo15Component implements OnInit {
         }
     }
 
+    validateNumberInput(event: KeyboardEvent) {
+        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
+        const isNumber = /\d/.test(event.key);
+    
+        if (!isNumber && !allowedKeys.includes(event.key)) {
+          event.preventDefault();
+        }
+      }
+
     private inicializarLinhas(): void {
         if (!this.pedidoService.pedido.balcony) {
             return

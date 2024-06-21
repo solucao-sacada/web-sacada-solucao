@@ -14,15 +14,19 @@
 
         <div class="w-full surface-card py-4 px-5 sm:px-8" style="border-radius: 53px">
 
-                <div class="flex flex-column align-items-center justify-content-center">
-
-                    <div class="px-4 mb-4 items-center mt-4">
+            <div class="back-button">
+                <i class="pi pi-angle-left text-2xl" routerLink="/"></i>
+            </div>
+            <div class="flex flex-column align-items-center justify-content-center">
+                <div class="px-4 mb-4 items-center mt-6">
+                      
                         <div class="py-3">
                             <div class="text-900 text-3xl text-center font-medium mb-3">
                                 Informações do usuário
                             </div>
                         </div>
 
+                        
                         <div class="field-group">
                             <label for="name" class="font-bold">Nome</label><br>
                             <input id="name" type="name" pInputText maxlength="70" (ngModelChange)="updateUser(user)"

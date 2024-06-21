@@ -70,6 +70,15 @@ export class Passo9Component implements OnInit {
         }
     }
 
+    validateNumberInput(event: KeyboardEvent) {
+        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
+        const isNumber = /\d/.test(event.key);
+    
+        if (!isNumber && !allowedKeys.includes(event.key)) {
+          event.preventDefault();
+        }
+      }
+
     private inicializarLinhas(): void {
         const codePedido = this.pedidoService.pedido.code
         const draft = this.pedidoService.getDraftPedidos()
@@ -226,6 +235,7 @@ export class Passo9Component implements OnInit {
                 if (vidrosDimensao500Mais !== totalVidros) {
                     this._toster.warn('A quantidade de vidros selecionada não corresponde à quantidade de peças quando a dimensão é 500 ou mais.');
                 } else {
+                    console.log('DIMENSAO> ',this.pedidoService.pedido.balcony.dimensions.data );
                     this.pedidoService.dimensionOK = true;
                     this.pedidoService.nextTab();
                 }

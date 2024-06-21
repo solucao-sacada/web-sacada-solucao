@@ -2,6 +2,7 @@ export interface OrcamentoRequestModel {
     _id?: string;
     idUser: string;
     client: string;
+    name?: string | null;
     emailClient: string;
     address: string;
     area: number

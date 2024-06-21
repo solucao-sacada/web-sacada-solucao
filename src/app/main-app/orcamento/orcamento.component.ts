@@ -166,7 +166,7 @@ export class OrcamentoComponent {
 
     gerarPedido(orcamento: OrcamentoRequestModel){
         const acessories = {
-            client: orcamento.client,
+            client: orcamento.name,
             selante: orcamento.selante,
             aparador: orcamento.aparador,
             prolongador: orcamento.prolongador,

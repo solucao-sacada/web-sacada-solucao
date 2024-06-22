@@ -61,7 +61,7 @@ export class CriarPedidoComponent implements CanComponentDeactivate, OnInit {
             this.pedidoService.activeIndex = 0;
             this.pedidoService.setActiveIndex(0);
 
-            // localStorage.removeItem('acessories');
+            localStorage.removeItem('acessories');
         }
 
         this.pedidoService.maxActiveIndex = 17;

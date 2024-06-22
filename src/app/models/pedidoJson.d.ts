@@ -252,6 +252,7 @@ export interface Client {
     apartment: string;
     building: string;
     city: string;
+    internal_id?: string | null;
     name: string;
     neighborhood: string;
     state: string;

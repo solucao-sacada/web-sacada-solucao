@@ -1,5 +1,6 @@
 export interface OrcamentoRequestModel {
     _id?: string;
+    internal_id?: string | null; //código do orçamento
     idUser: string;
     client: string;
     emailClient: string;

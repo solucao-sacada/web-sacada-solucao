@@ -33,7 +33,7 @@ export class Passo10Component implements AfterViewInit {
     }
 
     validateNumberInput(event: KeyboardEvent) {
-        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
+        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
         const isNumber = /\d/.test(event.key);
 
         if (!isNumber && !allowedKeys.includes(event.key)) {

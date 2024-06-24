@@ -71,7 +71,7 @@ export class Passo9Component implements OnInit {
     }
 
     validateNumberInput(event: KeyboardEvent) {
-        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete'];
+        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', 'Delete', '.'];
         const isNumber = /\d/.test(event.key);
     
         if (!isNumber && !allowedKeys.includes(event.key)) {

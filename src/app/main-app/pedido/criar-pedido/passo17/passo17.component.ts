@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { ImageService } from 'src/app/services/image.service';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
     selector: 'app-passo17',
@@ -35,7 +36,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
 export class Passo17Component {
     @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
 
-    images: File[] = [];
+    images: (File | string)[] = [];  // Pode conter arquivos ou URLs de imagens
     visible = false;
     observation = '';
 
@@ -44,6 +45,33 @@ export class Passo17Component {
         private imageService: ImageService,
         private toaster: ToasterService
     ) { }
+
+    async openCamera() {
+        try {
+            const permission = await Camera.requestPermissions();
+            if (permission.camera === 'granted') {
+                const image = await Camera.getPhoto({
+                    quality: 90,
+                    allowEditing: false,
+                    resultType: CameraResultType.DataUrl,  // Usar DataUrl para facilitar a conversão
+                    source: CameraSource.Camera
+                });
+
+                if (image.dataUrl) {
+                    // Converte a imagem DataUrl para Blob e então para File
+                    const response = await fetch(image.dataUrl);
+                    const blob = await response.blob();
+                    const file = new File([blob], 'captured_image.jpg', { type: 'image/jpeg' });
+                    this.images = [file];
+                    this.sendImages();
+                }
+            } else {
+                console.log('Permissão para usar a câmera foi negada');
+            }
+        } catch (error) {
+            console.error('Erro ao acessar a câmera:', error);
+        }
+    }
 
     openFilePicker(): void {
         this.fileInput.nativeElement.click();
@@ -63,7 +91,8 @@ export class Passo17Component {
 
     getImageUrl(): any {
         if (this.images.length > 0) {
-            return URL.createObjectURL(this.images[0]);
+            const image = this.images[0];
+            return typeof image === 'string' ? image : URL.createObjectURL(image);
         }
         return '';
     }
@@ -72,9 +101,22 @@ export class Passo17Component {
         this.images = [];
     }
 
-    sendImages(): void {
-        const imagem = this.images[0];
-        this.imageService.storeFile(imagem);
+    async sendImages(): Promise<void> {
+        if (this.images.length > 0) {
+            const image = this.images[0];
+            if (typeof image === 'string') {
+                // Handle URL image (from camera)
+                const response = await fetch(image);
+                const blob = await response.blob();
+                const file = new File([blob], 'uploaded_image.jpg', { type: 'image/jpeg' });
+                this.imageService.storeFile(file);
+            } else {
+                // Handle File object (from file picker)
+                this.imageService.storeFile(image);
+            }
+        } else {
+            this.imageService.storeFile(null); 
+        }
     }
 
     nextTab(): void {
@@ -84,16 +126,6 @@ export class Passo17Component {
 
     prevTab(): void {
         this.pedidoService.prevTab();
-    }
-
-    uploadFile(event: any): void {
-        const files = event.target.files;
-        if (files && files.length > 0) {
-            this.images.push(files[0]);
-            this.imageService.storeFile(files[0]);
-            this.toaster.success('Imagem enviada com sucesso');
-            (event.target as HTMLInputElement).value = '';
-        }
     }
 
     show(): void {

@@ -15,7 +15,7 @@
 ></textarea>
 
 <div class="upload-section">
-    <button pButton type="button" label="Adicionar Foto" icon="pi pi-camera" (click)="openFilePicker()"></button>
+    <button pButton type="button" label="Adicionar Foto" icon="pi pi-camera" (click)="openCamera()"></button>
     <input type="file" #fileInput accept="image/*" style="display: none;" (change)="handleFileSelect($event)">
 </div>
 <div class="image-preview" *ngIf="images.length > 0">

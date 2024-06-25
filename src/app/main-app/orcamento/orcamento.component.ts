@@ -8,32 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 
-interface IOrcamento {
-    id: string;
-    code: string; //código do orçamento
-    idUser: string;
-    client: string;
-    name: string;
-    emailClient: string;
-    address: string;
-    area: number
-    pricePlates: number
-    priceGlasses: number
-    priceAcessories: number
-    priceProlongador: number
-    priceKitSolutions: number
-
-    aparador?: boolean
-    selante?: boolean
-    prolongador?: boolean
-    chapaSuperior: boolean
-    chapaInferior: boolean
-    qtdAparador: number
-    qtdProlongador: number
-    qtdSelante: number
-    price: number;
-    height: number
-    width: number
+interface IDataID{
+    id: string
 }
 @Component({
     selector: 'app-orcamento',
@@ -188,9 +164,8 @@ export class OrcamentoComponent {
         this.isCalculeted = false;
     }
 
-    gerarPedido(orcamento: IOrcamento){
+    gerarPedido(orcamento: OrcamentoRequestModel){
         const acessories = {
-            internal_id: String(orcamento.code),
             client: orcamento.name,
             selante: orcamento.selante,
             aparador: orcamento.aparador,

@@ -3,6 +3,9 @@ import { ToasterService } from 'src/app/components/toaster/toaster.service';
 import { ImageService } from 'src/app/services/image.service';
 import { PedidoService } from 'src/app/services/pedido.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Platform } from '@ionic/angular';
+import { Capacitor } from '@capacitor/core';
+
 
 @Component({
     selector: 'app-passo17',
@@ -39,39 +42,37 @@ export class Passo17Component {
     images: (File | string)[] = [];  // Pode conter arquivos ou URLs de imagens
     visible = false;
     observation = '';
+    capturedImage: string;
 
     constructor(
         public pedidoService: PedidoService,
         private imageService: ImageService,
-        private toaster: ToasterService
+        private toaster: ToasterService,
+        private platform: Platform
     ) { }
 
     async openCamera() {
-        try {
-            const permission = await Camera.requestPermissions();
-            if (permission.camera === 'granted') {
-                const image = await Camera.getPhoto({
-                    quality: 90,
-                    allowEditing: false,
-                    resultType: CameraResultType.DataUrl,  // Usar DataUrl para facilitar a conversão
-                    source: CameraSource.Camera
-                });
-
-                if (image.dataUrl) {
-                    // Converte a imagem DataUrl para Blob e então para File
-                    const response = await fetch(image.dataUrl);
-                    const blob = await response.blob();
-                    const file = new File([blob], 'captured_image.jpg', { type: 'image/jpeg' });
-                    this.images = [file];
-                    this.sendImages();
-                }
-            } else {
-                console.log('Permissão para usar a câmera foi negada');
+        if (Capacitor.isNativePlatform()) {
+            const permissions = await Camera.requestPermissions()
+            if (permissions.camera == "denied" || permissions.photos == "denied") {
+              //A piece of code for displaying an error message to the user
+              this.toaster.warn("Permissão de acesso a câmera negada. Por favor, permita a acesso para que possamos adicionar imagens ao seu pedido.");
+                return
             }
-        } catch (error) {
-            console.error('Erro ao acessar a câmera:', error);
+
+            const image = await Camera.getPhoto({
+              quality: 90,
+              allowEditing: false,
+              resultType: CameraResultType.DataUrl,
+              source: CameraSource.Camera
+            });
+            if (image) {
+              this.images.push(image.dataUrl);
+              this.sendImages();
+            }
         }
-    }
+      }
+
 
     openFilePicker(): void {
         this.fileInput.nativeElement.click();
@@ -97,10 +98,9 @@ export class Passo17Component {
         return '';
     }
 
-    deleteImage(): void {
-        this.images = [];
+    deleteImage() {
+        this.capturedImage = null;
     }
-
     async sendImages(): Promise<void> {
         if (this.images.length > 0) {
             const image = this.images[0];
@@ -115,7 +115,7 @@ export class Passo17Component {
                 this.imageService.storeFile(image);
             }
         } else {
-            this.imageService.storeFile(null); 
+            this.imageService.storeFile(null);
         }
     }
 

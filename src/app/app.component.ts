@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { PedidoService } from './services/pedido.service';
 import { PedidoJson } from './models/pedidoJson';
+import { Platform } from '@ionic/angular';
+import { App } from '@capacitor/app';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -10,10 +13,20 @@ import { PedidoJson } from './models/pedidoJson';
 export class AppComponent implements OnInit {
     constructor(
         private primengConfig: PrimeNGConfig,
-        private pedidoService: PedidoService
-    ) {}
+        private pedidoService: PedidoService,
+        private platform: Platform,
+        private router: Router
+    ) {
+        this.initializeApp();
+    }
 
     pedidosPendentes: PedidoJson[] = [];
+
+    initializeApp() {
+        this.platform.ready().then(() => {
+          this.setupBackButtonBehavior();
+        });
+      }
 
     ngOnInit() {
         this.primengConfig.ripple = true;
@@ -27,4 +40,14 @@ export class AppComponent implements OnInit {
             });
         }
     }
+
+    setupBackButtonBehavior() {
+        App.addListener('backButton', ({ canGoBack }) => {
+          if (canGoBack) {
+            window.history.back();
+          } else {
+            App.exitApp();
+          }
+        });
+      }
 }

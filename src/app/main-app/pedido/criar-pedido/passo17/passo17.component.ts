@@ -43,6 +43,7 @@ export class Passo17Component {
     visible = false;
     observation = '';
     capturedImage: string;
+    visibleChoice: boolean = false; // para o p-dialog de escolha
 
     constructor(
         public pedidoService: PedidoService,
@@ -51,48 +52,38 @@ export class Passo17Component {
         private platform: Platform
     ) { }
 
-    async openCamera() {
-        const action = await this.chooseSource();
-    if (!action) {
-      return; // user cancelled
-    }
-
-    if (Capacitor.isNativePlatform()) {
-      const permissions = await Camera.requestPermissions();
-      if (permissions.camera === 'denied' || permissions.photos === 'denied') {
-        this.toaster.warn('Permissão negada para acessar a caixa de imagem');
-        return;
+    openCameraOrGallery() {
+        this.visibleChoice = true; // Abre o diálogo de escolha
       }
 
-      try {
-        const image = await Camera.getPhoto({
-          quality: 90,
-          allowEditing: false,
-          resultType: CameraResultType.DataUrl,
-          source: action === 'camera' ? CameraSource.Camera : CameraSource.Photos,
-        });
+      async selectSource(source: 'camera' | 'gallery') {
+        this.visibleChoice = false; // Fecha o diálogo de escolha
 
-        if (image) {
-          this.images.push(image.dataUrl);
-          this.sendImages();
-        }
-      } catch (error) {
-        console.error('Erro ao obter a foto:', error);
-      }
-    }
-    }
-
-    async chooseSource(){
-        return new Promise((resolve) => {
-          // This example uses a simple prompt. You can replace it with a more suitable UI for your app.
-          const source = window.prompt('Digite "camera" para usar a câmera ou "gallery" para selecionar da galeria:');
-          if (source === 'camera' || source === 'gallery') {
-            resolve(source);
-          } else {
-            resolve(null);
+        if (Capacitor.isNativePlatform()) {
+          const permissions = await Camera.requestPermissions();
+          if (permissions.camera === 'denied' || permissions.photos === 'denied') {
+            this.toaster.warn('Permissão negada');
+            return;
           }
-        });
-    }
+
+          try {
+            const image = await Camera.getPhoto({
+              quality: 90,
+              allowEditing: false,
+              resultType: CameraResultType.DataUrl,
+              source: source === 'camera' ? CameraSource.Camera : CameraSource.Photos,
+            });
+
+            if (image) {
+              this.images.push(image.dataUrl);
+              this.sendImages();
+            }
+          } catch (error) {
+            console.error('Erro ao obter a foto:', error);
+          }
+        }
+      }
+
 
 
 
@@ -116,9 +107,10 @@ export class Passo17Component {
         return '';
     }
 
-    deleteImage() {
-        this.capturedImage = null;
+    deleteImage(index: number) {
+        this.images.splice(index, 1);
     }
+
     async sendImages(): Promise<void> {
         if (this.images.length > 0) {
             const image = this.images[0];

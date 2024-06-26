@@ -15,29 +15,28 @@
 ></textarea>
 
 <div class="upload-section">
-    <button pButton type="button" label="Adicionar Foto" icon="pi pi-camera" (click)="openCamera()"></button>
-    <input type="file" #fileInput accept="image/*" style="display: none;" (change)="handleFileSelect($event)">
+    <!-- Botão para abrir a escolha entre câmera e galeria -->
+    <button pButton type="button" label="Adicionar Foto" icon="pi pi-camera" (click)="openCameraOrGallery()"></button>
 </div>
+
 <div class="image-preview" *ngIf="images.length > 0">
-    <img [src]="getImageUrl()" alt="Imagem Selecionada" class="img-responsive">
-      <span class="delete-icon pi pi-trash" (click)="deleteImage()"></span>
+    <img *ngFor="let img of images" [src]="img" alt="Imagem Selecionada" class="img-responsive">
+    <span class="delete-icon pi pi-trash" (click)="deleteImage()"></span>
 </div>
+
+<!-- Diálogo de escolha da fonte de imagem -->
+<p-dialog [(visible)]="visibleChoice" [style]="{width: '300px'}" header="Escolha uma opção" [modal]="true" class="p-fluid">
+    <div class="flex justify-content-around">
+        <button pButton type="button" icon="pi pi-camera" (click)="selectSource('camera')"></button>
+        <button pButton type="button" icon="pi pi-images" (click)="selectSource('gallery')"></button>
+    </div>
+</p-dialog>
 
 <p-dialog [(visible)]="visible" [style]="{width: '450px'}" header="Atenção" [modal]="true" class="p-fluid">
     <p class="text-700">Percebemos que você não enviou nenhuma imagem, deseja continuar mesmo assim?</p>
     <div class="flex flex-row gap-2 justify-content-end mt-4">
-        <button
-        pButton
-        style="width: 4.5rem;"
-        (click)="naoContinuar()">
-        Não
-        </button>
-        <button
-            pButton
-            style="width: 4.5rem;"
-            (click)="simContinuar()">
-            Sim
-        </button>
+        <button pButton style="width: 4.5rem;" (click)="naoContinuar()">Não</button>
+        <button pButton style="width: 4.5rem;" (click)="simContinuar()">Sim</button>
     </div>
 </p-dialog>
 
@@ -45,4 +44,5 @@
     (nextTab)="show()"
     (prevTab)="prevTab()"
 ></app-navigation-tabs-btn>
+
 <p-toast position="bottom-center" life="4000" key="tst"></p-toast>

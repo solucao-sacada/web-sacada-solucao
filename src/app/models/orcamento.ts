@@ -1,5 +1,6 @@
 export interface OrcamentoRequestModel {
     _id?: string;
+    internal_id?: string | null;
     idUser: string;
     client: string;
     name?: string | null;

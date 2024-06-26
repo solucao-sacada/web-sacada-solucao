@@ -35,6 +35,7 @@ export class Passo1Component implements OnInit {
 
     visible = false;
     user: User = {} as User;
+    internal_id: string = '';
 
     constructor(
         private _buscaCep: BuscaCepService,
@@ -106,6 +107,7 @@ export class Passo1Component implements OnInit {
                 'Por favor preencha todos os campos obrigatórios'
             );
         } else {
+            this.pedidoService.pedido.client.internal_id = this.internal_id;
             this.pedidoService.nextTab();
         }
     }

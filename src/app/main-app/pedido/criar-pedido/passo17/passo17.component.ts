@@ -52,31 +52,49 @@ export class Passo17Component {
     ) { }
 
     async openCamera() {
-        if (Capacitor.isNativePlatform()) {
-            const permissions = await Camera.requestPermissions()
-            if (permissions.camera == "denied" || permissions.photos == "denied") {
-              //A piece of code for displaying an error message to the user
-              this.toaster.warn("Permissão de acesso a câmera negada. Por favor, permita a acesso para que possamos adicionar imagens ao seu pedido.");
-                return
-            }
+        const action = await this.chooseSource();
+    if (!action) {
+      return; // user cancelled
+    }
 
-            const image = await Camera.getPhoto({
-              quality: 90,
-              allowEditing: false,
-              resultType: CameraResultType.DataUrl,
-              source: CameraSource.Camera
-            });
-            if (image) {
-              this.images.push(image.dataUrl);
-              this.sendImages();
-            }
-        }
+    if (Capacitor.isNativePlatform()) {
+      const permissions = await Camera.requestPermissions();
+      if (permissions.camera === 'denied' || permissions.photos === 'denied') {
+        this.toaster.warn('Permissão negada para acessar a caixa de imagem');
+        return;
       }
 
+      try {
+        const image = await Camera.getPhoto({
+          quality: 90,
+          allowEditing: false,
+          resultType: CameraResultType.DataUrl,
+          source: action === 'camera' ? CameraSource.Camera : CameraSource.Photos,
+        });
 
-    openFilePicker(): void {
-        this.fileInput.nativeElement.click();
+        if (image) {
+          this.images.push(image.dataUrl);
+          this.sendImages();
+        }
+      } catch (error) {
+        console.error('Erro ao obter a foto:', error);
+      }
     }
+    }
+
+    async chooseSource(){
+        return new Promise((resolve) => {
+          // This example uses a simple prompt. You can replace it with a more suitable UI for your app.
+          const source = window.prompt('Digite "camera" para usar a câmera ou "gallery" para selecionar da galeria:');
+          if (source === 'camera' || source === 'gallery') {
+            resolve(source);
+          } else {
+            resolve(null);
+          }
+        });
+    }
+
+
 
     handleFileSelect(event: Event): void {
         const input = event.target as HTMLInputElement;

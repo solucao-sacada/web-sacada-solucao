@@ -229,6 +229,7 @@ export class PedidoService {
                 apartment: '',
                 building: '',
                 city: '',
+                internal_id: '',
                 name: acessories?.client ? acessories.client : '',
                 neighborhood: '',
                 state: '',

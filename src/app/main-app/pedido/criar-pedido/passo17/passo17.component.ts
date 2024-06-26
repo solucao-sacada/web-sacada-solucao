@@ -114,6 +114,7 @@ export class Passo17Component {
     async sendImages(): Promise<void> {
         if (this.images.length > 0) {
             const image = this.images[0];
+            console.log(image);
             if (typeof image === 'string') {
                 // Handle URL image (from camera)
                 const response = await fetch(image);

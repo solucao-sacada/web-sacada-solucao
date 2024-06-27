@@ -24,17 +24,11 @@ export class ImageService {
         return this.http.post<any>(this.apiUrl + '/order/' + idOrder, formData);
     }
 
-    storeFile(file: File) {
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e: any) => {
-                const base64Image = e.target.result;
-                localStorage.setItem('imagemBase64', base64Image);
-            };
-
-            reader.readAsDataURL(file);
+    storeFile(base64Image: string | null) {
+        if (base64Image) {
+          localStorage.setItem('imagemBase64', base64Image);
         }
-    }
+      }
 
     dataURItoBlob() {
         const dataURI = localStorage.getItem('imagemBase64');
@@ -57,4 +51,6 @@ export class ImageService {
         if (image) return URL.createObjectURL(image);
         return '';
     }
+
+
 }

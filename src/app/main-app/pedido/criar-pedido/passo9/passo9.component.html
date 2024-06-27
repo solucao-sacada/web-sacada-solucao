@@ -22,7 +22,7 @@
 <div class="grid m-0 md:mx-4 border-bottom-1" *ngFor="let linha of linhas; let i = index">
     <div class="col-3 p-1 text-center border-x-1">{{ linha.piece }}</div>
     <div class="col-3 p-1 text-center border-right-1">
-        <input type="text" 
+        <input type="number"
             [(ngModel)]="linha.angle"
             (click)="selectText($event)"
             class="text-center w-full"
@@ -33,7 +33,7 @@
     </div>
 
     <div class="col-3 p-1 text-center border-right-1">
-        <input type="text" 
+        <input type="number"
             [(ngModel)]="linha.dimension"
             (click)="selectText($event)"
             (keydown)="validateNumberInput($event)"
@@ -42,6 +42,7 @@
     </div>
     <div class="col-3 p-1 text-center border-right-1 bg-green-200">
         <input [(ngModel)]="linha.quantity" class="bg-green-200 text-center w-full"
+        type="number"
         (click)="selectText($event)"
             (ngModelChange)="salvarDimensoes(); atualizarVidrosRestantes()">
     </div>
@@ -51,6 +52,7 @@
     <div class="col-3 p-1 text-center">&nbsp;</div>
     <div class="col-3 p-1 text-center border-bottom-1 border-x-1">
         <input [(ngModel)]="total"
+        type="number"
         (click)="selectText($event)"
         class="text-center w-full"
             style="border: none; outline: none"  (input)="updatePedido($event.target.value)"

@@ -46,7 +46,7 @@
         class="col-3 p-1 text-center border-right-1 flex justify-content-center align-items-center"
     >
         <input
-            type="text" 
+            type="number"
             (keydown)="validateNumberInput($event)"
             class="border-0 shadow-none text-center w-full"
             (ngModelChange)="fixedValues();"
@@ -57,8 +57,8 @@
     <div
         class="col-3 p-1 text-center border-right-1 flex justify-content-center align-items-center"
     >
-        <input 
-            type="text" 
+        <input
+            type="number"
             (keydown)="validateNumberInput($event)"
             class="border-0 shadow-none text-center w-full"
             (ngModelChange)="fixedValues()"

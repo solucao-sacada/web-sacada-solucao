@@ -27,7 +27,7 @@ export class Passo13Component implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.qtdVidros = this.pedidoService.getQuantidadeTotalVidros();
+        this.qtdVidros = Math.abs(this.pedidoService.getQuantidadeTotalVidros())
 
         if(this.qtdVidros > 0){
             this.atualizarQtdVidrosRestantes();

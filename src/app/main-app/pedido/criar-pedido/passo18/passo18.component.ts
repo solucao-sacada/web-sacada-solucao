@@ -33,10 +33,14 @@ export class Passo18Component {
 
 
     enviar() {
-        const imagem = localStorage.getItem('imagemBase64');
+        const imagem = localStorage.getItem('imagemBase64') || '';
+        console.log(imagem)
         this.ldService.start();
-        this._toaster.info(imagem)
         if (imagem) {
+            const formData = new FormData();
+            const file = this.imageService.dataURItoBlob();
+            formData.append('images', file, `image.${file.type.split('/')[1]}`);
+
             this.pedidoService
                 .create({
                     ...this.pedidoService.pedido,
@@ -71,7 +75,7 @@ export class Passo18Component {
                 .pipe(finalize(() => (this.disableEnviar = true)))
                 .subscribe((response) => {
                     this.imageService
-                        .uploadOrderImageFromLocalStorage(response._id)
+                        .uploadOrderImageFromLocalStorage(response._id, formData)
                         .subscribe((data) => {
                             this.pedidoService.dimensionOK = false;
                             this.pedidoService.saveDraftPedido(this.pedidoService.pedido);

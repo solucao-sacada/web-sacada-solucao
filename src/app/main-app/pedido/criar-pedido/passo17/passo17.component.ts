@@ -65,15 +65,15 @@ export class Passo17Component {
 
       try {
         const image = await Camera.getPhoto({
-          quality: 90,
+          quality: 20,
           allowEditing: false,
           resultType: CameraResultType.DataUrl,
           source: source === 'camera' ? CameraSource.Camera : CameraSource.Photos,
         });
-
         if (image) {
           this.images.push(image.dataUrl);
-          this.sendImages(image.dataUrl); // Passa a imagem diretamente como string base64
+          const resizedImage = await this.resizeImage(image.dataUrl); // Redimensiona a imagem antes de enviar
+          this.sendImages(resizedImage); // Passa a imagem redimensionada
         }
       } catch (error) {
         console.error('Erro ao obter a foto:', error);
@@ -127,11 +127,42 @@ export class Passo17Component {
     }
   }
 
+  async resizeImage(base64Str: string, maxWidth = 800, maxHeight = 800): Promise<string> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = base64Str;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width *= maxHeight / height;
+            height = maxHeight;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', 0.9));
+      };
+    });
+  }
+
   readAndStoreFile(file: File) {
     const reader = new FileReader();
-    reader.onload = (e: any) => {
+    reader.onload = async (e: any) => {
       const base64Image = e.target.result;
-      this.imageService.storeFile(base64Image);
+      const resizedImage = await this.resizeImage(base64Image);
+      this.imageService.storeFile(resizedImage);
     };
     reader.readAsDataURL(file);
   }

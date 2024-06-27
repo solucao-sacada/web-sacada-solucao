@@ -101,11 +101,11 @@
 
                 
                 <div class="field-group">
-                    <label for="oldPassword" class="font-bold">Senha antiga<span>*</span></label><br>
+                    <label for="password" class="font-bold">Senha<span>*</span></label><br>
                     <div class="flex items-center">
-                        <input id="oldPassword" [type]="showOldPassword ? 'text' : 'password'" pInputText name="oldPassword" placeholder="************"
-                        [(ngModel)]="oldPassword" required class="w-full mb-3 p-inputtext">
-                        <i class="pi" [ngClass]="showOldPassword ? 'pi-eye-slash' : 'pi-eye'" (click)="togglePasswordVisibility('old')"></i>
+                        <input id="password" [type]="showNewPassword ? 'text' : 'password'" pInputText name="password" placeholder="************"
+                        [(ngModel)]="user.password" required class="w-full mb-3 p-inputtext">
+                        <i class="pi" [ngClass]="showNewPassword ? 'pi-eye' : 'pi-eye-slash'" (click)="togglePasswordVisibility('new')"></i>
                     </div>
                 </div>
 
@@ -113,9 +113,9 @@
                     <label for="confirmPassword" class="font-bold">Confirmar Senha<span>*</span></label><br>
 
                     <div class="flex items-center">
-                        <input id="password" [type]="showConfirmPassword ? 'text' : 'password'" pInputText name="password" placeholder="************"
+                        <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" pInputText name="password" placeholder="************"
                         [(ngModel)]="confirmPassword" required class="w-full mb-3 p-inputtext">
-                        <i class="pi" [ngClass]="showConfirmPassword ? 'pi-eye-slash' : 'pi-eye'" (click)="togglePasswordVisibility('confirm')"></i>
+                        <i class="pi" [ngClass]="showConfirmPassword ? 'pi-eye' : 'pi-eye-slash'" (click)="togglePasswordVisibility('confirm')"></i>
                     </div>
                 </div>
 

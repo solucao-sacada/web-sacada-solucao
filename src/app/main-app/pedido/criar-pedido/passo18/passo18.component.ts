@@ -34,7 +34,10 @@ export class Passo18Component {
 
     enviar() {
         const imagem = localStorage.getItem('imagemBase64') || '';
-        console.log(imagem)
+        const draftPedidos = this.pedidoService.getDraftPedidos();
+
+        const findPedido = draftPedidos.find((p) => p.code === this.pedidoService.pedido.code);
+
         this.ldService.start();
         if (imagem) {
             const formData = new FormData();
@@ -46,6 +49,18 @@ export class Passo18Component {
                     ...this.pedidoService.pedido,
                     balcony:{
                         ...this.pedidoService.pedido.balcony,
+                        rails: {
+                            ...this.pedidoService.pedido.balcony.rails,
+                            lower_rail: {
+                                ...this.pedidoService.pedido.balcony.rails.lower_rail,
+                                built_in:{
+                                    ...this.pedidoService.pedido.balcony.rails.lower_rail.built_in,
+                                    tip: {
+                                        ...this.pedidoService.pedido.balcony.rails.lower_rail.built_in.tip
+                                    }
+                                }
+                            }
+                        },
                         plumb: {
                             left_wall: {
                                 top: String(this.pedidoService.pedido.balcony.plumb.left_wall.top),
@@ -69,8 +84,9 @@ export class Passo18Component {
                                 // converter os valores de measures para string
                                 data: this.pedidoService.pedido.balcony.levels.measures.data.map((data) => data.map((value) => String(value))),
                             }
-                        }
-                    } as unknown as Balcony
+                        },
+                        dimensions: findPedido.balcony.dimensions
+                    } as Balcony,
                 })
                 .pipe(finalize(() => (this.disableEnviar = true)))
                 .subscribe((response) => {
@@ -98,6 +114,18 @@ export class Passo18Component {
 
                     balcony:{
                         ...this.pedidoService.pedido.balcony,
+                        rails: {
+                            ...this.pedidoService.pedido.balcony.rails,
+                            lower_rail: {
+                                ...this.pedidoService.pedido.balcony.rails.lower_rail,
+                                built_in:{
+                                    ...this.pedidoService.pedido.balcony.rails.lower_rail.built_in,
+                                    tip: {
+                                        ...this.pedidoService.pedido.balcony.rails.lower_rail.built_in.tip
+                                    }
+                                }
+                            }
+                        },
                         plumb: {
                             left_wall: {
                                 top: String(this.pedidoService.pedido.balcony.plumb.left_wall.top),
@@ -120,8 +148,9 @@ export class Passo18Component {
                             measures: {
                                 data: this.pedidoService.pedido.balcony.levels.measures.data.map((data) => data.map((value) => String(value))),
                             }
-                        }
-                    } as unknown as Balcony
+                        },
+                        dimensions: findPedido.balcony.dimensions
+                    } as Balcony
                 })
                 .pipe(finalize(() => (this.disableEnviar = true)))
                 .subscribe((response) => {

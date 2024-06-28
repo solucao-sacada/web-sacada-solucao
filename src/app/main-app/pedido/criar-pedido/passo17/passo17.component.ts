@@ -111,7 +111,6 @@ export class Passo17Component {
       this.imageService.storeFile(imageDataUrl);
     } else if (this.images.length > 0) {
       const image = this.images[0];
-      console.log(image);
       if (typeof image === 'string') {
         // Handle URL image (from camera)
         const response = await fetch(image);

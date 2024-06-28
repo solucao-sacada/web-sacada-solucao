@@ -56,7 +56,6 @@ export class PedidoService {
 
                 this.removerDraft(pedido);
                 this.setPedidosOK(pedidos);
-                this._toaster.info('Pedido armazenado temporariamente.');
                 throw error;
             })
         );
@@ -257,7 +256,6 @@ export class PedidoService {
 
     setPedido(pedido: PedidoJson) {
         localStorage.setItem('pedido', JSON.stringify(pedido));
-        console.info('[INFO] Pedido armazenado localmente!', pedido);
     }
 
     setPedidosOK(pedidos: PedidoJson[]) {
